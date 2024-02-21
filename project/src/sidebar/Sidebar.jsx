@@ -1,15 +1,41 @@
-import "./sidebar.css"
-export default function Sidebar(){
+import "../App.css"
+import React, {useState} from "react";
+import * as FaIcons from "react-icons/fa"
+import * as AiIcons from "react-icons/ai"
+import {Link} from "react-router-dom"
+import {IconContext} from "react-icons"
+function Sidebar(){
+
+    const [sidebar, setSidebar]= useState(false);
+    const showSidebar=()=>{setSidebar(!sidebar);}
     return (
-        <div>
+        <>
+            <IconContext.Provider value={{color: "undefined"}}>
+                <div className="sidebar">
+                    <Link to="#" className="menu-bars">
+                        <FaIcons.FaBars onClick={showSidebar} />
+                    </Link>
+                </div>
+                <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+                    <ul className="nav-menu-items" onClick={showSidebar}>
+                        <li className="navbar-toggle">
+                            <Link to="#" className="menu-bars">
+                                <FaIcons.FaBars />
+                            </Link>
+                        </li>
+                        <li className="navbar-toggler">test1</li>
+                    </ul>
+                </nav>
+            </IconContext.Provider>
             <button className="sideBtn">
                 Button
             </button>
 
-        </div>
+        </>
     )
 }
 
+export default Sidebar;
 
 /*
 <!doctype html>
