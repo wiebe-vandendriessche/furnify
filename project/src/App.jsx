@@ -1,16 +1,10 @@
-import {
-    //BrowserRouter,
-    Routes,
-    //Route,
-} from "react-router-dom";
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Sidebar from './sidebar/Sidebar.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
 
   return (
     <div className="App">
@@ -20,9 +14,8 @@ function App() {
                 <button onClick={() => setCount((count) => count + 1)}>
                     count is {count}
                 </button>
-            </div>
-            <Routes></Routes>
 
+            </div>
         </main>
     </div>
   )

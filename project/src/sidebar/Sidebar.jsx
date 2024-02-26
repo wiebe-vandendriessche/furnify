@@ -1,30 +1,52 @@
 import "../App.css"
 import React, {useState} from "react";
-import * as FaIcons from "react-icons/fa"
-import * as AiIcons from "react-icons/ai"
-import {Link} from "react-router-dom"
+import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import {IconContext} from "react-icons"
+import Questionnaire from "./components/questionnaire.jsx";
+import Contact from "./components/contact.jsx";
 function Sidebar(){
 
     const [sidebar, setSidebar]= useState(false);
+    const [part, showPart]=useState(0);
     const showSidebar=()=>{setSidebar(!sidebar);}
+    const previousPart=()=>{showPart(part-1)}
+    const nextPart=()=>{showPart(part+1)}
+    const [state, setState] = useState({
+        name: "",
+        age: 0,
+        hobbies: ["paardrijden", "tango", "vissen"]
+    });
+
+    const showNextPart = () => {
+        switch(part) {
+            case 0:
+                return <Questionnaire nextP={nextPart}/>
+            case 1:
+                return <Contact nextP={nextPart} previousP={previousPart}/>
+            case 2:
+                return <p>Nothing to see here</p>
+            default:
+                return <p>This is some default text</p>
+        }
+    }
     return (
         <>
             <IconContext.Provider value={{color: "undefined"}}>
                 <div className="sidebar">
-                    <Link to="#" className="menu-bars">
-                        <FaIcons.FaBars onClick={showSidebar} />
-                    </Link>
+                    <FaAnglesLeft className="menu-bars-hidden menu-bars" onClick={showSidebar} />
                 </div>
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-                    <ul className="nav-menu-items" onClick={showSidebar}>
-                        <li className="navbar-toggle">
-                            <Link to="#" className="menu-bars">
-                                <FaIcons.FaBars />
-                            </Link>
-                        </li>
-                        <li className="navbar-toggler">test1</li>
-                    </ul>
+                    <FaAnglesRight className="menu-bars" onClick={showSidebar}/>
+                    <div>
+                        {showNextPart()}
+                        <form>
+                            <ol className="nav-menu-items" >
+
+                                <li className="navbar-toggler">test1</li>
+                                <li className="navbar-toggler"><input type="text" placeholder="insert text"></input></li>
+                            </ol>
+                        </form>
+                    </div>
                 </nav>
             </IconContext.Provider>
             <button className="sideBtn">
