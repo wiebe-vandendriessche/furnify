@@ -6,6 +6,8 @@ import Questionnaire_func from "./components/questionnaire_func.jsx";
 import Contact from "./components/contact";
 import Questionnaire_space from "./components/questionnaire_space";
 import Questionnaire_specs from "./components/questionnaire_specs";
+
+
 function Sidebar(){
 
     const [sidebar, setSidebar]= useState(true);

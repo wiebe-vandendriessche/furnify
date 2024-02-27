@@ -1,8 +1,12 @@
 import "../../App.css"
 import React, {useState} from "react";
 
-function Questionnaire_space() {
 
+
+function Questionnaire_space() {
+    const [showDims, setShow]= useState(true);
+    const showDim=()=>{setShow(false);}
+    const showNoDim=()=>{setShow(true)}
     return (
         <>
             <div>
@@ -18,18 +22,39 @@ function Questionnaire_space() {
                                         Vorm:
                                     </td>
                                     <td>
-                                        <input type="radio" id="colRectangular" name="space" value="Rectangular"/>
+                                        <input type="radio" id="colRectangular" name="space" value="Rectangular" onClick={showDim}/>
                                         <label htmlFor="colRectangular">Rechthoekig</label>
-                                        <input type="radio" id="colOther" name="space" value="Other"/>
+                                        <input type="radio" id="colOther" name="space" value="Other" onClick={showNoDim}/>
                                         <label htmlFor="colOther">Anders</label>
                                     </td>
                                 </tr>
-                                <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
-                                <input id="length" type="text"></input>
-                                <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
-                                <input id="width" type="text"></input>
-                                <label htmlFor="height" pattern="^\d*(\,\d{0,2})?$">Hoogte:</label>
-                                <input id="height" type="text"></input>
+                                <div hidden={showDims}>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
+                                        </td>
+                                        <td>
+                                            <input id="length" type="text"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
+                                        </td>
+                                        <td>
+                                            <input id="width" type="text"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="height" pattern="^\d*(\,\d{0,2})?$">Hoogte:</label>
+                                        </td>
+                                        <td>
+                                            <input id="height" type="text"></input>
+                                        </td>
+                                    </tr>
+                                </div>
+
                             </fieldset>
                         </td>
                     </tr>

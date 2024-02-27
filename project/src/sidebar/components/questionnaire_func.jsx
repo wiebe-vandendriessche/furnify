@@ -3,10 +3,6 @@ import React from "react";
 
 function Questionnaire_functional() {
 
-
-
-
-
     return (
         <>
             <div>
