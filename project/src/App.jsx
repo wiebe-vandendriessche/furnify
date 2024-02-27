@@ -4,7 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [width, setWidth] = useState(4);
+  const [height, setHeight] = useState(2.5);
+  const [length, setLength] = useState(7);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(`Width: ${width}, Height: ${height}, Length: ${length}`);
+  };
+
 
   return (
     <div className="container">
@@ -50,7 +59,7 @@ function App() {
         <Room width={5} depth={5} height={3} wallThickness={0.5} floorThickness={0.3} />
         <OrbitControls />
       </Canvas>
-    </div>
+    </div>  
   );
 }
 
