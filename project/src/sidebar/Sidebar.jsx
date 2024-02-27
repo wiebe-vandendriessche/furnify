@@ -6,7 +6,7 @@ import Questionnaire from "./components/questionnaire";
 import Contact from "./components/contact";
 function Sidebar(){
 
-    const [sidebar, setSidebar]= useState(false);
+    const [sidebar, setSidebar]= useState(true);
     const [part, showPart]=useState(0);
     const showSidebar=()=>{setSidebar(!sidebar);}
     const previousPart=()=>{showPart(part-1)}
