@@ -18,6 +18,12 @@ function Sidebar(){
         age: 0,
         hobbies: ["paardrijden", "tango", "vissen"]
     });
+    const showPrevious=()=>{
+        return part==0;
+    }
+    const showNext=()=>{
+        return part==3;
+    }
     const handleData=(data)=>{setState(data)}
     const showNextPart = () => {
         switch(part) {
@@ -28,7 +34,7 @@ function Sidebar(){
             case 2:
                     return <Questionnaire_specs/>
             case 3:
-                return <Contact nextP={nextPart} previousP={previousPart}/>
+                return <Contact />
             case 4:
                 return <p>Nothing to see here</p>
             default:
@@ -45,8 +51,8 @@ function Sidebar(){
                     <FaAnglesRight className="menu-bars" onClick={showSidebar}/>
                     <div>
                         {showNextPart()}
-                        <button onClick={previousPart}>Vorige</button>
-                        <button onClick={nextPart}>Volgende</button>
+                        <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>
+                        <button onClick={nextPart} hidden={ showNext() }>Volgende</button>
 
                         <form>
                             <ol className="nav-menu-items" >

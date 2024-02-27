@@ -1,16 +1,7 @@
 import "../../App.css"
 import React from "react";
 
-function Contact({nextP, previousP}) {
-
-
-
-    function showNext(){
-        nextP()
-    }
-    function showPrevious(){
-        previousP()
-    }
+function Contact() {
 
     return (
         <>
@@ -64,14 +55,6 @@ function Contact({nextP, previousP}) {
                         </td>
                         <td>
                             <input id="adress" name="adress" type="text"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button onClick={showPrevious}>Vorige</button>
-                        </td>
-                        <td>
-                            <button onClick={showNext}>Volgende</button>
                         </td>
                     </tr>
                 </table>
