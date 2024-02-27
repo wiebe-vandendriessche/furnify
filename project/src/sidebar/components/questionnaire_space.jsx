@@ -13,6 +13,17 @@ function Questionnaire_space() {
                                 <legend>
                                     Wat zijn de afmetingen van de woonruimte (cm)?
                                 </legend>
+                                <tr>
+                                    <td>
+                                        Vorm:
+                                    </td>
+                                    <td>
+                                        <input type="radio" id="colRectangular" name="space" value="Rectangular"/>
+                                        <label htmlFor="colRectangular">Rechthoekig</label>
+                                        <input type="radio" id="colOther" name="space" value="Other"/>
+                                        <label htmlFor="colOther">Anders</label>
+                                    </td>
+                                </tr>
                                 <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
                                 <input id="length" type="text"></input>
                                 <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
