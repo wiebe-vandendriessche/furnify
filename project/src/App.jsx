@@ -61,6 +61,7 @@ function App() {
         <directionalLight position={[0, 15, 15]}/>
         <Room width={5} depth={5} height={3} wallThickness={0.5} floorThickness={0.3} />
         <OrbitControls />
+        <axesHelper />
       </Canvas>
     </div>  
   );

@@ -20,7 +20,7 @@ const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
     leftWallVisible = camera.position.x >= 0;
     rightWallVisible = camera.position.x <= 0;
   });
-
+  
   return (
     <>
       {/* Back Wall */}
