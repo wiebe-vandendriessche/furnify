@@ -2,8 +2,8 @@ import "../App.css"
 import React, {useState} from "react";
 import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import {IconContext} from "react-icons"
-import Questionnaire from "./components/questionnaire.jsx";
-import Contact from "./components/contact.jsx";
+import Questionnaire from "./components/questionnaire";
+import Contact from "./components/contact";
 function Sidebar(){
 
     const [sidebar, setSidebar]= useState(false);
@@ -16,7 +16,7 @@ function Sidebar(){
         age: 0,
         hobbies: ["paardrijden", "tango", "vissen"]
     });
-
+    const handleData=(data)=>{setState(data)}
     const showNextPart = () => {
         switch(part) {
             case 0:

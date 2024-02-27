@@ -1,3 +1,4 @@
+import "../../App.css"
 import React from "react";
 
 function Contact({nextP, previousP}) {
@@ -14,40 +15,66 @@ function Contact({nextP, previousP}) {
     return (
         <>
             <div>
-                <p>
+                <h2>
                     Laat uw contactgegevens achter zodat we u kunnen bereiken
-                </p>
-                <ul>
-                    <li>
-                        <label htmlFor="firstName">Voornaam</label>
-                        <input name="firstName" type="text"/>
-                        <label htmlFor="lastName">Achternaam</label>
-                        <input name="lastName" type="text"/>
-                    </li>
-                    <li>
-                        <label htmlFor="phoneNumber">
-                            Telefoonnummer
-                        </label>
-                        {/*ADDING PATTERN?*/}
-                        <input name="phoneNumber" type="tel"/>
-                    </li>
-                    <li>
-                        <label htmlFor="mail">
-                            E-mail
-                        </label>
-                        <input name="mail" type="email"/>
-                    </li>
-
-                    <li>
-                        <label htmlFor="adress">
-                            Adres
-                        </label>
-                        <input name="adress" type="text"/>
-                    </li>
-                </ul>
-                <button onClick={showPrevious}>Vorige</button>
-                <button onClick={showNext}>Volgende</button>
-
+                </h2>
+                <table>
+                    <tr>
+                        <td>
+                            <label htmlFor="firstName">Voornaam:</label>
+                        </td>
+                        <td>
+                            <input id="firstName" name="firstName" type="text"/><br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label htmlFor="lastName">Achternaam:</label>
+                        </td>
+                        <td>
+                            <input id="lastName" name="lastName" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label htmlFor="phoneNumber">
+                                Telefoonnummer:
+                            </label>
+                        </td>
+                        <td>
+                            {/*ADDING PATTERN?*/}
+                            <input id="phoneNumber" name="phoneNumber" type="tel"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label htmlFor="mail">
+                                E-mail:
+                            </label>
+                        </td>
+                        <td>
+                            <input id="mail" name="mail" type="email"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label htmlFor="adress">
+                                Adres:
+                            </label>
+                        </td>
+                        <td>
+                            <input id="adress" name="adress" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onClick={showPrevious}>Vorige</button>
+                        </td>
+                        <td>
+                            <button onClick={showNext}>Volgende</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </>)
 }
