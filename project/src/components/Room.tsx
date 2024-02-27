@@ -1,64 +1,72 @@
-// import React from "react";
-
-// interface Props {
-//     width: number;
-//     length: number;
-//     height: number
-// }
-
-// const Room = ({ width, length, height }: Props) => {
-//   return <>
-//     <mesh>
-//         <boxGeometry args={[width, height, length]}/>
-//         <meshStandardMaterial color={"white"}/>
-//     </mesh>
-//   </>;
-// };
-
-// export default Room;
-
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Box } from '@react-three/drei';
 import { Mesh } from 'three';
+import { Wall } from './Wall';
+import { Floor } from './Floor';
+
+let backWallVisible = true;
+let frontWallVisible = true;
+let leftWallVisible = true;
+let rightWallVisible = true;
 
 const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
-  // Define refs for the walls and the floor
-  const backWallRef = useRef<Mesh>(null);
-  const frontWallRef = useRef<Mesh>(null);
-  const leftWallRef = useRef<Mesh>(null);
-  const rightWallRef = useRef<Mesh>(null);
-  const floorRef = useRef<Mesh>(null);
+
+
 
   useFrame(({ camera }) => {
-    if (backWallRef.current) {
-      backWallRef.current.visible = camera.position.z > 0;
-    }
-    if (frontWallRef.current) {
-      frontWallRef.current.visible = camera.position.z <= 0;
-    }
-    // Additional logic for left and right walls as needed
+    backWallVisible = camera.position.z >= 0;
+    frontWallVisible = camera.position.z <= 0;
+    leftWallVisible = camera.position.x >= 0;
+    rightWallVisible = camera.position.x <= 0;
   });
 
   return (
     <>
       {/* Back Wall */}
-      <Box ref={backWallRef} args={[width, height, wallThickness]} position={[0, height / 2, -depth / 2 + wallThickness / 2]} />
+      <Wall
+        width={width}
+        height={height}
+        depth={wallThickness}
+        position={[0, height / 2, -depth / 2 + wallThickness / 2]}
+        visible={backWallVisible}
+      />
       {/* Front Wall */}
-      <Box ref={frontWallRef} args={[width, height, wallThickness]} position={[0, height / 2, depth / 2 - wallThickness / 2]} />
+      <Wall
+        width={width}
+        height={height}
+        depth={wallThickness}
+        position={[0, height / 2, depth / 2 - wallThickness / 2]}
+        visible={frontWallVisible}
+      />
       {/* Left Wall */}
-      <Box ref={leftWallRef} args={[wallThickness, height, depth]} position={[-width / 2 + wallThickness / 2, height / 2, 0]} />
+      <Wall
+        width={wallThickness}
+        height={height}
+        depth={depth}
+        position={[-width / 2 + wallThickness / 2, height / 2, 0]}
+        visible={leftWallVisible}
+      />
       {/* Right Wall */}
-      <Box ref={rightWallRef} args={[wallThickness, height, depth]} position={[width / 2 - wallThickness / 2, height / 2, 0]} />
+      <Wall
+        width={wallThickness}
+        height={height}
+        depth={depth}
+        position={[width / 2 - wallThickness / 2, height / 2, 0]}
+        visible={rightWallVisible}
+      />
       {/* Floor */}
-      <Box ref={floorRef} args={[width, floorThickness, depth]} position={[0, -floorThickness / 2, 0]} />
+      <Floor
+        width={width}
+        height={floorThickness}
+        depth={depth}
+        position={[0, -floorThickness / 2, 0]}
+      />
     </>
   );
 };
 
-
-export default Room;
-
+export default Room
 
 
 
