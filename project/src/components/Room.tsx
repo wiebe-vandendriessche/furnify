@@ -37,9 +37,15 @@ const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
     if (frontWallRef.current) {
       frontWallRef.current.visible = camera.position.z <= 0;
     }
-    // Additional logic for left and right walls as needed
+    // Logic for left and right walls
+    if (leftWallRef.current) {
+      leftWallRef.current.visible = camera.position.x > 0;
+    }
+    if (rightWallRef.current) {
+      rightWallRef.current.visible = camera.position.x <= 0;
+    }
   });
-
+  
   return (
     <>
       {/* Back Wall */}

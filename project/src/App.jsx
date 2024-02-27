@@ -61,6 +61,7 @@ function App() {
         <spotLight position={[10, 15, 10]} angle={0.3} />
         <Room width={5} depth={5} height={3} wallThickness={0.5} floorThickness={0.3} />
         <OrbitControls />
+        <axesHelper />
       </Canvas>
     </div>  
   );
