@@ -4,21 +4,26 @@ import { Box } from '@react-three/drei';
 import { Mesh } from 'three';
 import { Wall } from './Wall';
 import { Floor } from './Floor';
-
-let backWallVisible = true;
-let frontWallVisible = true;
-let leftWallVisible = true;
-let rightWallVisible = true;
+import { useState } from 'react';
 
 const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
-
-
+  const [backWallVisible, setBackWallVisible] = useState(true);
+  const [frontWallVisible, setFrontWallVisible] = useState(true);
+  const [leftWallVisible, setLeftWallVisible] = useState(true);
+  const [rightWallVisible, setRightWallVisible] = useState(true);
 
   useFrame(({ camera }) => {
-    backWallVisible = camera.position.z >= 0;
-    frontWallVisible = camera.position.z <= 0;
-    leftWallVisible = camera.position.x >= 0;
-    rightWallVisible = camera.position.x <= 0;
+    
+    const newBackWallVisible = camera.position.z >= 0;
+    const newFrontWallVisible = camera.position.z <= 0;
+    const newLeftWallVisible = camera.position.x >= 0;
+    const newRightWallVisible = camera.position.x <= 0;
+
+    setBackWallVisible(newBackWallVisible);
+    setFrontWallVisible(newFrontWallVisible);
+    setLeftWallVisible(newLeftWallVisible);
+    setRightWallVisible(newRightWallVisible);
+
   });
   
   return (
