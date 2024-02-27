@@ -2,8 +2,10 @@ import "./Sidebar.css"
 import React, {useState} from "react";
 import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import {IconContext} from "react-icons"
-import Questionnaire from "./components/questionnaire";
+import Questionnaire_func from "./components/questionnaire_func.jsx";
 import Contact from "./components/contact";
+import Questionnaire_space from "./components/questionnaire_space";
+import Questionnaire_specs from "./components/questionnaire_specs";
 function Sidebar(){
 
     const [sidebar, setSidebar]= useState(true);
@@ -20,10 +22,14 @@ function Sidebar(){
     const showNextPart = () => {
         switch(part) {
             case 0:
-                return <Questionnaire nextP={nextPart}/>
+                return <Questionnaire_func/>
             case 1:
-                return <Contact nextP={nextPart} previousP={previousPart}/>
+                return <Questionnaire_space/>
             case 2:
+                    return <Questionnaire_specs/>
+            case 3:
+                return <Contact nextP={nextPart} previousP={previousPart}/>
+            case 4:
                 return <p>Nothing to see here</p>
             default:
                 return <p>This is some default text</p>
@@ -39,6 +45,9 @@ function Sidebar(){
                     <FaAnglesRight className="menu-bars" onClick={showSidebar}/>
                     <div>
                         {showNextPart()}
+                        <button onClick={previousPart}>Vorige</button>
+                        <button onClick={nextPart}>Volgende</button>
+
                         <form>
                             <ol className="nav-menu-items" >
 
