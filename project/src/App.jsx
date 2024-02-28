@@ -65,9 +65,9 @@ function App() {
         </div>
       </form>
       <Canvas className="canvas" >
-        <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
         <ambientLight intensity={.5}/>
         <directionalLight position={[0, 100, 100]}/>
+        <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
         
         <OrbitControls />
 
