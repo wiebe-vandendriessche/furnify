@@ -1,32 +1,14 @@
-.sidebar {
-    background-color: #ffffff;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.menu-bars-hidden {
+.menu-bars {
     position: fixed;
+    right: 0;
     top: 0;
-    right: 5px;
-    margin-left: 2rem;
-}
-
-ul {
-    list-style-type: none;
-}
-
-li {
-    padding-top: 15px;
-}
-
-input {
-    padding-left: 10px;
+    margin: 10px;
+    color: #000000;
+    cursor: pointer;
 }
 
 .nav-menu {
-    background-color: #f9f9f9;
+    background-color: #fdfdfd;
     width: 450px;
     height: 100vh;
     display: flex;
@@ -35,7 +17,6 @@ input {
     top: 0;
     right: -100%;
     transition: 850ms;
-    padding: 0px;
 }
 
 .nav-menu.active {
@@ -43,76 +24,54 @@ input {
     transition: 450ms;
 }
 
-.nav-text {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 60px;
-}
-
-.nav-text a {
-    text-decoration: none;
-    color: #151414;
-    font-size: 18px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
-}
-
-.nav-text a:hover {
-    background-color: #000000;
-    color: #fff;
-}
-
 .nav-menu-items {
     width: 100%;
-}
-
-.navbar-toggle {
-    background-color: gray;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.menu-bars {
-    height: 10px;
-    font-size: 31px;
-    margin-top: 10px;
-    background: none;
-    color: #000;
 }
 
 #logo {
     width: 75%;
     height: auto;
+}
+
+#a{
     padding: 16px 50px 16px 50px;
+}
+
+.btn{
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 /*render for mobile*/
 @media screen and (max-width: 450px) {
 
     .nav-menu {
-        background-color: #f9f9f9;
+        background-color: #fdfdfd;
         width: 100%;
         height: 100%;
-        justify-content: center;
         position: fixed;
-        left: 0;
+        left: 100%;
         right: 0;
         top: 0;
         bottom: 0;
     }
 
     .nav-menu.active {
-        left: 100%;
+        left: 0;
     }
 }
 
+/*specific color changes in sidebar for darkmode*/
+@media (prefers-color-scheme: dark) {
+    .nav-menu{
+        background-color: #242424;
+    }
+
+    .menu-bars{
+        color: white;
+    }
+}
