@@ -6,7 +6,7 @@ import { Wall } from './Wall';
 import { Floor } from './Floor';
 import { useState } from 'react';
 
-const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
+export const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
   const [backWallVisible, setBackWallVisible] = useState(true);
   const [frontWallVisible, setFrontWallVisible] = useState(true);
   const [leftWallVisible, setLeftWallVisible] = useState(true);
