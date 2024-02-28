@@ -1,4 +1,4 @@
-// src/contexts/DimensionContext.js
+// src/components/contexts/DimensionContext.jsx
 import React, { createContext, useContext, useState } from 'react';
 
 const DimensionContext = createContext();
@@ -25,4 +25,3 @@ export const DimensionProvider = ({ children }) => {
     </DimensionContext.Provider>
   );
 };
-    

@@ -39,7 +39,7 @@ const DimensionInput = () => {
                     id="depth"
                     name="depth"
                     value={depth}
-                    onChange={(e) => setdepth(Number(e.target.value))}
+                    onChange={(e) => setDepth(Number(e.target.value))}
                     required
                 />
 
