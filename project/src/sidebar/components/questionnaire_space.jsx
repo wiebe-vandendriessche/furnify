@@ -1,13 +1,13 @@
 import "../../App.css"
 import React, {useState} from "react";
 import "./questionnaire.css"
-import {useReactContext} from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
 
 
 function Questionnaire_space() {
     //Uses reactcontext
-    const { dimensions, setDimensions } = useReactContext();
+    const { dimensions, setDimensions } = useConfiguratorContext();
     //Changes value of context
     const changeWidth=(event)=>{
         setDimensions({width: event.target.value});
