@@ -9,12 +9,12 @@ import './App.css'
 function App() {
   const [width, setWidth] = useState(4);
   const [height, setHeight] = useState(2.5);
-  const [length, setLength] = useState(7);
+  const [depth, setdepth] = useState(7);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(`Width: ${width}, Height: ${height}, Length: ${length}`);
+    console.log(`Width: ${width}, Height: ${height}, depth: ${depth}`);
   };
 
 
@@ -42,13 +42,13 @@ function App() {
             required
           />
 
-          <label htmlFor="length">Length:</label>
+          <label htmlFor="depth">depth:</label>
           <input
             type="number"
-            id="length"
-            name="length"
-            value={length}
-            onChange={(e) => setLength(Number(e.target.value))}
+            id="depth"
+            name="depth"
+            value={depth}
+            onChange={(e) => setdepth(Number(e.target.value))}
             required
           />
 
@@ -56,10 +56,10 @@ function App() {
         </div>
       </form>
       <Canvas className="canvas">
-        {/* <Room width={width} height={height} length={length} /> */}
+        {/* <Room width={width} height={height} depth={depth} /> */}
         <ambientLight intensity={0.3}></ambientLight>
         <directionalLight position={[0, 15, 15]}/>
-        <Room width={5} depth={5} height={3} wallThickness={0.5} floorThickness={0.3} />
+        <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
         <OrbitControls />
         <axesHelper />
       </Canvas>
