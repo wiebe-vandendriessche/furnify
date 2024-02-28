@@ -1,6 +1,7 @@
 import "../../App.css"
 import React, { useState } from "react";
 import "./questionnaire.css"
+import Obstruction from "./obstruction";
 
 
 function Questionnaire_space() {
@@ -19,58 +20,58 @@ function Questionnaire_space() {
                                         Wat zijn de afmetingen van de woonruimte?
                                     </legend>
                                     <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Vorm:
-                                        </td>
-                                        <td>
-                                            <input type="radio" id="colRectangular" name="space" value="Rectangular" onClick={showDim} />
-                                            <label htmlFor="colRectangular">Rechthoekig</label>
-                                            <input type="radio" id="colOther" name="space" value="Other" onClick={showNoDim} />
-                                            <label htmlFor="colOther">Anders</label>
-                                        </td>
-                                    </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Vorm:
+                                                </td>
+                                                <td>
+                                                    <input type="radio" id="colRectangular" name="space" value="Rectangular" onClick={showDim} />
+                                                    <label htmlFor="colRectangular">Rechthoekig</label>
+                                                    <input type="radio" id="colOther" name="space" value="Other" onClick={showNoDim} />
+                                                    <label htmlFor="colOther">Anders</label>
+                                                </td>
+                                            </tr>
 
-                                    <tr hidden={showDims}>
-                                        <td>
-                                            <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
-                                        </td>
-                                        <td>
-                                            <input id="length" type="text" onChange={(e) => {
-                                                const value = e.target.value;
-                                                console.log(!isNaN(+value)); // true if its a number, false if not
-                                            }}></input>
+                                            <tr hidden={showDims}>
+                                                <td>
+                                                    <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
+                                                </td>
+                                                <td>
+                                                    <input id="length" type="text" onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        console.log(!isNaN(+value)); // true if its a number, false if not
+                                                    }}></input>
 
 
-                                        </td>
-                                        <td>
-                                            <p >cm</p>
-                                        </td>
-                                    </tr>
-                                    <tr hidden={showDims}>
-                                        <td>
-                                            <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
-                                        </td>
-                                        <td>
-                                            <input id="width" type="text"></input>
-                                        </td>
-                                        <td>
-                                            <p>cm</p>
-                                        </td>
-                                    </tr>
-                                    <tr hidden={showDims}>
-                                        <td>
-                                            <label htmlFor="height" pattern="^\d*(\,\d{0,2})?$">Hoogte:</label>
-                                        </td>
-                                        <td>
-                                            <input id="height" type="text"></input>
-                                        </td>
-                                        <td>
-                                            <p>cm</p>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                                </td>
+                                                <td>
+                                                    <p >cm</p>
+                                                </td>
+                                            </tr>
+                                            <tr hidden={showDims}>
+                                                <td>
+                                                    <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
+                                                </td>
+                                                <td>
+                                                    <input id="width" type="text"></input>
+                                                </td>
+                                                <td>
+                                                    <p>cm</p>
+                                                </td>
+                                            </tr>
+                                            <tr hidden={showDims}>
+                                                <td>
+                                                    <label htmlFor="height" pattern="^\d*(\,\d{0,2})?$">Hoogte:</label>
+                                                </td>
+                                                <td>
+                                                    <input id="height" type="text"></input>
+                                                </td>
+                                                <td>
+                                                    <p>cm</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </fieldset>
                             </td>
@@ -79,8 +80,12 @@ function Questionnaire_space() {
                             <td>
                                 <fieldset>
                                     <legend>
-                                        Met welke van de volgende aspecten in uw woonruimte dienen we rekening te houden?
+                                        Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
                                     </legend>
+
+                                    <button >Voeg aspect toe</button>
+                                    <Obstruction/>
+                                    {/*
                                     <input type="checkbox" id="windowDoor" name="windowDoor" />
                                     <label htmlFor="windowDoor">
                                         Opening ramen en deuren
@@ -101,6 +106,7 @@ function Questionnaire_space() {
                                     <label htmlFor="others">
                                         Andere
                                     </label>
+                                    */}
                                 </fieldset>
                             </td>
                         </tr>
