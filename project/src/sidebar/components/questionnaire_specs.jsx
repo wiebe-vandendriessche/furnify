@@ -1,9 +1,15 @@
 import "../../App.css"
 import React from "react";
 import "./questionnaire.css"
+import {useReactContext} from "../../contexts/MyContext.jsx";
 
 function Questionnaire_spec() {
+    //Uses reactcontext
+    const { color, setColor } = useReactContext();
 
+    const changeColor=(event)=>{
+        setColor(event.target.value);
+    }
     return (
         <>
             <div>
@@ -53,10 +59,10 @@ function Questionnaire_spec() {
                                                     Kleur:
                                                 </td>
                                                 <td>
-                                                    <input type="radio" id="colWhite" name="color" value="white" />
+                                                    <input type="radio" id="colWhite" name="color" value="#FFFFFF" onChange={changeColor} checked={color=="#FFFFFF"}/>
                                                     <label htmlFor="colWhite">Wit</label>
-                                                    <input type="radio" id="colBlack" name="color" value="black" />
-                                                    <label htmlFor="colWhite">Zwart</label>
+                                                    <input type="radio" id="colBlack" name="color" value="#000000" onChange={changeColor} checked={color=="#000000"}/>
+                                                    <label htmlFor="colBlack">Zwart</label>
                                                 </td>
                                             </tr>
                                             <tr>

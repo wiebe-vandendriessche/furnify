@@ -1,10 +1,27 @@
 import "../../App.css"
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./questionnaire.css"
-import Obstruction from "./obstruction";
+import {useReactContext} from "../../contexts/MyContext.jsx";
+//import Obstruction from "./obstruction";
 
 
 function Questionnaire_space() {
+    //Uses reactcontext
+    const { dimensions, setDimensions } = useReactContext();
+    //Changes value of context
+    const changeWidth=(event)=>{
+        setDimensions({width: event.target.value});
+    }
+    const changeLength=(event)=>{
+        setDimensions({length: event.target.value})
+    }
+
+    const changeHeight=(event)=>
+    {
+        setDimensions({height: event.target.value})
+    }
+
+
     const [showDims, setShow] = useState(true);
     const showDim = () => { setShow(false); }
     const showNoDim = () => { setShow(true) }
@@ -32,18 +49,12 @@ function Questionnaire_space() {
                                                     <label htmlFor="colOther">Anders</label>
                                                 </td>
                                             </tr>
-
                                             <tr hidden={showDims}>
                                                 <td>
-                                                    <label htmlFor="length" pattern="^\d*(\,\d{0,2})?$">Lengte:</label>
+                                                    <label htmlFor="length" >Lengte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="length" type="text" onChange={(e) => {
-                                                        const value = e.target.value;
-                                                        console.log(!isNaN(+value)); // true if its a number, false if not
-                                                    }}></input>
-
-
+                                                    <input id="length" type="number" min={0} step={0.1} value={dimensions.length} onChange={changeLength}/>
                                                 </td>
                                                 <td>
                                                     <p >cm</p>
@@ -51,10 +62,10 @@ function Questionnaire_space() {
                                             </tr>
                                             <tr hidden={showDims}>
                                                 <td>
-                                                    <label htmlFor="width" pattern="^\d*(\,\d{0,2})?$">Breedte:</label>
+                                                    <label htmlFor="width" >Breedte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="width" type="text"></input>
+                                                    <input id="width" type="number" min={0} step={0.1} value={dimensions.width} onChange={changeWidth}/>
                                                 </td>
                                                 <td>
                                                     <p>cm</p>
@@ -62,10 +73,10 @@ function Questionnaire_space() {
                                             </tr>
                                             <tr hidden={showDims}>
                                                 <td>
-                                                    <label htmlFor="height" pattern="^\d*(\,\d{0,2})?$">Hoogte:</label>
+                                                    <label htmlFor="height">Hoogte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="height" type="text"></input>
+                                                    <input id="height" type="text" min={0} step={0.1} value={dimensions.height} onChange={changeHeight}/>
                                                 </td>
                                                 <td>
                                                     <p>cm</p>
@@ -84,7 +95,7 @@ function Questionnaire_space() {
                                     </legend>
 
                                     <button >Voeg aspect toe</button>
-                                    <Obstruction/>
+                                    {/*<Obstruction/>*/}
                                     {/*
                                     <input type="checkbox" id="windowDoor" name="windowDoor" />
                                     <label htmlFor="windowDoor">
