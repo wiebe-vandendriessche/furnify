@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Box } from '@react-three/drei';
-import { MeshBasicMaterial, Mesh } from 'three';
+import { Box, MeshWobbleMaterial } from '@react-three/drei';
+import { MeshBasicMaterial, Mesh, MeshDepthMaterial } from 'three';
 
 export const ColoredBox = ({ width, height, depth, position, color, visible }) => {
     return (

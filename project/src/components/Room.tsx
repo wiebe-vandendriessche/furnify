@@ -13,11 +13,13 @@ const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
   const [rightWallVisible, setRightWallVisible] = useState(true);
 
   useFrame(({ camera }) => {
-    
-    const newBackWallVisible = camera.position.z >= 0;
-    const newFrontWallVisible = camera.position.z <= 0;
-    const newLeftWallVisible = camera.position.x >= 0;
-    const newRightWallVisible = camera.position.x <= 0;
+
+    let viewWallValue = 2
+
+    let newBackWallVisible = camera.position.z >= -viewWallValue;
+    let newFrontWallVisible = camera.position.z <= viewWallValue;
+    let newLeftWallVisible = camera.position.x >= -viewWallValue;
+    let newRightWallVisible = camera.position.x <= viewWallValue;
 
     setBackWallVisible(newBackWallVisible);
     setFrontWallVisible(newFrontWallVisible);
@@ -25,7 +27,7 @@ const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
     setRightWallVisible(newRightWallVisible);
 
   });
-  
+
   return (
     <>
       {/* Back Wall */}
