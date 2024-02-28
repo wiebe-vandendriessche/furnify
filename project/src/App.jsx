@@ -5,6 +5,9 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import Room from './components/Room'
 import './App.css'
+import { useRef } from 'react'
+import { PointLight, PointLightHelper } from 'three'
+import { useHelper } from '@react-three/drei'
 
 function App() {
   const [width, setWidth] = useState(4);
@@ -16,6 +19,10 @@ function App() {
 
     console.log(`Width: ${width}, Height: ${height}, depth: ${depth}`);
   };
+
+  // const lightref = useRef<PointLight>(null);
+  // useHelper(lightref, PointLightHelper, 1, "red");
+
 
 
   return (
@@ -56,14 +63,14 @@ function App() {
         </div>
       </form>
       <Canvas className="canvas">
-        {/* <Room width={width} height={height} depth={depth} /> */}
         <ambientLight intensity={0.3}></ambientLight>
-        <directionalLight position={[0, 15, 15]}/>
+        <directionalLight position={[0, 15, 15]} />
         <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
+        <pointLight position={[5, 5, 0]} intensity={4} /> 
         <OrbitControls />
         <axesHelper />
       </Canvas>
-    </div>  
+    </div>
   );
 }
 
