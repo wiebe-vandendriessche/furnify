@@ -4,12 +4,13 @@ import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import {IconContext} from "react-icons"
 import Questionnaire_func from "./components/questionnaire_func.jsx";
 import Contact from "./components/contact";
+import logo from "../assets/logo_furnify.jpg";
 import Questionnaire_space from "./components/questionnaire_space";
 import Questionnaire_specs from "./components/questionnaire_specs";
+import button from 'react-bootstrap/Button';
 
 
 function Sidebar(){
-
     const [sidebar, setSidebar]= useState(true);
     const [part, showPart]=useState(0);
     const showSidebar=()=>{setSidebar(!sidebar);}
@@ -34,7 +35,7 @@ function Sidebar(){
             case 1:
                 return <Questionnaire_space/>
             case 2:
-                    return <Questionnaire_specs/>
+                return <Questionnaire_specs/>
             case 3:
                 return <Contact />
             case 4:
@@ -43,6 +44,7 @@ function Sidebar(){
                 return <p>This is some default text</p>
         }
     }
+
     return (
         <>
             <IconContext.Provider value={{color: "undefined"}}>
@@ -51,25 +53,15 @@ function Sidebar(){
                 </div>
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
                     <FaAnglesRight className="menu-bars" onClick={showSidebar}/>
+
                     <div>
+                        <img id="logo" src={logo} alt="furnify"/>
                         {showNextPart()}
                         <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>
                         <button onClick={nextPart} hidden={ showNext() }>Volgende</button>
-
-                        <form>
-                            <ol className="nav-menu-items" >
-
-                                <li className="navbar-toggler">test1</li>
-                                <li className="navbar-toggler"><input type="text" placeholder="insert text"></input></li>
-                            </ol>
-                        </form>
                     </div>
                 </nav>
             </IconContext.Provider>
-            <button className="sideBtn">
-                Button
-            </button>
-
         </>
     )
 }

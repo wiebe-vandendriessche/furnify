@@ -1,5 +1,6 @@
 import "../../App.css"
 import React from "react";
+import "./questionnaire.css"
 
 function Questionnaire_functional() {
 
