@@ -2,7 +2,7 @@ import "../../App.css"
 import React, {useState} from "react";
 import "./questionnaire.css"
 import {useReactContext} from "../../contexts/MyContext.jsx";
-//import Obstruction from "./obstruction";
+import Obstruction from "./obstruction";
 
 
 function Questionnaire_space() {
@@ -76,7 +76,7 @@ function Questionnaire_space() {
                                                     <label htmlFor="height">Hoogte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="height" type="text" min={0} step={0.1} value={dimensions.height} onChange={changeHeight}/>
+                                                    <input id="height" type="number" min={0} step={0.1} value={dimensions.height} onChange={changeHeight}/>
                                                 </td>
                                                 <td>
                                                     <p>cm</p>
@@ -95,29 +95,7 @@ function Questionnaire_space() {
                                     </legend>
 
                                     <button >Voeg aspect toe</button>
-                                    {/*<Obstruction/>*/}
-                                    {/*
-                                    <input type="checkbox" id="windowDoor" name="windowDoor" />
-                                    <label htmlFor="windowDoor">
-                                        Opening ramen en deuren
-                                    </label>
-                                    <input type="checkbox" id="radiator" name="radiator" />
-                                    <label htmlFor="radiator">
-                                        Radiatoren
-                                    </label>
-                                    <input type="checkbox" id="switchPower" name="switchPower" />
-                                    <label htmlFor="switchPower">
-                                        Schakelaars en stroomtoevoeren
-                                    </label>
-                                    <input type="checkbox" id="slopeWall" name="slopeWall" />
-                                    <label htmlFor="slopeWall">
-                                        Schuine wanden
-                                    </label>
-                                    <input type="checkbox" id="others" name="others" />
-                                    <label htmlFor="others">
-                                        Andere
-                                    </label>
-                                    */}
+                                    <Obstruction/>
                                 </fieldset>
                             </td>
                         </tr>
