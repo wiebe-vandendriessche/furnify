@@ -25,19 +25,19 @@ function Questionnaire_spec() {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="wall" name="wall" />
+                                                    <input type="radio" id="wall" name="dev" />
                                                     <label htmlFor="wall">muur</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="Partition" name="Partition" />
+                                                    <input type="radio" id="Partition" name="dev" />
                                                     <label htmlFor="Partition">scheidingswand</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="middel" name="middel" />
+                                                    <input type="radio" id="middel" name="dev" />
                                                     <label htmlFor="middel">te midden van ruimte</label>
                                                 </td>
                                             </tr>
