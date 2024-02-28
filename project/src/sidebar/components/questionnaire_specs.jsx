@@ -11,9 +11,33 @@ function Questionnaire_spec() {
                     <tbody>
                         <tr>
                             <td>
-                                Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?
-                                Opties: Scheidingswand, te midden van ruimte, ed.
-
+                                <fieldset>
+                                    <legend>
+                                        Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?
+                                    </legend>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" id="wall" name="wall" />
+                                                    <label htmlFor="wall">muur</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" id="Partition" name="Partition" />
+                                                    <label htmlFor="Partition">scheidingswand</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" id="middel" name="middel" />
+                                                    <label htmlFor="middel">te midden van ruimte</label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
                             </td>
                         </tr>
                         <tr>
@@ -21,7 +45,6 @@ function Questionnaire_spec() {
                                 <fieldset>
                                     <legend>
                                         Welke materialen verkiest u ter afwerking van uw modulaire meubels?
-
                                     </legend>
                                     <table>
                                         <tbody>
@@ -49,26 +72,20 @@ function Questionnaire_spec() {
                                                     <label htmlFor="matWalnut">Notelaar</label>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <p>
-                                                        <label htmlFor="otherRequirements">
-                                                            Andere specifieke wensen of vereisten waarmee rekening te houden?
-                                                        </label>
-                                                        <textarea id="otherRequirements" rows="3" cols="40"></textarea>
-
-                                                    </p>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </fieldset>
-
                             </td>
                         </tr>
                         <tr>
                             <td>
+                                <fieldset>
+                                    <legend  >
+                                        Andere specifieke wensen of vereisten waarmee rekening te houden?
 
+                                    </legend>
+                                    <textarea id="otherRequirements" rows="3" cols="40"></textarea>
+                                </fieldset>
                             </td>
                         </tr>
                     </tbody>
