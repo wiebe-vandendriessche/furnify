@@ -5,14 +5,17 @@ import { Mesh } from 'three';
 import { Wall } from './Wall';
 import { Floor } from './Floor';
 import { useState } from 'react';
+import * as THREE from 'three';
 
 export const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
+  const roomRef = useRef<THREE.Group>(null);
+
   const [backWallVisible, setBackWallVisible] = useState(true);
   const [frontWallVisible, setFrontWallVisible] = useState(true);
   const [leftWallVisible, setLeftWallVisible] = useState(true);
   const [rightWallVisible, setRightWallVisible] = useState(true);
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, clock }) => {
 
     let viewWallValue = 2
 
@@ -26,10 +29,20 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
     setLeftWallVisible(newLeftWallVisible);
     setRightWallVisible(newRightWallVisible);
 
+    // //rotate
+    //  // Define the radius of the circle path and the speed of rotation
+    //  const radius = 10; // Adjust based on your scene size
+    //  const speed = 0.5; // Adjust for rotation speed
+ 
+    //  // Calculate the camera's new position over time
+    //  const angle = clock.getElapsedTime() * speed;
+    //  camera.position.x = radius * Math.sin(angle);
+    //  camera.position.z = radius * Math.cos(angle);
+    //  camera.lookAt(new THREE.Vector3(0, height / 2, 0));
   });
 
   return (
-    <>
+    <group ref={roomRef}>
       {/* Back Wall */}
       <Wall
         width={width}
@@ -69,7 +82,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         depth={depth}
         position={[0, -floorThickness / 2, 0]}
       />
-    </>
+    </group>
   );
 };
 

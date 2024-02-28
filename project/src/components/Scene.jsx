@@ -8,7 +8,7 @@ import { Room } from './roomComponents/Room.tsx'
 const Scene = () => {
     const { width, height, depth } = useDimensions();
     return (
-        <Canvas className="canvas" >
+        <Canvas className="canvas" camera={{position: [10, 6, 8]}}>
             <ambientLight intensity={.5} />
             <directionalLight position={[0, 100, 100]} />
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />

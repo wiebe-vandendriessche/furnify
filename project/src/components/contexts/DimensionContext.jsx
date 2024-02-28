@@ -6,7 +6,7 @@ const DimensionContext = createContext();
 export const useDimensions = () => useContext(DimensionContext);
 
 export const DimensionProvider = ({ children }) => {
-  const [width, setWidth] = useState(4);
+  const [width, setWidth] = useState(6);
   const [height, setHeight] = useState(2.5);
   const [depth, setDepth] = useState(7);
 
