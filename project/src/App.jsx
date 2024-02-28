@@ -2,8 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import Room from './components/Room'
+
+import * as THREE from 'three';
 import './App.css'
 import { useRef } from 'react'
 import { PointLight, PointLightHelper } from 'three'
@@ -62,12 +64,17 @@ function App() {
           <button type="submit">Submit</button>
         </div>
       </form>
-      <Canvas className="canvas">
-        <ambientLight intensity={0.3}></ambientLight>
-        <directionalLight position={[0, 15, 15]} />
+      <Canvas className="canvas" >
         <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
-        <pointLight position={[5, 5, 0]} intensity={4} /> 
+        <ambientLight intensity={.5}/>
+        <directionalLight position={[0, 100, 100]}/>
+        
         <OrbitControls />
+
+        <Sky distance={450000} sunPosition={[0, 100, 100]} inclination={10} azimuth={0.25} />
+        
+        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+
         <axesHelper />
       </Canvas>
     </div>
