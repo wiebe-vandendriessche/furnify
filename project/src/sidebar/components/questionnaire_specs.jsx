@@ -1,12 +1,14 @@
 import "../../App.css"
 import React from "react";
 import "./questionnaire.css"
-import {useReactContext} from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
 
 function Questionnaire_spec() {
     //Uses reactcontext
-    const { color, setColor } = useReactContext();
-
+    const { color, setColor, material, setMaterial } = useConfiguratorContext();
+    const changeMaterial=(event)=>{
+        setMaterial(event.target.value);
+    }
     const changeColor=(event)=>{
         setColor(event.target.value);
     }
@@ -70,11 +72,11 @@ function Questionnaire_spec() {
                                                     Materiaal:
                                                 </td>
                                                 <td>
-                                                    <input type="radio" id="matBirch" name="material" value="birch" />
+                                                    <input type="radio" id="matBirch" name="material" value="birch" onChange={changeMaterial} checked={material=="birch"}/>
                                                     <label htmlFor="matBirch">Berk</label>
-                                                    <input type="radio" id="matOak" name="material" value="oak" />
+                                                    <input type="radio" id="matOak" name="material" value="oak" onChange={changeMaterial} checked={material=="oak"}/>
                                                     <label htmlFor="matOak">Eik</label>
-                                                    <input type="radio" id="matWalnut" name="material" value="walnut" />
+                                                    <input type="radio" id="matWalnut" name="material" value="walnut" onChange={changeMaterial} checked={material=="walnut"}/>
                                                     <label htmlFor="matWalnut">Notelaar</label>
                                                 </td>
                                             </tr>

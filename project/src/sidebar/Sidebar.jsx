@@ -16,11 +16,6 @@ function Sidebar(){
     const showSidebar=()=>{setSidebar(!sidebar);}
     const previousPart=()=>{showPart(part-1)}
     const nextPart=()=>{showPart(part+1)}
-    const [state, setState] = useState({
-        name: "",
-        age: 0,
-        hobbies: ["paardrijden", "tango", "vissen"]
-    });
     const showPrevious=()=>{
         return part==0;
     }
@@ -31,9 +26,9 @@ function Sidebar(){
     const showNextPart = () => {
         switch(part) {
             case 0:
-                return <Questionnaire_func/>
-            case 1:
                 return <Questionnaire_space/>
+            case 1:
+                return <Questionnaire_func/>
             case 2:
                 return <Questionnaire_specs/>
             case 3:
@@ -55,7 +50,9 @@ function Sidebar(){
                     <FaAnglesRight className="menu-bars" onClick={showSidebar}/>
 
                     <div>
-                        <img id="logo" src={logo} alt="furnify"/>
+                        <a href={"https://www.furnifyhome.eu/"}>
+                            <img id="logo" src={logo} alt="furnify"/>
+                        </a>
                         {showNextPart()}
                         <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>
                         <button onClick={nextPart} hidden={ showNext() }>Volgende</button>
