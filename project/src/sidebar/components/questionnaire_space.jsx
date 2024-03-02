@@ -1,7 +1,7 @@
 import "../../App.css"
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
+import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
 
 
@@ -9,22 +9,34 @@ function Questionnaire_space() {
     //Uses reactcontext
     const { dimensions, setDimensions } = useConfiguratorContext();
     //Changes value of context
-    const changeWidth=(event)=>{
-        setDimensions({width: event.target.value});
+    const changeWidth = (event) => {
+        setDimensions({ width: event.target.value });
     }
-    const changeLength=(event)=>{
-        setDimensions({length: event.target.value})
+    const changeLength = (event) => {
+        setDimensions({ length: event.target.value })
     }
 
-    const changeHeight=(event)=>
-    {
-        setDimensions({height: event.target.value})
+    const changeHeight = (event) => {
+        setDimensions({ height: event.target.value })
     }
 
 
     const [showDims, setShow] = useState(true);
     const showDim = () => { setShow(false); }
     const showNoDim = () => { setShow(true) }
+
+    const [Obst, setObstr] = useState([])
+    const addObstr = () => {
+        if (Obst.length > 0) {
+            setObstr([...Obst, (Obst[Obst.length - 1] + 1)]);
+        }
+        else {
+            setObstr([1]);
+        }
+    }
+
+
+
     return (
         <>
             <div>
@@ -54,7 +66,7 @@ function Questionnaire_space() {
                                                     <label htmlFor="length" >Lengte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="length" type="number" min={0} step={0.1} value={dimensions.length} onChange={changeLength}/>
+                                                    <input id="length" type="number" min={0} step={0.1} value={dimensions.length} onChange={changeLength} />
                                                 </td>
                                                 <td>
                                                     <p >cm</p>
@@ -65,7 +77,7 @@ function Questionnaire_space() {
                                                     <label htmlFor="width" >Breedte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="width" type="number" min={0} step={0.1} value={dimensions.width} onChange={changeWidth}/>
+                                                    <input id="width" type="number" min={0} step={0.1} value={dimensions.width} onChange={changeWidth} />
                                                 </td>
                                                 <td>
                                                     <p>cm</p>
@@ -76,7 +88,7 @@ function Questionnaire_space() {
                                                     <label htmlFor="height">Hoogte:</label>
                                                 </td>
                                                 <td>
-                                                    <input id="height" type="number" min={0} step={0.1} value={dimensions.height} onChange={changeHeight}/>
+                                                    <input id="height" type="number" min={0} step={0.1} value={dimensions.height} onChange={changeHeight} />
                                                 </td>
                                                 <td>
                                                     <p>cm</p>
@@ -94,8 +106,11 @@ function Questionnaire_space() {
                                         Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
                                     </legend>
 
-                                    <button >Voeg aspect toe</button>
-                                    <Obstruction/>
+                                    <button onClick={addObstr} >Voeg aspect toe</button>
+                                    <div>
+                                        {Obst.map((item) => (<Obstruction key={item} />))}
+                                    </div>
+
                                 </fieldset>
                             </td>
                         </tr>
