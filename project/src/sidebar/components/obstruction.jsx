@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import "./questionnaire.css"
 
 function Obstruction() {
+    
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
-    const showButton = () => { setShow2(!showButton2) + setShow1(!showButton1) }
-
+    const [typeObstr, setObstr] = useState("Aspect")
+    const showButton = () => { setShow2(!showButton2) + setShow1(!showButton1) };
+    const saveName = () => {setObstr(type.value)}
+    
 
     return (
         <div className="Obstruction">
@@ -13,29 +16,29 @@ function Obstruction() {
                 <tbody>
                     <tr hidden={showButton1}>
                         <td>
-                            <button id="typeclosed" onClick={showButton}>Type</button>
+                            <input type="button" id="typeclosed" onClick={showButton} value = {typeObstr}></input>
                         </td>
                     </tr>
 
                     <tr hidden={showButton2}>
                         <td>
                             <fieldset>
-                                <legend>
-                                    <button id="typeopen" onClick={showButton}>Type</button>
-                                </legend>
+                            <legend>
+                                    <input type="button" id="typeopen" value = {typeObstr} onClick={showButton}  ></input>
+                                    </legend>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td>
                                                 <label htmlFor="type">Type: </label>
-                                                <select name="type" id="type">
-                                                    <option value="window">raam</option>
-                                                    <option value="door">deur</option>
+                                                <select name="type" id="type" onChange={saveName} >
+                                                    <option value="raam">raam</option>
+                                                    <option value="deur">deur</option>
                                                     <option value="radiator">radiator</option>
-                                                    <option value="outlet">stopcontact</option>
-                                                    <option value="switch">schakelaar</option>
-                                                    <option value="slope">schuine wand</option>
-                                                    <option value="others">anders</option>
+                                                    <option value="stopcontact">stopcontact</option>
+                                                    <option value="schakelaar">schakelaar</option>
+                                                    <option value="schuine wand">schuine wand</option>
+                                                    <option value="anders">anders</option>
                                                 </select>
                                             </td>
                                         </tr>
