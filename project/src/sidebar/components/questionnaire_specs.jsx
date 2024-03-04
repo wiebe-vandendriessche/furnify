@@ -1,16 +1,22 @@
 import "../../App.css"
-import React from "react";
 import "./questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext, useVariaContext} from "../../contexts/MyContext.jsx";
 
 function Questionnaire_spec() {
     //Uses reactcontext
-    const { color, setColor, material, setMaterial } = useConfiguratorContext();
+    const { color, setColor, material, setMaterial, layout, setLayout} = useConfiguratorContext();
+    const {requirements, setRequirements}=useVariaContext();
     const changeMaterial=(event)=>{
         setMaterial(event.target.value);
     }
     const changeColor=(event)=>{
         setColor(event.target.value);
+    }
+    const changeLayout=(event)=>{
+        setLayout(event.target.value);
+    }
+    const changeRequirements=(event)=>{
+        setRequirements(event.target.value);
     }
     return (
         <>
@@ -27,20 +33,20 @@ function Questionnaire_spec() {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="wall" name="dev" />
+                                                    <input type="radio" id="wall" value={"wall"} name="dev" onChange={changeLayout} checked={"wall"===layout}/>
                                                     <label htmlFor="wall">muur</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="Partition" name="dev" />
+                                                    <input type="radio" id="Partition" value={"partition"} name="dev" onChange={changeLayout} checked={"partition"===layout}/>
                                                     <label htmlFor="Partition">scheidingswand</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="middel" name="dev" />
-                                                    <label htmlFor="middel">te midden van ruimte</label>
+                                                    <input type="radio" id="middle" name="dev" value={"middle"} onChange={changeLayout} checked={"middle"===layout}/>
+                                                    <label htmlFor="middle">te midden van ruimte</label>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -61,9 +67,9 @@ function Questionnaire_spec() {
                                                     Kleur:
                                                 </td>
                                                 <td>
-                                                    <input type="radio" id="colWhite" name="color" value="#FFFFFF" onChange={changeColor} checked={color=="#FFFFFF"}/>
+                                                    <input type="radio" id="colWhite" name="color" value="#FFFFFF" onChange={changeColor} checked={color==="#FFFFFF"}/>
                                                     <label htmlFor="colWhite">Wit</label>
-                                                    <input type="radio" id="colBlack" name="color" value="#000000" onChange={changeColor} checked={color=="#000000"}/>
+                                                    <input type="radio" id="colBlack" name="color" value="#000000" onChange={changeColor} checked={color==="#000000"}/>
                                                     <label htmlFor="colBlack">Zwart</label>
                                                 </td>
                                             </tr>
@@ -72,11 +78,11 @@ function Questionnaire_spec() {
                                                     Materiaal:
                                                 </td>
                                                 <td>
-                                                    <input type="radio" id="matBirch" name="material" value="birch" onChange={changeMaterial} checked={material=="birch"}/>
+                                                    <input type="radio" id="matBirch" name="material" value="birch" onChange={changeMaterial} checked={material==="birch"}/>
                                                     <label htmlFor="matBirch">Berk</label>
-                                                    <input type="radio" id="matOak" name="material" value="oak" onChange={changeMaterial} checked={material=="oak"}/>
+                                                    <input type="radio" id="matOak" name="material" value="oak" onChange={changeMaterial} checked={material==="oak"}/>
                                                     <label htmlFor="matOak">Eik</label>
-                                                    <input type="radio" id="matWalnut" name="material" value="walnut" onChange={changeMaterial} checked={material=="walnut"}/>
+                                                    <input type="radio" id="matWalnut" name="material" value="walnut" onChange={changeMaterial} checked={material==="walnut"}/>
                                                     <label htmlFor="matWalnut">Notelaar</label>
                                                 </td>
                                             </tr>
@@ -92,7 +98,7 @@ function Questionnaire_spec() {
                                         Andere specifieke wensen of vereisten waarmee rekening te houden?
 
                                     </legend>
-                                    <textarea id="otherRequirements" rows="3" cols="40"></textarea>
+                                    <textarea id="otherRequirements" rows="3" cols="40" value={requirements} onChange={changeRequirements}></textarea>
                                 </fieldset>
                             </td>
                         </tr>

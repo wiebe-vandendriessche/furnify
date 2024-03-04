@@ -1,10 +1,37 @@
 import "../../App.css"
-import React, { useState } from "react";
 import "./questionnaire.css"
+import {useConfiguratorContext, useVariaContext} from "../../contexts/MyContext.jsx";
 
 function Questionnaire_functional() {
-    const [showBedQuest, setShow] = useState(true);
-    const showBed = () => { setShow(!showBedQuest) }
+    const {functionalities, setFunctionalities}=useConfiguratorContext();
+    const {mattress, setMattress, room, setRoom}=useVariaContext();
+    const changeBed = () => {
+        setFunctionalities({...functionalities, bed: !functionalities.bed})
+        if(!functionalities.bed){
+            setMattress("");
+        }
+    }
+    const changeDesk = () => {
+        setFunctionalities(
+            {...functionalities, desk: !functionalities.desk}
+        );
+    }
+    const changeSofa = () => {
+        setFunctionalities(
+            {...functionalities, sofa: !functionalities.sofa}
+        );
+    }
+    const changeStoragespace = () => {
+        setFunctionalities(
+            {...functionalities, storagespace: !functionalities.storagespace});
+    }
+
+    const changeMattresstype=(event)=>{
+        setMattress(event.target.id);
+    }
+    const changeRoom=(event)=>{
+        setRoom(event.target.id);
+    }
 
     return (
         <>
@@ -20,19 +47,19 @@ function Questionnaire_functional() {
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="radio" id="guestroom" name="room" />
+                                                    <input type="radio" id="guestroom" name="room" onChange={changeRoom} checked={"guestroom"===room}/>
                                                     <label htmlFor="guestroom">logeerkamer</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="livingroom" name="room" />
+                                                    <input type="radio" id="livingroom" name="room" onChange={changeRoom} checked={"livingroom"===room}/>
                                                     <label htmlFor="livingroom">woonkamer</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="bedroom" name="room" />
+                                                    <input type="radio" id="bedroom" name="room" onChange={changeRoom} checked={"bedroom"===room}/>
                                                     <label htmlFor="bedroom">slaapkamer</label>
                                                 </td>
                                             </tr>
@@ -51,13 +78,13 @@ function Questionnaire_functional() {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="bed" name="bed" onChange={showBed} />
+                                                    <input type="checkbox" id="bed" name="bed" onChange={changeBed} checked={functionalities.bed}/>
                                                     <label htmlFor="bed">Bed</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="desk" name="desk" />
+                                                    <input type="checkbox" id="desk" name="desk" onChange={changeDesk} checked={functionalities.desk}/>
                                                     <label htmlFor="desk">Bureauruimte</label>
 
                                                 </td>
@@ -65,7 +92,7 @@ function Questionnaire_functional() {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="sofa" name="sofa" />
+                                                    <input type="checkbox" id="sofa" name="sofa" onChange={changeSofa} checked={functionalities.sofa}/>
                                                     <label htmlFor="sofa">Sofa</label>
 
                                                 </td>
@@ -73,7 +100,7 @@ function Questionnaire_functional() {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" id="storageSpace" name="storageSpace" />
+                                                    <input type="checkbox" id="storageSpace" name="storageSpace" onChange={changeStoragespace} checked={functionalities.storagespace}/>
                                                     <label htmlFor="storageSpace">Opbergruimte</label>
                                                 </td>
                                             </tr>
@@ -86,7 +113,7 @@ function Questionnaire_functional() {
                         </tr>
                         <tr>
                             <td>
-                                <fieldset hidden = {showBedQuest}>
+                                <fieldset hidden = {!functionalities.bed}>
                                     <legend>
                                         Welke matras verkiest u?
                                     </legend>
@@ -95,19 +122,19 @@ function Questionnaire_functional() {
                                             <tr>
                                             
                                                 <td>
-                                                    <input type="radio" id="soft" name="mattress" />
+                                                    <input type="radio" id="soft" name="mattress" onChange={changeMattresstype} checked={"soft"===mattress}/>
                                                     <label htmlFor="soft">extra zacht</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="medium" name="mattress" />
+                                                    <input type="radio" id="medium" name="mattress" onChange={changeMattresstype} checked={"medium"===mattress}/>
                                                     <label htmlFor="medium">medium</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="radio" id="hard" name="mattress" />
+                                                    <input type="radio" id="hard" name="mattress" onChange={changeMattresstype} checked={"hard"===mattress}/>
                                                     <label htmlFor="hard">extra stevig</label>
                                                 </td>
                                             </tr>

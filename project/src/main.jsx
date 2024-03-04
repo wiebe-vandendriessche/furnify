@@ -2,12 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {ConfiguratorProvider} from "./contexts/MyContext";
+import {ConfiguratorProvider, ContactProvider, VariaProvider} from "./contexts/MyContext";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <ConfiguratorProvider>
-          <App />
-      </ConfiguratorProvider>
+      <VariaProvider>
+          <ContactProvider>
+              <ConfiguratorProvider>
+                  <App />
+              </ConfiguratorProvider>
+          </ContactProvider>
+      </VariaProvider>
   </React.StrictMode>,
 )

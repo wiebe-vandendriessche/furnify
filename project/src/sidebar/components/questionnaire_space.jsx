@@ -1,5 +1,5 @@
 import "../../App.css"
-import React, { useState } from "react";
+import { useState } from "react";
 import "./questionnaire.css"
 import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
@@ -7,17 +7,17 @@ import Obstruction from "./obstruction";
 
 function Questionnaire_space() {
     //Uses reactcontext
-    const { dimensions, setDimensions } = useConfiguratorContext();
+    const { dimensions, setDimensions} = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({ width: event.target.value });
+        setDimensions({ ...dimensions, width: event.target.value });
     }
     const changeLength = (event) => {
-        setDimensions({ length: event.target.value })
+        setDimensions({ ...dimensions, length: event.target.value })
     }
 
     const changeHeight = (event) => {
-        setDimensions({ height: event.target.value })
+        setDimensions({ ...dimensions, height: event.target.value })
     }
 
 
@@ -33,6 +33,7 @@ function Questionnaire_space() {
         else {
             setObstr([1]);
         }
+        console.log(Obst)
     }
 
 
