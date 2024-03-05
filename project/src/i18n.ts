@@ -55,6 +55,13 @@ i18n
                             office_space:"Office space",
                             sofa:"Sofa",
                             storage_space:"Storage space",
+                        },
+                        bed: {
+                            q_bed: "Which mattress do you prefer?",
+                            soft: "Extra soft",
+                            medium: "Medium",
+                            sturdy: "Extra sturdy",
+                            apply: "Not applicable"
                         }
                     },
                     questionnaire_specs: {
@@ -66,6 +73,8 @@ i18n
                         },
                         q_materials: "Which materials do you prefer to finish your modular furniture?",
                         materials:{
+                            color: "Color",
+                            material: "Material",
                             white:"White",
                             black:"Black",
                             birch:"Birch",
@@ -122,6 +131,13 @@ i18n
                             office_space:"Bureauruimte",
                             sofa:"Sofa",
                             storage_space:"Opbergruimte",
+                        },
+                        bed:{
+                            q_bed:"Welke matras verkiest u?",
+                            soft:"Extra zacht",
+                            medium:"Medium",
+                            sturdy:"Extra stevig",
+                            apply: "Niet van toepassing"
                         }
                     },
                     questionnaire_specs: {
@@ -133,6 +149,8 @@ i18n
                         },
                         q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
                         materials:{
+                            color:"kleur",
+                            material:"materiaal",
                             white:"Wit",
                             black:"Zwart",
                             birch:"Berk",
@@ -189,6 +207,13 @@ i18n
                             office_space:"Bureau",
                             sofa:"Canapé",
                             storage_space:"Espace de stockage",
+                        },
+                        bed: {
+                            q_bed: "Quel matelas préférez-vous?",
+                            soft: "Extra doux",
+                            medium: "Moyen",
+                            sturdy: "Extra solide",
+                            apply: "Non applicable"
                         }
                     },
                     questionnaire_specs: {
@@ -204,7 +229,9 @@ i18n
                             black:"Noir",
                             birch:"Bouleau",
                             oak:"Chêne",
-                            walnut:"Noyer"
+                            walnut:"Noyer",
+                            color: "Couleur",
+                            material: "Matériau"
                         },
                         q_other:"D'autres souhaits ou exigences spécifiques à prendre en compte?"
                     },
@@ -256,6 +283,13 @@ i18n
                             office_space: "Bürofläche",
                             sofa: "Sofa",
                             storage_space: "Stauraum",
+                        },
+                        bed: {
+                            q_bed: "Welche Matratze bevorzugen Sie?",
+                            soft: "Extra weich",
+                            medium: "Mittel",
+                            sturdy: "Extra fest",
+                            apply: "Nicht anwendbar"
                         }
                     },
                     questionnaire_specs: {
@@ -271,7 +305,9 @@ i18n
                             black: "Schwarz",
                             birch: "Birke",
                             oak: "Eiche",
-                            walnut: "Walnuss"
+                            walnut: "Walnuss",
+                            color: "Farbe",
+                            material: "Material"
                         },
                         q_other: "Andere spezifische Wünsche oder Anforderungen, die berücksichtigt werden sollen?"
                     },
@@ -323,6 +359,13 @@ i18n
                             office_space: "Espacio de oficina",
                             sofa: "Sofá",
                             storage_space: "Espacio de almacenamiento",
+                        },
+                        bed: {
+                            q_bed: "¿Qué colchón prefieres?",
+                            soft: "Extra suave",
+                            medium: "Medio",
+                            sturdy: "Extra firme",
+                            apply: "No aplicable"
                         }
                     },
                     questionnaire_specs: {
@@ -338,7 +381,9 @@ i18n
                             black: "Negro",
                             birch: "Birch",
                             oak: "Roble",
-                            walnut: "Nogal"
+                            walnut: "Nogal",
+                            color: "Color",
+                            material: "Material"
                         },
                         q_other: "¿Otras peticiones o requisitos específicos a tener en cuenta?"
                     },
@@ -390,6 +435,13 @@ i18n
                             office_space: "Spazio ufficio",
                             sofa: "Divano",
                             storage_space: "Spazio di archiviazione",
+                        },
+                        bed: {
+                            q_bed: "Quale materasso preferisci?",
+                            soft: "Extra morbido",
+                            medium: "Medio",
+                            sturdy: "Extra robusto",
+                            apply: "Non applicabile"
                         }
                     },
                     questionnaire_specs: {
@@ -405,7 +457,9 @@ i18n
                             black: "Nero",
                             birch: "Betulla",
                             oak: "Quercia",
-                            walnut: "Noce"
+                            walnut: "Noce",
+                            color: "Colore",
+                            material: "Materiale"
                         },
                         q_other: "Altre richieste o requisiti specifici da considerare?"
                     },
