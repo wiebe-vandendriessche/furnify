@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./questionnaire.css"
+import {useState} from "react";
+import "../../App.css"
 import Form from "react-bootstrap/Form";
-import { Button, FloatingLabel } from "react-bootstrap";
+import {Col, FloatingLabel, Row} from "react-bootstrap";
 
 function Obstruction({id}) {
     const type = "type" + id;
@@ -18,7 +18,6 @@ function Obstruction({id}) {
     }
 
     return (
-        
         <div>
             <input type="button" id={typeopen} value={typeObstr ?? "Aspect"} onClick={showButton}  ></input>
             <div hidden={showButton2}>
@@ -36,32 +35,38 @@ function Obstruction({id}) {
                 </Form.Group>
                 <Form.Group>
                     <div>
-                        <FloatingLabel
+                        <Row className="g-2">
+                            <Col md>
+                                <FloatingLabel
+                                    label="Lengte(cm)"
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col md>
+                                <FloatingLabel
+                                    label="Breedte(cm)"
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col md>
+                                <FloatingLabel
+                                    label="Hoogte(cm)"
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                            label="Lengte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} />
-                        </FloatingLabel>
-                        <FloatingLabel
 
-                            label="Breedte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} />
-                        </FloatingLabel>
-                        <FloatingLabel
-
-                            label="Hoogte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} />
-                        </FloatingLabel>
                     </div>
                 </Form.Group>
             </div>
         </div>
-
     )
 }
 

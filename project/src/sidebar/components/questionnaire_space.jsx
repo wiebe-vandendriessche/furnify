@@ -1,27 +1,27 @@
 import "../../App.css"
-import { useState } from "react";
+import {useState} from "react";
 import "./questionnaire.css"
-import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { FloatingLabel, ToggleButton } from "react-bootstrap";
+import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
 
 function Questionnaire_space() {
     //Uses reactcontext
-    const { dimensions, setDimensions } = useConfiguratorContext();
+    const {dimensions, setDimensions} = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({ ...dimensions, width: event.target.value });
+        setDimensions({...dimensions, width: event.target.value});
     }
     const changeLength = (event) => {
-        setDimensions({ ...dimensions, length: event.target.value })
+        setDimensions({...dimensions, length: event.target.value})
     }
 
     const changeHeight = (event) => {
-        setDimensions({ ...dimensions, height: event.target.value })
+        setDimensions({...dimensions, height: event.target.value})
     }
 
 
@@ -44,92 +44,7 @@ function Questionnaire_space() {
     }
 
 
-
     return (
-
-        /*<div>
-            <table>
-                <tbody>
-                <tr>
-                    <td>
-                        <fieldset>
-                            <legend>
-                                Wat zijn de afmetingen van de woonruimte?
-                            </legend>
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Vorm:
-                                    </td>
-                                    <td>
-                                        <input type="radio" id="colRectangular" name="space" value="Rectangular"
-                                               onClick={showDim}/>
-                                        <label htmlFor="colRectangular">Rechthoekig</label>
-                                        <input type="radio" id="colOther" name="space" value="Other"
-                                               onClick={showNoDim}/>
-                                        <label htmlFor="colOther">Anders</label>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="length">Lengte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="length" type="number" min={0} step={0.1} value={dimensions.length}
-                                               onChange={changeLength}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="width">Breedte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="width" type="number" min={0} step={0.1} value={dimensions.width}
-                                               onChange={changeWidth}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="height">Hoogte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="height" type="number" min={0} step={0.1} value={dimensions.height}
-                                               onChange={changeHeight}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <fieldset>
-                            <legend>
-                                Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
-                            </legend>
-
-                            <button onClick={addObstr}>Voeg aspect toe</button>
-                            <div>
-                                {Obst.map((item) => (<Obstruction key={item}/>))}
-                            </div>
-
-                        </fieldset>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>*/
         <Form className="overflow-auto">
             <Form.Group>
                 <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>
@@ -156,30 +71,34 @@ function Questionnaire_space() {
                 </div>
                 <Collapse in={open}>
                     <div>
-                        <FloatingLabel
+                        <Row className="g-2">
+                            <Col md>
+                                <FloatingLabel
+                                    label="Lengte(cm)"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                                                  onChange={changeLength}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col md>
+                                <FloatingLabel
+                                    label="Breedte(cm)"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
+                                                  onChange={changeWidth}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col md>
+                                <FloatingLabel
+                                    label="Hoogte(cm)"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
+                                                  onChange={changeHeight}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
 
-                            label="Lengte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                onChange={changeLength} />
-                        </FloatingLabel>
-                        <FloatingLabel
 
-                            label="Breedte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                onChange={changeWidth} />
-                        </FloatingLabel>
-                        <FloatingLabel
-
-                            label="Hoogte"
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                onChange={changeHeight} />
-                        </FloatingLabel>
                     </div>
                 </Collapse>
             </Form.Group>
