@@ -4,14 +4,13 @@ import { useTexture } from '@react-three/drei';
 
 export const Wall = ({ width, height, depth, position, visible }) => {
   const wallTexture = useTexture({
-    map: './textures/plastered_wall/plastered_wall_diff_4k.jpg',
-    displacement: './textures/plastered_wall/plastered_wall_disp_4k.jpg',
-    aoMap: './textures/plastered_wall/plastered_wall_arm_4k.jpg',
-    roughnessMap: './textures/plastered_wall/plastered_wall_arm_4k.jpg',
-    metalnessMap: './textures/plastered_wall/plastered_wall_arm_4k.jpg',
-    normalMap: './textures/plastered_wall/plastered_wall_nor_gl_4k.jpg',
+    map: './textures/beige_wall/beige_wall_001_ao_1k.jpg',
+    displacement: './textures/beige_wall/beige_wall_001_disp_1k.jpg',
+    aoMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
+    roughnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
+    metalnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
+    normalMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
   });
-
 
   return (
     <ColoredBox
