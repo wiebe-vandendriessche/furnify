@@ -8,6 +8,7 @@ import { Ground } from './other/Ground.jsx'
 
 
 
+
 const Scene = () => {
     const { width, height, depth } = useDimensions();
     return (
@@ -18,7 +19,6 @@ const Scene = () => {
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
             <OrbitControls />
-
 
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
             
