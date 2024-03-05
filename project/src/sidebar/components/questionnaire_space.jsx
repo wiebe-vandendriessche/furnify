@@ -1,17 +1,17 @@
 import "../../App.css"
-import {useState} from "react";
+import { useState } from "react";
 import "./questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
+import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {FloatingLabel, ToggleButton} from "react-bootstrap";
+import { FloatingLabel, ToggleButton } from "react-bootstrap";
 
 function Questionnaire_space() {
     //Uses reactcontext
-    const { dimensions, setDimensions} = useConfiguratorContext();
+    const { dimensions, setDimensions } = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
         setDimensions({ ...dimensions, width: event.target.value });
@@ -130,71 +130,71 @@ function Questionnaire_space() {
                 </tbody>
             </table>
         </div>*/
-            <Form className="overflow-auto">
-                <Form.Group>
-                    <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>
-                    <div className="mb-3">
-                        <ButtonGroup>
-                            <ToggleButton
-                                onClick={() => setOpen(!open)}
-                                type="radio"
-                                value="Rectangular"
-                                variant="danger"
-                                checked={open}
-                            >
-                                Rechthoekig
-                            </ToggleButton>
-                            <ToggleButton
-                                type="radio"
-                                value="Other"
-                                variant="danger"
-                                checked={!open}
-                                onClick={() => setOpen(false)}>
-                                anders
-                            </ToggleButton>
-                        </ButtonGroup>
-                    </div>
-                    <Collapse in={open}>
-                        <div>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Lengte"
-                                className="mb-4"
-                            >
-                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                              onChange={changeLength} />
-                            </FloatingLabel>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Breedte"
-                                className="mb-4"
-                            >
-                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                              onChange={changeWidth} />
-                            </FloatingLabel>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Hoogte"
-                                className="mb-4"
-                            >
-                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                              onChange={changeHeight} />
-                            </FloatingLabel>
-                        </div>
-                    </Collapse>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
-                    <Button onClick={addObstr} variant="danger">Voeg aspect toe</Button>
+        <Form className="overflow-auto">
+            <Form.Group>
+                <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>
+                <div className="mb-3">
+                    <ButtonGroup>
+                        <ToggleButton
+                            onClick={() => setOpen(!open)}
+                            type="radio"
+                            value="Rectangular"
+                            variant="danger"
+                            checked={open}
+                        >
+                            Rechthoekig
+                        </ToggleButton>
+                        <ToggleButton
+                            type="radio"
+                            value="Other"
+                            variant="danger"
+                            checked={!open}
+                            onClick={() => setOpen(false)}>
+                            anders
+                        </ToggleButton>
+                    </ButtonGroup>
+                </div>
+                <Collapse in={open}>
                     <div>
-                        {Obst.map((item) => (<Obstruction key={item}/>))}
+                        <FloatingLabel
+
+                            label="Lengte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                                onChange={changeLength} />
+                        </FloatingLabel>
+                        <FloatingLabel
+
+                            label="Breedte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                                onChange={changeWidth} />
+                        </FloatingLabel>
+                        <FloatingLabel
+
+                            label="Hoogte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                                onChange={changeHeight} />
+                        </FloatingLabel>
                     </div>
-                </Form.Group>
+                </Collapse>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
+                <Button onClick={addObstr} variant="danger">Voeg aspect toe</Button>
+                <div>
+                    {Obst.map((item) => (<Obstruction key={item} />))}
+                </div>
+            </Form.Group>
 
-            </Form>
+        </Form>
 
 
-)
+    )
 }
 
 export default Questionnaire_space;
