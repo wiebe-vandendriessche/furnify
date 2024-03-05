@@ -145,7 +145,7 @@ function Questionnaire_space() {
         </div>*/
         <Form className="overflow-auto">
             <Form.Group>
-                <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>
+                <Form.Label>{t('questionnaire_space.q_dimensions')}</Form.Label>
                 <div className="mb-3">
                     <ButtonGroup>
                         <ToggleButton
@@ -197,7 +197,7 @@ function Questionnaire_space() {
                 </Collapse>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
+                <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
                 <Button onClick={addObstr} variant="danger">
                     {t('questionnaire_space.add_aspect')}
                 </Button>
