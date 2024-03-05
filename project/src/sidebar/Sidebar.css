@@ -37,9 +37,9 @@
     padding: 16px 50px 16px 50px;
 }
 
-.btn{
+.bottom_btn{
     position: absolute;
-    bottom: 50px;
+    bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: center;

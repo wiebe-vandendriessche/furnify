@@ -1,6 +1,7 @@
 import "./Sidebar.css"
 import React, {useState} from "react";
 import {IconContext} from "react-icons"
+import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import Questionnaire_func from "./components/questionnaire_func.jsx";
 import Contact from "./components/contact";
 import logo from "../assets/logo_lm.png";
@@ -58,12 +59,11 @@ function Sidebar() {
                                 <source srcSet={logo_dm} media="(prefers-color-scheme: dark)"/>
                                 <img id="logo" src={logo} alt="furnify"/>
                             </picture>
-
                         </a>
                         {showNextPart()}
-                        <div className="btn">
-                            <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>
-                            <button onClick={nextPart} hidden={showNext()}>Volgende</button>
+                        <div className="bottom_btn">
+                            <button onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>
+                            <button onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>
                         </div>
 
                     </div>

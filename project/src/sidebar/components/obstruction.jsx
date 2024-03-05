@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./questionnaire.css"
+import Form from "react-bootstrap/Form";
+import {Button, FloatingLabel} from "react-bootstrap";
 
 function Obstruction() {
-    
+
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const [typeObstr, setObstr] = useState("Aspect")
-    const showButton = () => { setShow2(!showButton2) + setShow1(!showButton1) };
-    const saveName = () => {setObstr(type.value)}
-    
+    const showButton = () => {
+        setShow2(!showButton2) + setShow1(!showButton1)
+    };
+    const saveName = () => {
+        setObstr(type.value)
+    }
 
     return (
-        <div className="Obstruction">
+        /*<div className="Obstruction">
             <table>
                 <tbody>
                     <tr hidden={showButton1}>
@@ -86,7 +91,51 @@ function Obstruction() {
             </table>
 
 
+        </div>*/
+        <div>
+            <Button variant={"danger"} id="typeopen" value={saveName} onClick={showButton}>Aspect</Button>
+            <Form className="overflow-auto" hidden={showButton1}>
+                <Form.Group className="mb-3">
+                    <Form.Select name="type" id="type" onChange={saveName}>
+                        <option value="Type">Type</option>
+                        <option value="raam">raam</option>
+                        <option value="deur">deur</option>
+                        <option value="radiator">radiator</option>
+                        <option value="stopcontact">stopcontact</option>
+                        <option value="schakelaar">schakelaar</option>
+                        <option value="schuine wand">schuine wand</option>
+                        <option value="anders">anders</option>
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                    <div>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Lengte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Breedte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Hoogte"
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
+                    </div>
+                </Form.Group>
+
+            </Form>
         </div>
+
     )
 }
 
