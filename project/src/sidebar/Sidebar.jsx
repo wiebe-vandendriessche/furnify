@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import React, {useState} from "react";
+import {useState} from "react";
 import {IconContext} from "react-icons"
 import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import Questionnaire_func from "./components/questionnaire_func.jsx";

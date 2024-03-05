@@ -54,11 +54,6 @@ button:hover {
     -webkit-transform: scale(1.1);
 }
 
-/*button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}*/
-
 .form-control:focus {
     border-color:#e84646;
     -webkit-box-shadow:0 0 0.5rem #e84646;
