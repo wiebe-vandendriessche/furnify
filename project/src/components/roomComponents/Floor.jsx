@@ -1,8 +1,7 @@
 import React from 'react';
 import { ColoredBox } from './Coloredbox';
 import { useTexture } from '@react-three/drei';
-import img from '../../../public/planks_oak.png';
-import { useLoader } from '@react-three/fiber';
+import { useEffect } from 'react';
 import * as THREE from 'three';
 
 export const Floor = ({ width, height, depth, position }) => {
@@ -16,7 +15,26 @@ export const Floor = ({ width, height, depth, position }) => {
         normalMap: './textures/laminate_floor/laminate_floor_02_nor_gl_1k.jpg',
     });
 
-    const texture = useLoader(THREE.TextureLoader, img)
+    // Apply texture repetition to all textures
+    useEffect(() => {
+        const repeatTextures = [
+            floorTexture.map,
+            floorTexture.displacement,
+            floorTexture.aoMap,
+            floorTexture.roughnessMap,
+            floorTexture.metalnessMap,
+            floorTexture.normalMap
+        ];
+            
+        repeatTextures.forEach(texture => {
+            if (texture) {
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(width/2, depth/2) // TODO: only change repeat settings when width, depth is divisible by a certain number
+                texture.needsUpdate = true;
+            }
+        });
+    }, [floorTexture]);
 
     return (
         <ColoredBox
@@ -25,7 +43,7 @@ export const Floor = ({ width, height, depth, position }) => {
             depth={depth}
             position={position}
             color="blue"
-            textures={texture}
+            textures={floorTexture}
         />
     );
 };
