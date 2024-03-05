@@ -35,12 +35,16 @@ function Questionnaire_space() {
     const changeObstacleHeight=(event)=>{
         setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, height:event.target.value}:obstacle))
     }
+    const deleteObstacle=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.filter((obstacle, index)=>(index!=event.target.id.split("obst")[1])))
+        console.log("verwijder");
+    }
     const [open, setOpen] = useState(false);
     const addObstacles = () => {
         if (obstacles.length > 0) {
             setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);
         } else {
-            setObstacles([{type: "Type", width: 0, height: 0, length:0}]);
+            setObstacles([{type: "type", width: 0, height: 0, length:0}]);
         }
     }
 
@@ -52,6 +56,7 @@ function Questionnaire_space() {
                 <div className="mb-3">
                     <ButtonGroup>
                         <ToggleButton
+                            id={"rectangularShape"}
                             onClick={() => setOpen(!open)}
                             type="radio"
                             value="Rectangular"
@@ -61,6 +66,7 @@ function Questionnaire_space() {
                             Rechthoekig
                         </ToggleButton>
                         <ToggleButton
+                            id={"otherShape"}
                             type="radio"
                             value="Other"
                             variant="danger"
@@ -109,7 +115,9 @@ function Questionnaire_space() {
                 <div>
                     {obstacles.map((item, index) => (<Obstruction obstId={"obst" + JSON.stringify(index)} type={item.type}
                                                                   length={item.length} width={item.width} height={item.height}
-                                                                  changeLength={changeObstacleLength} changeHeight={changeObstacleHeight} changeWidth={changeObstacleWidth} key={item} changeType={changeObstacleType}/>))}
+                                                                  changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}
+                                                                  changeWidth={changeObstacleWidth} key={"obst"+index} changeType={changeObstacleType}
+                                                                  deleteObst={deleteObstacle}      />))}
                 </div>
             </Form.Group>
 

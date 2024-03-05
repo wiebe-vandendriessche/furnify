@@ -1,10 +1,11 @@
 import {useState} from "react";
 import "../../App.css"
 import Form from "react-bootstrap/Form";
+import {FaRectangleXmark} from "react-icons/fa6";
 import {Col, FloatingLabel, Row} from "react-bootstrap";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
@@ -15,7 +16,8 @@ function Obstruction({changeLength, changeHeight, changeWidth, changeType, type,
     console.log(obstId);
     return (
         <div>
-            <input type="button" id={"button"+obstId} value={type ?? "Aspect"} onClick={showButton}  ></input>
+            <input type="button" id={"button"+obstId} value={type ?? "Aspect"} onClick={showButton}  />
+            <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name={type} id={"type" + obstId} onChange={(e)=>{changeType(e)}} defaultValue={type?type:"type"}>
