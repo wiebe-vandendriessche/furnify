@@ -187,7 +187,7 @@ function Questionnaire_space() {
                 <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
                 <Button onClick={addObstr} variant="danger">Voeg aspect toe</Button>
                 <div>
-                    {Obst.map((item) => (<Obstruction key={item} />))}
+                    {Obst.map((item) => (<Obstruction key={item} id={item} />))}
                 </div>
             </Form.Group>
 

@@ -3,26 +3,28 @@ import "./questionnaire.css"
 import Form from "react-bootstrap/Form";
 import { Button, FloatingLabel } from "react-bootstrap";
 
-function Obstruction() {
-
+function Obstruction({id}) {
+    const type = "type" + id;
+    const typeopen = "typeopen" + id;
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const [typeObstr, setObstr] = useState("Aspect")
     const showButton = () => {
         setShow2(!showButton2) + setShow1(!showButton1)
     };
-    const saveName = () => {
-        setObstr(type.value)
+    const saveName = (event) => {
+        setObstr(event.target.value)
+       
     }
 
     return (
         
         <div>
-            <input type="button" id="typeopen" value={typeObstr} onClick={showButton}  ></input>
+            <input type="button" id={typeopen} value={typeObstr ?? "Aspect"} onClick={showButton}  ></input>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id="type" onChange={saveName}>
-                        <option value="Type">Type</option>
+                    <Form.Select name={type} id={"type" + id} onChange={saveName}>
+                        <option value="type">type</option>
                         <option value="raam">raam</option>
                         <option value="deur">deur</option>
                         <option value="radiator">radiator</option>
