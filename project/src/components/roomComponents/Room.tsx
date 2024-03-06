@@ -17,6 +17,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
 
   useFrame(({ camera, clock }) => {
 
+    // Determines how soon walls appear/dissapear when orbiting around the romom
     let viewWallValue = 2
 
     let newBackWallVisible = camera.position.z >= -viewWallValue;
