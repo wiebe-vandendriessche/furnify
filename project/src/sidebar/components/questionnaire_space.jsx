@@ -24,32 +24,32 @@ function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const { dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
+    const { dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({...dimensions, width: event.target.value});
+        setDimensions({ ...dimensions, width: event.target.value });
     }
     const changeLength = (event) => {
-        setDimensions({...dimensions, length: event.target.value})
+        setDimensions({ ...dimensions, length: event.target.value })
     }
 
     const changeHeight = (event) => {
-        setDimensions({...dimensions, height: event.target.value})
+        setDimensions({ ...dimensions, height: event.target.value })
     }
-    const changeObstacleType=(event)=>{
-        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=> index==event.target.id.split("obst")[1]?{...obstacle, type: event.target.value}:obstacle))
+    const changeObstacleType = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.id.split("obst")[1] ? { ...obstacle, type: event.target.value } : obstacle))
     }
-    const changeObstacleLength=(event)=>{
-        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, length:event.target.value}:obstacle))
+    const changeObstacleLength = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, length: event.target.value } : obstacle))
     }
-    const changeObstacleWidth=(event)=>{
-        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, width: event.target.value}:obstacle))
+    const changeObstacleWidth = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, width: event.target.value } : obstacle))
     }
-    const changeObstacleHeight=(event)=>{
-        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, height:event.target.value}:obstacle))
+    const changeObstacleHeight = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, height: event.target.value } : obstacle))
     }
-    const deleteObstacle=(event)=>{
-        setObstacles((prevObstacles)=>prevObstacles.filter((obstacle, index)=>(index!=event.target.id.split("obst")[1])))
+    const deleteObstacle = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.filter((obstacle, index) => (index != event.target.id.split("obst")[1])))
         console.log("verwijder");
     }
     const [open, setOpen] = useState(false);
@@ -57,7 +57,7 @@ function Questionnaire_space() {
         if (obstacles.length > 0) {
             setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);
         } else {
-            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, length:0}]);
+            setObstacles([{ type: t('obstructions.type'), width: 0, height: 0, length: 0 }]);
         }
     }
 
@@ -121,10 +121,10 @@ function Questionnaire_space() {
                 <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
                 <div>
                     {obstacles.map((item, index) => (<Obstruction obstId={"obst" + JSON.stringify(index)} type={item.type}
-                                                                  length={item.length} width={item.width} height={item.height}
-                                                                  changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}
-                                                                  changeWidth={changeObstacleWidth} key={"obst"+index} changeType={changeObstacleType}
-                                                                  deleteObst={deleteObstacle}      />))}
+                        length={item.length} width={item.width} height={item.height}
+                        changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}
+                        changeWidth={changeObstacleWidth} key={"obst" + index} changeType={changeObstacleType}
+                        deleteObst={deleteObstacle} />))}
                 </div>
             </Form.Group>
 

@@ -28,7 +28,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
     console.log(obstId);
     return (
         <div>
-            <input type="button" id={"button"+obstId} value={type ?? "Aspect"} onClick={showButton}  />
+            <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
             <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
