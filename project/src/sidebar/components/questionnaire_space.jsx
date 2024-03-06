@@ -102,7 +102,7 @@ function Questionnaire_space() {
                             label={t('questionnaire_space.width')}
                             className="mb-4"
                         >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                            <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
                                 onChange={changeWidth} />
                         </FloatingLabel>
                         <FloatingLabel
@@ -110,7 +110,7 @@ function Questionnaire_space() {
                             label={t('questionnaire_space.height')}
                             className="mb-4"
                         >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                            <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
                                 onChange={changeHeight} />
                         </FloatingLabel>
                     </div>
