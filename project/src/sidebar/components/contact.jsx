@@ -3,7 +3,9 @@ import {useContactContext} from "../../contexts/MyContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import {FloatingLabel} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 
 function Contact() {
     const { t, i18n } = useTranslation();
@@ -32,9 +34,7 @@ function Contact() {
 
 
     return (
-
-        <>
-            <div>
+            /*<div>
                 <h2>
                 {t('contact.q_contact')}
                 </h2>
@@ -88,8 +88,42 @@ function Contact() {
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </>)
+            </div>*/
+
+        <div>
+           <Form>
+              <div>
+
+              </div>
+               <FloatingLabel
+                   controlId="floatingInput"
+                   label={t('contact.firstname')}>
+                   <Form.Control type="text" placeholder={"firstName"} defaultValue={firstName} onChange={changeFirstName}/>
+               </FloatingLabel>
+               <FloatingLabel
+                   controlId="floatingInput"
+                   label={t('contact.lastname')}>
+                   <Form.Control type="text" placeholder={"name"} defaultValue={lastName} onChange={changeLastName}/>
+               </FloatingLabel>
+               <FloatingLabel
+                   controlId="floatingInput"
+                   label="">
+                   <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true} searchPlaceholder={""} disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel" value={phoneNumber} onChange={changePhoneNumber}/>
+               </FloatingLabel>
+
+               <FloatingLabel
+                   controlId="floatingInput"
+                   label={t('contact.email')}>
+                   <Form.Control type="email" placeholder={"email"} defaultValue={mail} onChange={changeMail}/>
+                   <FloatingLabel
+                       controlId="floatingInput"
+                       label={t('contact.address')}>
+                       <Form.Control type="text" placeholder={"address"} defaultValue={address} onChange={changeAddress}/>
+                   </FloatingLabel>
+               </FloatingLabel>
+           </Form>
+        </div>
+        )
 }
 
 export default Contact;

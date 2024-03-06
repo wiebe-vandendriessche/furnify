@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import "./questionnaire.css"
 import Form from "react-bootstrap/Form";
-import {Button, FloatingLabel} from "react-bootstrap";
-import { useTranslation } from 'react-i18next'
-import {FaRectangleXmark} from "react-icons/fa6";
-    
+import {Col, FloatingLabel, Row} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import {useTranslation} from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
 function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
@@ -17,7 +16,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
     }, [])
 
     const lng = navigator.language;
-    
+
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
@@ -27,12 +26,11 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
 
     console.log(obstId);
     return (
-        <div>
+        <div className="obstruction-bg">
             <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
-            <FaRectangleXmark id={"delete"+obstId} name={"delete"+obstId} onClick={(e)=> {
-                deleteObst(e)
-            }}/>
-
+            <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete"+obstId} onClick={(e)=>deleteObst(e)}>
+                x
+            </Button>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
@@ -48,28 +46,37 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                 </Form.Group>
                 <Form.Group>
                     <div>
-                        <FloatingLabel
-                            controlId={"length"+obstId}
-                            label={t('questionnaire_space.length')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
-                        </FloatingLabel>
-                        <FloatingLabel
-                            controlId={"width"+obstId}
-                            label={t('questionnaire_space.width')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
+                        <Row>
+                            <Col>
+                                <FloatingLabel
+                                    controlId={"length"+obstId}
+                                    label={t('questionnaire_space.length')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel
+                                    controlId={"width"+obstId}
+                                    label={t('questionnaire_space.width')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
 
-                        </FloatingLabel>
-                        <FloatingLabel
-                            controlId={"height"+obstId}
-                            label={t('questionnaire_space.height')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
-                        </FloatingLabel>
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel
+                                    controlId={"height"+obstId}
+                                    label={t('questionnaire_space.height')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+
                     </div>
                 </Form.Group>
             </div>

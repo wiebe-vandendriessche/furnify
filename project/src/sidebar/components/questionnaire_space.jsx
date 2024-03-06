@@ -7,8 +7,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {FloatingLabel, ToggleButton} from "react-bootstrap";
 import {useTranslation} from 'react-i18next'
+import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
 
 
 function Questionnaire_space() {
@@ -111,30 +111,38 @@ function Questionnaire_space() {
                 </div>
                 <Collapse in={open}>
                     <div>
-                        <FloatingLabel
-                            controlId="rectangularLength"
-                            label={t('questionnaire_space.length')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                          onChange={changeLength}/>
-                        </FloatingLabel>
-                        <FloatingLabel
-                            controlId="rectangularWidth"
-                            label={t('questionnaire_space.width')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                          onChange={changeWidth}/>
-                        </FloatingLabel>
-                        <FloatingLabel
-                            controlId="rectangularHeight"
-                            label={t('questionnaire_space.height')}
-                            className="mb-4"
-                        >
-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                          onChange={changeHeight}/>
-                        </FloatingLabel>
+                        <Row>
+                            <Col>
+                                <FloatingLabel
+                                    controlId="rectangularLength"
+                                    label={t('questionnaire_space.length')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+                                                  onChange={changeLength} />
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel
+                                    controlId="rectangularWidth"
+                                    label={t('questionnaire_space.width')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
+                                                  onChange={changeWidth} />
+                                </FloatingLabel>
+                            </Col>
+                            <Col>
+                                <FloatingLabel
+                                    controlId="rectangularHeight"
+                                    label={t('questionnaire_space.height')}
+                                    className="mb-4"
+                                >
+                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
+                                                  onChange={changeHeight} />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
                     </div>
                 </Collapse>
             </Form.Group>
