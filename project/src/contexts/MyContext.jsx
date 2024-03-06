@@ -4,12 +4,14 @@ export const ContactContext= createContext(null);
 export const ConfiguratorContext=createContext(null);
 export const VariaContext=createContext(null)
 
+// eslint-disable-next-line react/prop-types
 export const ConfiguratorProvider=({children})=>{
     const [dimensions, setDimensions]=useState({length: 0, width:0, height:0});
     const [color, setColor]=useState("#FFFFFF");
     const [material, setMaterial]=useState("birch");
     const [layout, setLayout]=useState("")
     const [functionalities, setFunctionalities]=useState({bed: false, sofa: false, desk: false, storagespace: false})
+    const [obstacles, setObstacles]=useState([]);
 
     return (
         <ConfiguratorContext.Provider
@@ -24,13 +26,16 @@ export const ConfiguratorProvider=({children})=>{
                 layout,
                 setLayout,
                 functionalities,
-                setFunctionalities
+                setFunctionalities,
+                obstacles,
+                setObstacles
             }
         }>
             {children}
     </ConfiguratorContext.Provider>);
 }
 
+// eslint-disable-next-line react/prop-types
 export const ContactProvider=({children})=>{
     const [firstName, setFirstName]=useState("");
     const [lastName, setLastName]=useState("");
@@ -56,6 +61,7 @@ export const ContactProvider=({children})=>{
     )
 }
 
+// eslint-disable-next-line react/prop-types
 export const VariaProvider=({children})=>{
     const [requirements, setRequirements]=useState("");
     const [mattress, setMattress]=useState("");

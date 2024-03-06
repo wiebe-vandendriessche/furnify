@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import React, {useState} from "react";
+import {useState} from "react";
 import {IconContext} from "react-icons"
 import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
 import Questionnaire_func from "./components/questionnaire_func.jsx";
@@ -53,7 +53,7 @@ function Sidebar() {
 
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
 
-                    <div>
+                    <div className="overflow-auto">
                         <a id="a" href={"https://www.furnifyhome.eu/"}>
                             <picture>
                                 <source srcSet={logo_dm} media="(prefers-color-scheme: dark)"/>

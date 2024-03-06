@@ -24,38 +24,42 @@ function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const { dimensions, setDimensions } = useConfiguratorContext();
+    const { dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({ ...dimensions, width: event.target.value });
+        setDimensions({...dimensions, width: event.target.value});
     }
     const changeLength = (event) => {
-        setDimensions({ ...dimensions, length: event.target.value })
+        setDimensions({...dimensions, length: event.target.value})
     }
 
     const changeHeight = (event) => {
-        setDimensions({ ...dimensions, height: event.target.value })
+        setDimensions({...dimensions, height: event.target.value})
     }
-
-
-    /*const [showDims, setShow] = useState(true);
-    const showDim = () => {
-        setShow(false);
+    const changeObstacleType=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=> index==event.target.id.split("obst")[1]?{...obstacle, type: event.target.value}:obstacle))
     }
-    const showNoDim = () => {
-        setShow(true)
-    }*/
+    const changeObstacleLength=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, length:event.target.value}:obstacle))
+    }
+    const changeObstacleWidth=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, width: event.target.value}:obstacle))
+    }
+    const changeObstacleHeight=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.map((obstacle, index)=>index==event.target.name.split("obst")[1]?{...obstacle, height:event.target.value}:obstacle))
+    }
+    const deleteObstacle=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.filter((obstacle, index)=>(index!=event.target.id.split("obst")[1])))
+        console.log("verwijder");
+    }
     const [open, setOpen] = useState(false);
-    const [Obst, setObstr] = useState([])
-    const addObstr = () => {
-        if (Obst.length > 0) {
-            setObstr([...Obst, (Obst[Obst.length - 1] + 1)]);
+    const addObstacles = () => {
+        if (obstacles.length > 0) {
+            setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);
         } else {
-            setObstr([1]);
+            setObstacles([{type: "type", width: 0, height: 0, length:0}]);
         }
-        console.log(Obst)
     }
-
 
 
     return (
@@ -197,12 +201,14 @@ function Questionnaire_space() {
                 </Collapse>
             </Form.Group>
             <Form.Group>
-                <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
-                <Button onClick={addObstr} variant="danger">
-                    {t('questionnaire_space.add_aspect')}
-                </Button>
+                <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
+                <Button onClick={addObstacles} variant="danger">Voeg aspect toe</Button>
                 <div>
-                    {Obst.map((item) => (<Obstruction key={item} />))}
+                    {obstacles.map((item, index) => (<Obstruction obstId={"obst" + JSON.stringify(index)} type={item.type}
+                                                                  length={item.length} width={item.width} height={item.height}
+                                                                  changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}
+                                                                  changeWidth={changeObstacleWidth} key={"obst"+index} changeType={changeObstacleType}
+                                                                  deleteObst={deleteObstacle}      />))}
                 </div>
             </Form.Group>
 
