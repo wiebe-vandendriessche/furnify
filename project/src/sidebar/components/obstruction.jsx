@@ -3,8 +3,10 @@ import "./questionnaire.css"
 import Form from "react-bootstrap/Form";
 import {Button, FloatingLabel} from "react-bootstrap";
 import { useTranslation } from 'react-i18next'
+    
 
-function Obstruction() {
+// eslint-disable-next-line react/prop-types
+function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -14,9 +16,7 @@ function Obstruction() {
     }, [])
 
     const lng = navigator.language;
-
-// eslint-disable-next-line react/prop-types
-function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+    
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {

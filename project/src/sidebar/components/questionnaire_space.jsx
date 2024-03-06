@@ -201,8 +201,8 @@ function Questionnaire_space() {
                 </Collapse>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
-                <Button onClick={addObstacles} variant="danger">Voeg aspect toe</Button>
+                <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
+                <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
                 <div>
                     {obstacles.map((item, index) => (<Obstruction obstId={"obst" + JSON.stringify(index)} type={item.type}
                                                                   length={item.length} width={item.width} height={item.height}
