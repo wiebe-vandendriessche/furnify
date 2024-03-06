@@ -91,39 +91,43 @@ function Contact() {
             </div>*/
 
         <div>
-           <Form>
-              <div>
+            <h2>
+                {t('contact.q_contact')}
+            </h2>
+            <Form>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('contact.firstname')}>
+                    <Form.Control type="text" placeholder={"firstName"} defaultValue={firstName}
+                                  onChange={changeFirstName}/>
+                </FloatingLabel>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('contact.lastname')}>
+                    <Form.Control type="text" placeholder={"name"} defaultValue={lastName} onChange={changeLastName}/>
+                </FloatingLabel>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="">
+                    <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true} searchPlaceholder={""}
+                                disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
+                                value={phoneNumber} onChange={changePhoneNumber}/>
+                </FloatingLabel>
 
-              </div>
-               <FloatingLabel
-                   controlId="floatingInput"
-                   label={t('contact.firstname')}>
-                   <Form.Control type="text" placeholder={"firstName"} defaultValue={firstName} onChange={changeFirstName}/>
-               </FloatingLabel>
-               <FloatingLabel
-                   controlId="floatingInput"
-                   label={t('contact.lastname')}>
-                   <Form.Control type="text" placeholder={"name"} defaultValue={lastName} onChange={changeLastName}/>
-               </FloatingLabel>
-               <FloatingLabel
-                   controlId="floatingInput"
-                   label="">
-                   <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true} searchPlaceholder={""} disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel" value={phoneNumber} onChange={changePhoneNumber}/>
-               </FloatingLabel>
-
-               <FloatingLabel
-                   controlId="floatingInput"
-                   label={t('contact.email')}>
-                   <Form.Control type="email" placeholder={"email"} defaultValue={mail} onChange={changeMail}/>
-                   <FloatingLabel
-                       controlId="floatingInput"
-                       label={t('contact.address')}>
-                       <Form.Control type="text" placeholder={"address"} defaultValue={address} onChange={changeAddress}/>
-                   </FloatingLabel>
-               </FloatingLabel>
-           </Form>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={t('contact.email')}>
+                    <Form.Control type="email" placeholder={"email"} defaultValue={mail} onChange={changeMail}/>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label={t('contact.address')}>
+                        <Form.Control type="text" placeholder={"address"} defaultValue={address}
+                                      onChange={changeAddress}/>
+                    </FloatingLabel>
+                </FloatingLabel>
+            </Form>
         </div>
-        )
+    )
 }
 
 export default Contact;
