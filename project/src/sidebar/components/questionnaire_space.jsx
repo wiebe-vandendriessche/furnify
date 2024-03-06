@@ -57,96 +57,12 @@ function Questionnaire_space() {
         if (obstacles.length > 0) {
             setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);
         } else {
-            setObstacles([{type: "type", width: 0, height: 0, length:0}]);
+            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, length:0}]);
         }
     }
 
 
     return (
-
-        /*<div>
-            <table>
-                <tbody>
-                <tr>
-                    <td>
-                        <fieldset>
-                            <legend>
-                                Wat zijn de afmetingen van de woonruimte?
-                            </legend>
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        Vorm:
-                                    </td>
-                                    <td>
-                                        <input type="radio" id="colRectangular" name="space" value="Rectangular"
-                                               onClick={showDim}/>
-                                        <label htmlFor="colRectangular">Rechthoekig</label>
-                                        <input type="radio" id="colOther" name="space" value="Other"
-                                               onClick={showNoDim}/>
-                                        <label htmlFor="colOther">Anders</label>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="length">Lengte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="length" type="number" min={0} step={0.1} value={dimensions.length}
-                                               onChange={changeLength}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="width">Breedte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="width" type="number" min={0} step={0.1} value={dimensions.width}
-                                               onChange={changeWidth}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                <tr hidden={showDims}>
-                                    <td>
-                                        <label htmlFor="height">Hoogte:</label>
-                                    </td>
-                                    <td>
-                                        <input id="height" type="number" min={0} step={0.1} value={dimensions.height}
-                                               onChange={changeHeight}/>
-                                    </td>
-                                    <td>
-                                        <p>cm</p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <fieldset>
-                            <legend>
-                                Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
-                            </legend>
-
-                            <button onClick={addObstr}>Voeg aspect toe</button>
-                            <div>
-                                {Obst.map((item) => (<Obstruction key={item}/>))}
-                            </div>
-
-                        </fieldset>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>*/
         <Form className="overflow-auto">
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_dimensions')}</Form.Label>

@@ -59,7 +59,7 @@ function Contact() {
                         <tr>
                             <td>
                                 <label htmlFor="phoneNumber">
-                                {t('contact.phone_numnber')}:
+                                {t('contact.phone_number')}:
                                 </label>
                             </td>
                             <td>

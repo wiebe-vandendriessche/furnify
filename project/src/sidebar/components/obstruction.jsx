@@ -32,15 +32,15 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
             <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}} defaultValue={type?type:"type"}>
-                        <option value="Type">Type</option>
-                        <option value="raam">{t('obstructions.window')}</option>
-                        <option value="deur">{t('obstructions.door')}</option>
-                        <option value="radiator">{t('obstructions.radiator')}</option>
-                        <option value="stopcontact">{t('obstructions.walloutlet')}</option>
-                        <option value="schakelaar">{t('obstructions.switch')}</option>
-                        <option value="schuine wand">{t('obstructions.sloping_Wall')}</option>
-                        <option value="anders">{t('obstructions.other')}</option>
+                    <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
+                        <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
+                        <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
+                        <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
+                        <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>
+                        <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>
+                        <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>
+                        <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>
+                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
