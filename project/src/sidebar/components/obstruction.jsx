@@ -29,7 +29,10 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
     return (
         <div>
             <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
-            <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
+            <FaRectangleXmark id={"delete"+obstId} name={"delete"+obstId} onClick={(e)=> {
+                deleteObst(e)
+            }}/>
+
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
@@ -46,14 +49,14 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                 <Form.Group>
                     <div>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId={"length"+obstId}
                             label={t('questionnaire_space.length')}
                             className="mb-4"
                         >
                             <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId={"width"+obstId}
                             label={t('questionnaire_space.width')}
                             className="mb-4"
                         >
@@ -61,7 +64,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
 
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId={"height"+obstId}
                             label={t('questionnaire_space.height')}
                             className="mb-4"
                         >

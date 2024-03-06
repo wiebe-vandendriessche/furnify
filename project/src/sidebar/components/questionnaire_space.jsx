@@ -1,64 +1,86 @@
 import "../../App.css"
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import "./questionnaire.css"
-import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
 import Obstruction from "./obstruction";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { FloatingLabel, ToggleButton } from "react-bootstrap";
-import { useTranslation } from 'react-i18next'
+import {FloatingLabel, ToggleButton} from "react-bootstrap";
+import {useTranslation} from 'react-i18next'
 
 
 function Questionnaire_space() {
     //i18n
-    const { t, i18n } = useTranslation();
-
+    const {t, i18n} = useTranslation();
+    const [stateId, setStateId] = useState(1);
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
 
-    const lng = navigator.language;
-
 
     //Uses reactcontext
-    const { dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();
+    const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({ ...dimensions, width: event.target.value });
+        setDimensions({...dimensions, width: event.target.value});
     }
     const changeLength = (event) => {
-        setDimensions({ ...dimensions, length: event.target.value })
+        setDimensions({...dimensions, length: event.target.value})
     }
 
     const changeHeight = (event) => {
-        setDimensions({ ...dimensions, height: event.target.value })
+        setDimensions({...dimensions, height: event.target.value})
     }
     const changeObstacleType = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.id.split("obst")[1] ? { ...obstacle, type: event.target.value } : obstacle))
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
+            ...obstacle,
+            type: event.target.value
+        } : obstacle))
     }
     const changeObstacleLength = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, length: event.target.value } : obstacle))
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
+            ...obstacle,
+            obstLength: event.target.value
+        } : obstacle))
     }
     const changeObstacleWidth = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, width: event.target.value } : obstacle))
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
+            ...obstacle,
+            width: event.target.value
+        } : obstacle))
     }
     const changeObstacleHeight = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split("obst")[1] ? { ...obstacle, height: event.target.value } : obstacle))
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
+            ...obstacle,
+            height: event.target.value
+        } : obstacle))
     }
     const deleteObstacle = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.filter((obstacle, index) => (index != event.target.id.split("obst")[1])))
-        console.log("verwijder");
+        event.preventDefault();
+        let obstacleIndex = event.currentTarget.id.split("obst")[1]
+        setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
     const [open, setOpen] = useState(false);
     const addObstacles = () => {
+        setStateId(stateId + 1)
         if (obstacles.length > 0) {
-            setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);
+            console.log("hier")
+            console.log(stateId)
+            setObstacles([...obstacles, {
+                type: t('obstructions.type'),
+                width: 0,
+                height: 0,
+                obstLength: 0,
+                id: stateId
+            }]);
         } else {
-            setObstacles([{ type: t('obstructions.type'), width: 0, height: 0, length: 0 }]);
+
+            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, obstLength: 0, id: stateId}]);
         }
+        console.log(stateId)
     }
 
 
@@ -90,28 +112,28 @@ function Questionnaire_space() {
                 <Collapse in={open}>
                     <div>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId="rectangularLength"
                             label={t('questionnaire_space.length')}
                             className="mb-4"
                         >
                             <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                onChange={changeLength} />
+                                          onChange={changeLength}/>
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId="rectangularWidth"
                             label={t('questionnaire_space.width')}
                             className="mb-4"
                         >
                             <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                onChange={changeWidth} />
+                                          onChange={changeWidth}/>
                         </FloatingLabel>
                         <FloatingLabel
-                            controlId="floatingInput"
+                            controlId="rectangularHeight"
                             label={t('questionnaire_space.height')}
                             className="mb-4"
                         >
                             <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                onChange={changeHeight} />
+                                          onChange={changeHeight}/>
                         </FloatingLabel>
                     </div>
                 </Collapse>
@@ -120,11 +142,15 @@ function Questionnaire_space() {
                 <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
                 <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
                 <div>
-                    {obstacles.map((item, index) => (<Obstruction obstId={"obst" + JSON.stringify(index)} type={item.type}
-                        length={item.length} width={item.width} height={item.height}
-                        changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}
-                        changeWidth={changeObstacleWidth} key={"obst" + index} changeType={changeObstacleType}
-                        deleteObst={deleteObstacle} />))}
+                    {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
+                                                           length={item.obstLength} width={item.width}
+                                                           height={item.height}
+                                                           changeLength={changeObstacleLength}
+                                                           changeHeight={changeObstacleHeight}
+                                                           changeWidth={changeObstacleWidth}
+                                                           key={"obst" + item.id}
+                                                           changeType={changeObstacleType}
+                                                           deleteObst={deleteObstacle}/>))}
                 </div>
             </Form.Group>
 
