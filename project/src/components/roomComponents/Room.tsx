@@ -11,9 +11,9 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const roomRef = useRef<THREE.Group>(null);
 
   const [backWallVisible, setBackWallVisible] = useState(true);
-  const [frontWallVisible, setFrontWallVisible] = useState(true);
+  const [frontWallVisible, setFrontWallVisible] = useState(false);
   const [leftWallVisible, setLeftWallVisible] = useState(true);
-  const [rightWallVisible, setRightWallVisible] = useState(true);
+  const [rightWallVisible, setRightWallVisible] = useState(false);
 
   useFrame(({ camera, clock }) => {
 
