@@ -25,12 +25,15 @@ export const Floor = ({ width, height, depth, position }) => {
             floorTexture.metalnessMap,
             floorTexture.normalMap
         ];
-            
+
+        let repeatWidth = Math.floor(width / 3);
+        let repeatDepth = Math.floor(depth / 3);
+
         repeatTextures.forEach(texture => {
             if (texture) {
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
-                texture.repeat.set(width/2, depth/2) // TODO: only change repeat settings when width, depth is divisible by a certain number
+                texture.repeat.set(repeatWidth, repeatDepth)
                 texture.needsUpdate = true;
             }
         });
