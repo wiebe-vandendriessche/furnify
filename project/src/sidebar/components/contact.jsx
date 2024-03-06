@@ -2,8 +2,17 @@ import "../../App.css"
 import {useContactContext} from "../../contexts/MyContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 
 function Contact() {
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        const lng = navigator.language;
+        i18n.changeLanguage(lng);
+    }, [])
+
     const {firstName, setFirstName, lastName, setLastName, mail, setMail, phoneNumber, setPhoneNumber, address, setAddress}=useContactContext();
     const changeFirstName = (event) => {
         setFirstName(event.target.value);
@@ -27,13 +36,13 @@ function Contact() {
         <>
             <div>
                 <h2>
-                    Laat uw contactgegevens achter zodat we u kunnen bereiken
+                {t('contact.q_contact')}
                 </h2>
                 <table>
                     <tbody>
                         <tr>
                             <td>
-                                <label htmlFor="firstName">Voornaam:</label>
+                                <label htmlFor="firstName">{t('contact.firstname')}:</label>
                             </td>
                             <td>
                                 <input id="firstName" name="firstName" type="text" defaultValue={firstName} onChange={changeFirstName}/>
@@ -41,7 +50,7 @@ function Contact() {
                         </tr>
                         <tr>
                             <td>
-                                <label htmlFor="lastName">Achternaam:</label>
+                                <label htmlFor="lastName">{t('contact.lastname')}:</label>
                             </td>
                             <td>
                                 <input id="lastName" name="lastName" type="text" defaultValue={lastName} onChange={changeLastName}/>
@@ -50,7 +59,7 @@ function Contact() {
                         <tr>
                             <td>
                                 <label htmlFor="phoneNumber">
-                                    Telefoonnummer:
+                                {t('contact.phone_numnber')}:
                                 </label>
                             </td>
                             <td>
@@ -60,7 +69,7 @@ function Contact() {
                         <tr>
                             <td>
                                 <label htmlFor="mail">
-                                    E-mail:
+                                {t('contact.email')}:
                                 </label>
                             </td>
                             <td>
@@ -70,7 +79,7 @@ function Contact() {
                         <tr>
                             <td>
                                 <label htmlFor="address">
-                                    Adres:
+                                {t('contact.address')}:
                                 </label>
                             </td>
                             <td>

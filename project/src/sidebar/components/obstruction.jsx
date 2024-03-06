@@ -1,8 +1,19 @@
-import {useState} from "react";
-import "../../App.css"
+import React, {useState, useEffect} from "react";
+import "./questionnaire.css"
 import Form from "react-bootstrap/Form";
-import {FaRectangleXmark} from "react-icons/fa6";
-import {Col, FloatingLabel, Row} from "react-bootstrap";
+import {Button, FloatingLabel} from "react-bootstrap";
+import { useTranslation } from 'react-i18next'
+
+function Obstruction() {
+    //i18n
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        const lng = navigator.language;
+        i18n.changeLanguage(lng);
+    }, [])
+
+    const lng = navigator.language;
 
 // eslint-disable-next-line react/prop-types
 function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
@@ -20,47 +31,40 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
             <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
             <div hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name={type} id={"type" + obstId} onChange={(e)=>{changeType(e)}} defaultValue={type?type:"type"}>
-                        <option value="type">type</option>
-                        <option value="raam">raam</option>
-                        <option value="deur">deur</option>
-                        <option value="radiator">radiator</option>
-                        <option value="stopcontact">stopcontact</option>
-                        <option value="schakelaar">schakelaar</option>
-                        <option value="schuine wand">schuine wand</option>
-                        <option value="anders">anders</option>
+                    <Form.Select name="type" id="type" onChange={saveName}>
+                        <option value="Type">Type</option>
+                        <option value="raam">{t('obstructions.window')}</option>
+                        <option value="deur">{t('obstructions.door')}</option>
+                        <option value="radiator">{t('obstructions.radiator')}</option>
+                        <option value="stopcontact">{t('obstructions.walloutlet')}</option>
+                        <option value="schakelaar">{t('obstructions.switch')}</option>
+                        <option value="schuine wand">{t('obstructions.sloping_Wall')}</option>
+                        <option value="anders">{t('obstructions.other')}</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
                     <div>
-                        <Row className="g-2">
-                            <Col md>
-                                <FloatingLabel
-                                    label="Lengte(cm)"
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
-                                </FloatingLabel>
-                            </Col>
-                            <Col md>
-                                <FloatingLabel
-                                    label="Breedte(cm)"
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
-                                </FloatingLabel>
-                            </Col>
-                            <Col md>
-                                <FloatingLabel
-                                    label="Hoogte(cm)"
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-
-
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label={t('questionnaire_space.length')}
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label={t('questionnaire_space.width')}
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label={t('questionnaire_space.height')}
+                            className="mb-4"
+                        >
+                            <Form.Control type="number" min={0} step={0.1}/>
+                        </FloatingLabel>
                     </div>
                 </Form.Group>
             </div>
