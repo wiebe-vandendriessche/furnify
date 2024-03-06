@@ -1,6 +1,9 @@
 import React from 'react';
 import { ColoredBox } from './Coloredbox';
 import { useTexture } from '@react-three/drei';
+import { useEffect } from 'react';
+import * as THREE from 'three';
+
 
 export const Wall = ({ width, height, depth, position, visible }) => {
   const wallTexture = useTexture({
@@ -11,6 +14,27 @@ export const Wall = ({ width, height, depth, position, visible }) => {
     metalnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
     normalMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
   });
+
+  // Apply texture repetition to all textures
+  useEffect(() => {
+    const repeatTextures = [
+      wallTexture.map,
+      wallTexture.displacement,
+      wallTexture.aoMap,
+      wallTexture.roughnessMap,
+      wallTexture.metalnessMap,
+      wallTexture.normalMap
+    ];
+
+    repeatTextures.forEach(texture => {
+      if (texture) {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(2, 2) // TODO: only change repeat settings when width, depth is divisible by a certain number
+        texture.needsUpdate = true;
+      }
+    });
+  }, [wallTexture]);
 
   return (
     <ColoredBox
