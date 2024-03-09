@@ -5,6 +5,7 @@
     margin: 10px;
     color: #000000;
     cursor: pointer;
+    z-index: 1;
 }
 
 .nav-menu {
@@ -17,7 +18,7 @@
     top: 0;
     right: -100%;
     transition: 850ms;
-    z-index: 99;
+    z-index: 1;
 }
 
 .nav-menu.active {
