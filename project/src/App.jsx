@@ -1,8 +1,9 @@
+import { useState } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls, Sky, Stars } from '@react-three/drei'
+import Room from './components/roomComponents/Room'
 import { useEffect, useState } from 'react'
 import './App.css'
-import Sidebar from './sidebar/Sidebar.jsx'
-
-import { useTranslation } from 'react-i18next'
 
 function App() {
 
@@ -19,15 +20,16 @@ function App() {
     <div className="App">
       <Sidebar />
       <main>
-        <h2>
-          {t('greeting.hello')}
-        </h2>
-        <span>
-          Browser Language: {lng}
-        </span>
+        <DimensionProvider>
+          <div className="container">
+            <DimensionInput />
+            <Scene />
+          </div>
+        </DimensionProvider>
       </main>
     </div>
   )
+  ;
 }
 
 export default App;
