@@ -130,9 +130,9 @@ function Questionnaire_spec() {
             </table>
         </div>*/
 
-        <div>
+        <div className="m5">
             <Form>
-                <div>
+                <div className="m5">
                     <FormGroup>
                         <FormLabel>{t('questionnaire_specs.q_prefrences')}</FormLabel>
                         <ButtonGroup>
@@ -152,7 +152,7 @@ function Questionnaire_spec() {
                         </ButtonGroup>
                     </FormGroup>
                 </div>
-                <div className={"d-inline-flex"}>
+                <div className={"d-inline-flex m5"}>
                     <FormGroup>
                         <FormLabel>{t('questionnaire_specs.q_materials')}</FormLabel>
                         <ButtonGroup>
@@ -183,7 +183,7 @@ function Questionnaire_spec() {
                         </ButtonGroup>
                     </FormGroup>
                 </div>
-                <div>
+                <div className="m5">
                     <FormGroup>
                         <FormLabel>{t('questionnaire_specs.q_other')}</FormLabel>
                     </FormGroup>

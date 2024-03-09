@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b725b0e-8c8c-444f-81ae-827f2967f27e" name="Changes" comment="add title to contact.jsx">
+    <list default="true" id="3b725b0e-8c8c-444f-81ae-827f2967f27e" name="Changes" comment="fix css">
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/contact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/contact.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/obstruction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/obstruction.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_func.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_func.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_space.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_space.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_specs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_specs.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +94,7 @@
       <workItem from="1709676026016" duration="317000" />
       <workItem from="1709676373606" duration="474000" />
       <workItem from="1709676879367" duration="1458000" />
-      <workItem from="1709725975726" duration="32287000" />
+      <workItem from="1709725975726" duration="34561000" />
     </task>
     <task id="LOCAL-00001" summary="layout improvement and dark mode implemented without toggle button">
       <created>1709159854028</created>
@@ -149,7 +156,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709766764405</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1709978403619</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709978403619</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1709978649389</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709978649389</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +198,7 @@
     <MESSAGE value="put bootstrap on all component" />
     <MESSAGE value="update logbook" />
     <MESSAGE value="add title to contact.jsx" />
-    <option name="LAST_COMMIT_MESSAGE" value="add title to contact.jsx" />
+    <MESSAGE value="fix css" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix css" />
   </component>
 </project>

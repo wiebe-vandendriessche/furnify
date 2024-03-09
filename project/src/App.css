@@ -1,15 +1,19 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 .canvas {
-  width: 80vw;  /* Ensures it takes the full viewport width */
-  height: 80vh; /* Ensures it takes the full viewport height */
-  display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
+    width: 100vw; /* Ensures it takes the full viewport width */
+    height: 80vh; /* Ensures it takes the full viewport height */
+    display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
+    padding: 0;
+    margin: 0;
 }
 
 .container {
-  width: 100vw;  /* Ensures it takes the full viewport width */
-  height: 100vh; /* Ensures it takes the full viewport height */
-  display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
+    width: 100vw; /* Ensures it takes the full viewport width */
+    height: 100vh; /* Ensures it takes the full viewport height */
+    display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
+    padding: 0;
+    margin: 0;
 }
 
 :root {
@@ -31,16 +35,15 @@ a {
     color: #e84646;
     text-decoration: inherit;
 }
+
 a:hover {
     color: #e84646;
 }
 
 body {
     margin: 0;
+    padding: 0;
     display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
 }
 
 h1 {
@@ -67,12 +70,13 @@ button:hover {
 }
 
 .form-control:focus {
-    border-color:#e84646;
-    -webkit-box-shadow:0 0 0.5rem #e84646;
+    border-color: #e84646;
+    -webkit-box-shadow: 0 0 0.5rem #e84646;
 }
+
 .form-select:focus {
-    border-color:#e84646;
-    -webkit-box-shadow:0 0 0.5rem #e84646;
+    border-color: #e84646;
+    -webkit-box-shadow: 0 0 0.5rem #e84646;
 }
 
 
@@ -82,9 +86,11 @@ button:hover {
         color: #213547;
         background-color: #ffffff;
     }
+
     a:hover {
         color: #747bff;
     }
+
     button {
         background-color: #f1f1f1;
     }
@@ -100,9 +106,11 @@ button:hover {
         color: #ffffff;
         background-color: #000000;
     }
+
     a:hover {
         color: #747bff;
     }
+
     button {
         background-color: #525252;
         color: white;
@@ -113,3 +121,10 @@ button:hover {
     }
 
 }
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
