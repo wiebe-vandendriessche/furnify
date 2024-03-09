@@ -1,0 +1,157 @@
+Index: project/src/sidebar/components/questionnaire.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>div {\r\n    margin: 5px;\r\n}\r\n\r\n.center {\r\n    justify-content: center;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire.css b/project/src/sidebar/components/questionnaire.css
+--- a/project/src/sidebar/components/questionnaire.css	
++++ b/project/src/sidebar/components/questionnaire.css	
+@@ -2,6 +2,36 @@
+     margin: 5px;
+ }
+ 
+-.center {
++ButtonGroup {
++    position: center;
+     justify-content: center;
+-}
+\ No newline at end of file
++}
++
++.obstruction-bg{
++    background-color: #dc3545;
++    border-radius: 4px;
++    border: 10px solid transparent;
++}
++
++input{
++    border-radius: 4px;
++    border: solid transparent;
++    width: 100%;
++}
++
++.fa-rectangle-xmark{
++    padding: 1px 10px;
++    color: white;
++    border: solid transparent;
++}
++
++.tbtn{
++    margin: 5px;
++}
++
++.flex{
++    display: flex;
++    flex-wrap: wrap;
++}
++
++
+Index: project/src/sidebar/components/obstruction.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState, useEffect} from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport Form from \"react-bootstrap/Form\";\r\nimport {Button, FloatingLabel} from \"react-bootstrap\";\r\nimport { useTranslation } from 'react-i18next'\r\nimport {FaRectangleXmark} from \"react-icons/fa6\";\r\n    \r\n\r\n// eslint-disable-next-line react/prop-types\r\nfunction Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {\r\n    //i18n\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const lng = navigator.language;\r\n    \r\n    const [showButton1, setShow1] = useState(false);\r\n    const [showButton2, setShow2] = useState(true);\r\n    const showButton = () => {\r\n        setShow2(!showButton2)\r\n        setShow1(!showButton1)\r\n    };\r\n\r\n    console.log(obstId);\r\n    return (\r\n        <div>\r\n            <input type=\"button\" id={\"button\"+obstId} value={type ?? \"Aspect\"} onClick={showButton}  />\r\n            <FaRectangleXmark id={\"delete\"+obstId} onClick={(e)=>deleteObst(e)}/>\r\n            <div hidden={showButton2}>\r\n                <Form.Group className=\"mb-3\">\r\n                    <Form.Select name=\"type\" id={\"type\"+obstId} onChange={(e)=>{changeType(e)}}>\r\n                        <option value={t('obstructions.type')}>{t('obstructions.type')}</option>\r\n                        <option value={t('obstructions.window')}>{t('obstructions.window')}</option>\r\n                        <option value={t('obstructions.door')}>{t('obstructions.door')}</option>\r\n                        <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>\r\n                        <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>\r\n                        <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>\r\n                        <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>\r\n                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>\r\n                    </Form.Select>\r\n                </Form.Group>\r\n                <Form.Group>\r\n                    <div>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.length')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"length\"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.width')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"width\"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>\r\n\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.height')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"height\"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>\r\n                        </FloatingLabel>\r\n                    </div>\r\n                </Form.Group>\r\n            </div>\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default Obstruction;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/obstruction.jsx b/project/src/sidebar/components/obstruction.jsx
+--- a/project/src/sidebar/components/obstruction.jsx	
++++ b/project/src/sidebar/components/obstruction.jsx	
+@@ -1,10 +1,10 @@
+ import React, {useState, useEffect} from "react";
+ import "./questionnaire.css"
+ import Form from "react-bootstrap/Form";
+-import {Button, FloatingLabel} from "react-bootstrap";
+-import { useTranslation } from 'react-i18next'
+ import {FaRectangleXmark} from "react-icons/fa6";
+-    
++import {Col, FloatingLabel, Row} from "react-bootstrap";
++import Button from "react-bootstrap/Button";
++import {useTranslation} from "react-i18next";
+ 
+ // eslint-disable-next-line react/prop-types
+ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+@@ -17,7 +17,7 @@
+     }, [])
+ 
+     const lng = navigator.language;
+-    
++
+     const [showButton1, setShow1] = useState(false);
+     const [showButton2, setShow2] = useState(true);
+     const showButton = () => {
+@@ -27,9 +27,11 @@
+ 
+     console.log(obstId);
+     return (
+-        <div>
++        <div className="obstruction-bg">
+             <input type="button" id={"button"+obstId} value={type ?? "Aspect"} onClick={showButton}  />
+-            <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
++            <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete"+obstId} onClick={(e)=>deleteObst(e)}>
++                x
++            </Button>
+             <div hidden={showButton2}>
+                 <Form.Group className="mb-3">
+                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
+@@ -45,28 +47,38 @@
+                 </Form.Group>
+                 <Form.Group>
+                     <div>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.length')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.width')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
++                        <Row>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.length')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.width')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
+ 
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.height')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
+-                        </FloatingLabel>
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.height')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
++                                </FloatingLabel>
++                            </Col>
++                        </Row>
++
++
+                     </div>
+                 </Form.Group>
+             </div>

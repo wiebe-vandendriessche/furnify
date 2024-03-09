@@ -1,0 +1,550 @@
+Index: project/src/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>:root {\r\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\r\n  line-height: 1.5;\r\n  font-weight: 400;\r\n\r\n  color: rgba(255, 255, 255, 0.87);\r\n  background-color: #242424;\r\n\r\n  font-synthesis: none;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\na {\r\n  font-weight: 500;\r\n  color: #646cff;\r\n  text-decoration: inherit;\r\n}\r\na:hover {\r\n  color: #535bf2;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  display: flex;\r\n  place-items: center;\r\n  min-width: 320px;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1 {\r\n  font-size: 3.2em;\r\n  line-height: 1.1;\r\n}\r\n\r\nbutton {\r\n  border-radius: 8px;\r\n  border: 1px solid transparent;\r\n  padding: 0.6em 1.2em;\r\n  font-size: 1em;\r\n  font-weight: 500;\r\n  font-family: inherit;\r\n  background-color: #1a1a1a;\r\n  cursor: pointer;\r\n  transition: border-color 0.25s;\r\n  margin: 5px;\r\n}\r\n\r\n/*button:focus,\r\nbutton:focus-visible {\r\n  outline: 4px auto -webkit-focus-ring-color;\r\n}*/\r\n\r\n\r\n/*general color change for dark and light mode */\r\n@media (prefers-color-scheme: light) {\r\n  :root {\r\n    color: #213547;\r\n    background-color: #ffffff;\r\n  }\r\n  a:hover {\r\n    color: #747bff;\r\n  }\r\n  button {\r\n    background-color: #ffe9e9;\r\n  }\r\n\r\n  button:hover {\r\n    background-color: #e84646;\r\n    color: #ffffff;\r\n  }\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    color: #ffffff;\r\n    background-color: #000000;\r\n  }\r\n  a:hover {\r\n    color: #747bff;\r\n  }\r\n  button {\r\n    background-color: #525252;\r\n    color: white;\r\n  }\r\n\r\n  button:hover {\r\n    background-color: #e84646;\r\n  }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/index.css b/project/src/index.css
+--- a/project/src/index.css	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/index.css	(date 1709598677219)
+@@ -1,3 +1,5 @@
++@import "../node_modules/bootstrap/scss/bootstrap.scss";
++
+ :root {
+   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+   line-height: 1.5;
+@@ -14,11 +16,11 @@
+ 
+ a {
+   font-weight: 500;
+-  color: #646cff;
++  color: #e84646;
+   text-decoration: inherit;
+ }
+ a:hover {
+-  color: #535bf2;
++  color: #e84646;
+ }
+ 
+ body {
+@@ -47,11 +49,25 @@
+   margin: 5px;
+ }
+ 
++
++button:hover {
++  -webkit-transform: scale(1.1);
++}
++
+ /*button:focus,
+ button:focus-visible {
+   outline: 4px auto -webkit-focus-ring-color;
+ }*/
+ 
++.form-control:focus {
++  border-color:#e84646;
++  -webkit-box-shadow:0 0 0.5rem #e84646;
++}
++.form-select:focus {
++  border-color:#e84646;
++  -webkit-box-shadow:0 0 0.5rem #e84646;
++}
++
+ 
+ /*general color change for dark and light mode */
+ @media (prefers-color-scheme: light) {
+@@ -63,7 +79,7 @@
+     color: #747bff;
+   }
+   button {
+-    background-color: #ffe9e9;
++    background-color: #f1f1f1;
+   }
+ 
+   button:hover {
+Index: project/src/sidebar/components/questionnaire_space.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport React, { useState } from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport { useConfiguratorContext } from \"../../contexts/MyContext.jsx\";\r\nimport Obstruction from \"./obstruction\";\r\n\r\n\r\nfunction Questionnaire_space() {\r\n    //Uses reactcontext\r\n    const { dimensions, setDimensions } = useConfiguratorContext();\r\n    //Changes value of context\r\n    const changeWidth = (event) => {\r\n        setDimensions({ width: event.target.value });\r\n    }\r\n    const changeLength = (event) => {\r\n        setDimensions({ length: event.target.value })\r\n    }\r\n\r\n    const changeHeight = (event) => {\r\n        setDimensions({ height: event.target.value })\r\n    }\r\n\r\n\r\n    const [showDims, setShow] = useState(true);\r\n    const showDim = () => { setShow(false); }\r\n    const showNoDim = () => { setShow(true) }\r\n\r\n    const [Obst, setObstr] = useState([])\r\n    const addObstr = () => {\r\n        if (Obst.length > 0) {\r\n            setObstr([...Obst, (Obst[Obst.length - 1] + 1)]);\r\n        }\r\n        else {\r\n            setObstr([1]);\r\n        }\r\n    }\r\n\r\n\r\n\r\n    return (\r\n        <>\r\n            <div>\r\n                <table>\r\n                    <tbody>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>\r\n                                        Wat zijn de afmetingen van de woonruimte?\r\n                                    </legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    Vorm:\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"colRectangular\" name=\"space\" value=\"Rectangular\" onClick={showDim} />\r\n                                                    <label htmlFor=\"colRectangular\">Rechthoekig</label>\r\n                                                    <input type=\"radio\" id=\"colOther\" name=\"space\" value=\"Other\" onClick={showNoDim} />\r\n                                                    <label htmlFor=\"colOther\">Anders</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr hidden={showDims}>\r\n                                                <td>\r\n                                                    <label htmlFor=\"length\" >Lengte:</label>\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input id=\"length\" type=\"number\" min={0} step={0.1} value={dimensions.length} onChange={changeLength} />\r\n                                                </td>\r\n                                                <td>\r\n                                                    <p >cm</p>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr hidden={showDims}>\r\n                                                <td>\r\n                                                    <label htmlFor=\"width\" >Breedte:</label>\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input id=\"width\" type=\"number\" min={0} step={0.1} value={dimensions.width} onChange={changeWidth} />\r\n                                                </td>\r\n                                                <td>\r\n                                                    <p>cm</p>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr hidden={showDims}>\r\n                                                <td>\r\n                                                    <label htmlFor=\"height\">Hoogte:</label>\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input id=\"height\" type=\"number\" min={0} step={0.1} value={dimensions.height} onChange={changeHeight} />\r\n                                                </td>\r\n                                                <td>\r\n                                                    <p>cm</p>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>\r\n                                        Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.\r\n                                    </legend>\r\n\r\n                                    <button onClick={addObstr} >Voeg aspect toe</button>\r\n                                    <div>\r\n                                        {Obst.map((item) => (<Obstruction key={item} />))}\r\n                                    </div>\r\n\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </>)\r\n}\r\n\r\nexport default Questionnaire_space;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire_space.jsx b/project/src/sidebar/components/questionnaire_space.jsx
+--- a/project/src/sidebar/components/questionnaire_space.jsx	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/sidebar/components/questionnaire_space.jsx	(date 1709594596075)
+@@ -1,123 +1,198 @@
+ import "../../App.css"
+-import React, { useState } from "react";
++import React, {useState} from "react";
+ import "./questionnaire.css"
+-import { useConfiguratorContext } from "../../contexts/MyContext.jsx";
++import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
+ import Obstruction from "./obstruction";
+-
++import Form from 'react-bootstrap/Form';
++import Button from 'react-bootstrap/Button';
++import Collapse from 'react-bootstrap/Collapse';
++import ButtonGroup from 'react-bootstrap/ButtonGroup';
++import {FloatingLabel, ToggleButton} from "react-bootstrap";
+ 
+ function Questionnaire_space() {
+     //Uses reactcontext
+-    const { dimensions, setDimensions } = useConfiguratorContext();
++    const {dimensions, setDimensions} = useConfiguratorContext();
+     //Changes value of context
+     const changeWidth = (event) => {
+-        setDimensions({ width: event.target.value });
++        setDimensions({width: event.target.value});
+     }
+     const changeLength = (event) => {
+-        setDimensions({ length: event.target.value })
++        setDimensions({length: event.target.value})
+     }
+ 
+     const changeHeight = (event) => {
+-        setDimensions({ height: event.target.value })
++        setDimensions({height: event.target.value})
+     }
+ 
+ 
+-    const [showDims, setShow] = useState(true);
+-    const showDim = () => { setShow(false); }
+-    const showNoDim = () => { setShow(true) }
+-
++    /*const [showDims, setShow] = useState(true);
++    const showDim = () => {
++        setShow(false);
++    }
++    const showNoDim = () => {
++        setShow(true)
++    }*/
++    const [open, setOpen] = useState(false);
+     const [Obst, setObstr] = useState([])
+     const addObstr = () => {
+         if (Obst.length > 0) {
+             setObstr([...Obst, (Obst[Obst.length - 1] + 1)]);
+-        }
+-        else {
++        } else {
+             setObstr([1]);
+         }
+     }
+ 
+ 
+-
+     return (
+-        <>
+-            <div>
+-                <table>
+-                    <tbody>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>
+-                                        Wat zijn de afmetingen van de woonruimte?
+-                                    </legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
+-                                                <td>
+-                                                    Vorm:
+-                                                </td>
+-                                                <td>
+-                                                    <input type="radio" id="colRectangular" name="space" value="Rectangular" onClick={showDim} />
+-                                                    <label htmlFor="colRectangular">Rechthoekig</label>
+-                                                    <input type="radio" id="colOther" name="space" value="Other" onClick={showNoDim} />
+-                                                    <label htmlFor="colOther">Anders</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr hidden={showDims}>
+-                                                <td>
+-                                                    <label htmlFor="length" >Lengte:</label>
+-                                                </td>
+-                                                <td>
+-                                                    <input id="length" type="number" min={0} step={0.1} value={dimensions.length} onChange={changeLength} />
+-                                                </td>
+-                                                <td>
+-                                                    <p >cm</p>
+-                                                </td>
+-                                            </tr>
+-                                            <tr hidden={showDims}>
+-                                                <td>
+-                                                    <label htmlFor="width" >Breedte:</label>
+-                                                </td>
+-                                                <td>
+-                                                    <input id="width" type="number" min={0} step={0.1} value={dimensions.width} onChange={changeWidth} />
+-                                                </td>
+-                                                <td>
+-                                                    <p>cm</p>
+-                                                </td>
+-                                            </tr>
+-                                            <tr hidden={showDims}>
+-                                                <td>
+-                                                    <label htmlFor="height">Hoogte:</label>
+-                                                </td>
+-                                                <td>
+-                                                    <input id="height" type="number" min={0} step={0.1} value={dimensions.height} onChange={changeHeight} />
+-                                                </td>
+-                                                <td>
+-                                                    <p>cm</p>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>
+-                                        Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
+-                                    </legend>
++
++        /*<div>
++            <table>
++                <tbody>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                Wat zijn de afmetingen van de woonruimte?
++                            </legend>
++                            <table>
++                                <tbody>
++                                <tr>
++                                    <td>
++                                        Vorm:
++                                    </td>
++                                    <td>
++                                        <input type="radio" id="colRectangular" name="space" value="Rectangular"
++                                               onClick={showDim}/>
++                                        <label htmlFor="colRectangular">Rechthoekig</label>
++                                        <input type="radio" id="colOther" name="space" value="Other"
++                                               onClick={showNoDim}/>
++                                        <label htmlFor="colOther">Anders</label>
++                                    </td>
++                                </tr>
++                                <tr hidden={showDims}>
++                                    <td>
++                                        <label htmlFor="length">Lengte:</label>
++                                    </td>
++                                    <td>
++                                        <input id="length" type="number" min={0} step={0.1} value={dimensions.length}
++                                               onChange={changeLength}/>
++                                    </td>
++                                    <td>
++                                        <p>cm</p>
++                                    </td>
++                                </tr>
++                                <tr hidden={showDims}>
++                                    <td>
++                                        <label htmlFor="width">Breedte:</label>
++                                    </td>
++                                    <td>
++                                        <input id="width" type="number" min={0} step={0.1} value={dimensions.width}
++                                               onChange={changeWidth}/>
++                                    </td>
++                                    <td>
++                                        <p>cm</p>
++                                    </td>
++                                </tr>
++                                <tr hidden={showDims}>
++                                    <td>
++                                        <label htmlFor="height">Hoogte:</label>
++                                    </td>
++                                    <td>
++                                        <input id="height" type="number" min={0} step={0.1} value={dimensions.height}
++                                               onChange={changeHeight}/>
++                                    </td>
++                                    <td>
++                                        <p>cm</p>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
++                        </fieldset>
++                    </td>
++                </tr>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.
++                            </legend>
+ 
+-                                    <button onClick={addObstr} >Voeg aspect toe</button>
+-                                    <div>
+-                                        {Obst.map((item) => (<Obstruction key={item} />))}
+-                                    </div>
++                            <button onClick={addObstr}>Voeg aspect toe</button>
++                            <div>
++                                {Obst.map((item) => (<Obstruction key={item}/>))}
++                            </div>
+ 
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </>)
++                        </fieldset>
++                    </td>
++                </tr>
++                </tbody>
++            </table>
++        </div>*/
++            <Form className="overflow-auto">
++                <Form.Group>
++                    <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>
++                    <div className="mb-3">
++                        <ButtonGroup>
++                            <ToggleButton
++                                onClick={() => setOpen(!open)}
++                                type="radio"
++                                value="Rectangular"
++                                variant="danger"
++                                checked={open}
++                            >
++                                Rechthoekig
++                            </ToggleButton>
++                            <ToggleButton
++                                type="radio"
++                                value="Other"
++                                variant="danger"
++                                checked={!open}
++                                onClick={() => setOpen(false)}>
++                                anders
++                            </ToggleButton>
++                        </ButtonGroup>
++                    </div>
++                    <Collapse in={open}>
++                        <div>
++                            <FloatingLabel
++                                controlId="floatingInput"
++                                label="Lengte"
++                                className="mb-4"
++                            >
++                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
++                                              onChange={changeLength} />
++                            </FloatingLabel>
++                            <FloatingLabel
++                                controlId="floatingInput"
++                                label="Breedte"
++                                className="mb-4"
++                            >
++                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
++                                              onChange={changeLength} />
++                            </FloatingLabel>
++                            <FloatingLabel
++                                controlId="floatingInput"
++                                label="Hoogte"
++                                className="mb-4"
++                            >
++                                <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
++                                              onChange={changeLength} />
++                            </FloatingLabel>
++                        </div>
++                    </Collapse>
++                </Form.Group>
++                <Form.Group>
++                    <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>
++                    <Button onClick={addObstr} variant="danger">Voeg aspect toe</Button>
++                    <div>
++                        {Obst.map((item) => (<Obstruction key={item}/>))}
++                    </div>
++                </Form.Group>
++
++            </Form>
++
++
++)
+ }
+ 
+ export default Questionnaire_space;
+\ No newline at end of file
+Index: project/src/sidebar/components/questionnaire.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>table {\r\n    height: 100%;\r\n    width: 100%\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire.css b/project/src/sidebar/components/questionnaire.css
+--- a/project/src/sidebar/components/questionnaire.css	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/sidebar/components/questionnaire.css	(date 1709588353494)
+@@ -1,4 +1,5 @@
+ table {
+     height: 100%;
+     width: 100%
+-}
+\ No newline at end of file
++}
++
+Index: project/src/sidebar/components/obstruction.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState } from \"react\";\r\nimport \"./questionnaire.css\"\r\n\r\nfunction Obstruction() {\r\n    \r\n    const [showButton1, setShow1] = useState(false);\r\n    const [showButton2, setShow2] = useState(true);\r\n    const [typeObstr, setObstr] = useState(\"Aspect\")\r\n    const showButton = () => { setShow2(!showButton2) + setShow1(!showButton1) };\r\n    const saveName = () => {setObstr(type.value)}\r\n    \r\n\r\n    return (\r\n        <div className=\"Obstruction\">\r\n            <table>\r\n                <tbody>\r\n                    <tr hidden={showButton1}>\r\n                        <td>\r\n                            <input type=\"button\" id=\"typeclosed\" onClick={showButton} value = {typeObstr}></input>\r\n                        </td>\r\n                    </tr>\r\n\r\n                    <tr hidden={showButton2}>\r\n                        <td>\r\n                            <fieldset>\r\n                            <legend>\r\n                                    <input type=\"button\" id=\"typeopen\" value = {typeObstr} onClick={showButton}  ></input>\r\n                                    </legend>\r\n                                <table>\r\n                                    <tbody>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"type\">Type: </label>\r\n                                                <select name=\"type\" id=\"type\" onChange={saveName} >\r\n                                                    <option value=\"raam\">raam</option>\r\n                                                    <option value=\"deur\">deur</option>\r\n                                                    <option value=\"radiator\">radiator</option>\r\n                                                    <option value=\"stopcontact\">stopcontact</option>\r\n                                                    <option value=\"schakelaar\">schakelaar</option>\r\n                                                    <option value=\"schuine wand\">schuine wand</option>\r\n                                                    <option value=\"anders\">anders</option>\r\n                                                </select>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"length_ob\" >Lengte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"length_ob\" type=\"number\" min={0} step={0.1}  />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p >cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"width_ob\" >Breedte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"width_ob\" type=\"number\" min={0} step={0.1} />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p>cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"height_ob\">Hoogte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"height_ob\" type=\"text\" min={0} step={0.1} />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p>cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </fieldset>\r\n\r\n                        </td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n\r\n\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default Obstruction;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/obstruction.jsx b/project/src/sidebar/components/obstruction.jsx
+--- a/project/src/sidebar/components/obstruction.jsx	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/sidebar/components/obstruction.jsx	(date 1709596315750)
+@@ -1,17 +1,22 @@
+-import React, { useState } from "react";
++import React, {useState} from "react";
+ import "./questionnaire.css"
++import Form from "react-bootstrap/Form";
++import {Button, FloatingLabel} from "react-bootstrap";
+ 
+ function Obstruction() {
+-    
++
+     const [showButton1, setShow1] = useState(false);
+     const [showButton2, setShow2] = useState(true);
+     const [typeObstr, setObstr] = useState("Aspect")
+-    const showButton = () => { setShow2(!showButton2) + setShow1(!showButton1) };
+-    const saveName = () => {setObstr(type.value)}
+-    
++    const showButton = () => {
++        setShow2(!showButton2) + setShow1(!showButton1)
++    };
++    const saveName = () => {
++        setObstr(type.value)
++    }
+ 
+     return (
+-        <div className="Obstruction">
++        /*<div className="Obstruction">
+             <table>
+                 <tbody>
+                     <tr hidden={showButton1}>
+@@ -86,7 +91,51 @@
+             </table>
+ 
+ 
++        </div>*/
++        <div>
++            <Button variant={"danger"} id="typeopen" value={saveName} onClick={showButton}>Aspect</Button>
++            <Form className="overflow-auto" hidden={showButton1}>
++                <Form.Group className="mb-3">
++                    <Form.Select name="type" id="type" onChange={saveName}>
++                        <option value="Type">Type</option>
++                        <option value="raam">raam</option>
++                        <option value="deur">deur</option>
++                        <option value="radiator">radiator</option>
++                        <option value="stopcontact">stopcontact</option>
++                        <option value="schakelaar">schakelaar</option>
++                        <option value="schuine wand">schuine wand</option>
++                        <option value="anders">anders</option>
++                    </Form.Select>
++                </Form.Group>
++                <Form.Group>
++                    <div>
++                        <FloatingLabel
++                            controlId="floatingInput"
++                            label="Lengte"
++                            className="mb-4"
++                        >
++                            <Form.Control type="number" min={0} step={0.1}/>
++                        </FloatingLabel>
++                        <FloatingLabel
++                            controlId="floatingInput"
++                            label="Breedte"
++                            className="mb-4"
++                        >
++                            <Form.Control type="number" min={0} step={0.1}/>
++                        </FloatingLabel>
++                        <FloatingLabel
++                            controlId="floatingInput"
++                            label="Hoogte"
++                            className="mb-4"
++                        >
++                            <Form.Control type="number" min={0} step={0.1}/>
++                        </FloatingLabel>
++                    </div>
++                </Form.Group>
++
++            </Form>
+         </div>
++
+     )
+ }
+ 
+Index: project/src/sidebar/Sidebar.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"./Sidebar.css\"\r\nimport React, {useState} from \"react\";\r\nimport {IconContext} from \"react-icons\"\r\nimport Questionnaire_func from \"./components/questionnaire_func.jsx\";\r\nimport Contact from \"./components/contact\";\r\nimport logo from \"../assets/logo_lm.png\";\r\nimport logo_dm from \"../assets/logo_dm.png\";\r\nimport Questionnaire_space from \"./components/questionnaire_space\";\r\nimport Questionnaire_specs from \"./components/questionnaire_specs\";\r\nimport {AiOutlineClose, AiOutlineMenu} from \"react-icons/ai\";\r\n\r\n\r\nfunction Sidebar() {\r\n    const [sidebar, setSidebar] = useState(true);\r\n    const [part, showPart] = useState(0);\r\n    const showSidebar = () => {\r\n        setSidebar(!sidebar);\r\n    }\r\n    const previousPart = () => {\r\n        showPart(part - 1)\r\n    }\r\n    const nextPart = () => {\r\n        showPart(part + 1)\r\n    }\r\n    const showPrevious = () => {\r\n        return part == 0;\r\n    }\r\n    const showNext = () => {\r\n        return part == 3;\r\n    }\r\n\r\n    const showNextPart = () => {\r\n        switch (part) {\r\n            case 0:\r\n                return <Questionnaire_space/>\r\n            case 1:\r\n                return <Questionnaire_func/>\r\n            case 2:\r\n                return <Questionnaire_specs/>\r\n            case 3:\r\n                return <Contact/>\r\n            case 4:\r\n                return <p>Nothing to see here</p>\r\n            default:\r\n                return <p>This is some default text</p>\r\n        }\r\n    }\r\n\r\n    return (\r\n        <>\r\n            <IconContext.Provider value={{color: \"undefined\"}}>\r\n\r\n                <nav className={sidebar ? \"nav-menu active\" : \"nav-menu\"}>\r\n\r\n                    <div>\r\n                        <a id=\"a\" href={\"https://www.furnifyhome.eu/\"}>\r\n                            <picture>\r\n                                <source srcSet={logo_dm} media=\"(prefers-color-scheme: dark)\"/>\r\n                                <img id=\"logo\" src={logo} alt=\"furnify\"/>\r\n                            </picture>\r\n\r\n                        </a>\r\n                        {showNextPart()}\r\n                        <div className=\"btn\">\r\n                            <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>\r\n                            <button onClick={nextPart} hidden={showNext()}>Volgende</button>\r\n                        </div>\r\n\r\n                    </div>\r\n                </nav>\r\n                <div onClick={showSidebar} className=\"menu-bars\">\r\n                    {sidebar ? <AiOutlineClose size={25}/> : <AiOutlineMenu size={25}/>}\r\n                </div>\r\n            </IconContext.Provider>\r\n        </>\r\n    )\r\n}\r\n\r\nexport default Sidebar;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/Sidebar.jsx b/project/src/sidebar/Sidebar.jsx
+--- a/project/src/sidebar/Sidebar.jsx	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/sidebar/Sidebar.jsx	(date 1709588930694)
+@@ -1,6 +1,7 @@
+ import "./Sidebar.css"
+ import React, {useState} from "react";
+ import {IconContext} from "react-icons"
++import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
+ import Questionnaire_func from "./components/questionnaire_func.jsx";
+ import Contact from "./components/contact";
+ import logo from "../assets/logo_lm.png";
+@@ -58,12 +59,11 @@
+                                 <source srcSet={logo_dm} media="(prefers-color-scheme: dark)"/>
+                                 <img id="logo" src={logo} alt="furnify"/>
+                             </picture>
+-
+                         </a>
+                         {showNextPart()}
+-                        <div className="btn">
+-                            <button onClick={previousPart} hidden={showPrevious()}>Vorige</button>
+-                            <button onClick={nextPart} hidden={showNext()}>Volgende</button>
++                        <div className="bottom_btn">
++                            <button onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>
++                            <button onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>
+                         </div>
+ 
+                     </div>
+Index: project/src/sidebar/Sidebar.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.menu-bars {\r\n    position: fixed;\r\n    right: 0;\r\n    top: 0;\r\n    margin: 10px;\r\n    color: #000000;\r\n    cursor: pointer;\r\n}\r\n\r\n.nav-menu {\r\n    background-color: #fdfdfd;\r\n    width: 450px;\r\n    height: 100vh;\r\n    display: flex;\r\n    justify-content: center;\r\n    position: fixed;\r\n    top: 0;\r\n    right: -100%;\r\n    transition: 850ms;\r\n}\r\n\r\n.nav-menu.active {\r\n    right: 0;\r\n    transition: 450ms;\r\n}\r\n\r\n.nav-menu-items {\r\n    width: 100%;\r\n}\r\n\r\n#logo {\r\n    width: 75%;\r\n    height: auto;\r\n}\r\n\r\n#a{\r\n    padding: 16px 50px 16px 50px;\r\n}\r\n\r\n.btn{\r\n    position: absolute;\r\n    bottom: 50px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    width: 100%;\r\n}\r\n\r\n/*render for mobile*/\r\n@media screen and (max-width: 450px) {\r\n\r\n    .nav-menu {\r\n        background-color: #fdfdfd;\r\n        width: 100%;\r\n        height: 100%;\r\n        position: fixed;\r\n        left: 100%;\r\n        right: 0;\r\n        top: 0;\r\n        bottom: 0;\r\n    }\r\n\r\n    .nav-menu.active {\r\n        left: 0;\r\n    }\r\n}\r\n\r\n/*specific color changes in sidebar for darkmode*/\r\n@media (prefers-color-scheme: dark) {\r\n    .nav-menu{\r\n        background-color: #242424;\r\n    }\r\n\r\n    .menu-bars{\r\n        color: white;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/Sidebar.css b/project/src/sidebar/Sidebar.css
+--- a/project/src/sidebar/Sidebar.css	(revision 6923935f0944abfc0137fcad6ca2fc8c41da0e98)
++++ b/project/src/sidebar/Sidebar.css	(date 1709583049649)
+@@ -37,9 +37,9 @@
+     padding: 16px 50px 16px 50px;
+ }
+ 
+-.btn{
++.bottom_btn{
+     position: absolute;
+-    bottom: 50px;
++    bottom: 30px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1709483011561)
++++ b/.idea/.gitignore	(date 1709483011561)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
++# Editor-based HTTP Client requests
++/httpRequests/

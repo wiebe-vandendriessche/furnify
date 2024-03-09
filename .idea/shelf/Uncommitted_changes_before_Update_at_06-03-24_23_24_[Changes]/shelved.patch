@@ -1,0 +1,1030 @@
+Index: project/src/sidebar/components/questionnaire_func.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport \"./questionnaire.css\"\r\nimport { useConfiguratorContext, useVariaContext } from \"../../contexts/MyContext.jsx\";\r\nimport { useTranslation } from 'react-i18next'\r\nimport { useEffect, useState } from 'react'\r\n\r\nfunction Questionnaire_functional() {\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const lng = navigator.language;\r\n\r\n    const { functionalities, setFunctionalities } = useConfiguratorContext();\r\n    const { mattress, setMattress, room, setRoom } = useVariaContext();\r\n    const changeBed = () => {\r\n        setFunctionalities({ ...functionalities, bed: !functionalities.bed })\r\n        if (!functionalities.bed) {\r\n            setMattress(\"\");\r\n        }\r\n    }\r\n    const changeDesk = () => {\r\n        setFunctionalities(\r\n            { ...functionalities, desk: !functionalities.desk }\r\n        );\r\n    }\r\n    const changeSofa = () => {\r\n        setFunctionalities(\r\n            { ...functionalities, sofa: !functionalities.sofa }\r\n        );\r\n    }\r\n    const changeStoragespace = () => {\r\n        setFunctionalities(\r\n            { ...functionalities, storagespace: !functionalities.storagespace });\r\n    }\r\n\r\n    const changeMattresstype = (event) => {\r\n        setMattress(event.target.id);\r\n    }\r\n    const changeRoom = (event) => {\r\n        setRoom(event.target.id);\r\n    }\r\n\r\n    return (\r\n        <>\r\n            <div>\r\n                <table>\r\n                    <tbody>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>{t('questionnaire_func.q_space')}</legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"guestroom\" name=\"room\" onChange={changeRoom} checked={\"guestroom\" === room} />\r\n                                                    <label htmlFor=\"guestroom\">{t('questionnaire_func.space.guest_room')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"livingroom\" name=\"room\" onChange={changeRoom} checked={\"livingroom\" === room} />\r\n                                                    <label htmlFor=\"livingroom\">{t('questionnaire_func.space.living_room')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"bedroom\" name=\"room\" onChange={changeRoom} checked={\"bedroom\" === room} />\r\n                                                    <label htmlFor=\"bedroom\">{t('questionnaire_func.space.bedroom')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>\r\n                                        {t('questionnaire_func.q_function')}\r\n                                    </legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"checkbox\" id=\"bed\" name=\"bed\" onChange={changeBed} checked={functionalities.bed} />\r\n                                                    <label htmlFor=\"bed\">{t('questionnaire_func.functions.bed')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"checkbox\" id=\"desk\" name=\"desk\" onChange={changeDesk} checked={functionalities.desk} />\r\n                                                    <label htmlFor=\"desk\">{t('questionnaire_func.functions.office_space')}</label>\r\n\r\n                                                </td>\r\n\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"checkbox\" id=\"sofa\" name=\"sofa\" onChange={changeSofa} checked={functionalities.sofa} />\r\n                                                    <label htmlFor=\"sofa\">{t('questionnaire_func.functions.sofa')}</label>\r\n\r\n                                                </td>\r\n\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"checkbox\" id=\"storageSpace\" name=\"storageSpace\" onChange={changeStoragespace} checked={functionalities.storagespace} />\r\n                                                    <label htmlFor=\"storageSpace\">{t('questionnaire_func.functions.storage_space')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n\r\n                                </fieldset>\r\n\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset hidden={!functionalities.bed}>\r\n                                    <legend>\r\n                                        {t('questionnaire_func.bed.q_bed')}                                    </legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"soft\" name=\"mattress\" onChange={changeMattresstype} checked={\"soft\" === mattress} />\r\n                                                    <label htmlFor=\"soft\">{t('questionnaire_func.bed.soft')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"medium\" name=\"mattress\" onChange={changeMattresstype} checked={\"medium\" === mattress} />\r\n                                                    <label htmlFor=\"medium\">{t('questionnaire_func.bed.medium')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"hard\" name=\"mattress\" onChange={changeMattresstype} checked={\"hard\" === mattress} />\r\n                                                    <label htmlFor=\"hard\">{t('questionnaire_func.bed.sturdy')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"non\" name=\"mattress\" />\r\n                                                    <label htmlFor=\"non\">{t('questionnaire_func.bed.apply')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </>)\r\n}\r\n\r\nexport default Questionnaire_functional;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire_func.jsx b/project/src/sidebar/components/questionnaire_func.jsx
+--- a/project/src/sidebar/components/questionnaire_func.jsx	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/questionnaire_func.jsx	(date 1709763777757)
+@@ -1,11 +1,16 @@
+ import "../../App.css"
+ import "./questionnaire.css"
+-import { useConfiguratorContext, useVariaContext } from "../../contexts/MyContext.jsx";
+-import { useTranslation } from 'react-i18next'
+-import { useEffect, useState } from 'react'
++import {useConfiguratorContext, useVariaContext} from "../../contexts/MyContext.jsx";
++import {useTranslation} from 'react-i18next'
++import {useEffect, useState} from 'react'
++import Form from "react-bootstrap/Form";
++import ButtonGroup from "react-bootstrap/ButtonGroup";
++import Button from "react-bootstrap/Button";
++import {ToggleButton} from "react-bootstrap";
++import Collapse from "react-bootstrap/Collapse";
+ 
+ function Questionnaire_functional() {
+-    const { t, i18n } = useTranslation();
++    const {t, i18n} = useTranslation();
+ 
+     useEffect(() => {
+         const lng = navigator.language;
+@@ -14,155 +19,251 @@
+ 
+     const lng = navigator.language;
+ 
+-    const { functionalities, setFunctionalities } = useConfiguratorContext();
+-    const { mattress, setMattress, room, setRoom } = useVariaContext();
++    const {functionalities, setFunctionalities} = useConfiguratorContext();
++    const {mattress, setMattress, room, setRoom} = useVariaContext();
+     const changeBed = () => {
+-        setFunctionalities({ ...functionalities, bed: !functionalities.bed })
++        setFunctionalities({...functionalities, bed: !functionalities.bed})
+         if (!functionalities.bed) {
+             setMattress("");
+         }
++        console.log(functionalities.bed)
+     }
+     const changeDesk = () => {
+         setFunctionalities(
+-            { ...functionalities, desk: !functionalities.desk }
++            {...functionalities, desk: !functionalities.desk}
+         );
+     }
+     const changeSofa = () => {
+         setFunctionalities(
+-            { ...functionalities, sofa: !functionalities.sofa }
++            {...functionalities, sofa: !functionalities.sofa}
+         );
+     }
+     const changeStoragespace = () => {
+         setFunctionalities(
+-            { ...functionalities, storagespace: !functionalities.storagespace });
++            {...functionalities, storagespace: !functionalities.storagespace});
+     }
+ 
+     const changeMattresstype = (event) => {
+         setMattress(event.target.id);
+     }
++
++    const changeMattressnone = () => {
++        setMattress("")
++    }
+     const changeRoom = (event) => {
+         setRoom(event.target.id);
+     }
+ 
++    const space = [
++        {name: 'logeerkamer', id: 'guestroom'},
++        {name: 'woonkamer', id: 'livingroom'},
++        {name: 'slaapkamer', id: 'bedroom'},
++    ];
++
++
++
+     return (
+-        <>
+-            <div>
+-                <table>
+-                    <tbody>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>{t('questionnaire_func.q_space')}</legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
++        /*<div>
++            <table>
++                <tbody>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>{t('questionnaire_func.q_space')}</legend>
++                            <table>
++                                <tbody>
++                                <tr>
+ 
+-                                                <td>
+-                                                    <input type="radio" id="guestroom" name="room" onChange={changeRoom} checked={"guestroom" === room} />
+-                                                    <label htmlFor="guestroom">{t('questionnaire_func.space.guest_room')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="livingroom" name="room" onChange={changeRoom} checked={"livingroom" === room} />
+-                                                    <label htmlFor="livingroom">{t('questionnaire_func.space.living_room')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="bedroom" name="room" onChange={changeRoom} checked={"bedroom" === room} />
+-                                                    <label htmlFor="bedroom">{t('questionnaire_func.space.bedroom')}</label>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>
+-                                        {t('questionnaire_func.q_function')}
+-                                    </legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="checkbox" id="bed" name="bed" onChange={changeBed} checked={functionalities.bed} />
+-                                                    <label htmlFor="bed">{t('questionnaire_func.functions.bed')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="checkbox" id="desk" name="desk" onChange={changeDesk} checked={functionalities.desk} />
+-                                                    <label htmlFor="desk">{t('questionnaire_func.functions.office_space')}</label>
++                                    <td>
++                                        <input type="radio" id="guestroom" name="room" onChange={changeRoom}
++                                               checked={"guestroom" === room}/>
++                                        <label htmlFor="guestroom">{t('questionnaire_func.space.guest_room')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="livingroom" name="room" onChange={changeRoom}
++                                               checked={"livingroom" === room}/>
++                                        <label htmlFor="livingroom">{t('questionnaire_func.space.living_room')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="bedroom" name="room" onChange={changeRoom}
++                                               checked={"bedroom" === room}/>
++                                        <label htmlFor="bedroom">{t('questionnaire_func.space.bedroom')}</label>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
++                        </fieldset>
++                    </td>
++                </tr>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                {t('questionnaire_func.q_function')}
++                            </legend>
++                            <table>
++                                <tbody>
++                                <tr>
++                                    <td>
++                                        <input type="checkbox" id="bed" name="bed" onChange={changeBed}
++                                               checked={functionalities.bed}/>
++                                        <label htmlFor="bed">{t('questionnaire_func.functions.bed')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="checkbox" id="desk" name="desk" onChange={changeDesk}
++                                               checked={functionalities.desk}/>
++                                        <label htmlFor="desk">{t('questionnaire_func.functions.office_space')}</label>
+ 
+-                                                </td>
++                                    </td>
+ 
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="checkbox" id="sofa" name="sofa" onChange={changeSofa} checked={functionalities.sofa} />
+-                                                    <label htmlFor="sofa">{t('questionnaire_func.functions.sofa')}</label>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="checkbox" id="sofa" name="sofa" onChange={changeSofa}
++                                               checked={functionalities.sofa}/>
++                                        <label htmlFor="sofa">{t('questionnaire_func.functions.sofa')}</label>
+ 
+-                                                </td>
++                                    </td>
+ 
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="checkbox" id="storageSpace" name="storageSpace" onChange={changeStoragespace} checked={functionalities.storagespace} />
+-                                                    <label htmlFor="storageSpace">{t('questionnaire_func.functions.storage_space')}</label>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="checkbox" id="storageSpace" name="storageSpace"
++                                               onChange={changeStoragespace} checked={functionalities.storagespace}/>
++                                        <label
++                                            htmlFor="storageSpace">{t('questionnaire_func.functions.storage_space')}</label>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
+ 
+-                                </fieldset>
++                        </fieldset>
+ 
+-                            </td>
+-                        </tr>
+-                        <tr>
+-                            <td>
+-                                <fieldset hidden={!functionalities.bed}>
+-                                    <legend>
+-                                        {t('questionnaire_func.bed.q_bed')}                                    </legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
++                    </td>
++                </tr>
++                <tr>
++                    <td>
++                        <fieldset hidden={!functionalities.bed}>
++                            <legend>
++                                {t('questionnaire_func.bed.q_bed')}                                    </legend>
++                            <table>
++                                <tbody>
++                                <tr>
+ 
+-                                                <td>
+-                                                    <input type="radio" id="soft" name="mattress" onChange={changeMattresstype} checked={"soft" === mattress} />
+-                                                    <label htmlFor="soft">{t('questionnaire_func.bed.soft')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="medium" name="mattress" onChange={changeMattresstype} checked={"medium" === mattress} />
+-                                                    <label htmlFor="medium">{t('questionnaire_func.bed.medium')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="hard" name="mattress" onChange={changeMattresstype} checked={"hard" === mattress} />
+-                                                    <label htmlFor="hard">{t('questionnaire_func.bed.sturdy')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="non" name="mattress" />
+-                                                    <label htmlFor="non">{t('questionnaire_func.bed.apply')}</label>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </>)
++                                    <td>
++                                        <input type="radio" id="soft" name="mattress" onChange={changeMattresstype}
++                                               checked={"soft" === mattress}/>
++                                        <label htmlFor="soft">{t('questionnaire_func.bed.soft')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="medium" name="mattress" onChange={changeMattresstype}
++                                               checked={"medium" === mattress}/>
++                                        <label htmlFor="medium">{t('questionnaire_func.bed.medium')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="hard" name="mattress" onChange={changeMattresstype}
++                                               checked={"hard" === mattress}/>
++                                        <label htmlFor="hard">{t('questionnaire_func.bed.sturdy')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="non" name="mattress"/>
++                                        <label htmlFor="non">{t('questionnaire_func.bed.apply')}</label>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
++                        </fieldset>
++                    </td>
++                </tr>
++                </tbody>
++            </table>
++        </div>*/
++
++        <div className="mb-3">
++            <Form>
++                <div>
++                    <Form.Group>
++                        <Form.Label>Welke woonruimte wenst u te optimaliseren?</Form.Label>
++                        <ButtonGroup>
++                            {space.map((space) => (
++                                <ToggleButton
++                                    key={space.id}
++                                    id={space.id}
++                                    type="radio"
++                                    variant="danger"
++                                    value={space.name}
++                                    onChange={changeRoom}
++                                    checked={room === space.id}>
++                                    {space.name}
++                                </ToggleButton>
++                            ))}
++                        </ButtonGroup>
++                    </Form.Group>
++                </div>
++
++                <div>
++                    <Form.Group>
++                        <Form.Label>
++                            Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te
++                            benutten?
++                        </Form.Label>
++                        <div className={"flex"}>
++                            <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"} id="bed"
++                                          name="bed" onClick={changeBed}
++                                          checked={functionalities.bed}>{t('questionnaire_func.functions.bed')}</ToggleButton>
++                            <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"} id="desk"
++                                          name="desk" onChange={changeDesk}
++                                          checked={functionalities.desk}>{t('questionnaire_func.functions.office_space')}</ToggleButton>
++                            <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"} id="sofa"
++                                          name="sofa" onChange={changeSofa}
++                                          checked={functionalities.sofa}>{t('questionnaire_func.functions.sofa')}</ToggleButton>
++                            <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"}
++                                          id="storageSpace" name="storageSpace"
++                                          onChange={changeStoragespace}
++                                          checked={functionalities.storagespace}>{t('questionnaire_func.functions.storage_space')}</ToggleButton>
++                        </div>
++
++                        <Collapse in={functionalities.bed}>
++                            <div className="mb-3">
++                                <ButtonGroup>
++                                    <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress" onChange={changeMattresstype}
++                                                  checked={"soft" === mattress}>
++                                        {t('questionnaire_func.bed.soft')}
++                                    </ToggleButton>
++                                    <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress" onChange={changeMattresstype}
++                                                  checked={"medium" === mattress}>
++                                        {t('questionnaire_func.bed.medium')}
++                                    </ToggleButton>
++                                    <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress" onChange={changeMattresstype}
++                                                  checked={"hard" === mattress}>
++                                        {t('questionnaire_func.bed.sturdy')}
++                                    </ToggleButton>
++                                    <ToggleButton variant={"danger"} type="radio" id="non" name="mattress" onChange={changeMattressnone}
++                                                  checked={"" === mattress}>
++                                        {t('questionnaire_func.bed.apply')}
++                                    </ToggleButton>
++                                </ButtonGroup>
++                            </div>
++                        </Collapse>
++                    </Form.Group>
++                </div>
++            </Form>
++        </div>
++
++
++    )
+ }
+ 
+ export default Questionnaire_functional;
+\ No newline at end of file
+Index: project/src/sidebar/components/contact.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport {useContactContext} from \"../../contexts/MyContext.jsx\";\r\nimport PhoneInput from \"react-phone-input-2\";\r\nimport 'react-phone-input-2/lib/high-res.css'\r\nimport { useTranslation } from 'react-i18next'\r\nimport { useEffect, useState } from 'react'\r\n\r\nfunction Contact() {\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const {firstName, setFirstName, lastName, setLastName, mail, setMail, phoneNumber, setPhoneNumber, address, setAddress}=useContactContext();\r\n    const changeFirstName = (event) => {\r\n        setFirstName(event.target.value);\r\n    }\r\n    const changeLastName = (event) => {\r\n        setLastName(event.target.value);\r\n    }\r\n    const changePhoneNumber = (event) => {\r\n        setPhoneNumber(event);\r\n    }\r\n    const changeMail = (event) => {\r\n        setMail(event.target.value);\r\n    }\r\n    const changeAddress = (event) => {\r\n        setAddress(event.target.value);\r\n    }\r\n\r\n\r\n    return (\r\n\r\n        <>\r\n            <div>\r\n                <h2>\r\n                {t('contact.q_contact')}\r\n                </h2>\r\n                <table>\r\n                    <tbody>\r\n                        <tr>\r\n                            <td>\r\n                                <label htmlFor=\"firstName\">{t('contact.firstname')}:</label>\r\n                            </td>\r\n                            <td>\r\n                                <input id=\"firstName\" name=\"firstName\" type=\"text\" defaultValue={firstName} onChange={changeFirstName}/>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <label htmlFor=\"lastName\">{t('contact.lastname')}:</label>\r\n                            </td>\r\n                            <td>\r\n                                <input id=\"lastName\" name=\"lastName\" type=\"text\" defaultValue={lastName} onChange={changeLastName}/>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <label htmlFor=\"phoneNumber\">\r\n                                {t('contact.phone_number')}:\r\n                                </label>\r\n                            </td>\r\n                            <td>\r\n                                <PhoneInput country={'be'} onlyCountries={[\"be\", \"nl\"]} enableSearch={true} searchPlaceholder={\"\"} disableSearchIcon={true} id=\"phoneNumber\" name=\"phoneNumber\" type=\"tel\" value={phoneNumber} onChange={changePhoneNumber}/>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <label htmlFor=\"mail\">\r\n                                {t('contact.email')}:\r\n                                </label>\r\n                            </td>\r\n                            <td>\r\n                                <input id=\"mail\" name=\"mail\" type=\"email\" defaultValue={mail} onChange={changeMail}/>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <label htmlFor=\"address\">\r\n                                {t('contact.address')}:\r\n                                </label>\r\n                            </td>\r\n                            <td>\r\n                                <input id=\"address\" name=\"address\" type=\"text\" defaultValue={address} onChange={changeAddress}/>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </>)\r\n}\r\n\r\nexport default Contact;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/contact.jsx b/project/src/sidebar/components/contact.jsx
+--- a/project/src/sidebar/components/contact.jsx	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/contact.jsx	(date 1709763835154)
+@@ -4,6 +4,8 @@
+ import 'react-phone-input-2/lib/high-res.css'
+ import { useTranslation } from 'react-i18next'
+ import { useEffect, useState } from 'react'
++import {FloatingLabel, InputGroup} from "react-bootstrap";
++import Form from "react-bootstrap/Form";
+ 
+ function Contact() {
+     const { t, i18n } = useTranslation();
+@@ -32,9 +34,7 @@
+ 
+ 
+     return (
+-
+-        <>
+-            <div>
++            /*<div>
+                 <h2>
+                 {t('contact.q_contact')}
+                 </h2>
+@@ -88,8 +88,42 @@
+                         </tr>
+                     </tbody>
+                 </table>
+-            </div>
+-        </>)
++            </div>*/
++
++        <div>
++           <Form>
++              <div>
++
++              </div>
++               <FloatingLabel
++                   controlId="floatingInput"
++                   label={t('contact.firstname')}>
++                   <Form.Control type="text" placeholder={"name"}/>
++               </FloatingLabel>
++               <FloatingLabel
++                   controlId="floatingInput"
++                   label={t('contact.lastname')}>
++                   <Form.Control type="text" placeholder={"name"}/>
++               </FloatingLabel>
++               <FloatingLabel
++                   controlId="floatingInput"
++                   label="">
++                   <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true} searchPlaceholder={""} disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel" value={phoneNumber} onChange={changePhoneNumber}/>
++               </FloatingLabel>
++
++               <FloatingLabel
++                   controlId="floatingInput"
++                   label={t('contact.email')}>
++                   <Form.Control type="email" placeholder={"email"}/>
++                   <FloatingLabel
++                       controlId="floatingInput"
++                       label={t('contact.address')}>
++                       <Form.Control type="text" placeholder={"address"}/>
++                   </FloatingLabel>
++               </FloatingLabel>
++           </Form>
++        </div>
++        )
+ }
+ 
+ export default Contact;
+\ No newline at end of file
+Index: project/src/sidebar/components/questionnaire.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>div {\r\n    margin: 5px;\r\n}\r\n\r\n.center {\r\n    justify-content: center;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire.css b/project/src/sidebar/components/questionnaire.css
+--- a/project/src/sidebar/components/questionnaire.css	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/questionnaire.css	(date 1709762176480)
+@@ -2,6 +2,48 @@
+     margin: 5px;
+ }
+ 
+-.center {
++ButtonGroup {
++    position: center;
+     justify-content: center;
+-}
+\ No newline at end of file
++}
++
++.obstruction-bg{
++    background-color: #dc3545;
++    border-radius: 4px;
++    border: 10px solid transparent;
++}
++
++input{
++    border-radius: 4px;
++    border: solid transparent;
++    width: 100%;
++}
++
++.fa-rectangle-xmark{
++    padding: 1px 10px;
++    color: white;
++    border: solid transparent;
++}
++
++.tbtn{
++    margin: 5px;
++    justify-content: center;
++}
++
++.flex{
++    display: flex;
++    flex-wrap: wrap;
++}
++
++.white{
++    color: white;
++}
++
++.black{
++    color: black ;
++}
++
++PhoneInput{
++    background-color: #213547;
++    width: 100%;
++}
+Index: project/src/sidebar/components/obstruction.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState, useEffect} from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport Form from \"react-bootstrap/Form\";\r\nimport {Button, FloatingLabel} from \"react-bootstrap\";\r\nimport { useTranslation } from 'react-i18next'\r\nimport {FaRectangleXmark} from \"react-icons/fa6\";\r\n    \r\n\r\n// eslint-disable-next-line react/prop-types\r\nfunction Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {\r\n    //i18n\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const lng = navigator.language;\r\n    \r\n    const [showButton1, setShow1] = useState(false);\r\n    const [showButton2, setShow2] = useState(true);\r\n    const showButton = () => {\r\n        setShow2(!showButton2)\r\n        setShow1(!showButton1)\r\n    };\r\n\r\n    console.log(obstId);\r\n    return (\r\n        <div>\r\n            <input type=\"button\" id={\"button\"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />\r\n            <FaRectangleXmark id={\"delete\"+obstId} onClick={(e)=>deleteObst(e)}/>\r\n            <div hidden={showButton2}>\r\n                <Form.Group className=\"mb-3\">\r\n                    <Form.Select name=\"type\" id={\"type\"+obstId} onChange={(e)=>{changeType(e)}}>\r\n                        <option value={t('obstructions.type')}>{t('obstructions.type')}</option>\r\n                        <option value={t('obstructions.window')}>{t('obstructions.window')}</option>\r\n                        <option value={t('obstructions.door')}>{t('obstructions.door')}</option>\r\n                        <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>\r\n                        <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>\r\n                        <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>\r\n                        <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>\r\n                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>\r\n                    </Form.Select>\r\n                </Form.Group>\r\n                <Form.Group>\r\n                    <div>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.length')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"length\"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.width')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"width\"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>\r\n\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.height')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" name={\"height\"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>\r\n                        </FloatingLabel>\r\n                    </div>\r\n                </Form.Group>\r\n            </div>\r\n        </div>\r\n    )\r\n}\r\n\r\nexport default Obstruction;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/obstruction.jsx b/project/src/sidebar/components/obstruction.jsx
+--- a/project/src/sidebar/components/obstruction.jsx	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/obstruction.jsx	(date 1709734532532)
+@@ -1,10 +1,10 @@
+ import React, {useState, useEffect} from "react";
+ import "./questionnaire.css"
+ import Form from "react-bootstrap/Form";
+-import {Button, FloatingLabel} from "react-bootstrap";
+-import { useTranslation } from 'react-i18next'
+ import {FaRectangleXmark} from "react-icons/fa6";
+-    
++import {Col, FloatingLabel, Row} from "react-bootstrap";
++import Button from "react-bootstrap/Button";
++import {useTranslation} from "react-i18next";
+ 
+ // eslint-disable-next-line react/prop-types
+ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+@@ -17,7 +17,7 @@
+     }, [])
+ 
+     const lng = navigator.language;
+-    
++
+     const [showButton1, setShow1] = useState(false);
+     const [showButton2, setShow2] = useState(true);
+     const showButton = () => {
+@@ -27,9 +27,11 @@
+ 
+     console.log(obstId);
+     return (
+-        <div>
++        <div className="obstruction-bg">
+             <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
+-            <FaRectangleXmark id={"delete"+obstId} onClick={(e)=>deleteObst(e)}/>
++            <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete"+obstId} onClick={(e)=>deleteObst(e)}>
++                x
++            </Button>
+             <div hidden={showButton2}>
+                 <Form.Group className="mb-3">
+                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
+@@ -45,28 +47,38 @@
+                 </Form.Group>
+                 <Form.Group>
+                     <div>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.length')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.width')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
++                        <Row>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.length')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.width')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
+ 
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.height')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
+-                        </FloatingLabel>
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.height')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
++                                </FloatingLabel>
++                            </Col>
++                        </Row>
++
++
+                     </div>
+                 </Form.Group>
+             </div>
+Index: project/src/sidebar/components/questionnaire_space.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport { useEffect, useState } from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport { useConfiguratorContext } from \"../../contexts/MyContext.jsx\";\r\nimport Obstruction from \"./obstruction\";\r\nimport Form from 'react-bootstrap/Form';\r\nimport Button from 'react-bootstrap/Button';\r\nimport Collapse from 'react-bootstrap/Collapse';\r\nimport ButtonGroup from 'react-bootstrap/ButtonGroup';\r\nimport { FloatingLabel, ToggleButton } from \"react-bootstrap\";\r\nimport { useTranslation } from 'react-i18next'\r\n\r\n\r\nfunction Questionnaire_space() {\r\n    //i18n\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const lng = navigator.language;\r\n\r\n\r\n    //Uses reactcontext\r\n    const { dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();\r\n    //Changes value of context\r\n    const changeWidth = (event) => {\r\n        setDimensions({ ...dimensions, width: event.target.value });\r\n    }\r\n    const changeLength = (event) => {\r\n        setDimensions({ ...dimensions, length: event.target.value })\r\n    }\r\n\r\n    const changeHeight = (event) => {\r\n        setDimensions({ ...dimensions, height: event.target.value })\r\n    }\r\n    const changeObstacleType = (event) => {\r\n        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.id.split(\"obst\")[1] ? { ...obstacle, type: event.target.value } : obstacle))\r\n    }\r\n    const changeObstacleLength = (event) => {\r\n        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split(\"obst\")[1] ? { ...obstacle, length: event.target.value } : obstacle))\r\n    }\r\n    const changeObstacleWidth = (event) => {\r\n        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split(\"obst\")[1] ? { ...obstacle, width: event.target.value } : obstacle))\r\n    }\r\n    const changeObstacleHeight = (event) => {\r\n        setObstacles((prevObstacles) => prevObstacles.map((obstacle, index) => index == event.target.name.split(\"obst\")[1] ? { ...obstacle, height: event.target.value } : obstacle))\r\n    }\r\n    const deleteObstacle = (event) => {\r\n        setObstacles((prevObstacles) => prevObstacles.filter((obstacle, index) => (index != event.target.id.split(\"obst\")[1])))\r\n        console.log(\"verwijder\");\r\n    }\r\n    const [open, setOpen] = useState(false);\r\n    const addObstacles = () => {\r\n        if (obstacles.length > 0) {\r\n            setObstacles([...obstacles, (obstacles[obstacles.length - 1] + 1)]);\r\n        } else {\r\n            setObstacles([{ type: t('obstructions.type'), width: 0, height: 0, length: 0 }]);\r\n        }\r\n    }\r\n\r\n\r\n    return (\r\n        <Form className=\"overflow-auto\">\r\n            <Form.Group>\r\n                <Form.Label>{t('questionnaire_space.q_dimensions')}</Form.Label>\r\n                <div className=\"mb-3\">\r\n                    <ButtonGroup>\r\n                        <ToggleButton\r\n                            onClick={() => setOpen(!open)}\r\n                            type=\"radio\"\r\n                            value=\"Rectangular\"\r\n                            variant=\"danger\"\r\n                            checked={open}\r\n                        >\r\n                            {t('questionnaire_space.rectangular')}\r\n                        </ToggleButton>\r\n                        <ToggleButton\r\n                            type=\"radio\"\r\n                            value=\"Other\"\r\n                            variant=\"danger\"\r\n                            checked={!open}\r\n                            onClick={() => setOpen(false)}>\r\n                            {t('questionnaire_space.other')}\r\n                        </ToggleButton>\r\n                    </ButtonGroup>\r\n                </div>\r\n                <Collapse in={open}>\r\n                    <div>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.length')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.length} size=\"sm\"\r\n                                onChange={changeLength} />\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.width')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.width} size=\"sm\"\r\n                                onChange={changeWidth} />\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label={t('questionnaire_space.height')}\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.height} size=\"sm\"\r\n                                onChange={changeHeight} />\r\n                        </FloatingLabel>\r\n                    </div>\r\n                </Collapse>\r\n            </Form.Group>\r\n            <Form.Group>\r\n                <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>\r\n                <Button onClick={addObstacles} variant=\"danger\">{t('questionnaire_space.aspect')}</Button>\r\n                <div>\r\n                    {obstacles.map((item, index) => (<Obstruction obstId={\"obst\" + JSON.stringify(index)} type={item.type}\r\n                        length={item.length} width={item.width} height={item.height}\r\n                        changeLength={changeObstacleLength} changeHeight={changeObstacleHeight}\r\n                        changeWidth={changeObstacleWidth} key={\"obst\" + index} changeType={changeObstacleType}\r\n                        deleteObst={deleteObstacle} />))}\r\n                </div>\r\n            </Form.Group>\r\n\r\n        </Form>\r\n\r\n\r\n    )\r\n}\r\n\r\nexport default Questionnaire_space;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire_space.jsx b/project/src/sidebar/components/questionnaire_space.jsx
+--- a/project/src/sidebar/components/questionnaire_space.jsx	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/questionnaire_space.jsx	(date 1709740647263)
+@@ -7,7 +7,7 @@
+ import Button from 'react-bootstrap/Button';
+ import Collapse from 'react-bootstrap/Collapse';
+ import ButtonGroup from 'react-bootstrap/ButtonGroup';
+-import { FloatingLabel, ToggleButton } from "react-bootstrap";
++import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
+ import { useTranslation } from 'react-i18next'
+ 
+ 
+@@ -89,30 +89,38 @@
+                 </div>
+                 <Collapse in={open}>
+                     <div>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.length')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
+-                                onChange={changeLength} />
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.width')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
+-                                onChange={changeWidth} />
+-                        </FloatingLabel>
+-                        <FloatingLabel
+-                            controlId="floatingInput"
+-                            label={t('questionnaire_space.height')}
+-                            className="mb-4"
+-                        >
+-                            <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
+-                                onChange={changeHeight} />
+-                        </FloatingLabel>
++                        <Row>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.length')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
++                                                  onChange={changeLength} />
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.width')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
++                                                  onChange={changeWidth} />
++                                </FloatingLabel>
++                            </Col>
++                            <Col>
++                                <FloatingLabel
++                                    controlId="floatingInput"
++                                    label={t('questionnaire_space.height')}
++                                    className="mb-4"
++                                >
++                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
++                                                  onChange={changeHeight} />
++                                </FloatingLabel>
++                            </Col>
++                        </Row>
+                     </div>
+                 </Collapse>
+             </Form.Group>
+Index: project/src/sidebar/components/questionnaire_specs.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport \"./questionnaire.css\"\r\nimport { useConfiguratorContext, useVariaContext } from \"../../contexts/MyContext.jsx\";\r\nimport { useTranslation } from 'react-i18next'\r\nimport { useEffect, useState } from 'react'\r\n\r\nfunction Questionnaire_spec() {\r\n    const { t, i18n } = useTranslation();\r\n\r\n    useEffect(() => {\r\n        const lng = navigator.language;\r\n        i18n.changeLanguage(lng);\r\n    }, [])\r\n\r\n    const lng = navigator.language;\r\n    //Uses reactcontext\r\n    const { color, setColor, material, setMaterial, layout, setLayout } = useConfiguratorContext();\r\n    const { requirements, setRequirements } = useVariaContext();\r\n    const changeMaterial = (event) => {\r\n        setMaterial(event.target.value);\r\n    }\r\n    const changeColor = (event) => {\r\n        setColor(event.target.value);\r\n    }\r\n    const changeLayout = (event) => {\r\n        setLayout(event.target.value);\r\n    }\r\n    const changeRequirements = (event) => {\r\n        setRequirements(event.target.value);\r\n    }\r\n    return (\r\n        <>\r\n            <div>\r\n                <table>\r\n                    <tbody>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>\r\n                                        {t('questionnaire_specs.q_prefrences')}\r\n                                    </legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"wall\" value={\"wall\"} name=\"dev\" onChange={changeLayout} checked={\"wall\" === layout} />\r\n                                                    <label htmlFor=\"wall\">{t('questionnaire_specs.prefrences.wall')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"Partition\" value={\"partition\"} name=\"dev\" onChange={changeLayout} checked={\"partition\" === layout} />\r\n                                                    <label htmlFor=\"Partition\">{t('questionnaire_specs.prefrences.partition_wall')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"middle\" name=\"dev\" value={\"middle\"} onChange={changeLayout} checked={\"middle\" === layout} />\r\n                                                    <label htmlFor=\"middle\">{t('questionnaire_specs.prefrences.in_the_middle_of_space')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend>\r\n                                        {t('questionnaire_specs.q_materials')}\r\n                                    </legend>\r\n                                    <table>\r\n                                        <tbody>\r\n                                            <tr>\r\n                                                <td>\r\n                                                {t('questionnaire_specs.materials.color')}:\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"colWhite\" name=\"color\" value=\"#FFFFFF\" onChange={changeColor} checked={color === \"#FFFFFF\"} />\r\n                                                    <label htmlFor=\"colWhite\">{t('questionnaire_specs.materials.white')}</label>\r\n                                                    <input type=\"radio\" id=\"colBlack\" name=\"color\" value=\"#000000\" onChange={changeColor} checked={color === \"#000000\"} />\r\n                                                    <label htmlFor=\"colBlack\">{t('questionnaire_specs.materials.black')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                            <tr>\r\n                                                <td>\r\n                                                {t('questionnaire_specs.materials.material')}:\r\n                                                </td>\r\n                                                <td>\r\n                                                    <input type=\"radio\" id=\"matBirch\" name=\"material\" value=\"birch\" onChange={changeMaterial} checked={material === \"birch\"} />\r\n                                                    <label htmlFor=\"matBirch\">{t('questionnaire_specs.materials.birch')}</label>\r\n                                                    <input type=\"radio\" id=\"matOak\" name=\"material\" value=\"oak\" onChange={changeMaterial} checked={material === \"oak\"} />\r\n                                                    <label htmlFor=\"matOak\">{t('questionnaire_specs.materials.oak')}</label>\r\n                                                    <input type=\"radio\" id=\"matWalnut\" name=\"material\" value=\"walnut\" onChange={changeMaterial} checked={material === \"walnut\"} />\r\n                                                    <label htmlFor=\"matWalnut\">{t('questionnaire_specs.materials.walnut')}</label>\r\n                                                </td>\r\n                                            </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>\r\n                                <fieldset>\r\n                                    <legend  >\r\n                                    {t('questionnaire_specs.q_other')}:\r\n                                    </legend>\r\n                                    <textarea id=\"otherRequirements\" rows=\"3\" cols=\"40\" value={requirements} onChange={changeRequirements}></textarea>\r\n                                </fieldset>\r\n                            </td>\r\n                        </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </>)\r\n}\r\n\r\nexport default Questionnaire_spec;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire_specs.jsx b/project/src/sidebar/components/questionnaire_specs.jsx
+--- a/project/src/sidebar/components/questionnaire_specs.jsx	(revision 5db91d62f7b80e9ddb05f88df0a63aae66f289c0)
++++ b/project/src/sidebar/components/questionnaire_specs.jsx	(date 1709763138619)
+@@ -1,11 +1,16 @@
+ import "../../App.css"
+ import "./questionnaire.css"
+-import { useConfiguratorContext, useVariaContext } from "../../contexts/MyContext.jsx";
+-import { useTranslation } from 'react-i18next'
+-import { useEffect, useState } from 'react'
++import {useConfiguratorContext, useVariaContext} from "../../contexts/MyContext.jsx";
++import {useTranslation} from 'react-i18next'
++import {useEffect, useState} from 'react'
++import Form from "react-bootstrap/Form";
++import {Dropdown, DropdownButton, FormGroup, FormLabel, ToggleButton} from "react-bootstrap";
++import ButtonGroup from "react-bootstrap/ButtonGroup";
++import Button from "react-bootstrap/Button";
++import {FaCircle, FaDotCircle, FaSquare} from "react-icons/fa";
+ 
+ function Questionnaire_spec() {
+-    const { t, i18n } = useTranslation();
++    const {t, i18n} = useTranslation();
+ 
+     useEffect(() => {
+         const lng = navigator.language;
+@@ -14,13 +19,14 @@
+ 
+     const lng = navigator.language;
+     //Uses reactcontext
+-    const { color, setColor, material, setMaterial, layout, setLayout } = useConfiguratorContext();
+-    const { requirements, setRequirements } = useVariaContext();
++    const {color, setColor, material, setMaterial, layout, setLayout} = useConfiguratorContext();
++    const {requirements, setRequirements} = useVariaContext();
+     const changeMaterial = (event) => {
+         setMaterial(event.target.value);
+     }
+     const changeColor = (event) => {
+         setColor(event.target.value);
++        console.log(event.target)
+     }
+     const changeLayout = (event) => {
+         setLayout(event.target.value);
+@@ -29,92 +35,165 @@
+         setRequirements(event.target.value);
+     }
+     return (
+-        <>
+-            <div>
+-                <table>
+-                    <tbody>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>
+-                                        {t('questionnaire_specs.q_prefrences')}
+-                                    </legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="wall" value={"wall"} name="dev" onChange={changeLayout} checked={"wall" === layout} />
+-                                                    <label htmlFor="wall">{t('questionnaire_specs.prefrences.wall')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="Partition" value={"partition"} name="dev" onChange={changeLayout} checked={"partition" === layout} />
+-                                                    <label htmlFor="Partition">{t('questionnaire_specs.prefrences.partition_wall')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                    <input type="radio" id="middle" name="dev" value={"middle"} onChange={changeLayout} checked={"middle" === layout} />
+-                                                    <label htmlFor="middle">{t('questionnaire_specs.prefrences.in_the_middle_of_space')}</label>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend>
+-                                        {t('questionnaire_specs.q_materials')}
+-                                    </legend>
+-                                    <table>
+-                                        <tbody>
+-                                            <tr>
+-                                                <td>
+-                                                {t('questionnaire_specs.materials.color')}:
+-                                                </td>
+-                                                <td>
+-                                                    <input type="radio" id="colWhite" name="color" value="#FFFFFF" onChange={changeColor} checked={color === "#FFFFFF"} />
+-                                                    <label htmlFor="colWhite">{t('questionnaire_specs.materials.white')}</label>
+-                                                    <input type="radio" id="colBlack" name="color" value="#000000" onChange={changeColor} checked={color === "#000000"} />
+-                                                    <label htmlFor="colBlack">{t('questionnaire_specs.materials.black')}</label>
+-                                                </td>
+-                                            </tr>
+-                                            <tr>
+-                                                <td>
+-                                                {t('questionnaire_specs.materials.material')}:
+-                                                </td>
+-                                                <td>
+-                                                    <input type="radio" id="matBirch" name="material" value="birch" onChange={changeMaterial} checked={material === "birch"} />
+-                                                    <label htmlFor="matBirch">{t('questionnaire_specs.materials.birch')}</label>
+-                                                    <input type="radio" id="matOak" name="material" value="oak" onChange={changeMaterial} checked={material === "oak"} />
+-                                                    <label htmlFor="matOak">{t('questionnaire_specs.materials.oak')}</label>
+-                                                    <input type="radio" id="matWalnut" name="material" value="walnut" onChange={changeMaterial} checked={material === "walnut"} />
+-                                                    <label htmlFor="matWalnut">{t('questionnaire_specs.materials.walnut')}</label>
+-                                                </td>
+-                                            </tr>
+-                                        </tbody>
+-                                    </table>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                        <tr>
+-                            <td>
+-                                <fieldset>
+-                                    <legend  >
+-                                    {t('questionnaire_specs.q_other')}:
+-                                    </legend>
+-                                    <textarea id="otherRequirements" rows="3" cols="40" value={requirements} onChange={changeRequirements}></textarea>
+-                                </fieldset>
+-                            </td>
+-                        </tr>
+-                    </tbody>
+-                </table>
+-            </div>
+-        </>)
++
++        /*<div>
++            <table>
++                <tbody>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                {t('questionnaire_specs.q_prefrences')}
++                            </legend>
++                            <table>
++                                <tbody>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="wall" value={"wall"} name="dev" onChange={changeLayout}
++                                               checked={"wall" === layout}/>
++                                        <label htmlFor="wall">{t('questionnaire_specs.prefrences.wall')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="Partition" value={"partition"} name="dev"
++                                               onChange={changeLayout} checked={"partition" === layout}/>
++                                        <label
++                                            htmlFor="Partition">{t('questionnaire_specs.prefrences.partition_wall')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        <input type="radio" id="middle" name="dev" value={"middle"}
++                                               onChange={changeLayout} checked={"middle" === layout}/>
++                                        <label
++                                            htmlFor="middle">{t('questionnaire_specs.prefrences.in_the_middle_of_space')}</label>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
++                        </fieldset>
++                    </td>
++                </tr>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                {t('questionnaire_specs.q_materials')}
++                            </legend>
++                            <table>
++                                <tbody>
++                                <tr>
++                                    <td>
++                                        {t('questionnaire_specs.materials.color')}:
++                                    </td>
++                                    <td>
++                                        <input type="radio" id="colWhite" name="color" value="#FFFFFF"
++                                               onChange={changeColor} checked={color === "#FFFFFF"}/>
++                                        <label htmlFor="colWhite">{t('questionnaire_specs.materials.white')}</label>
++                                        <input type="radio" id="colBlack" name="color" value="#000000"
++                                               onChange={changeColor} checked={color === "#000000"}/>
++                                        <label htmlFor="colBlack">{t('questionnaire_specs.materials.black')}</label>
++                                    </td>
++                                </tr>
++                                <tr>
++                                    <td>
++                                        {t('questionnaire_specs.materials.material')}:
++                                    </td>
++                                    <td>
++                                        <input type="radio" id="matBirch" name="material" value="birch"
++                                               onChange={changeMaterial} checked={material === "birch"}/>
++                                        <label htmlFor="matBirch">{t('questionnaire_specs.materials.birch')}</label>
++                                        <input type="radio" id="matOak" name="material" value="oak"
++                                               onChange={changeMaterial} checked={material === "oak"}/>
++                                        <label htmlFor="matOak">{t('questionnaire_specs.materials.oak')}</label>
++                                        <input type="radio" id="matWalnut" name="material" value="walnut"
++                                               onChange={changeMaterial} checked={material === "walnut"}/>
++                                        <label htmlFor="matWalnut">{t('questionnaire_specs.materials.walnut')}</label>
++                                    </td>
++                                </tr>
++                                </tbody>
++                            </table>
++                        </fieldset>
++                    </td>
++                </tr>
++                <tr>
++                    <td>
++                        <fieldset>
++                            <legend>
++                                {t('questionnaire_specs.q_other')}:
++                            </legend>
++                            <textarea id="otherRequirements" rows="3" cols="40" value={requirements}
++                                      onChange={changeRequirements}></textarea>
++                        </fieldset>
++                    </td>
++                </tr>
++                </tbody>
++            </table>
++        </div>*/
++
++        <div>
++            <Form>
++                <div>
++                    <FormGroup>
++                        <FormLabel>{t('questionnaire_specs.q_prefrences')}</FormLabel>
++                        <ButtonGroup>
++                            <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="dev"
++                                          onChange={changeLayout}
++                                          checked={"wall" === layout}>
++                                {t('questionnaire_specs.prefrences.wall')}
++                            </ToggleButton>
++                            <ToggleButton variant={"danger"} type="radio" id="Partition" value={"partition"} name="dev"
++                                          onChange={changeLayout} checked={"partition" === layout}>
++                                {t('questionnaire_specs.prefrences.partition_wall')}
++                            </ToggleButton>
++                            <ToggleButton variant={"danger"} type="radio" id="middle" name="dev" value={"middle"}
++                                          onChange={changeLayout} checked={"middle" === layout}>
++                                {t('questionnaire_specs.prefrences.in_the_middle_of_space')}
++                            </ToggleButton>
++                        </ButtonGroup>
++                    </FormGroup>
++                </div>
++                <div className={"d-inline-flex"}>
++                    <FormGroup>
++                        <FormLabel>{t('questionnaire_specs.q_materials')}</FormLabel>
++                        <ButtonGroup>
++                            <ToggleButton variant={"danger"} type="radio" id="matBirch" value={"birch"} name="material"
++                                          onChange={changeMaterial}
++                                          checked={material === "birch"}>
++                                {t('questionnaire_specs.materials.birch')}
++                            </ToggleButton>
++                            <ToggleButton variant={"danger"} type="radio" id="matOak" value={"oak"} name="material"
++                                          onChange={changeMaterial} checked={material === "oak"}>
++                                {t('questionnaire_specs.materials.oak')}
++                            </ToggleButton>
++                            <ToggleButton variant={"danger"} type="radio" id="matWalnut" name="material"
++                                          value={"walnut"}
++                                          onChange={changeMaterial} checked={material === "walnut"}>
++                                {t('questionnaire_specs.materials.walnut')}
++                            </ToggleButton>
++                        </ButtonGroup>
++                        <ButtonGroup>
++                            <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
++                                          onChange={changeColor} checked={color === "#FFFFFF"}>
++                                {t('questionnaire_specs.materials.white')}
++                            </ToggleButton>
++                            <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
++                                          onChange={changeColor} checked={color === "#000000"}>
++                                {t('questionnaire_specs.materials.black')}
++                            </ToggleButton>
++                        </ButtonGroup>
++                    </FormGroup>
++                </div>
++                <div>
++                    <FormGroup>
++                        <FormLabel>{t('questionnaire_specs.q_other')}</FormLabel>
++                    </FormGroup>
++                    <Form.Control as={"textarea"} rows={5}></Form.Control>
++                </div>
++            </Form>
++        </div>
++    )
+ }
+ 
+ export default Questionnaire_spec;
+\ No newline at end of file
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
