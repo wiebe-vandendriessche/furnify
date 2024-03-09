@@ -4,6 +4,8 @@ import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import Room from './components/roomComponents/Room'
 import { useEffect, useState } from 'react'
 import './App.css'
+import Sidebar from './sidebar/Sidebar.jsx'
+import { useTranslation } from 'react-i18next'
 
 function App() {
 
