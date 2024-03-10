@@ -90,7 +90,7 @@ function Contact() {
                 </table>
             </div>*/
 
-        <div>
+        <div className="m5">
             <h2>
                 {t('contact.q_contact')}
             </h2>

@@ -88,7 +88,7 @@ function Questionnaire_space() {
         <Form className="overflow-auto">
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_dimensions')}</Form.Label>
-                <div className="mb-3">
+                <div className="mb-3 m5">
                     <ButtonGroup>
                         <ToggleButton
                             onClick={() => setOpen(!open)}
@@ -110,7 +110,7 @@ function Questionnaire_space() {
                     </ButtonGroup>
                 </div>
                 <Collapse in={open}>
-                    <div>
+                    <div className="m5">
                         <Row>
                             <Col>
                                 <FloatingLabel
@@ -149,7 +149,7 @@ function Questionnaire_space() {
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
                 <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
-                <div>
+                <div className="m5">
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                            length={item.obstLength} width={item.width}
                                                            height={item.height}

@@ -1,0 +1,365 @@
+Index: project/src/App.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/App.css b/project/src/App.css
+--- a/project/src/App.css	(revision 41805de5dc0e31e222ae092fcf5fdff258daef22)
++++ b/project/src/App.css	(date 1709647231942)
+@@ -1,0 +1,108 @@
++@import "../node_modules/bootstrap/scss/bootstrap.scss";
++
++:root {
++    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
++    line-height: 1.5;
++    font-weight: 400;
++
++    color: rgba(255, 255, 255, 0.87);
++    background-color: #242424;
++
++    font-synthesis: none;
++    text-rendering: optimizeLegibility;
++    -webkit-font-smoothing: antialiased;
++    -moz-osx-font-smoothing: grayscale;
++}
++
++a {
++    font-weight: 500;
++    color: #e84646;
++    text-decoration: inherit;
++}
++a:hover {
++    color: #e84646;
++}
++
++body {
++    margin: 0;
++    display: flex;
++    place-items: center;
++    min-width: 320px;
++    min-height: 100vh;
++}
++
++h1 {
++    font-size: 3.2em;
++    line-height: 1.1;
++}
++
++button {
++    border-radius: 8px;
++    border: 1px solid transparent;
++    padding: 0.6em 1.2em;
++    font-size: 1em;
++    font-weight: 500;
++    font-family: inherit;
++    background-color: #1a1a1a;
++    cursor: pointer;
++    transition: border-color 0.25s;
++    margin: 5px;
++}
++
++
++button:hover {
++    -webkit-transform: scale(1.1);
++}
++
++/*button:focus,
++button:focus-visible {
++  outline: 4px auto -webkit-focus-ring-color;
++}*/
++
++.form-control:focus {
++    border-color:#e84646;
++    -webkit-box-shadow:0 0 0.5rem #e84646;
++}
++.form-select:focus {
++    border-color:#e84646;
++    -webkit-box-shadow:0 0 0.5rem #e84646;
++}
++
++
++/*general color change for dark and light mode */
++@media (prefers-color-scheme: light) {
++    :root {
++        color: #213547;
++        background-color: #ffffff;
++    }
++    a:hover {
++        color: #747bff;
++    }
++    button {
++        background-color: #f1f1f1;
++    }
++
++    button:hover {
++        background-color: #e84646;
++        color: #ffffff;
++    }
++}
++
++@media (prefers-color-scheme: dark) {
++    :root {
++        color: #ffffff;
++        background-color: #000000;
++    }
++    a:hover {
++        color: #747bff;
++    }
++    button {
++        background-color: #525252;
++        color: white;
++    }
++
++    button:hover {
++        background-color: #e84646;
++    }
++
++}
+Index: project/src/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@import \"../node_modules/bootstrap/scss/bootstrap.scss\";\r\n\r\n:root {\r\n  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;\r\n  line-height: 1.5;\r\n  font-weight: 400;\r\n\r\n  color: rgba(255, 255, 255, 0.87);\r\n  background-color: #242424;\r\n\r\n  font-synthesis: none;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\na {\r\n  font-weight: 500;\r\n  color: #e84646;\r\n  text-decoration: inherit;\r\n}\r\na:hover {\r\n  color: #e84646;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  display: flex;\r\n  place-items: center;\r\n  min-width: 320px;\r\n  min-height: 100vh;\r\n}\r\n\r\nh1 {\r\n  font-size: 3.2em;\r\n  line-height: 1.1;\r\n}\r\n\r\nbutton {\r\n  border-radius: 8px;\r\n  border: 1px solid transparent;\r\n  padding: 0.6em 1.2em;\r\n  font-size: 1em;\r\n  font-weight: 500;\r\n  font-family: inherit;\r\n  background-color: #1a1a1a;\r\n  cursor: pointer;\r\n  transition: border-color 0.25s;\r\n  margin: 5px;\r\n}\r\n\r\n\r\nbutton:hover {\r\n  -webkit-transform: scale(1.1);\r\n}\r\n\r\n/*button:focus,\r\nbutton:focus-visible {\r\n  outline: 4px auto -webkit-focus-ring-color;\r\n}*/\r\n\r\n.form-control:focus {\r\n  border-color:#e84646;\r\n  -webkit-box-shadow:0 0 0.5rem #e84646;\r\n}\r\n.form-select:focus {\r\n  border-color:#e84646;\r\n  -webkit-box-shadow:0 0 0.5rem #e84646;\r\n}\r\n\r\n\r\n/*general color change for dark and light mode */\r\n@media (prefers-color-scheme: light) {\r\n  :root {\r\n    color: #213547;\r\n    background-color: #ffffff;\r\n  }\r\n  a:hover {\r\n    color: #747bff;\r\n  }\r\n  button {\r\n    background-color: #f1f1f1;\r\n  }\r\n\r\n  button:hover {\r\n    background-color: #e84646;\r\n    color: #ffffff;\r\n  }\r\n}\r\n\r\n@media (prefers-color-scheme: dark) {\r\n  :root {\r\n    color: #ffffff;\r\n    background-color: #000000;\r\n  }\r\n  a:hover {\r\n    color: #747bff;\r\n  }\r\n  button {\r\n    background-color: #525252;\r\n    color: white;\r\n  }\r\n\r\n  button:hover {\r\n    background-color: #e84646;\r\n  }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/index.css b/project/src/index.css
+--- a/project/src/index.css	(revision 41805de5dc0e31e222ae092fcf5fdff258daef22)
++++ b/project/src/index.css	(date 1709647231957)
+@@ -1,108 +1,0 @@
+-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+-
+-:root {
+-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+-  line-height: 1.5;
+-  font-weight: 400;
+-
+-  color: rgba(255, 255, 255, 0.87);
+-  background-color: #242424;
+-
+-  font-synthesis: none;
+-  text-rendering: optimizeLegibility;
+-  -webkit-font-smoothing: antialiased;
+-  -moz-osx-font-smoothing: grayscale;
+-}
+-
+-a {
+-  font-weight: 500;
+-  color: #e84646;
+-  text-decoration: inherit;
+-}
+-a:hover {
+-  color: #e84646;
+-}
+-
+-body {
+-  margin: 0;
+-  display: flex;
+-  place-items: center;
+-  min-width: 320px;
+-  min-height: 100vh;
+-}
+-
+-h1 {
+-  font-size: 3.2em;
+-  line-height: 1.1;
+-}
+-
+-button {
+-  border-radius: 8px;
+-  border: 1px solid transparent;
+-  padding: 0.6em 1.2em;
+-  font-size: 1em;
+-  font-weight: 500;
+-  font-family: inherit;
+-  background-color: #1a1a1a;
+-  cursor: pointer;
+-  transition: border-color 0.25s;
+-  margin: 5px;
+-}
+-
+-
+-button:hover {
+-  -webkit-transform: scale(1.1);
+-}
+-
+-/*button:focus,
+-button:focus-visible {
+-  outline: 4px auto -webkit-focus-ring-color;
+-}*/
+-
+-.form-control:focus {
+-  border-color:#e84646;
+-  -webkit-box-shadow:0 0 0.5rem #e84646;
+-}
+-.form-select:focus {
+-  border-color:#e84646;
+-  -webkit-box-shadow:0 0 0.5rem #e84646;
+-}
+-
+-
+-/*general color change for dark and light mode */
+-@media (prefers-color-scheme: light) {
+-  :root {
+-    color: #213547;
+-    background-color: #ffffff;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #f1f1f1;
+-  }
+-
+-  button:hover {
+-    background-color: #e84646;
+-    color: #ffffff;
+-  }
+-}
+-
+-@media (prefers-color-scheme: dark) {
+-  :root {
+-    color: #ffffff;
+-    background-color: #000000;
+-  }
+-  a:hover {
+-    color: #747bff;
+-  }
+-  button {
+-    background-color: #525252;
+-    color: white;
+-  }
+-
+-  button:hover {
+-    background-color: #e84646;
+-  }
+-
+-}
+Index: project/src/sidebar/components/questionnaire_space.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"../../App.css\"\r\nimport {useState} from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport {useConfiguratorContext} from \"../../contexts/MyContext.jsx\";\r\nimport Obstruction from \"./obstruction\";\r\nimport Form from 'react-bootstrap/Form';\r\nimport Button from 'react-bootstrap/Button';\r\nimport Collapse from 'react-bootstrap/Collapse';\r\nimport ButtonGroup from 'react-bootstrap/ButtonGroup';\r\nimport {FloatingLabel, ToggleButton} from \"react-bootstrap\";\r\n\r\nfunction Questionnaire_space() {\r\n    //Uses reactcontext\r\n    const { dimensions, setDimensions} = useConfiguratorContext();\r\n    //Changes value of context\r\n    const changeWidth = (event) => {\r\n        setDimensions({ ...dimensions, width: event.target.value });\r\n    }\r\n    const changeLength = (event) => {\r\n        setDimensions({ ...dimensions, length: event.target.value })\r\n    }\r\n\r\n    const changeHeight = (event) => {\r\n        setDimensions({ ...dimensions, height: event.target.value })\r\n    }\r\n\r\n\r\n    /*const [showDims, setShow] = useState(true);\r\n    const showDim = () => {\r\n        setShow(false);\r\n    }\r\n    const showNoDim = () => {\r\n        setShow(true)\r\n    }*/\r\n    const [open, setOpen] = useState(false);\r\n    const [Obst, setObstr] = useState([])\r\n    const addObstr = () => {\r\n        if (Obst.length > 0) {\r\n            setObstr([...Obst, (Obst[Obst.length - 1] + 1)]);\r\n        } else {\r\n            setObstr([1]);\r\n        }\r\n        console.log(Obst)\r\n    }\r\n\r\n\r\n\r\n    return (\r\n\r\n        /*<div>\r\n            <table>\r\n                <tbody>\r\n                <tr>\r\n                    <td>\r\n                        <fieldset>\r\n                            <legend>\r\n                                Wat zijn de afmetingen van de woonruimte?\r\n                            </legend>\r\n                            <table>\r\n                                <tbody>\r\n                                <tr>\r\n                                    <td>\r\n                                        Vorm:\r\n                                    </td>\r\n                                    <td>\r\n                                        <input type=\"radio\" id=\"colRectangular\" name=\"space\" value=\"Rectangular\"\r\n                                               onClick={showDim}/>\r\n                                        <label htmlFor=\"colRectangular\">Rechthoekig</label>\r\n                                        <input type=\"radio\" id=\"colOther\" name=\"space\" value=\"Other\"\r\n                                               onClick={showNoDim}/>\r\n                                        <label htmlFor=\"colOther\">Anders</label>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr hidden={showDims}>\r\n                                    <td>\r\n                                        <label htmlFor=\"length\">Lengte:</label>\r\n                                    </td>\r\n                                    <td>\r\n                                        <input id=\"length\" type=\"number\" min={0} step={0.1} value={dimensions.length}\r\n                                               onChange={changeLength}/>\r\n                                    </td>\r\n                                    <td>\r\n                                        <p>cm</p>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr hidden={showDims}>\r\n                                    <td>\r\n                                        <label htmlFor=\"width\">Breedte:</label>\r\n                                    </td>\r\n                                    <td>\r\n                                        <input id=\"width\" type=\"number\" min={0} step={0.1} value={dimensions.width}\r\n                                               onChange={changeWidth}/>\r\n                                    </td>\r\n                                    <td>\r\n                                        <p>cm</p>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr hidden={showDims}>\r\n                                    <td>\r\n                                        <label htmlFor=\"height\">Hoogte:</label>\r\n                                    </td>\r\n                                    <td>\r\n                                        <input id=\"height\" type=\"number\" min={0} step={0.1} value={dimensions.height}\r\n                                               onChange={changeHeight}/>\r\n                                    </td>\r\n                                    <td>\r\n                                        <p>cm</p>\r\n                                    </td>\r\n                                </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </fieldset>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <td>\r\n                        <fieldset>\r\n                            <legend>\r\n                                Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.\r\n                            </legend>\r\n\r\n                            <button onClick={addObstr}>Voeg aspect toe</button>\r\n                            <div>\r\n                                {Obst.map((item) => (<Obstruction key={item}/>))}\r\n                            </div>\r\n\r\n                        </fieldset>\r\n                    </td>\r\n                </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>*/\r\n            <Form className=\"overflow-auto\">\r\n                <Form.Group>\r\n                    <Form.Label>Wat zijn de afmetingen van de woonruimte?</Form.Label>\r\n                    <div className=\"mb-3\">\r\n                        <ButtonGroup>\r\n                            <ToggleButton\r\n                                onClick={() => setOpen(!open)}\r\n                                type=\"radio\"\r\n                                value=\"Rectangular\"\r\n                                variant=\"danger\"\r\n                                checked={open}\r\n                            >\r\n                                Rechthoekig\r\n                            </ToggleButton>\r\n                            <ToggleButton\r\n                                type=\"radio\"\r\n                                value=\"Other\"\r\n                                variant=\"danger\"\r\n                                checked={!open}\r\n                                onClick={() => setOpen(false)}>\r\n                                anders\r\n                            </ToggleButton>\r\n                        </ButtonGroup>\r\n                    </div>\r\n                    <Collapse in={open}>\r\n                        <div>\r\n                            <FloatingLabel\r\n                                controlId=\"floatingInput\"\r\n                                label=\"Lengte\"\r\n                                className=\"mb-4\"\r\n                            >\r\n                                <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.length} size=\"sm\"\r\n                                              onChange={changeLength} />\r\n                            </FloatingLabel>\r\n                            <FloatingLabel\r\n                                controlId=\"floatingInput\"\r\n                                label=\"Breedte\"\r\n                                className=\"mb-4\"\r\n                            >\r\n                                <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.length} size=\"sm\"\r\n                                              onChange={changeWidth} />\r\n                            </FloatingLabel>\r\n                            <FloatingLabel\r\n                                controlId=\"floatingInput\"\r\n                                label=\"Hoogte\"\r\n                                className=\"mb-4\"\r\n                            >\r\n                                <Form.Control type=\"number\" min={0} step={0.1} value={dimensions.length} size=\"sm\"\r\n                                              onChange={changeHeight} />\r\n                            </FloatingLabel>\r\n                        </div>\r\n                    </Collapse>\r\n                </Form.Group>\r\n                <Form.Group>\r\n                    <Form.Label>Voeg toe met welke aspecten we in uw woonruimte rekening moeten houden.</Form.Label>\r\n                    <Button onClick={addObstr} variant=\"danger\">Voeg aspect toe</Button>\r\n                    <div>\r\n                        {Obst.map((item) => (<Obstruction key={item}/>))}\r\n                    </div>\r\n                </Form.Group>\r\n\r\n            </Form>\r\n\r\n\r\n)\r\n}\r\n\r\nexport default Questionnaire_space;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/questionnaire_space.jsx b/project/src/sidebar/components/questionnaire_space.jsx
+--- a/project/src/sidebar/components/questionnaire_space.jsx	(revision 41805de5dc0e31e222ae092fcf5fdff258daef22)
++++ b/project/src/sidebar/components/questionnaire_space.jsx	(date 1709649057027)
+@@ -157,7 +157,7 @@
+                     <Collapse in={open}>
+                         <div>
+                             <FloatingLabel
+-                                controlId="floatingInput"
++                                controlId="floatingInput1"
+                                 label="Lengte"
+                                 className="mb-4"
+                             >
+@@ -165,7 +165,7 @@
+                                               onChange={changeLength} />
+                             </FloatingLabel>
+                             <FloatingLabel
+-                                controlId="floatingInput"
++                                controlId="floatingInput2"
+                                 label="Breedte"
+                                 className="mb-4"
+                             >
+@@ -173,7 +173,7 @@
+                                               onChange={changeWidth} />
+                             </FloatingLabel>
+                             <FloatingLabel
+-                                controlId="floatingInput"
++                                controlId="floatingInput3"
+                                 label="Hoogte"
+                                 className="mb-4"
+                             >
+Index: project/src/sidebar/Sidebar.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import \"./Sidebar.css\"\r\nimport React, {useState} from \"react\";\r\nimport {IconContext} from \"react-icons\"\r\nimport {FaAnglesRight, FaAnglesLeft} from \"react-icons/fa6\"\r\nimport Questionnaire_func from \"./components/questionnaire_func.jsx\";\r\nimport Contact from \"./components/contact\";\r\nimport logo from \"../assets/logo_lm.png\";\r\nimport logo_dm from \"../assets/logo_dm.png\";\r\nimport Questionnaire_space from \"./components/questionnaire_space\";\r\nimport Questionnaire_specs from \"./components/questionnaire_specs\";\r\nimport {AiOutlineClose, AiOutlineMenu} from \"react-icons/ai\";\r\n\r\n\r\nfunction Sidebar() {\r\n    const [sidebar, setSidebar] = useState(true);\r\n    const [part, showPart] = useState(0);\r\n    const showSidebar = () => {\r\n        setSidebar(!sidebar);\r\n    }\r\n    const previousPart = () => {\r\n        showPart(part - 1)\r\n    }\r\n    const nextPart = () => {\r\n        showPart(part + 1)\r\n    }\r\n    const showPrevious = () => {\r\n        return part == 0;\r\n    }\r\n    const showNext = () => {\r\n        return part == 3;\r\n    }\r\n\r\n    const showNextPart = () => {\r\n        switch (part) {\r\n            case 0:\r\n                return <Questionnaire_space/>\r\n            case 1:\r\n                return <Questionnaire_func/>\r\n            case 2:\r\n                return <Questionnaire_specs/>\r\n            case 3:\r\n                return <Contact/>\r\n            case 4:\r\n                return <p>Nothing to see here</p>\r\n            default:\r\n                return <p>This is some default text</p>\r\n        }\r\n    }\r\n\r\n    return (\r\n        <>\r\n            <IconContext.Provider value={{color: \"undefined\"}}>\r\n\r\n                <nav className={sidebar ? \"nav-menu active\" : \"nav-menu\"}>\r\n\r\n                    <div>\r\n                        <a id=\"a\" href={\"https://www.furnifyhome.eu/\"}>\r\n                            <picture>\r\n                                <source srcSet={logo_dm} media=\"(prefers-color-scheme: dark)\"/>\r\n                                <img id=\"logo\" src={logo} alt=\"furnify\"/>\r\n                            </picture>\r\n                        </a>\r\n                        {showNextPart()}\r\n                        <div className=\"bottom_btn\">\r\n                            <button onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>\r\n                            <button onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>\r\n                        </div>\r\n\r\n                    </div>\r\n                </nav>\r\n                <div onClick={showSidebar} className=\"menu-bars\">\r\n                    {sidebar ? <AiOutlineClose size={25}/> : <AiOutlineMenu size={25}/>}\r\n                </div>\r\n            </IconContext.Provider>\r\n        </>\r\n    )\r\n}\r\n\r\nexport default Sidebar;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/Sidebar.jsx b/project/src/sidebar/Sidebar.jsx
+--- a/project/src/sidebar/Sidebar.jsx	(revision 41805de5dc0e31e222ae092fcf5fdff258daef22)
++++ b/project/src/sidebar/Sidebar.jsx	(date 1709648818340)
+@@ -53,7 +53,7 @@
+ 
+                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+ 
+-                    <div>
++                    <div className="overflow-auto">
+                         <a id="a" href={"https://www.furnifyhome.eu/"}>
+                             <picture>
+                                 <source srcSet={logo_dm} media="(prefers-color-scheme: dark)"/>
+Index: project/src/sidebar/components/obstruction.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState} from \"react\";\r\nimport \"./questionnaire.css\"\r\nimport Form from \"react-bootstrap/Form\";\r\nimport {Button, FloatingLabel} from \"react-bootstrap\";\r\n\r\nfunction Obstruction() {\r\n\r\n    const [showButton1, setShow1] = useState(false);\r\n    const [showButton2, setShow2] = useState(true);\r\n    const [typeObstr, setObstr] = useState(\"Aspect\")\r\n    const showButton = () => {\r\n        setShow2(!showButton2) + setShow1(!showButton1)\r\n    };\r\n    const saveName = () => {\r\n        setObstr(type.value)\r\n    }\r\n\r\n    return (\r\n        /*<div className=\"Obstruction\">\r\n            <table>\r\n                <tbody>\r\n                    <tr hidden={showButton1}>\r\n                        <td>\r\n                            <input type=\"button\" id=\"typeclosed\" onClick={showButton} value = {typeObstr}></input>\r\n                        </td>\r\n                    </tr>\r\n\r\n                    <tr hidden={showButton2}>\r\n                        <td>\r\n                            <fieldset>\r\n                            <legend>\r\n                                    <input type=\"button\" id=\"typeopen\" value = {typeObstr} onClick={showButton}  ></input>\r\n                                    </legend>\r\n                                <table>\r\n                                    <tbody>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"type\">Type: </label>\r\n                                                <select name=\"type\" id=\"type\" onChange={saveName} >\r\n                                                    <option value=\"raam\">raam</option>\r\n                                                    <option value=\"deur\">deur</option>\r\n                                                    <option value=\"radiator\">radiator</option>\r\n                                                    <option value=\"stopcontact\">stopcontact</option>\r\n                                                    <option value=\"schakelaar\">schakelaar</option>\r\n                                                    <option value=\"schuine wand\">schuine wand</option>\r\n                                                    <option value=\"anders\">anders</option>\r\n                                                </select>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"length_ob\" >Lengte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"length_ob\" type=\"number\" min={0} step={0.1}  />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p >cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"width_ob\" >Breedte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"width_ob\" type=\"number\" min={0} step={0.1} />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p>cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>\r\n                                                <label htmlFor=\"height_ob\">Hoogte:</label>\r\n                                            </td>\r\n                                            <td>\r\n                                                <input id=\"height_ob\" type=\"text\" min={0} step={0.1} />\r\n                                            </td>\r\n                                            <td>\r\n                                                <p>cm</p>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </fieldset>\r\n\r\n                        </td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n\r\n\r\n        </div>*/\r\n        <div>\r\n            <Button variant={\"danger\"} id=\"typeopen\" value={saveName} onClick={showButton}>Aspect</Button>\r\n            <Form className=\"overflow-auto\" hidden={showButton1}>\r\n                <Form.Group className=\"mb-3\">\r\n                    <Form.Select name=\"type\" id=\"type\" onChange={saveName}>\r\n                        <option value=\"Type\">Type</option>\r\n                        <option value=\"raam\">raam</option>\r\n                        <option value=\"deur\">deur</option>\r\n                        <option value=\"radiator\">radiator</option>\r\n                        <option value=\"stopcontact\">stopcontact</option>\r\n                        <option value=\"schakelaar\">schakelaar</option>\r\n                        <option value=\"schuine wand\">schuine wand</option>\r\n                        <option value=\"anders\">anders</option>\r\n                    </Form.Select>\r\n                </Form.Group>\r\n                <Form.Group>\r\n                    <div>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label=\"Lengte\"\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1}/>\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label=\"Breedte\"\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1}/>\r\n                        </FloatingLabel>\r\n                        <FloatingLabel\r\n                            controlId=\"floatingInput\"\r\n                            label=\"Hoogte\"\r\n                            className=\"mb-4\"\r\n                        >\r\n                            <Form.Control type=\"number\" min={0} step={0.1}/>\r\n                        </FloatingLabel>\r\n                    </div>\r\n                </Form.Group>\r\n\r\n            </Form>\r\n        </div>\r\n\r\n    )\r\n}\r\n\r\nexport default Obstruction;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/project/src/sidebar/components/obstruction.jsx b/project/src/sidebar/components/obstruction.jsx
+--- a/project/src/sidebar/components/obstruction.jsx	(revision 41805de5dc0e31e222ae092fcf5fdff258daef22)
++++ b/project/src/sidebar/components/obstruction.jsx	(date 1709649616308)
+@@ -93,9 +93,9 @@
+ 
+         </div>*/
+         <div>
+-            <Button variant={"danger"} id="typeopen" value={saveName} onClick={showButton}>Aspect</Button>
+-            <Form className="overflow-auto" hidden={showButton1}>
+-                <Form.Group className="mb-3">
++            <input type="button" id="typeopen" value = {typeObstr} onClick={showButton}  ></input>
++            <div hidden={showButton1}>
++                <Form.Group  className="mb-3">
+                     <Form.Select name="type" id="type" onChange={saveName}>
+                         <option value="Type">Type</option>
+                         <option value="raam">raam</option>
+@@ -110,21 +110,18 @@
+                 <Form.Group>
+                     <div>
+                         <FloatingLabel
+-                            controlId="floatingInput"
+                             label="Lengte"
+                             className="mb-4"
+                         >
+                             <Form.Control type="number" min={0} step={0.1}/>
+                         </FloatingLabel>
+                         <FloatingLabel
+-                            controlId="floatingInput"
+                             label="Breedte"
+                             className="mb-4"
+                         >
+                             <Form.Control type="number" min={0} step={0.1}/>
+                         </FloatingLabel>
+                         <FloatingLabel
+-                            controlId="floatingInput"
+                             label="Hoogte"
+                             className="mb-4"
+                         >
+@@ -132,8 +129,8 @@
+                         </FloatingLabel>
+                     </div>
+                 </Form.Group>
++            </div>
+ 
+-            </Form>
+         </div>
+ 
+     )
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1709599309011)
++++ b/.idea/.gitignore	(date 1709599309011)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
++# Editor-based HTTP Client requests
++/httpRequests/

@@ -26,12 +26,12 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
 
     console.log(obstId);
     return (
-        <div className="obstruction-bg">
+        <div className="obstruction-bg m5">
             <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
             <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete"+obstId} onClick={(e)=>deleteObst(e)}>
                 x
             </Button>
-            <div hidden={showButton2}>
+            <div className="m5" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
                         <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
@@ -45,7 +45,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
-                    <div>
+                    <div className="m5">
                         <Row>
                             <Col>
                                 <FloatingLabel

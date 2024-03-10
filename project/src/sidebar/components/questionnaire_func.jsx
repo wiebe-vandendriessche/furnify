@@ -187,9 +187,9 @@ function Questionnaire_functional() {
             </table>
         </div>*/
 
-        <div className="mb-3">
+        <div className="mb-3 m5">
             <Form>
-                <div>
+                <div className="m5">
                     <Form.Group>
                         <Form.Label>Welke woonruimte wenst u te optimaliseren?</Form.Label>
                         <ButtonGroup>
@@ -209,13 +209,13 @@ function Questionnaire_functional() {
                     </Form.Group>
                 </div>
 
-                <div>
+                <div className="m5">
                     <Form.Group>
                         <Form.Label>
                             Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te
                             benutten?
                         </Form.Label>
-                        <div className={"flex"}>
+                        <div className={"flex m5"}>
                             <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"} id="bed"
                                           name="bed" onClick={changeBed}
                                           checked={functionalities.bed}>{t('questionnaire_func.functions.bed')}</ToggleButton>
@@ -232,7 +232,7 @@ function Questionnaire_functional() {
                         </div>
 
                         <Collapse in={functionalities.bed}>
-                            <div className="mb-3">
+                            <div className="mb-3 m5">
                                 <ButtonGroup>
                                     <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress" onChange={changeMattresstype}
                                                   checked={"soft" === mattress}>
