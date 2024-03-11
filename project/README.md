@@ -1,8 +1,45 @@
-# React + Vite
+# Furnify2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overzicht
 
-Currently, two official plugins are available:
+Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vite op Node.js. Het stelt gebruikers in staat om aan de hand van een vragenlijst de kamer te configureren met de verschillende modules van Furnify.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Repository-indeling
+
+- **/src:** Bevat de broncode van de applicatie.
+- **/public/textures:** Bevat de textures gebruikt voor het 3D model.
+- **/src/assets:** Bevatten afbeeldingen, logos, etc.
+- **/src/components:** Bevatten alle components die met het 3D model te maken hebben.
+- **/src/components/contexts:** Bevat context die met het 3D model te maken heeft.
+- **/src/components/other:** Bevat modules die geen deel uitmaken van de kamer.
+- **/src/components/roomComponents:** Bevat modules die deel uitmaken van de kamer.
+- **/src/contexts:** Bevat MyContext.jsx. Deze is bedoelt om de vragenlijst te koppelen.
+- **/src/sidebar:** Bevat code voor de sidebar.
+- **/src/sidebar/components:** Bevat code voor de componenten van de sidebar.
+- **/src/i18n.ts:** Bevat de configuratie voor de internationalisatie.
+
+
+## Setup
+
+### Compileren en uitvoeren
+
+(nog niet kunnen deployen wegens fout nginx en apache)
+(wel mogelijk developer omgeving te runnen op de linux server dankzij vite op poort 8080-> http://157.193.171.41:8080/ werkt enkel als npm run dev code runt op terminal van de linux server)
+
+start dev server:
+```bash
+npm run dev
+```
+installeer node packages:
+```bash
+npm install
+```
+build for production:
+```bash
+npm run build
+```
+locally preview production build:
+```bash
+npm run preview
+```
+
