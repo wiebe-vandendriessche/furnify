@@ -51,9 +51,9 @@ function Questionnaire_functional() {
     }
 
     const space = [
-        {name: 'logeerkamer', id: 'guestroom'},
-        {name: 'woonkamer', id: 'livingroom'},
-        {name: 'slaapkamer', id: 'bedroom'},
+        {name: t('questionnaire_func.space.guest_room'), id: 'guestroom'},
+        {name: t('questionnaire_func.space.living_room'), id: 'livingroom'},
+        {name: t('questionnaire_func.space.bedroom'), id: 'bedroom'},
     ];
 
 
@@ -191,7 +191,7 @@ function Questionnaire_functional() {
             <Form>
                 <div className="m5">
                     <Form.Group>
-                        <Form.Label>Welke woonruimte wenst u te optimaliseren?</Form.Label>
+                        <Form.Label>{t('questionnaire_func.q_space')}</Form.Label>
                         <ButtonGroup>
                             {space.map((space) => (
                                 <ToggleButton
@@ -212,8 +212,7 @@ function Questionnaire_functional() {
                 <div className="m5">
                     <Form.Group>
                         <Form.Label>
-                            Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te
-                            benutten?
+                        {t('questionnaire_func.q_function')}
                         </Form.Label>
                         <div className={"flex m5"}>
                             <ToggleButton className={"tbtn"} type="checkbox" variant={"outline-danger"} id="bed"
