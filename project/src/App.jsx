@@ -7,6 +7,7 @@ import Sidebar from './sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
 import { DimensionProvider } from './3D/contexts/DimensionContext';
 import Scene from './3D/Scene'
+import { ConfiguratorProvider } from './contexts/MyContext'
 
 
 function App() {
@@ -21,18 +22,20 @@ function App() {
   const lng = navigator.language;
 
   return (
-    <div className="App">
-      <Sidebar />
-      <main>
-        <DimensionProvider>
+    <ConfiguratorProvider>
+      <div className="App">
+        <Sidebar />
+        <main>
+          {/* <DimensionProvider> */}
           <div className="container">
             <Scene />
           </div>
-        </DimensionProvider>
-      </main>
-    </div>
+          {/* </DimensionProvider> */}
+        </main>
+      </div>
+    </ConfiguratorProvider>
   )
-  ;
+    ;
 }
 
 export default App;

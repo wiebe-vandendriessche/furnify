@@ -5,12 +5,18 @@ import { useState } from 'react'
 import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
+import { useConfiguratorContext } from '../contexts/MyContext.jsx';
 
 
 
 
 const Scene = () => {
-    const { width, height, depth } = useDimensions();
+    // const { width, height, depth } = useDimensions();
+    const { dimensions, setDimensions} = useConfiguratorContext();
+    let width = dimensions.width;
+    let depth = dimensions.length;
+    let height = dimensions.height;
+    console.log("f: ", dimensions);
     return (
         <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
