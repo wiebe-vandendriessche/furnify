@@ -23,10 +23,9 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 
 ### Compileren en uitvoeren
 
-(nog niet kunnen deployen wegens fout nginx en apache)
-(wel mogelijk developer omgeving te runnen op de linux server dankzij vite op poort 8080-> http://157.193.171.41:8080/ werkt enkel als npm run dev code runt op terminal van de linux server)
+http://157.193.171.41
 
-**start dev server:**
+**start dev test server (niet om te deployen):**
 ```bash
 npm run dev
 ```
