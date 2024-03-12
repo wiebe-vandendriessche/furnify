@@ -23,22 +23,18 @@ function Questionnaire_space() {
 
     //Uses reactcontext
     const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
-    //Changes value of context
-    const changeWidth = (event) => {
-        setDimensions({...dimensions, width: event.target.value});
-    }
-    const changeLength = (event) => {
-        setDimensions({...dimensions, length: event.target.value})
+    //Changes values of dimensions in context
+    const changeDim=(event)=>{
+        setDimensions({...dimensions, [event.target.name]: event.target.value});
+        console.log(event.target.name);
     }
 
-    const changeHeight = (event) => {
-        setDimensions({...dimensions, height: event.target.value})
-    }
-    const changeObstacleType = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
+    const changeObstacle=(event)=>{
+        setObstacles((prevObstacles)=>prevObstacles.map((obstacle)=> obstacle.id == event.target.id.split("obst")[1]?{
             ...obstacle,
-            type: event.target.value
-        } : obstacle))
+            [event.target.name]: event.target.value
+            }:obstacle
+        ))
     }
     const changeObstacleLength = (event) => {
         setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
@@ -119,7 +115,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                                  onChange={changeLength} />
+                                                  name="length" onChange={changeDim} />
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -129,7 +125,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                                  onChange={changeWidth} />
+                                                  name={"width"} onChange={changeDim} />
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -139,7 +135,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                                  onChange={changeHeight} />
+                                                name={"height"}  onChange={changeDim} />
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -155,9 +151,9 @@ function Questionnaire_space() {
                                                            height={item.height}
                                                            changeLength={changeObstacleLength}
                                                            changeHeight={changeObstacleHeight}
-                                                           changeWidth={changeObstacleWidth}
+                                                           changeWidth={changeObstacle}
                                                            key={"obst" + item.id}
-                                                           changeType={changeObstacleType}
+                                                           changeType={changeObstacle}
                                                            deleteObst={deleteObstacle}/>))}
                 </div>
             </Form.Group>

@@ -25,6 +25,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
     };
 
     console.log(obstId);
+    console.log(type)
     return (
         <div className="obstruction-bg m5">
             <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
@@ -33,7 +34,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
             </Button>
             <div className="m5" hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
+                    <Form.Select name="type" id={"type"+obstId} value={ type ?? t('obstructions.type')} onChange={(e)=>{changeType(e)}}>
                         <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
@@ -53,7 +54,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.length')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"length"+obstId} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
+                                    <Form.Control type="number" name={"length"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -62,7 +63,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.width')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"width"+obstId} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
+                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
 
                                 </FloatingLabel>
                             </Col>
@@ -72,7 +73,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.height')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"height"+obstId} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
+                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>
