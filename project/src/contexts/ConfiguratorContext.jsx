@@ -7,21 +7,16 @@ export const ConfiguratorContext = createContext(null);
 export const ConfiguratorProvider = ({ children }) => {
 
     const [dimensions, setDimensions] = useState({ length: 6, width: 8, height: 2.5 });
-    const [color, setColor] = useState("#FFFFFF");
-    const [material, setMaterial] = useState("birch");
-    const [layout, setLayout] = useState("")
+
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, desk: false, storagespace: false })
+    const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birck", layout:""})
     const [obstacles, setObstacles] = useState([]);
 
     const value = {
         dimensions,
         setDimensions,
-        color,
-        setColor,
-        material,
-        setMaterial,
-        layout,
-        setLayout,
+        specs,
+        setSpecs,
         functionalities,
         setFunctionalities,
         obstacles,

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+function Obstruction({deleteObst, changeObst, type, obstId, length, width, height}) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -14,8 +14,6 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
-
-    const lng = navigator.language;
 
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
@@ -34,7 +32,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
             </Button>
             <div className="m5" hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type"+obstId} value={ type ?? t('obstructions.type')} onChange={(e)=>{changeType(e)}}>
+                    <Form.Select name="type" id={"type"+obstId} value={ type ?? t('obstructions.type')} onChange={(e)=>{changeObst(e)}}>
                         <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
@@ -54,7 +52,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.length')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"length"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeLength(e)}/>
+                                    <Form.Control type="number" name={"length"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeObst(e)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -63,7 +61,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.width')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeWidth(e)}/>
+                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeObst(e)}/>
 
                                 </FloatingLabel>
                             </Col>
@@ -73,7 +71,7 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
                                     label={t('questionnaire_space.height')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeHeight(e)}/>
+                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeObst(e)}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>

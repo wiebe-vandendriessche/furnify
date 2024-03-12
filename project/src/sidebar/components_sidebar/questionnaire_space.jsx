@@ -36,24 +36,6 @@ function Questionnaire_space() {
             }:obstacle
         ))
     }
-    const changeObstacleLength = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
-            ...obstacle,
-            obstLength: event.target.value
-        } : obstacle))
-    }
-    const changeObstacleWidth = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
-            ...obstacle,
-            width: event.target.value
-        } : obstacle))
-    }
-    const changeObstacleHeight = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
-            ...obstacle,
-            height: event.target.value
-        } : obstacle))
-    }
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
@@ -149,11 +131,8 @@ function Questionnaire_space() {
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                            length={item.obstLength} width={item.width}
                                                            height={item.height}
-                                                           changeLength={changeObstacleLength}
-                                                           changeHeight={changeObstacleHeight}
-                                                           changeWidth={changeObstacle}
+                                                           changeObst={changeObstacle}
                                                            key={"obst" + item.id}
-                                                           changeType={changeObstacle}
                                                            deleteObst={deleteObstacle}/>))}
                 </div>
             </Form.Group>
