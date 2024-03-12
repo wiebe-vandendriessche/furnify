@@ -26,7 +26,6 @@ function Questionnaire_space() {
     //Changes value of context
     const changeWidth = (event) => {
         setDimensions({...dimensions, width: event.target.value});
-        console.log("d: ", dimensions);
     }
     const changeLength = (event) => {
         setDimensions({...dimensions, length: event.target.value})
