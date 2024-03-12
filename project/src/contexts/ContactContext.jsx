@@ -1,7 +1,7 @@
+import React from 'react'
 import { createContext, useContext, useState } from 'react';
 
 export const ContactContext = createContext(null);
-export const VariaContext = createContext(null)
 
 // eslint-disable-next-line react/prop-types
 export const ContactProvider = ({ children }) => {
@@ -29,31 +29,6 @@ export const ContactProvider = ({ children }) => {
     )
 }
 
-// eslint-disable-next-line react/prop-types
-export const VariaProvider = ({ children }) => {
-    const [requirements, setRequirements] = useState("");
-    const [mattress, setMattress] = useState("");
-    const [room, setRoom] = useState("");
-    return (
-        <VariaContext.Provider value={{
-            requirements,
-            setRequirements,
-            mattress,
-            setMattress,
-            room,
-            setRoom
-        }}>
-            {children}
-
-        </VariaContext.Provider>
-    )
-
-}
-
-
 export const useContactContext = () => {
     return useContext(ContactContext);
-}
-export const useVariaContext = () => {
-    return useContext(VariaContext);
 }

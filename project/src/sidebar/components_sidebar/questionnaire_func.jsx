@@ -1,6 +1,6 @@
 import "../../App.css"
 import "./questionnaire.css"
-import {useVariaContext} from "../../contexts/MyContext.jsx";
+import {useVariaContext} from "../../contexts/VariaContext.jsx";
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
