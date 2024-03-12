@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDimensions } from './contexts/DimensionContext';
 import { Canvas } from '@react-three/fiber';
 import { useState } from 'react'
 import { OrbitControls, Sky, Stars } from '@react-three/drei'
@@ -11,8 +10,7 @@ import { useConfiguratorContext } from '../contexts/MyContext.jsx';
 
 
 const Scene = () => {
-    // const { width, height, depth } = useDimensions();
-    const { dimensions, setDimensions} = useConfiguratorContext();
+    const { dimensions } = useConfiguratorContext();
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
