@@ -123,9 +123,9 @@ i18n
                     questionnaire_func: {
                         q_space:"Welke woonruimte wenst u te optimaliseren?",
                         space:{
-                            guest_room:"Guest room",
-                            living_room:"Living room",
-                            bedroom:"Bedroom",
+                            guest_room:"Logeerkamer",
+                            living_room:"Woonkamer",
+                            bedroom:"Slaapkamer",
                         },
                         q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
                         functions:{
