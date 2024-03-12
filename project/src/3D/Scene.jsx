@@ -14,7 +14,6 @@ const Scene = () => {
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
-    console.log("f: ", dimensions);
     return (
         <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />

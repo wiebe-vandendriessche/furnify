@@ -21,7 +21,6 @@ function App() {
   const lng = navigator.language;
 
   return (
-    <ConfiguratorProvider>
       <div className="App">
         <Sidebar />
         <main>
@@ -30,7 +29,6 @@ function App() {
           </div>
         </main>
       </div>
-    </ConfiguratorProvider>
   )
     ;
 }
