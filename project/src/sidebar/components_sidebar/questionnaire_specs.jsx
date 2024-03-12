@@ -1,6 +1,7 @@
 import "../../App.css"
 import "./questionnaire.css"
-import {useConfiguratorContext, useVariaContext} from "../../contexts/MyContext.jsx";
+import {useVariaContext} from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
 import Form from "react-bootstrap/Form";
