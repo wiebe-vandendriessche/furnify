@@ -30,6 +30,10 @@ function Questionnaire_space() {
     }
 
     const changeObstacle=(event)=>{
+        console.log(event)
+        console.log(event.target)
+        console.log(event.target.name);
+        console.log(event.target.value)
         setObstacles((prevObstacles)=>prevObstacles.map((obstacle)=> obstacle.id == event.target.id.split("obst")[1]?{
             ...obstacle,
             [event.target.name]: event.target.value
@@ -131,8 +135,8 @@ function Questionnaire_space() {
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                            length={item.obstLength} width={item.width}
                                                            height={item.height}
-                                                           changeObst={changeObstacle}
                                                            key={"obst" + item.id}
+                                                           changeObst={changeObstacle}
                                                            deleteObst={deleteObstacle}/>))}
                 </div>
             </Form.Group>

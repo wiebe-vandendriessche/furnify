@@ -52,7 +52,7 @@ function Obstruction({deleteObst, changeObst, type, obstId, length, width, heigh
                                     label={t('questionnaire_space.length')}
                                     className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"length"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeObst(e)}/>
+                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeObst(e)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
