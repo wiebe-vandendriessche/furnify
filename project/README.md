@@ -26,19 +26,25 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 (nog niet kunnen deployen wegens fout nginx en apache)
 (wel mogelijk developer omgeving te runnen op de linux server dankzij vite op poort 8080-> http://157.193.171.41:8080/ werkt enkel als npm run dev code runt op terminal van de linux server)
 
-start dev server:
+**start dev server:**
 ```bash
 npm run dev
 ```
-installeer node packages:
+**installeer node packages**:
 ```bash
 npm install
 ```
-build for production:
+**build for production**:
 ```bash
 npm run build
 ```
-locally preview production build:
+in de root voer deze commando's uit:
+```bash
+sudo rm -rf /var/www/html/*
+
+sudo cp -r furnify2/project/dist/* /var/www/html
+```
+**locally preview production build**:
 ```bash
 npm run preview
 ```
