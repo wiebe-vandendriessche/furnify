@@ -1,7 +1,7 @@
 import "../../App.css"
 import {useEffect, useState} from "react";
 import "./questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/MyContext.jsx";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import Obstruction from "./obstruction";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

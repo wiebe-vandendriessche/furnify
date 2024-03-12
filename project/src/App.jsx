@@ -6,7 +6,7 @@ import './App.css'
 import Sidebar from './sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
 import Scene from './3D/Scene'
-import { ConfiguratorProvider } from './contexts/MyContext'
+import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
 
 
 function App() {

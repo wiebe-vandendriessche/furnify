@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
-import { useConfiguratorContext } from '../contexts/MyContext.jsx';
+import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
 
 
 
