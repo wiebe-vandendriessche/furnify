@@ -34,7 +34,7 @@ export const Wall = ({ width, height, depth, position, visible }) => {
         texture.needsUpdate = true;
       }
     });
-  }, [wallTexture]);
+  }, [width, depth]);
 
   return (
     <ColoredBox

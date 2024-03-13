@@ -37,7 +37,7 @@ export const Floor = ({ width, height, depth, position }) => {
                 texture.needsUpdate = true;
             }
         });
-    }, [floorTexture]);
+    }, [width, depth]);
 
     return (
         <ColoredBox
