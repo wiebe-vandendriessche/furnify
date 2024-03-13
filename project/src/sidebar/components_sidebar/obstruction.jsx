@@ -1,12 +1,12 @@
 import {useState, useEffect} from "react";
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import Form from "react-bootstrap/Form";
 import {Col, FloatingLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useTranslation} from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
+export function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height}) {
     //i18n
     const { t, i18n } = useTranslation();
 

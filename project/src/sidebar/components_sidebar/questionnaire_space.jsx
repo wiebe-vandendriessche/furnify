@@ -1,8 +1,8 @@
 import "../../App.css"
 import {useEffect, useState} from "react";
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
-import Obstruction from "./obstruction";
+import Obstruction from "./Obstruction.jsx";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next'
 import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
 
 
-function Questionnaire_space() {
+export function Questionnaire_space() {
     //i18n
     const {t, i18n} = useTranslation();
     const [stateId, setStateId] = useState(1);
