@@ -6,6 +6,8 @@ import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
 import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
 import { Tv_wand } from './models/Tv_wand.jsx';
+import { Bed } from './models/Bed.jsx';
+import { Bed_assembly } from './models/Bed_assembly.jsx';
 
 
 const Scene = () => {
@@ -17,7 +19,7 @@ const Scene = () => {
         <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
             <directionalLight position={[-10, 6, -8]} />
-            <Tv_wand />
+            <Bed_assembly />
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3}/>
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
