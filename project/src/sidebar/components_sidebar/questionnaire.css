@@ -2,6 +2,10 @@
     margin: 5px;
 }
 
+.m15{
+    margin: 15px;
+}
+
 .obstruction-bg{
     background-color: #dc3545;
     border-radius: 4px;

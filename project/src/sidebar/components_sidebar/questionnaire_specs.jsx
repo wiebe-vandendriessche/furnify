@@ -27,8 +27,6 @@ function Questionnaire_spec() {
         setVaria({[event.target.name]: event.target.value});
     }
     return (
-
-
         <div className="m5">
             <Form>
                 <div className="m5">

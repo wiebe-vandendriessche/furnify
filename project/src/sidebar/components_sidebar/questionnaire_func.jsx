@@ -70,32 +70,35 @@ function Questionnaire_functional() {
                                               checked={value}>{t('questionnaire_func.functions.' + key)}</ToggleButton>
                             ))}
                         </div>
-                        <Collapse in={functionalities.bed}>
-                            <div className="mb-3 m5">
-                                <ButtonGroup defaultValue={varia.mattress ?? " "}>
-                                    <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
-                                                  onChange={changeVaria}
-                                                  checked={"soft" == varia.mattress}>
-                                        {t('questionnaire_func.bed.soft')}
-                                    </ToggleButton>
-                                    <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
-                                                  onChange={changeVaria}
-                                                  checked={"medium" == varia.mattress}>
-                                        {t('questionnaire_func.bed.medium')}
-                                    </ToggleButton>
-                                    <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress"
-                                                  onChange={changeVaria}
-                                                  checked={"hard" == varia.mattress}>
-                                        {t('questionnaire_func.bed.sturdy')}
-                                    </ToggleButton>
-                                    <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
-                                                  onChange={changeVaria}
-                                                  checked={" " == varia.mattress}>
-                                        {t('questionnaire_func.bed.apply')}
-                                    </ToggleButton>
-                                </ButtonGroup>
-                            </div>
-                        </Collapse>
+                        <div className={"m15"}>
+                            <Collapse in={functionalities.bed}>
+                                <div className="mb-3 m5">
+                                    <ButtonGroup defaultValue={varia.mattress ?? " "}>
+                                        <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"soft" == varia.mattress}>
+                                            {t('questionnaire_func.bed.soft')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"medium" == varia.mattress}>
+                                            {t('questionnaire_func.bed.medium')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"hard" == varia.mattress}>
+                                            {t('questionnaire_func.bed.sturdy')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={" " == varia.mattress}>
+                                            {t('questionnaire_func.bed.apply')}
+                                        </ToggleButton>
+                                    </ButtonGroup>
+                                </div>
+                            </Collapse>
+                        </div>
+
                     </Form.Group>
                 </div>
             </Form>
