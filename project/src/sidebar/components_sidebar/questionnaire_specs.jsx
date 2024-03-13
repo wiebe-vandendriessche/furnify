@@ -1,5 +1,5 @@
 import "../../App.css"
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import {useVariaContext} from "../../contexts/VariaContext.jsx";
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import {FormGroup, FormLabel, ToggleButton,ButtonGroup} from "react-bootstrap";
 
 
-function Questionnaire_spec() {
+export function Questionnaire_spec() {
     const {t, i18n} = useTranslation();
 
     useEffect(() => {

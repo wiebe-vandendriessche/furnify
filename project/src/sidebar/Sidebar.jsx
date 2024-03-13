@@ -2,16 +2,16 @@ import "./Sidebar.css"
 import {useState} from "react";
 import {IconContext} from "react-icons"
 import {FaAnglesRight, FaAnglesLeft} from "react-icons/fa6"
-import Questionnaire_func from "./components_sidebar/questionnaire_func.jsx";
-import Contact from "./components_sidebar/contact";
+import Questionnaire_func from "./components_sidebar/Questionnaire_func.jsx";
+import Contact from "./components_sidebar/Contact";
 import logo from "../assets/logo_lm.png";
 import logo_dm from "../assets/logo_dm.png";
-import Questionnaire_space from "./components_sidebar/questionnaire_space";
-import Questionnaire_specs from "./components_sidebar/questionnaire_specs";
+import Questionnaire_space from "./components_sidebar/Questionnaire_space";
+import Questionnaire_specs from "./components_sidebar/Questionnaire_specs";
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
 
 
-function Sidebar() {
+export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const showSidebar = () => {
