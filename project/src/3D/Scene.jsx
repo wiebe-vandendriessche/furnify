@@ -5,6 +5,7 @@ import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
 import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
+import { Model } from './models/Tv_wand.jsx';
 
 
 
@@ -18,6 +19,7 @@ const Scene = () => {
         <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
             <directionalLight position={[-10, 6, -8]} />
+            <Model />
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3}/>
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
