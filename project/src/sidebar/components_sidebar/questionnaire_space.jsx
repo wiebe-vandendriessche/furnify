@@ -64,21 +64,21 @@ function Questionnaire_space() {
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
     const [open, setOpen] = useState(false);
-    const addObstacles = () => {
+    const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
-            console.log("hier")
+            console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
             setObstacles([...obstacles, {
-                type: t('obstructions.type'),
+                type: event.currentTarget.getAttribute("value"),
                 width: 0,
                 height: 0,
                 obstLength: 0,
                 id: stateId
             }]);
         } else {
-
-            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, obstLength: 0, id: stateId}]);
+            console.log("value: " + event.currentTarget.getAttribute("value"))
+            setObstacles([{type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId}]);
         }
         console.log(stateId)
     }
@@ -148,7 +148,9 @@ function Questionnaire_space() {
             </Form.Group>
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
-                <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
+                <input type="button" onClick={addObstacles} variant="danger" value= "raam"/>
+                <input type="button" onClick={addObstacles} variant="danger" value= "deur"/>
+                <input type="button" onClick={addObstacles} variant="danger" value= "anders"/>
                 <div className="m5">
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                            length={item.obstLength} width={item.width}
