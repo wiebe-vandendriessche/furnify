@@ -1,5 +1,5 @@
 import "../../App.css"
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import {useVariaContext} from "../../contexts/VariaContext.jsx";
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
@@ -7,7 +7,7 @@ import {useEffect} from 'react'
 import {ToggleButton, Collapse, ButtonGroup, Form} from "react-bootstrap";
 import {matchRoutes} from "react-router-dom";
 
-function Questionnaire_functional() {
+export function Questionnaire_functional() {
     const {t, i18n} = useTranslation();
 
     useEffect(() => {
