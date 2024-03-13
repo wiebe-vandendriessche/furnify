@@ -13,6 +13,7 @@
     "@popperjs/core": "^2.11.8",
     "@react-three/drei": "^9.99.0",
     "@react-three/fiber": "^8.15.16",
+    "@use-gesture/react": "^10.3.0",
     "bootstrap": "^5.3.3",
     "i18next": "^23.10.0",
     "i18next-browser-languagedetector": "^7.2.0",
