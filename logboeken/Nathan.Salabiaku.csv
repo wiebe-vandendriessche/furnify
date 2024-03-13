@@ -23,3 +23,6 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 10/03/24,18:00,23:00,extern,verslag,47
 11/03/24,18:00,19:00,extern,verslag,47
 11/03/24,20:00,22:00,extern,verslag,47
+12/03/24,14:30,16:30,contacturen,gesprek met klant
+12/03/24,22:00,23:00,extern,remove duplicated code,65
+13/03/24,13:00,16:00,contacturen,issues fixen
