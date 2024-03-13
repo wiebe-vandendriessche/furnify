@@ -11,14 +11,12 @@ import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
 
 function App() {
 
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const lng = navigator.language;
     i18n.changeLanguage(lng);
   }, [])
-
-  const lng = navigator.language;
 
   return (
       <div className="App">

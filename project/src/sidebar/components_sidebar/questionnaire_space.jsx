@@ -24,20 +24,20 @@ function Questionnaire_space() {
     //Uses reactcontext
     const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
     //Changes values of dimensions in context
-    const changeDim=(event)=>{
+    const changeDim = (event) => {
         setDimensions({...dimensions, [event.target.name]: event.target.value});
         console.log(event.target.name);
     }
 
-    const changeObstacle=(event)=>{
+    const changeObstacle = (event) => {
         console.log(event)
         console.log(event.target)
         console.log(event.target.name);
         console.log(event.target.value)
-        setObstacles((prevObstacles)=>prevObstacles.map((obstacle)=> obstacle.id == event.target.id.split("obst")[1]?{
-            ...obstacle,
-            [event.target.name]: event.target.value
-            }:obstacle
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } : obstacle
         ))
     }
     const deleteObstacle = (event) => {
@@ -94,36 +94,21 @@ function Questionnaire_space() {
                 <Collapse in={open}>
                     <div className="m5">
                         <Row>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularLength"
-                                    label={t('questionnaire_space.length')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                                  name="length" onChange={changeDim} />
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularWidth"
-                                    label={t('questionnaire_space.width')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                                  name={"width"} onChange={changeDim} />
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularHeight"
-                                    label={t('questionnaire_space.height')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                                name={"height"}  onChange={changeDim} />
-                                </FloatingLabel>
-                            </Col>
+                            {Object.entries(dimensions).map(([key, value]) => (
+                                    <Col key={key}>
+                                        <FloatingLabel
+                                            controlId={"rectangular"+key}
+                                            label={t('questionnaire_space.'+key)}
+                                            className="mb-4"
+                                        >
+                                            <Form.Control type="number" min={0} step={0.1} value={value}
+                                                          size="sm"
+                                                          name={key} onChange={changeDim}/>
+                                        </FloatingLabel>
+                                    </Col>
+                                )
+                            )}
+
                         </Row>
                     </div>
                 </Collapse>
