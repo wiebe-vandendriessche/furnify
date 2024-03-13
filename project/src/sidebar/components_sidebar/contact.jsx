@@ -26,21 +26,25 @@ function Contact() {
 
     return (
 
-        <div className="m5">
-            <h2>
-                {t('contact.q_contact')}
-            </h2>
+        <div className={"m-2"}>
+            <div className={"mb-3"}>
+                <h5>
+                    {t('contact.q_contact')}
+                </h5>
+            </div>
             <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phoneNumber' ? (<FloatingLabel key={key}
-                                                           controlId="floatingInput"
-                                                           label={t(key)}>
+                                                            className={"mb-2"}
+                                                            controlId="floatingInput"
+                                                            label={t(key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (
                         <FloatingLabel key={key}
-                            controlId="floatingInput"
-                            label="">
+                                       controlId="floatingInput"
+                                       className={"mb-2"}
+                                       label="">
                             <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true}
                                         searchPlaceholder={""}
                                         disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"

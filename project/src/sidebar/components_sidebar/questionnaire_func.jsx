@@ -34,70 +34,78 @@ function Questionnaire_functional() {
 
     return (
 
-        <div className="mb-3 m5">
+        <div className="m-2">
             <Form>
-                <div className="m5">
+                <div className="mb-4">
                     <Form.Group>
-                        <Form.Label>{t('questionnaire_func.q_space')}</Form.Label>
-                        <ButtonGroup>
-                            {space.map((space) => (
-                                <ToggleButton
-                                    key={space.id}
-                                    id={space.id}
-                                    name={"room"}
-                                    type="radio"
-                                    variant="danger"
-                                    value={space.name}
-                                    onChange={changeVaria}
-                                    checked={varia.room == space.id}>
-                                    {space.name}
-                                </ToggleButton>
-                            ))}
-                        </ButtonGroup>
+                        <div className={"mb-3"}>
+                            <h5>{t('questionnaire_func.q_space')}</h5>
+                        </div>
+                        <div className={"m-1"}>
+                            <ButtonGroup>
+                                {space.map((space) => (
+                                    <ToggleButton
+                                        key={space.id}
+                                        id={space.id}
+                                        name={"room"}
+                                        type="radio"
+                                        variant="danger"
+                                        value={space.name}
+                                        onChange={changeVaria}
+                                        checked={varia.room == space.id}>
+                                        {space.name}
+                                    </ToggleButton>
+                                ))}
+                            </ButtonGroup>
+                        </div>
                     </Form.Group>
                 </div>
 
-                <div className="m5">
+                <div className={"mb-3"}>
                     <Form.Group>
-                        <Form.Label>
-                            {t('questionnaire_func.q_function')}
-                        </Form.Label>
-                        <div className={"flex m5"}>
-                            {Object.entries(functionalities).map(([key, value]) => (
-                                <ToggleButton key={key} className={"tbtn"} type="checkbox" variant={"outline-danger"}
-                                              id={key}
-                                              onChange={changeFunctionalities}
-                                              checked={value}>{t('questionnaire_func.functions.' + key)}</ToggleButton>
-                            ))}
+                        <div className={"mb-3"}>
+                            <h5>{t('questionnaire_func.q_function')}</h5>
                         </div>
-                        <div className={"m15"}>
-                            <Collapse in={functionalities.bed}>
-                                <div className="mb-3 m5">
-                                    <ButtonGroup defaultValue={varia.mattress ?? " "}>
-                                        <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
-                                                      onChange={changeVaria}
-                                                      checked={"soft" == varia.mattress}>
-                                            {t('questionnaire_func.bed.soft')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
-                                                      onChange={changeVaria}
-                                                      checked={"medium" == varia.mattress}>
-                                            {t('questionnaire_func.bed.medium')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress"
-                                                      onChange={changeVaria}
-                                                      checked={"hard" == varia.mattress}>
-                                            {t('questionnaire_func.bed.sturdy')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
-                                                      onChange={changeVaria}
-                                                      checked={" " == varia.mattress}>
-                                            {t('questionnaire_func.bed.apply')}
-                                        </ToggleButton>
-                                    </ButtonGroup>
-                                </div>
-                            </Collapse>
+                        <div className={"m-1"}>
+                            <div className={"flex"}>
+                                {Object.entries(functionalities).map(([key, value]) => (
+                                    <ToggleButton key={key} className={"tbtn"} type="checkbox"
+                                                  variant={"outline-danger"}
+                                                  id={key}
+                                                  onChange={changeFunctionalities}
+                                                  checked={value}>{t('questionnaire_func.functions.' + key)}</ToggleButton>
+                                ))}
+                            </div>
+                            <div className={"m-1"}>
+                                <Collapse in={functionalities.bed}>
+                                    <div className="mb-3">
+                                        <ButtonGroup defaultValue={varia.mattress ?? " "}>
+                                            <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
+                                                          onChange={changeVaria}
+                                                          checked={"soft" == varia.mattress}>
+                                                {t('questionnaire_func.bed.soft')}
+                                            </ToggleButton>
+                                            <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
+                                                          onChange={changeVaria}
+                                                          checked={"medium" == varia.mattress}>
+                                                {t('questionnaire_func.bed.medium')}
+                                            </ToggleButton>
+                                            <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress"
+                                                          onChange={changeVaria}
+                                                          checked={"hard" == varia.mattress}>
+                                                {t('questionnaire_func.bed.sturdy')}
+                                            </ToggleButton>
+                                            <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
+                                                          onChange={changeVaria}
+                                                          checked={" " == varia.mattress}>
+                                                {t('questionnaire_func.bed.apply')}
+                                            </ToggleButton>
+                                        </ButtonGroup>
+                                    </div>
+                                </Collapse>
+                            </div>
                         </div>
+
 
                     </Form.Group>
                 </div>
