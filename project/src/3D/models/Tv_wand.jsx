@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 tv_wand.gltf
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function Model(props) {
+export function Tv_wand(props) {
   const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
   return (
     <group {...props} dispose={null}>
