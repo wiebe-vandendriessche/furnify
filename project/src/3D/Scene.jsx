@@ -19,7 +19,7 @@ const Scene = () => {
         <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
             <directionalLight position={[-10, 6, -8]} />
-            <Bed_assembly />
+            <Tv_wand />
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3}/>
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
