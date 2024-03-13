@@ -34,7 +34,6 @@ function Obstruction({deleteObst, changeLength, changeHeight, changeWidth, chang
             <div className="m5" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type"+obstId} onChange={(e)=>{changeType(e)}}>
-                        <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
                         <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>

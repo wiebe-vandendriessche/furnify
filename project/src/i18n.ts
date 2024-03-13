@@ -34,7 +34,6 @@ i18n
                         add_aspect: "Add aspect"
                     },
                     obstructions: {
-                        type:"Type",
                         window:"Window",
                         door:"Door",
                         radiator:"Radiator",
@@ -111,7 +110,7 @@ i18n
                         add_aspect: "Voeg een aspect toe"
                     },
                     obstructions: {
-                        type:"Type",
+
                         window:"Raam",
                         door:"Deur",
                         radiator:"Radiator",
@@ -188,7 +187,6 @@ i18n
                         add_aspect: "Ajouter un aspect"
                     },
                     obstructions: {
-                        type:"Type",
                         window:"Fenêtre",
                         door:"Porte",
                         radiator:"Radiateur",
@@ -265,7 +263,6 @@ i18n
                         add_aspect: "Aspekt hinzufügen"
                     },
                     obstructions: {
-                        type:"Typ",
                         window: "Fenster",
                         door: "Tür",
                         radiator: "Heizkörper",
@@ -342,7 +339,6 @@ i18n
                         add_aspect: "Agregar aspecto"
                     },
                     obstructions: {
-                        type:"Tipo",
                         window: "Ventana",
                         door: "Puerta",
                         radiator: "Radiador",
@@ -419,7 +415,6 @@ i18n
                         add_aspect: "Aggiungi aspetto"
                     },
                     obstructions: {
-                        type:"Tipo",
                         window: "Finestra",
                         door: "Porta",
                         radiator: "Termosifone",

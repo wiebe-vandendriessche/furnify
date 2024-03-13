@@ -148,9 +148,9 @@ function Questionnaire_space() {
             </Form.Group>
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
-                <input type="button" onClick={addObstacles} variant="danger" value= "raam"/>
-                <input type="button" onClick={addObstacles} variant="danger" value= "deur"/>
-                <input type="button" onClick={addObstacles} variant="danger" value= "anders"/>
+                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.window')}/>
+                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.door')}/>
+                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.other')}/>
                 <div className="m5">
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                            length={item.obstLength} width={item.width}
