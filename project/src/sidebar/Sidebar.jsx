@@ -53,7 +53,7 @@ function Sidebar() {
 
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
 
-                    <div className="overflow-auto">
+                    <div className="overflow-y">
                         <a id="a" href={"https://www.furnifyhome.eu/"}>
                             <picture>
                                 <source srcSet={logo_dm} media="(prefers-color-scheme: dark)"/>
