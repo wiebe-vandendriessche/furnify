@@ -43,17 +43,34 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
         setInsideRight(false)
         setOutside(true)
     }
-
+    const [hideDoor, setHideDoor] = useState(true);
+    const showExtraQuestion = (event) => {
+        showWichQuestion(event.target.value)
+    }
+    const showWichQuestion = (value) => {
+        setHideDoor(true)
+        if (value == t('obstructions.door')) {
+            setHideDoor(false)
+            console.log("in if")
+        }
+    }
     
+
+
     return (
         <div className="obstruction-bg m5">
-            <input type="button" id={"button" + obstId} value={type ?? t('obstructions.type')} onClick={showButton} />
+            <input type="button" id={"button" + obstId} value={type ?? t('obstructions.type')} onClick={ (e) =>{
+                showButton()
+                showExtraQuestion(e)}} />
             <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete" + obstId} onClick={(e) => deleteObst(e)}>
                 x
             </Button>
             <div className="m5" hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type" + obstId} onChange={(e) => { changeType(e) }}>
+                    <Form.Select name="type" id={"type" + obstId} onChange={(e) => {
+                        changeType(e)
+                        showExtraQuestion(e)
+                    }}>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
                         <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>
@@ -97,7 +114,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                         </Row>
                     </div>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group hidden={hideDoor}>
                     <Form.Label>Hoe opent de deur?</Form.Label>
                     <div>
                         <ButtonGroup>
