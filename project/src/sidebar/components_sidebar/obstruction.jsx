@@ -24,44 +24,52 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
         setShow1(!showButton1)
     };
 
-    const [insideLeft, setInsideLeft] = useState(false);
-    const [insideRight, setInsideRight] = useState(false);
-    const [outside, setOutside] = useState(false);
+    const [insideLeftDoor, setInsideLeftDoor] = useState(false);
+    const [insideRightDoor, setInsideRightDoor] = useState(false);
+    const [outsideDoor, setOutsideDoor] = useState(false);
 
-    const changeInsideLeft = () => {
-        setInsideLeft(true)
-        setInsideRight(false)
-        setOutside(false)
+    const changeInsideLeftDoor = () => {
+        setInsideLeftDoor(true)
+        setInsideRightDoor(false)
+        setOutsideDoor(false)
     }
-    const changeInsideRight = () => {
-        setInsideLeft(false)
-        setInsideRight(true)
-        setOutside(false)
+    const changeInsideRightDoor = () => {
+        setInsideLeftDoor(false)
+        setInsideRightDoor(true)
+        setOutsideDoor(false)
     }
-    const changeOutside = () => {
-        setInsideLeft(false)
-        setInsideRight(false)
-        setOutside(true)
+    const changeOutsideDoor = () => {
+        setInsideLeftDoor(false)
+        setInsideRightDoor(false)
+        setOutsideDoor(true)
     }
     const [hideDoor, setHideDoor] = useState(true);
+    const [hideWindow, setHideWindow] = useState(true);
     const showExtraQuestion = (event) => {
         showWichQuestion(event.target.value)
     }
     const showWichQuestion = (value) => {
         setHideDoor(true)
+        setHideWindow(true)
         if (value == t('obstructions.door')) {
             setHideDoor(false)
-            console.log("in if")
+        }
+        else if(value == t('obstructions.window')){
+            setHideWindow(false)
         }
     }
-    
+
+    const [insideWindow, setinsideWindow] = useState(true);
+
+   
 
 
     return (
         <div className="obstruction-bg m5">
-            <input type="button" id={"button" + obstId} value={type ?? t('obstructions.type')} onClick={ (e) =>{
+            <input type="button" id={"button" + obstId} value={type ?? t('obstructions.other')} onClick={(e) => {
                 showButton()
-                showExtraQuestion(e)}} />
+                showExtraQuestion(e)
+            }} />
             <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete" + obstId} onClick={(e) => deleteObst(e)}>
                 x
             </Button>
@@ -71,13 +79,14 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                         changeType(e)
                         showExtraQuestion(e)
                     }}>
+                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
                         <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>
                         <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>
                         <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>
                         <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>
-                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>
+                        
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
@@ -119,34 +128,47 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                     <div>
                         <ButtonGroup>
                             <ToggleButton
-                                onClick={changeInsideLeft}
+                                onClick={changeInsideLeftDoor}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
-                                checked={insideLeft}
+                                checked={insideLeftDoor}
                             >
                                 Naar binnen, links in de ruimte
                             </ToggleButton>
                             <ToggleButton
-                                onClick={changeInsideRight}
+                                onClick={changeInsideRightDoor}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
-                                checked={insideRight}
+                                checked={insideRightDoor}
                             >
                                 Naar binnen, rechts in de ruimte
                             </ToggleButton>
                             <ToggleButton
-                                onClick={changeOutside}
+                                onClick={changeOutsideDoor}
                                 type="radio"
                                 value="Other"
                                 variant="danger"
-                                checked={outside}>
+                                checked={outsideDoor}>
                                 Naar buiten
                             </ToggleButton>
                         </ButtonGroup>
                     </div>
                 </Form.Group>
+                <Form.Group hidden={hideWindow}>
+                    <Form.Label>Kan het raam naar binnen openen?</Form.Label>
+                    <div>
+                        <ButtonGroup>
+                            <ToggleButton className={"wo"} type="radio" variant="danger" checked={insideWindow} onClick={() => setinsideWindow(!insideWindow)}
+                            >ja </ToggleButton>
+                            <ToggleButton className={"wo"} type="radio" variant="danger"checked={!insideWindow} onClick={() => setinsideWindow(!insideWindow)}
+                            >nee</ToggleButton>
+                            
+                        </ButtonGroup>
+                    </div>
+                </Form.Group>
+
             </div>
         </div>
     )
