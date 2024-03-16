@@ -40,7 +40,18 @@ i18n
                         walloutlet:"Wall outlet",
                         switch:"Switch",
                         sloping_Wall:"Sloping wall",
-                        other:"Other"
+                        other:"Other",
+                        q_door:{
+                            opening_door:"How does the door open?",
+                            inside_left:"Inside the room, to the left",
+                            inside_right:"Inside the room, to the right",
+                            outside:"Outside the room"
+                        },
+                        q_window:{
+                            opening_window:"Can the window open to the inside?",
+                            yes:"yes",
+                            no:"no"
+                        }
                     },
                     questionnaire_func: {
                         q_space:"Which living space do you want to optimize?",
@@ -117,7 +128,18 @@ i18n
                         walloutlet:"Stopcontact",
                         switch:"Schakelaar",
                         sloping_Wall:"Schuine wand",
-                        other:"Andere"
+                        other:"Andere",
+                        q_door:{
+                            opening_door:"Hoe opent de deur?",
+                            inside_left:"Binnen in de ruimte, naar links",
+                            inside_right:"Binnen in de ruimte, naar rechts",
+                            outside:"Buiten de ruimte"
+                        },
+                        q_window:{
+                            opening_window:"Kan het raam naar binnen openen?",
+                            yes:"ja",
+                            no:"nee"
+                        }
                     },
                     questionnaire_func: {
                         q_space:"Welke woonruimte wenst u te optimaliseren?",
@@ -193,7 +215,18 @@ i18n
                         walloutlet:"Prise murale",
                         switch:"Interrupteur",
                         sloping_Wall:"Mur en pente",
-                        other:"Autre"
+                        other:"Autre",
+                        q_door:{
+                            opening_door:"Comment s'ouvre la porte ?",
+                            inside_left:"A l'intérieur de la salle, à gauche",
+                            inside_right:"A l'intérieur de la salle, à droite",
+                            outside:"Espace extérieur"
+                        },
+                        q_window:{
+                            opening_window:"La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
+                            yes:"oui",
+                            no:"non"
+                        }
                     },
                     questionnaire_func: {
                         q_space:"Quel espace de vie souhaitez-vous optimiser?",
@@ -269,7 +302,18 @@ i18n
                         walloutlet: "Steckdose",
                         switch: "Schalter",
                         sloping_Wall: "Schräge Wand",
-                        other: "Andere"
+                        other: "Andere",
+                        q_door:{
+                            opening_door:"Wie wird die Tür geöffnet?",
+                            inside_left:"Im Inneren des Raums, links",
+                            inside_right:"Im Inneren des Raums, rechts",
+                            outside:"außerhalb des Raumes"
+                        },
+                        q_window:{
+                            opening_window:"Kann man das Fenster nach innen öffnen?",
+                            yes:"ja",
+                            no:"nein"
+                        }
                     },
                     questionnaire_func: {
                         q_space: "Welchen Wohnraum möchten Sie optimieren?",
@@ -345,7 +389,18 @@ i18n
                         walloutlet: "Enchufe de pared",
                         switch: "Interruptor",
                         sloping_Wall: "Pared inclinada",
-                        other: "Otro"
+                        other: "Otro",
+                        q_door:{
+                            opening_door:"cómo abrir la puerta",
+                            inside_left:"dentro de la habitación, a la izquierda",
+                            inside_right:"dentro de la habitación, a la derecha",
+                            outside:"espacio exterior"
+                        },
+                        q_window:{
+                            opening_window:"¿Puede abrirse la ventana hacia el interior?",
+                            yes:"si",
+                            no:"no"
+                        }
                     },
                     questionnaire_func: {
                         q_space: "¿Qué espacio habitable deseas optimizar?",
@@ -421,7 +476,18 @@ i18n
                         walloutlet: "Presa di corrente a parete",
                         switch: "Interruttore",
                         sloping_Wall: "Muro inclinato",
-                        other: "Altro"
+                        other: "Altro",
+                        q_door:{
+                            opening_door:"Come funziona l'impianto?",
+                            inside_left:"All'interno della stanza, a sinistra",
+                            inside_right:"All'interno della stanza, a destra",
+                            outside:"fuori dalla stanza"
+                        },
+                        q_window:{
+                            opening_window:"La finestra può aprirsi all'interno?",
+                            yes:"si",
+                            no:"no"
+                        }
                     },
                     questionnaire_func: {
                         q_space: "Quale spazio abitativo desideri ottimizzare?",

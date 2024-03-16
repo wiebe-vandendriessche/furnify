@@ -124,7 +124,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                     </div>
                 </Form.Group>
                 <Form.Group hidden={hideDoor}>
-                    <Form.Label>Hoe opent de deur?</Form.Label>
+                    <Form.Label> {t('obstructions.q_door.opening_door')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton
@@ -134,7 +134,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                                 variant="danger"
                                 checked={insideLeftDoor}
                             >
-                                Naar binnen, links in de ruimte
+                                {t('obstructions.q_door.inside_left')}
                             </ToggleButton>
                             <ToggleButton
                                 onClick={changeInsideRightDoor}
@@ -143,7 +143,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                                 variant="danger"
                                 checked={insideRightDoor}
                             >
-                                Naar binnen, rechts in de ruimte
+                                {t('obstructions.q_door.inside_right')}
                             </ToggleButton>
                             <ToggleButton
                                 onClick={changeOutsideDoor}
@@ -151,19 +151,19 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                                 value="Other"
                                 variant="danger"
                                 checked={outsideDoor}>
-                                Naar buiten
+                                {t('obstructions.q_door.outside')}
                             </ToggleButton>
                         </ButtonGroup>
                     </div>
                 </Form.Group>
                 <Form.Group hidden={hideWindow}>
-                    <Form.Label>Kan het raam naar binnen openen?</Form.Label>
+                    <Form.Label>{t('obstructions.q_window.opening_window')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton className={"wo"} type="radio" variant="danger" checked={insideWindow} onClick={() => setinsideWindow(!insideWindow)}
-                            >ja </ToggleButton>
+                            >{t('obstructions.q_window.yes')} </ToggleButton>
                             <ToggleButton className={"wo"} type="radio" variant="danger"checked={!insideWindow} onClick={() => setinsideWindow(!insideWindow)}
-                            >nee</ToggleButton>
+                            >{t('obstructions.q_window.no')}</ToggleButton>
                             
                         </ButtonGroup>
                     </div>
