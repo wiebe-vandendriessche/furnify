@@ -1,11 +1,10 @@
-image: cypress/base:10
-
 stages:
   - test
 
 test:
+  image: node:latest
   stage: test
   script:
     - cd "$CI_PROJECT_DIR/project"
-    - npm install
+    - npm ci
     - npm run testViewless
