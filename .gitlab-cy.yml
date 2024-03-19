@@ -1,5 +1,3 @@
-pipeline:
-
 image: cypress/base:10
 
 stages:
