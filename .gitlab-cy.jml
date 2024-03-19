@@ -1,0 +1,13 @@
+pipeline:
+
+image: cypress/base:10
+
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - cd "$CI_PROJECT_DIR/project"
+    - npm install
+    - npm run testViewless
