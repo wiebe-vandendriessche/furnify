@@ -8,7 +8,7 @@ import {useTranslation} from "react-i18next";
 // eslint-disable-next-line react/prop-types
 function Obstruction({deleteObst, changeObst, type, obstId, length, width, height}) {
     //i18n
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
 
     useEffect(() => {
         const lng = navigator.language;
@@ -25,14 +25,19 @@ function Obstruction({deleteObst, changeObst, type, obstId, length, width, heigh
     console.log(obstId);
     console.log(type)
     return (
-        <div className="obstruction-bg m5">
-            <input type="button" id={"button"+obstId} value={type ?? t('obstructions.type')} onClick={showButton}  />
-            <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete"+obstId} onClick={(e)=>deleteObst(e)}>
-                x
-            </Button>
-            <div className="m5" hidden={showButton2}>
+        <div className="obstruction-bg mb-2 flex">
+                <input type="button" id={"button" + obstId} value={type ?? t('obstructions.type')}
+                       onClick={showButton}/>
+                <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete" + obstId}
+                        onClick={(e) => deleteObst(e)}>
+                    x
+                </Button>
+            <div className="m-1" hidden={showButton2}>
                 <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type"+obstId} value={ type ?? t('obstructions.type')} onChange={(e)=>{changeObst(e)}}>
+                    <Form.Select name="type" id={"type" + obstId} value={type ?? t('obstructions.type')}
+                                 onChange={(e) => {
+                                     changeObst(e)
+                                 }}>
                         <option value={t('obstructions.type')}>{t('obstructions.type')}</option>
                         <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
                         <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
@@ -44,34 +49,34 @@ function Obstruction({deleteObst, changeObst, type, obstId, length, width, heigh
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
-                    <div className="m5">
+                    <div className="m-1">
                         <Row>
                             <Col>
                                 <FloatingLabel
-                                    controlId={"length"+obstId}
+                                    controlId={"length" + obstId}
                                     label={t('questionnaire_space.length')}
-                                    className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1} defaultValue={length} onChange={(e)=>changeObst(e)}/>
+                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
+                                                  defaultValue={length} onChange={(e) => changeObst(e)}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
                                 <FloatingLabel
-                                    controlId={"width"+obstId}
+                                    controlId={"width" + obstId}
                                     label={t('questionnaire_space.width')}
-                                    className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width} onChange={(e)=>changeObst(e)}/>
+                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                                  onChange={(e) => changeObst(e)}/>
 
                                 </FloatingLabel>
                             </Col>
                             <Col>
                                 <FloatingLabel
-                                    controlId={"height"+obstId}
+                                    controlId={"height" + obstId}
                                     label={t('questionnaire_space.height')}
-                                    className="mb-4"
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height} onChange={(e)=>changeObst(e)}/>
+                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                                  onChange={(e) => changeObst(e)}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>

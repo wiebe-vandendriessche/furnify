@@ -79,6 +79,14 @@ button:hover {
     -webkit-box-shadow: 0 0 0.5rem #e84646;
 }
 
+.form-control{
+    background-color: white;
+}
+
+.form-floating{
+    color: black;
+}
+
 
 /*general color change for dark and light mode */
 @media (prefers-color-scheme: light) {
@@ -99,6 +107,16 @@ button:hover {
         background-color: #e84646;
         color: #ffffff;
     }
+}
+
+.react-tel-input .form-control {
+    line-height: 25px;
+    height: 35px;
+    height: calc(3.5rem + calc(var(--bs-border-width)* 2));
+    min-height: calc(3.5rem + calc(var(--bs-border-width)* 2));
+    line-height: 1.25;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {

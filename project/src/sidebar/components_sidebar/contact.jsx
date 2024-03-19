@@ -1,4 +1,5 @@
 import "../../App.css"
+import "./questionnaire.css"
 import {useContactContext} from "../../contexts/ContactContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
@@ -41,15 +42,12 @@ function Contact() {
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (
-                        <FloatingLabel key={key}
-                                       controlId="floatingInput"
-                                       className={"mb-2"}
-                                       label="">
-                            <PhoneInput country={'be'} onlyCountries={["be", "nl"]} enableSearch={true}
-                                        searchPlaceholder={""}
-                                        disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
-                                        value={contact.phoneNumber} onChange={changePhoneNumber}/>
-                        </FloatingLabel>
+
+                        <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
+                                    enableSearch={true}
+                                    searchPlaceholder={""}
+                                    disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
+                                    value={contact.phoneNumber} onChange={changePhoneNumber}/>
                     )))
                 }
             </Form>

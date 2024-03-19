@@ -68,7 +68,7 @@ function Questionnaire_space() {
 
     return (
         <div className={"m-2"}>
-            <Form className="overflow-auto">
+            <Form>
                 <div className={"mb-4"}>
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -122,9 +122,9 @@ function Questionnaire_space() {
                     <div className={"mb-3"}>
                         <h5>{t('questionnaire_space.q_aspects')}</h5>
                     </div>
-                    <div className={"m-1"}>
+                    <div className={"m-1 aspect"}>
                         <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
-                        <div className={""}>
+                        <div>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}
                                                                    height={item.height}

@@ -5,6 +5,7 @@ import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
 import {ToggleButton, Collapse, ButtonGroup, Form} from "react-bootstrap";
+import {matchRoutes} from "react-router-dom";
 
 function Questionnaire_functional() {
     const {t, i18n} = useTranslation();
@@ -30,6 +31,12 @@ function Questionnaire_functional() {
         {name: t('questionnaire_func.space.living_room'), id: t('questionnaire_func.space.living_room')},
         {name: t('questionnaire_func.space.bedroom'), id: t('questionnaire_func.space.bedroom')},
     ];
+
+    const mattress = [
+        {id: 'soft', name: t('questionnaire_func.bed.soft')},
+        {id:'medium',name:t('questionnaire_func.bed.medium')},
+        {id:'sturdy',name:t('questionnaire_func.bed.sturdy')},
+        {id:' ',name:t('questionnaire_func.bed.apply')}]
 
 
     return (
@@ -80,6 +87,7 @@ function Questionnaire_functional() {
                                 <Collapse in={functionalities.bed}>
                                     <div className="mb-3">
                                         <ButtonGroup defaultValue={varia.mattress ?? " "}>
+
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
                                                           onChange={changeVaria}
                                                           checked={"soft" == varia.mattress}>
@@ -90,9 +98,9 @@ function Questionnaire_functional() {
                                                           checked={"medium" == varia.mattress}>
                                                 {t('questionnaire_func.bed.medium')}
                                             </ToggleButton>
-                                            <ToggleButton variant={"danger"} type="radio" id="hard" name="mattress"
+                                            <ToggleButton variant={"danger"} type="radio" id="sturdy" name="mattress"
                                                           onChange={changeVaria}
-                                                          checked={"hard" == varia.mattress}>
+                                                          checked={"sturdy" == varia.mattress}>
                                                 {t('questionnaire_func.bed.sturdy')}
                                             </ToggleButton>
                                             <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
