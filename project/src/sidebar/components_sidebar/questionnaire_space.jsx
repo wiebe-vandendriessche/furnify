@@ -122,9 +122,9 @@ function Questionnaire_space() {
                     <div className={"mb-3"}>
                         <h5>{t('questionnaire_space.q_aspects')}</h5>
                     </div>
-                    <div className={"m-1 aspect"}>
+                    <div className={"m-1"}>
                         <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
-                        <div>
+                        <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}
                                                                    height={item.height}
