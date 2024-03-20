@@ -33,21 +33,18 @@
 }
 
 #logo {
-    width: 75%;
+    width: 60%;
     height: auto;
-}
-
-#a{
-    padding: 16px 50px 16px 50px;
 }
 
 .bottom_btn{
     position: absolute;
-    bottom: 30px;
+    bottom: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 15vh;
 }
 
 /*render for mobile*/
