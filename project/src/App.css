@@ -109,16 +109,6 @@ button:hover {
     }
 }
 
-.react-tel-input .form-control {
-    line-height: 25px;
-    height: 35px;
-    height: calc(3.5rem + calc(var(--bs-border-width)* 2));
-    min-height: calc(3.5rem + calc(var(--bs-border-width)* 2));
-    line-height: 1.25;
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    width: 100%;
-}
-
 @media (prefers-color-scheme: dark) {
     :root {
         color: #ffffff;
