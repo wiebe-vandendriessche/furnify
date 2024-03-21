@@ -1,20 +1,20 @@
 import "../../App.css"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "./questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
+import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import Obstruction from "./obstruction";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {useTranslation} from 'react-i18next'
-import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
-import {height_check} from "../../algorithm/module_choice.ts"
+import { useTranslation } from 'react-i18next'
+import { Col, FloatingLabel, Row, ToggleButton } from "react-bootstrap";
+import { height_check } from "../../algorithm/module_choice.ts"
 
 
 function Questionnaire_space() {
     //i18n
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     const [stateId, setStateId] = useState(1);
     useEffect(() => {
         const lng = navigator.language;
@@ -23,17 +23,17 @@ function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
+    const { dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();
     //Changes value of context
     const changeWidth = (event) => {
-        setDimensions({...dimensions, width: event.target.value});
+        setDimensions({ ...dimensions, width: event.target.value });
     }
     const changeLength = (event) => {
-        setDimensions({...dimensions, length: event.target.value})
+        setDimensions({ ...dimensions, length: event.target.value })
     }
 
     const changeHeight = (event) => {
-        setDimensions({...dimensions, height: event.target.value})
+        setDimensions({ ...dimensions, height: event.target.value })
         height_check(event.target.value)
     }
     const changeObstacleType = (event) => {
@@ -59,6 +59,13 @@ function Questionnaire_space() {
             ...obstacle,
             height: event.target.value
         } : obstacle))
+        console.log(event.target)
+    }
+    const changeObstacleDoor = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
+            ...obstacle,
+            door: event.target.getAttribute('controlId').split("obst")[0]
+        } : obstacle))
     }
     const deleteObstacle = (event) => {
         event.preventDefault();
@@ -76,11 +83,13 @@ function Questionnaire_space() {
                 width: 0,
                 height: 0,
                 obstLength: 0,
-                id: stateId
+                id: stateId,
+                door: 0,
+                window: 0
             }]);
         } else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
-            setObstacles([{type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId}]);
+            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: 0 }]);
         }
         console.log(stateId)
     }
@@ -121,7 +130,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                                  onChange={changeLength} />
+                                        onChange={changeLength} />
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -131,7 +140,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                                  onChange={changeWidth} />
+                                        onChange={changeWidth} />
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -141,7 +150,7 @@ function Questionnaire_space() {
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                                  onChange={changeHeight} />
+                                        onChange={changeHeight} />
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -150,19 +159,22 @@ function Questionnaire_space() {
             </Form.Group>
             <Form.Group>
                 <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
-                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.window')}/>
-                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.door')}/>
-                <input type="button" onClick={addObstacles} variant="danger" value= {t('obstructions.other')}/>
+                <input type="button" onClick={addObstacles} variant="danger" value={t('obstructions.window')} />
+                <input type="button" onClick={addObstacles} variant="danger" value={t('obstructions.door')} />
+                <input type="button" onClick={addObstacles} variant="danger" value={t('obstructions.other')} />
                 <div className="m5">
                     {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                                                           length={item.obstLength} width={item.width}
-                                                           height={item.height}
-                                                           changeLength={changeObstacleLength}
-                                                           changeHeight={changeObstacleHeight}
-                                                           changeWidth={changeObstacleWidth}
-                                                           key={"obst" + item.id}
-                                                           changeType={changeObstacleType}
-                                                           deleteObst={deleteObstacle}/>))}
+                        length={item.obstLength} width={item.width}
+                        height={item.height}
+                        door={item.door}
+                        window={item.window}
+                        changeLength={changeObstacleLength}
+                        changeHeight={changeObstacleHeight}
+                        changeWidth={changeObstacleWidth}
+                        key={"obst" + item.id}
+                        changeType={changeObstacleType}
+                        changeDoor={changeObstacleDoor}
+                        deleteObst={deleteObstacle} />))}
                 </div>
             </Form.Group>
 

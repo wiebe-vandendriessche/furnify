@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, changeType, type, obstId, length, width, height }) {
+function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, changeType, changeDoor, type, obstId, length, width, height, door, window }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -29,19 +29,24 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
     const [outsideDoor, setOutsideDoor] = useState(false);
 
     const changeInsideLeftDoor = () => {
+
         setInsideLeftDoor(true)
         setInsideRightDoor(false)
         setOutsideDoor(false)
+
     }
     const changeInsideRightDoor = () => {
+
         setInsideLeftDoor(false)
         setInsideRightDoor(true)
         setOutsideDoor(false)
+
     }
     const changeOutsideDoor = () => {
         setInsideLeftDoor(false)
         setInsideRightDoor(false)
         setOutsideDoor(true)
+
     }
     const [hideDoor, setHideDoor] = useState(true);
     const [hideWindow, setHideWindow] = useState(true);
@@ -53,16 +58,21 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
         setHideWindow(true)
         if (value == t('obstructions.door')) {
             setHideDoor(false)
+            if (door == 'left') {
+                changeInsideLeftDoor()
+            }
+            else if (door == 'right') {
+                changeInsideRightDoor()
+            }
+            else if (door == 'out') {
+                changeOutsideDoor()
+            }
         }
-        else if(value == t('obstructions.window')){
+        else if (value == t('obstructions.window')) {
             setHideWindow(false)
         }
     }
-
     const [insideWindow, setinsideWindow] = useState(true);
-
-   
-
 
     return (
         <div className="obstruction-bg m5">
@@ -86,7 +96,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                         <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>
                         <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>
                         <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>
-                        
+
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
@@ -128,7 +138,13 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                     <div>
                         <ButtonGroup>
                             <ToggleButton
-                                onClick={changeInsideLeftDoor}
+                                controlId={"left" + obstId}
+                                className="mb-4"
+                                name={"left" + obstId}
+                                onClick={(e) => {
+                                    changeInsideLeftDoor()
+                                    changeDoor(e)
+                                }}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -137,7 +153,13 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                                 {t('obstructions.q_door.inside_left')}
                             </ToggleButton>
                             <ToggleButton
-                                onClick={changeInsideRightDoor}
+                                controlId={"right" + obstId}
+                                className="mb-4"
+                                name={"right" + obstId}
+                                onClick={(e) => {
+                                    changeInsideRightDoor()
+                                    changeDoor(e)
+                                }}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -146,7 +168,13 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                                 {t('obstructions.q_door.inside_right')}
                             </ToggleButton>
                             <ToggleButton
-                                onClick={changeOutsideDoor}
+                                controlId={"out" + obstId}
+                                className="mb-4"
+                                name={"out" + obstId}
+                                onClick={(e) => {
+                                    changeOutsideDoor()
+                                    changeDoor(e)
+                                }}
                                 type="radio"
                                 value="Other"
                                 variant="danger"
@@ -162,9 +190,8 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                         <ButtonGroup>
                             <ToggleButton className={"wo"} type="radio" variant="danger" checked={insideWindow} onClick={() => setinsideWindow(!insideWindow)}
                             >{t('obstructions.q_window.yes')} </ToggleButton>
-                            <ToggleButton className={"wo"} type="radio" variant="danger"checked={!insideWindow} onClick={() => setinsideWindow(!insideWindow)}
+                            <ToggleButton className={"wo"} type="radio" variant="danger" checked={!insideWindow} onClick={() => setinsideWindow(!insideWindow)}
                             >{t('obstructions.q_window.no')}</ToggleButton>
-                            
                         </ButtonGroup>
                     </div>
                 </Form.Group>
