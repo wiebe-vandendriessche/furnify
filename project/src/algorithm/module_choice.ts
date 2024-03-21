@@ -1,4 +1,4 @@
-const MIN_HEIGHT = 2.2;
+const MIN_HEIGHT = 2.24;
 
 export const height_check = (height: number) => {
     if(height < MIN_HEIGHT){
