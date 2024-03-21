@@ -67,6 +67,13 @@ function Questionnaire_space() {
             door: event.target.getAttribute('controlId').split("obst")[0]
         } : obstacle))
     }
+    const changeObstacleWindow = (event, value) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
+            ...obstacle,
+            window: value
+        } : obstacle))
+    }
+
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
@@ -85,11 +92,11 @@ function Questionnaire_space() {
                 obstLength: 0,
                 id: stateId,
                 door: 0,
-                window: 0
+                window: true
             }]);
         } else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
-            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: 0 }]);
+            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
         }
         console.log(stateId)
     }
@@ -163,18 +170,20 @@ function Questionnaire_space() {
                 <input type="button" onClick={addObstacles} variant="danger" value={t('obstructions.door')} />
                 <input type="button" onClick={addObstacles} variant="danger" value={t('obstructions.other')} />
                 <div className="m5">
-                    {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                        length={item.obstLength} width={item.width}
-                        height={item.height}
-                        door={item.door}
-                        window={item.window}
-                        changeLength={changeObstacleLength}
-                        changeHeight={changeObstacleHeight}
-                        changeWidth={changeObstacleWidth}
-                        key={"obst" + item.id}
-                        changeType={changeObstacleType}
-                        changeDoor={changeObstacleDoor}
-                        deleteObst={deleteObstacle} />))}
+                    {obstacles.map((item) => (
+                        <Obstruction obstId={"obst" + item.id} type={item.type}
+                            length={item.obstLength} width={item.width}
+                            height={item.height}
+                            door={item.door}
+                            window={item.window}
+                            changeLength={changeObstacleLength}
+                            changeHeight={changeObstacleHeight}
+                            changeWidth={changeObstacleWidth}
+                            key={"obst" + item.id}
+                            changeType={changeObstacleType}
+                            changeDoor={changeObstacleDoor}
+                            changeWindow={changeObstacleWindow}
+                            deleteObst={deleteObstacle} />))}
                 </div>
             </Form.Group>
 

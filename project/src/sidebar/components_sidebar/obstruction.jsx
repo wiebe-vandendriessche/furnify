@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, changeType, changeDoor, type, obstId, length, width, height, door, window }) {
+function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, changeType, changeDoor, changeWindow, type, obstId, length, width, height, door, window }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -72,7 +72,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
             setHideWindow(false)
         }
     }
-    const [insideWindow, setinsideWindow] = useState(true);
+    const [insideWindow, setinsideWindow] = useState(window);
 
     return (
         <div className="obstruction-bg m5">
@@ -188,9 +188,29 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                     <Form.Label>{t('obstructions.q_window.opening_window')}</Form.Label>
                     <div>
                         <ButtonGroup>
-                            <ToggleButton className={"wo"} type="radio" variant="danger" checked={insideWindow} onClick={() => setinsideWindow(!insideWindow)}
+                            <ToggleButton
+                                className="mb-4"
+                                type="radio"
+                                variant="danger"
+                                name={"yes" + obstId}
+                                controlId={"yes" + obstId}
+                                checked={insideWindow}
+                                onClick={(event) => {
+                                    setinsideWindow(!insideWindow)
+                                    changeWindow(event, !insideWindow)
+                                }}
                             >{t('obstructions.q_window.yes')} </ToggleButton>
-                            <ToggleButton className={"wo"} type="radio" variant="danger" checked={!insideWindow} onClick={() => setinsideWindow(!insideWindow)}
+                            <ToggleButton
+                                className="mb-4"
+                                type="radio"
+                                variant="danger"
+                                name={"no" + obstId}
+                                controlId={"yes" + obstId}
+                                checked={!insideWindow}
+                                onClick={(event) => {
+                                    setinsideWindow(!insideWindow)
+                                    changeWindow(event, !insideWindow)
+                                }}
                             >{t('obstructions.q_window.no')}</ToggleButton>
                         </ButtonGroup>
                     </div>
