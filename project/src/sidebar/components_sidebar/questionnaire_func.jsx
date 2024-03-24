@@ -79,7 +79,7 @@ function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
-                                    <div className="mb-3">
+                                    <div className="mb-3" >
                                         <ButtonGroup defaultValue={varia.mattress ?? " "}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
