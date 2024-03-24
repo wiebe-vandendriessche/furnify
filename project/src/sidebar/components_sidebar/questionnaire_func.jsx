@@ -32,12 +32,6 @@ function Questionnaire_functional() {
         {name: t('questionnaire_func.space.bedroom'), id: t('questionnaire_func.space.bedroom')},
     ];
 
-    const mattress = [
-        {id: 'soft', name: t('questionnaire_func.bed.soft')},
-        {id:'medium',name:t('questionnaire_func.bed.medium')},
-        {id:'sturdy',name:t('questionnaire_func.bed.sturdy')},
-        {id:' ',name:t('questionnaire_func.bed.apply')}]
-
 
     return (
 
