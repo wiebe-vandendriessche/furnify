@@ -35,10 +35,10 @@ function Contact() {
             </div>
             <Form>
                 {Object.entries(contact).map(([key, value]) => (
-                    key !== 'phoneNumber' ? (<FloatingLabel key={key}
+                    key !== 'phone_number' ? (<FloatingLabel key={key}
                                                             className={"mb-2"}
                                                             controlId="floatingInput"
-                                                            label={t(key)}>
+                                                            label={t("contact."+key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (

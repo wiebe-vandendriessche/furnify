@@ -4,7 +4,7 @@ export const ContactContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 export const ContactProvider = ({ children }) => {
-    const [contact, setContact]= useState({firstName: "", lastName: "", mail: "", phoneNumber: null, address: ""})
+    const [contact, setContact]= useState({firstname: "", lastname: "", email: "", phone_number: null, address: ""})
 
     return (
         <ContactContext.Provider

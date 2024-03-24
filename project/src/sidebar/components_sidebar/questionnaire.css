@@ -36,14 +36,7 @@ input{
     color: black ;
 }
 
-.aspect{
-    height: 40vh;
-    padding: 10px;
-    border-radius: 10px;
-    border: solid transparent;
-    overflow: auto;
-    border-color: rgba(232, 70, 70, 0.09);
-}
+
 
 .react-tel-input .form-control {
     line-height: 25px;

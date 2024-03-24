@@ -87,6 +87,14 @@ button:hover {
     color: black;
 }
 
+.aspect{
+    height: 40vh;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid transparent;
+    overflow: auto;
+}
+
 
 /*general color change for dark and light mode */
 @media (prefers-color-scheme: light) {
@@ -107,6 +115,11 @@ button:hover {
         background-color: #e84646;
         color: #ffffff;
     }
+
+    .aspect{
+        border-color: rgba(172, 172, 172, 0.09);
+        background-color: #f6f6f6;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -126,6 +139,11 @@ button:hover {
 
     button:hover {
         background-color: #e84646;
+    }
+
+    .aspect{
+        border-color: rgba(26, 26, 26, 0.89);
+        background-color: #121212;
     }
 
 }
