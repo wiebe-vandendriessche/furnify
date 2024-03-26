@@ -20,9 +20,23 @@ describe('First test',()=>{
 
 
   it('Sidebar should be open', ()=>{
-    cy.get('nav.nav-menu').should('be.visible');
+    cy.get('nav.nav-menu').should('be.visible'); //Sidebar should be shown
+    cy.get('img#logo').should('be.visible');  //Furnify logo should be visible
+
+    //TODO: use of datatest-id
+    cy.get('.bottom_btn > :nth-child(2)');
+    cy.contains('Aspect'); //Button with aspect on it
   });
 
+  /*it('Clicking logo should navigate to furnify', ()=>{
+    cy.get('img#logo').click();
+    cy.wait(5000);
+    cy.url().then(($url)=>{
+      cy.log("HIERREEEEEEEEEEEE");
+      cy.log($url);
+      //expect($url).to.eq("https://www.furnifyhome.eu");
+    })
+  })*/
 
   it('Clicking sidebar should close it', ()=>{
     cy.get('div.menu-bars > svg').click();
@@ -44,6 +58,8 @@ describe('First test',()=>{
     cy.get('[datatest-id="btn-nav-sidebar-next"]').click();
     cy.get('[datatest-id="btn-nav-sidebar-previous"]').click();
   })
+
+  //it("Making")
 
 
 
