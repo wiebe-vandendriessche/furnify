@@ -40,30 +40,47 @@ function Questionnaire_space() {
             } : obstacle
         ))
     }
+
+    const changeObstacleDoor = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
+            ...obstacle,
+            door: event.target.getAttribute('controlId').split("obst")[0]
+        } : obstacle))
+    }
+    const changeObstacleWindow = (event, value) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
+            ...obstacle,
+            window: value
+        } : obstacle))
+    }
+
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
     const [open, setOpen] = useState(false);
-    const addObstacles = () => {
+    const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
-            console.log("hier")
+            console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
             setObstacles([...obstacles, {
-                type: t('obstructions.type'),
+                type: event.currentTarget.getAttribute("value"),
                 width: 0,
                 height: 0,
                 obstLength: 0,
-                id: stateId
+                id: stateId,
+                door: 0,
+                window: true
             }]);
         } else {
-
-            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, obstLength: 0, id: stateId}]);
+            console.log("value: " + event.currentTarget.getAttribute("value"))
+            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
         }
         console.log(stateId)
     }
+
 
 
     return (
@@ -123,13 +140,19 @@ function Questionnaire_space() {
                         <h5>{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
-                        <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
                         <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}
                                                                    height={item.height}
+                                                                   door={item.door}
+                                                                   window={item.window}
                                                                    key={"obst" + item.id}
                                                                    changeObst={changeObstacle}
+                                                                   changeDoor={changeObstacleDoor}
+                                                                   changeWindow={changeObstacleWindow}
                                                                    deleteObst={deleteObstacle}/>))}
                         </div>
                     </div>

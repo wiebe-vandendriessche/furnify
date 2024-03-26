@@ -107,8 +107,6 @@ function Questionnaire_functional() {
                                 </Collapse>
                             </div>
                         </div>
-
-
                     </Form.Group>
                 </div>
             </Form>
