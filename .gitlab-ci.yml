@@ -2,7 +2,7 @@ stages:
   - test
 
 test:
-  image: gitlab.stud.atlantis.ugent.be:5050/vop2324/furnify2:latest
+  image: ${CI_REGISTRY}/vop2324/furnify2:latest
   stage: test
   script:
     - cd "$CI_PROJECT_DIR/project"
