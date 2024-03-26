@@ -94,6 +94,7 @@ export function Questionnaire_space() {
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
+                                    datatest-id={"btn-space-room-rectangular"}
                                     onClick={() => setOpen(!open)}
                                     type="radio"
                                     value="Rectangular"
@@ -103,6 +104,7 @@ export function Questionnaire_space() {
                                     {t('questionnaire_space.rectangular')}
                                 </ToggleButton>
                                 <ToggleButton
+                                    datatest-id={"btn-space-room-other"}
                                     type="radio"
                                     value="Other"
                                     variant="danger"
@@ -122,7 +124,9 @@ export function Questionnaire_space() {
                                                     label={t('questionnaire_space.' + key)}
                                                     className="mb-4"
                                                 >
-                                                    <Form.Control type="number" min={0} step={0.1} value={value}
+                                                    <Form.Control
+                                                        datatest-id={"input-space-room-rectangular"+key}
+                                                        type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
                                                                   name={key} onChange={changeDim}/>
                                                 </FloatingLabel>
@@ -140,9 +144,9 @@ export function Questionnaire_space() {
                         <h5>{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
+                        <Button datatest-id={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
+                        <Button datatest-id={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
+                        <Button datatest-id={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
                         <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}

@@ -1,16 +1,10 @@
+import {passRoomDimensions} from "../helperfuncs/helperspace.js";
+
 describe('First test',()=>{
 
-  beforeEach('visit site', ()=>{
-    cy.visit('', {
-      onBeforeLoad(win) {
-        Object.defineProperty(win.navigator, 'language', { value: 'nl-BE' });
-        Object.defineProperty(win.navigator, 'languages', { value: ['nl'] });
-        Object.defineProperty(win.navigator, 'accept_languages', { value: ['nl'] });
-      },
-      headers: {
-        'Accept-Language': 'nl',
-      },
-    });  })
+  beforeEach('visit application', ()=>{
+    cy.visit('');
+  })
 
 
   it('Looking for logo', ()=>{
@@ -19,13 +13,14 @@ describe('First test',()=>{
   });
 
 
-  it('Sidebar should be open', ()=>{
+  it('Making sure every element on the sidebar is displayed', ()=>{
     cy.get('nav.nav-menu').should('be.visible'); //Sidebar should be shown
     cy.get('img#logo').should('be.visible');  //Furnify logo should be visible
 
-    //TODO: use of datatest-id
-    cy.get('.bottom_btn > :nth-child(2)');
-    cy.contains('Aspect'); //Button with aspect on it
+    //use of datatest-id
+    cy.get('[datatest-id="btn-nav-sidebar-next"]');
+    //Multiple aspect buttons
+    cy.get('[datatest-id="btn-space-aspect-window"]')
   });
 
   /*it('Clicking logo should navigate to furnify', ()=>{
@@ -45,22 +40,27 @@ describe('First test',()=>{
 
   it('Passing dimensions to rectangular form', ()=>{
     let badInput="RANDOM_TEXT";
-    //cy.get('input.btn-check[value="Rectangular"]')
     //TODO: add datatest-id/names see: https://docs.cypress.io/guides/references/best-practices
-    cy.get('.btn-group > :nth-child(2)').click();
-    cy.get('input#rectangularLength').clear().type(badInput); //passing unallowed value
-    cy.get('input#rectangularWidth').clear().type("7"); //clearing full input and passing a value
-    cy.get('input#rectangularHeight').clear().type("2");
+
+    cy.get('[datatest-id="btn-space-room-rectangular"]').click();
+    passRoomDimensions([badInput, 7, 2]);
     cy.contains(badInput).should("not.exist");  //making sure input doesn't get saved
   })
 
-  it("Making sure data doesn't get lost when going to next part of sidebar and back", ()=>{
+  it("Changing roomdimensions and making sure it's saved when navigating to next part of questionnaire", ()=>{
+    let inputValues=[13, 7.9, 34]
+    cy.get('[datatest-id="btn-space-room-rectangular"]').click();
+    passRoomDimensions(inputValues);
     cy.get('[datatest-id="btn-nav-sidebar-next"]').click();
     cy.get('[datatest-id="btn-nav-sidebar-previous"]').click();
+    //TODO: delete line below when rectangular button is fixed
+    cy.get('[datatest-id="btn-space-room-rectangular"]').click();
+    cy.get('[datatest-id="input-space-room-rectangularlength"]').should('have.value', inputValues[0]);
+    cy.get('[datatest-id="input-space-room-rectangularwidth"]').should('have.value', inputValues[1]);
+    cy.get('[datatest-id="input-space-room-rectangularheight"]').should('have.value', inputValues[2]);
   })
 
-  //it("Making")
+  it("Adding and deleting obstructions");
 
-
-
+  it("");
 })

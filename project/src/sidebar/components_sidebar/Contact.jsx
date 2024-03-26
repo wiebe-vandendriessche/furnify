@@ -1,5 +1,5 @@
 import "../../App.css"
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import {useContactContext} from "../../contexts/ContactContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
@@ -22,7 +22,7 @@ function Contact() {
     }
 
     const changePhoneNumber = (event) => {
-        setContact({...contact, phoneNumber: event})
+        setContact({...contact, phone_number: event})
     }
 
     return (
@@ -47,7 +47,7 @@ function Contact() {
                                     enableSearch={true}
                                     searchPlaceholder={""}
                                     disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
-                                    value={contact.phoneNumber} onChange={changePhoneNumber}/>
+                                    value={contact.phone_number} onChange={changePhoneNumber}/>
                     )))
                 }
             </Form>
