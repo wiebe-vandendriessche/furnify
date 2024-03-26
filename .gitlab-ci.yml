@@ -2,7 +2,7 @@ stages:
   - test
 
 test:
-  image: cypress/browsers:latest
+  image: $CI_REGISTRY/furnify2:latest
   stage: test
   script:
     - cd "$CI_PROJECT_DIR/project"
