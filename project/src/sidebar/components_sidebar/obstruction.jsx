@@ -74,12 +74,10 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     console.log(type)
     return (
         <div className="obstruction-bg mb-2 flex">
-            <input type="button" id={"button" + obstId} value={type ?? t('obstructions.type')}
+            <Button id={"button" + obstId} variant={"light"} value={type ?? t(type)}
                    onClick={(e) => {
                        showButton()
-                       showExtraQuestion(e)
-                   }}
-            />
+                       showExtraQuestion(e)}}>{t(type)}</Button>
             <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete" + obstId}
                     onClick={(e) => deleteObst(e)}>
                 x
