@@ -118,7 +118,11 @@ button:hover {
 
     .aspect{
         border-color: rgba(172, 172, 172, 0.09);
-        background-color: #f6f6f6;
+        background-color: #f1f1f1;
+    }
+
+    .obstruction-bg{
+        background-color: #ffffff;
     }
 }
 
@@ -144,6 +148,10 @@ button:hover {
     .aspect{
         border-color: rgba(26, 26, 26, 0.89);
         background-color: #121212;
+    }
+
+    .obstruction-bg{
+        background-color: #242424;
     }
 
 }

@@ -81,6 +81,20 @@ function Questionnaire_space() {
         console.log(stateId)
     }
 
+    //prevent user from typing negative values
+    function handleKeyPress(event) {
+        // Allow digits (0-9) and prevent backspace (charCode 8)
+        if (
+            (event.charCode !== 8 && event.charCode === 0) ||
+            (event.charCode >= 48 && event.charCode <= 57)
+        ) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }
+    }
+
 
 
     return (
@@ -124,7 +138,8 @@ function Questionnaire_space() {
                                                 >
                                                     <Form.Control type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
-                                                                  name={key} onChange={changeDim}/>
+                                                                  name={key} onChange={changeDim}
+                                                                  onKeyPress={handleKeyPress}/>
                                                 </FloatingLabel>
                                             </Col>
                                         )
