@@ -7,8 +7,8 @@ import * as THREE from 'three';
 function createTextSprite(text) {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
-  context.font = '48px serif';
-  context.fillStyle = 'rgba(255, 255, 255, 1.0)';
+  context.font = '64px serif';
+  context.fillStyle = 'rgba(0, 0, 0, 1.0)';
   context.fillText(text, 0, 50);
 
   const texture = new CanvasTexture(context.canvas);
