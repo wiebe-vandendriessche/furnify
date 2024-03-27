@@ -10,7 +10,7 @@ export const Wall = ({ width, height, depth, position, visible }) => {
     map: './textures/beige_wall/beige_wall_001_ao_1k.jpg',
     displacement: './textures/beige_wall/beige_wall_001_disp_1k.jpg',
     aoMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
-    roughnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
+    // roughnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg', // uit om glans te voorkomen
     metalnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
     normalMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
   });

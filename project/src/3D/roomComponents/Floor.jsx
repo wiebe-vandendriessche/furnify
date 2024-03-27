@@ -10,7 +10,7 @@ export const Floor = ({ width, height, depth, position }) => {
         map: './textures/laminate_floor/laminate_floor_02_diff_1k.jpg',
         displacement: './textures/laminate_floor/laminate_floor_02_disp_1k.jpg',
         aoMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
-        roughnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
+        // roughnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg', // uit om glans te voorkomen
         metalnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
         normalMap: './textures/laminate_floor/laminate_floor_02_nor_gl_1k.jpg',
     });
