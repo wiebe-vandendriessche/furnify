@@ -28,6 +28,10 @@ export const FloorplanEditor: React.FC = () => {
   const [points, setPoints] = useState<Point[]>([]);
   const [line, setLine] = useState<Line | null>(null);
   const [textSprites, setTextSprites] = useState<Sprite[]>([]);
+  const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
+  const [tempLine, setTempLine] = useState<Line | null>(null);
+
+
 
   const addPoint = useCallback((point: Point) => {
     setPoints((prevPoints) => [...prevPoints, point]);
@@ -59,8 +63,30 @@ export const FloorplanEditor: React.FC = () => {
       }
 
       setTextSprites(newTextSprites);
+
+      // Update or create the temporary line
+      if (points.length > 0 && currentMousePosition) {
+        const lastPoint = points[points.length - 1];
+        const geometry = new BufferGeometry().setFromPoints([lastPoint, currentMousePosition]);
+
+        if (!tempLine) {
+          const material = new LineBasicMaterial({ color: 0xff0000 }); // Different color for the temp line
+          const line = new Line(geometry, material);
+          setTempLine(line);
+          scene.add(line);
+        } else {
+          tempLine.geometry.dispose(); // Dispose of the old geometry
+          tempLine.geometry = geometry;
+        }
+      }
     }
   });
+
+  useEffect(() => {
+    return () => {
+        if (tempLine) scene.remove(tempLine);
+    };
+}, [tempLine, scene]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -84,6 +110,32 @@ export const FloorplanEditor: React.FC = () => {
     window.addEventListener('click', handleClick);
     return () => window.removeEventListener('click', handleClick);
   }, [addPoint, camera]);
+
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      event.preventDefault();
+
+      const rect = (event.target as HTMLElement).getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      const mousePosition = new Vector2(x, y);
+      const raycaster = new Raycaster();
+      raycaster.setFromCamera(mousePosition, camera);
+
+      const planeZ = new Plane(new Vector3(0, 0, 1), 0);
+      const intersection = new Vector3();
+      raycaster.ray.intersectPlane(planeZ, intersection);
+
+      if (intersection) {
+        setCurrentMousePosition(intersection);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [camera]);
 
   const spheres = points.map((point, index) => (
     <mesh key={index} position={[point.x, point.y, point.z]}>
