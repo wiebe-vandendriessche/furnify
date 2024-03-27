@@ -16,15 +16,21 @@
     "bootstrap": "^5.3.3",
     "i18next": "^23.10.0",
     "i18next-browser-languagedetector": "^7.2.0",
+    "papaparse": "^5.4.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.5",
     "react-icons": "^5.0.1",
     "react-phone-input-2": "^2.15.1",
-    "react-router-dom": "^6.22.1"
+    "react-router-dom": "^6.22.1",
+    "url": "^0.11.3",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/papaparse": "^5.3.14",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
