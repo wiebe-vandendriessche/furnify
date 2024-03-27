@@ -5,15 +5,22 @@ import { OrbitControls } from '@react-three/drei'
 import { easing } from 'maath'
 import { Grid, useDrag } from './Grid'
 
-export const DCube = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, ...props }) => {
+export const DCube = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, ...props }) => {
     
     const ref = useRef()
     
     const pos = useRef(position)
-    
+
+    // adjust boundaries
+    const maxX2 = maxX/2 - 0.8;
+    const maxZ2 = maxZ/2 - 0.8;
+
     const onDrag = useCallback(({ x, z }) => {
-        pos.current = [x, position[1], z];
-    }, []);
+        // Apply boundary checks
+        const newX = Math.max(-maxX2, Math.min(maxX2, x));
+        const newZ = Math.max(-maxZ2, Math.min(maxZ2, z));
+        pos.current = [newX, position[1], newZ];
+    }, [maxX, maxZ, position]);
     
     const [events, active, hovered] = useDrag(onDrag)
     

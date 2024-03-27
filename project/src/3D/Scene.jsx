@@ -26,7 +26,7 @@ const Scene = () => {
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
             <Grid scale={10}>
-                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} />
+                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth}/>
             </Grid>
             <OrbitControls makeDefault />
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
