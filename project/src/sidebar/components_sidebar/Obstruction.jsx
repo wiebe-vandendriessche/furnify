@@ -97,6 +97,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
             <div className="m-1" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type" + obstId}
+                                 defaultValue={type}
                                  onChange={(e) => {
                                      changeObst(e)
                                      showExtraQuestion(e)
