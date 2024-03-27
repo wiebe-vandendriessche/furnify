@@ -79,6 +79,22 @@ button:hover {
     -webkit-box-shadow: 0 0 0.5rem #e84646;
 }
 
+.form-control{
+    background-color: white;
+}
+
+.form-floating{
+    color: black;
+}
+
+.aspect{
+    height: 40vh;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid transparent;
+    overflow: auto;
+}
+
 
 /*general color change for dark and light mode */
 @media (prefers-color-scheme: light) {
@@ -99,6 +115,15 @@ button:hover {
         background-color: #e84646;
         color: #ffffff;
     }
+
+    .aspect{
+        border-color: rgba(172, 172, 172, 0.09);
+        background-color: #f1f1f1;
+    }
+
+    .obstruction-bg{
+        background-color: #ffffff;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -118,6 +143,15 @@ button:hover {
 
     button:hover {
         background-color: #e84646;
+    }
+
+    .aspect{
+        border-color: rgba(26, 26, 26, 0.89);
+        background-color: #121212;
+    }
+
+    .obstruction-bg{
+        background-color: #242424;
     }
 
 }

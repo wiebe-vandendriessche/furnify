@@ -23,148 +23,159 @@ export function Questionnaire_space() {
 
     //Uses reactcontext
     const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
-    //Changes value of context
-    const changeWidth = (event) => {
-        setDimensions({...dimensions, width: event.target.value});
-    }
-    const changeLength = (event) => {
-        setDimensions({...dimensions, length: event.target.value})
+    //Changes values of dimensions in context
+    const changeDim = (event) => {
+        setDimensions({...dimensions, [event.target.name]: event.target.value});
+        console.log(event.target.name);
     }
 
-    const changeHeight = (event) => {
-        setDimensions({...dimensions, height: event.target.value})
-    }
-    const changeObstacleType = (event) => {
+    const changeObstacle = (event) => {
+        console.log(event)
+        console.log(event.target)
+        console.log(event.target.name);
+        console.log(event.target.value)
         setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } : obstacle
+        ))
+    }
+
+    const changeObstacleDoor = (event) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
             ...obstacle,
-            type: event.target.value
+            door: event.target.getAttribute('controlId').split("obst")[0]
         } : obstacle))
     }
-    const changeObstacleLength = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
+    const changeObstacleWindow = (event, value) => {
+        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
             ...obstacle,
-            obstLength: event.target.value
+            window: value
         } : obstacle))
     }
-    const changeObstacleWidth = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
-            ...obstacle,
-            width: event.target.value
-        } : obstacle))
-    }
-    const changeObstacleHeight = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.name.split("obst")[1] ? {
-            ...obstacle,
-            height: event.target.value
-        } : obstacle))
-    }
+
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
     const [open, setOpen] = useState(false);
-    const addObstacles = () => {
+    const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
-            console.log("hier")
+            console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
             setObstacles([...obstacles, {
-                type: t('obstructions.type'),
+                type: event.currentTarget.getAttribute("value"),
                 width: 0,
                 height: 0,
                 obstLength: 0,
-                id: stateId
+                id: stateId,
+                door: 0,
+                window: true
             }]);
         } else {
-
-            setObstacles([{type: t('obstructions.type'), width: 0, height: 0, obstLength: 0, id: stateId}]);
+            console.log("value: " + event.currentTarget.getAttribute("value"))
+            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
         }
         console.log(stateId)
     }
 
+    //prevent user from typing negative values
+    function handleKeyPress(event) {
+        // Allow digits (0-9) and prevent backspace (charCode 8)
+        if (
+            (event.charCode !== 8 && event.charCode === 0) ||
+            (event.charCode >= 48 && event.charCode <= 57)
+        ) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }
+    }
+
+
 
     return (
-        <Form className="overflow-auto">
-            <Form.Group>
-                <Form.Label>{t('questionnaire_space.q_dimensions')}</Form.Label>
-                <div className="mb-3 m5">
-                    <ButtonGroup>
-                        <ToggleButton
-                            onClick={() => setOpen(!open)}
-                            type="radio"
-                            value="Rectangular"
-                            variant="danger"
-                            checked={open}
-                        >
-                            {t('questionnaire_space.rectangular')}
-                        </ToggleButton>
-                        <ToggleButton
-                            type="radio"
-                            value="Other"
-                            variant="danger"
-                            checked={!open}
-                            onClick={() => setOpen(false)}>
-                            {t('questionnaire_space.other')}
-                        </ToggleButton>
-                    </ButtonGroup>
+        <div className={"m-2"}>
+            <Form>
+                <div className={"mb-4"}>
+                    <Form.Group>
+                        <div className={"mb-3"}>
+                            <h5>{t('questionnaire_space.q_dimensions')}</h5>
+                        </div>
+                        <div className="m-1">
+                            <ButtonGroup>
+                                <ToggleButton
+                                    onClick={() => setOpen(!open)}
+                                    type="radio"
+                                    value="Rectangular"
+                                    variant="danger"
+                                    checked={open}
+                                >
+                                    {t('questionnaire_space.rectangular')}
+                                </ToggleButton>
+                                <ToggleButton
+                                    type="radio"
+                                    value="Other"
+                                    variant="danger"
+                                    checked={!open}
+                                    onClick={() => setOpen(false)}>
+                                    {t('questionnaire_space.other')}
+                                </ToggleButton>
+                            </ButtonGroup>
+                        </div>
+                        <div className={"m-3"}>
+                            <Collapse in={open}>
+                                <Row>
+                                    {Object.entries(dimensions).map(([key, value]) => (
+                                            <Col key={key}>
+                                                <FloatingLabel
+                                                    controlId={"rectangular" + key}
+                                                    label={t('questionnaire_space.' + key)}
+                                                    className="mb-4"
+                                                >
+                                                    <Form.Control type="number" min={0} step={0.1} value={value}
+                                                                  size="sm"
+                                                                  name={key} onChange={changeDim}
+                                                                  onKeyPress={handleKeyPress}/>
+                                                </FloatingLabel>
+                                            </Col>
+                                        )
+                                    )}
+
+                                </Row>
+                            </Collapse>
+                        </div>
+                    </Form.Group>
                 </div>
-                <Collapse in={open}>
-                    <div className="m5">
-                        <Row>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularLength"
-                                    label={t('questionnaire_space.length')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
-                                                  onChange={changeLength} />
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularWidth"
-                                    label={t('questionnaire_space.width')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
-                                                  onChange={changeWidth} />
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlId="rectangularHeight"
-                                    label={t('questionnaire_space.height')}
-                                    className="mb-4"
-                                >
-                                    <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"
-                                                  onChange={changeHeight} />
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
+                <Form.Group>
+                    <div className={"mb-3"}>
+                        <h5>{t('questionnaire_space.q_aspects')}</h5>
                     </div>
-                </Collapse>
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{t('questionnaire_space.q_aspects')}</Form.Label>
-                <Button onClick={addObstacles} variant="danger">{t('questionnaire_space.aspect')}</Button>
-                <div className="m5">
-                    {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                                                           length={item.obstLength} width={item.width}
-                                                           height={item.height}
-                                                           changeLength={changeObstacleLength}
-                                                           changeHeight={changeObstacleHeight}
-                                                           changeWidth={changeObstacleWidth}
-                                                           key={"obst" + item.id}
-                                                           changeType={changeObstacleType}
-                                                           deleteObst={deleteObstacle}/>))}
-                </div>
-            </Form.Group>
+                    <div className={"m-1"}>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
+                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
+                        <div className={"aspect"}>
+                            {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
+                                                                   length={item.obstLength} width={item.width}
+                                                                   height={item.height}
+                                                                   door={item.door}
+                                                                   window={item.window}
+                                                                   key={"obst" + item.id}
+                                                                   changeObst={changeObstacle}
+                                                                   changeDoor={changeObstacleDoor}
+                                                                   changeWindow={changeObstacleWindow}
+                                                                   deleteObst={deleteObstacle}/>))}
+                        </div>
+                    </div>
 
-        </Form>
+                </Form.Group>
 
-
+            </Form>
+        </div>
     )
 }
 
