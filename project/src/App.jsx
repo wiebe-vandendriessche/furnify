@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Sky, Stars } from '@react-three/drei'
+import { Box, OrbitControls, Sky, Stars } from '@react-three/drei'
 // import Room from './components/roomComponents/Room'
 import { useEffect, useState } from 'react'
 import './App.css'
@@ -25,10 +25,13 @@ function App() {
       <main>
         <div className="container">
           {/* <Scene /> */}
-          <Canvas orthographic camera={{ position: [0, 100, 0], zoom: 20, up: [0, 0, -1], far: 10000 }}>
+          <Canvas orthographic camera={{ position: [0, 0, 5], zoom: 100 }}>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
             <FloorplanEditor />
+            <axesHelper />
+            {/* <OrbitControls /> */}
           </Canvas>
-
         </div>
       </main>
     </div>
