@@ -59,7 +59,6 @@ export function Questionnaire_space() {
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
-    const [open, setOpen] = useState(false);
     const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
@@ -95,8 +94,8 @@ export function Questionnaire_space() {
         }
     }
 
-    const changeForm=()=>{
-        setRectangular(!rectangular);
+    const changeForm=(bool)=>{
+        setRectangular(bool);
     }
 
 
@@ -111,7 +110,7 @@ export function Questionnaire_space() {
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
-                                    onClick={changeForm}
+                                    onClick={()=>{changeForm(true)}}
                                     type="radio"
                                     value="Rectangular"
                                     variant="danger"
@@ -124,7 +123,7 @@ export function Questionnaire_space() {
                                     value="Other"
                                     variant="danger"
                                     checked={!rectangular}
-                                    onClick={changeForm}>
+                                    onClick={()=>{changeForm(false)}}>
                                     {t('questionnaire_space.other')}
                                 </ToggleButton>
                             </ButtonGroup>
