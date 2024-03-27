@@ -62,8 +62,9 @@ export const Floor = ({ width, height, depth, position }) => {
             height={height}
             depth={depth}
             position={position}
-            color="blue"
+            color="white"
             textures={floorTexture}
+            addColorToTexture={true}
         />
     );
 };

@@ -42,9 +42,10 @@ export const Wall = ({ width, height, depth, position, visible }) => {
       height={height}
       depth={depth}
       position={position}
-      color="blue"
+      color="lightgrey"
       visible={visible}
       textures={wallTexture}
+      addColorToTexture={true}
     />
   );
 };
