@@ -7,6 +7,7 @@ import Sidebar from './sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
 import Scene from './3D/Scene'
 import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
+import { FloorplanEditor } from './2D/FloorplanEditor'
 
 
 function App() {
@@ -19,14 +20,18 @@ function App() {
   }, [])
 
   return (
-      <div className="App">
-        <Sidebar />
-        <main>
-          <div className="container">
-            <Scene />
-          </div>
-        </main>
-      </div>
+    <div className="App">
+      <Sidebar />
+      <main>
+        <div className="container">
+          {/* <Scene /> */}
+          <Canvas orthographic camera={{ position: [0, 100, 0], zoom: 20, up: [0, 0, -1], far: 10000 }}>
+            <FloorplanEditor />
+          </Canvas>
+
+        </div>
+      </main>
+    </div>
   )
     ;
 }
