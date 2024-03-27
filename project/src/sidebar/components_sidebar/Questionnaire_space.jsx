@@ -82,16 +82,13 @@ export function Questionnaire_space() {
 
     //prevent user from typing negative values
     function handleKeyPress(event) {
-        // Allow digits (0-9) and prevent backspace (charCode 8)
-        if (
-            (event.charCode !== 8 && event.charCode === 0) ||
-            (event.charCode >= 48 && event.charCode <= 57)
-        ) {
-            return true;
-        } else {
+        //prevent use of negative values
+        if(event.charCode==45){
+            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
+        return true;
     }
 
     const changeForm=(bool)=>{
