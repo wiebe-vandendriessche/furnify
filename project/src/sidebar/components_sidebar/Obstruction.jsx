@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import Form from "react-bootstrap/Form";
 import {ButtonGroup, Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
 import Button from "react-bootstrap/Button";

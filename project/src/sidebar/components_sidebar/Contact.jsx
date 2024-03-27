@@ -1,5 +1,5 @@
 import "../../App.css"
-import "./questionnaire.css"
+import "./Questionnaire.css"
 import {useContactContext} from "../../contexts/ContactContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
