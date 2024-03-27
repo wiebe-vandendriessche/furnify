@@ -4,17 +4,11 @@ export const VariaContext = createContext(null)
 
 // eslint-disable-next-line react/prop-types
 export const VariaProvider = ({ children }) => {
-    const [requirements, setRequirements] = useState("");
-    const [mattress, setMattress] = useState("");
-    const [room, setRoom] = useState("");
+    const [varia, setVaria]=useState({requirements:"", mattress:" ", room:""})
+
     return (
         <VariaContext.Provider value={{
-            requirements,
-            setRequirements,
-            mattress,
-            setMattress,
-            room,
-            setRoom
+            varia, setVaria
         }}>
             {children}
 
