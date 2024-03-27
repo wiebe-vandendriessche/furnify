@@ -59,9 +59,6 @@ export function Questionnaire_space() {
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
-    const changeForm=()=>{
-        setRectangular(!rectangular);
-    }
     const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
@@ -83,6 +80,23 @@ export function Questionnaire_space() {
         console.log(stateId)
     }
 
+    //prevent user from typing negative values
+    function handleKeyPress(event) {
+        // Allow digits (0-9) and prevent backspace (charCode 8)
+        if (
+            (event.charCode !== 8 && event.charCode === 0) ||
+            (event.charCode >= 48 && event.charCode <= 57)
+        ) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }
+    }
+
+    const changeForm=(bool)=>{
+        setRectangular(bool);
+    }
 
 
     return (
@@ -96,8 +110,8 @@ export function Questionnaire_space() {
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
+                                    onClick={()=>{changeForm(true)}}
                                     datatest-id={"btn-space-room-rectangular"}
-                                    onClick={changeForm}
                                     type="radio"
                                     value="Rectangular"
                                     variant="danger"
@@ -111,7 +125,7 @@ export function Questionnaire_space() {
                                     value="Other"
                                     variant="danger"
                                     checked={!rectangular}
-                                    onClick={changeForm}>
+                                    onClick={()=>{changeForm(false)}}>
                                     {t('questionnaire_space.other')}
                                 </ToggleButton>
                             </ButtonGroup>
@@ -131,7 +145,8 @@ export function Questionnaire_space() {
                                                         datatest-id={"input-space-room-rectangular-"+key}
                                                         type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
-                                                                  name={key} onChange={changeDim}/>
+                                                                  name={key} onChange={changeDim}
+                                                                  onKeyPress={handleKeyPress}/>
                                                 </FloatingLabel>
                                             </Col>
                                         )

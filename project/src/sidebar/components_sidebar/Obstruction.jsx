@@ -69,12 +69,24 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     }
     const [insideWindow, setinsideWindow] = useState(window);
 
+    function handleKeyPress(event) {
+        // Allow digits (0-9) and prevent backspace (charCode 8)
+        if (
+            (event.charCode !== 8 && event.charCode === 0) ||
+            (event.charCode >= 48 && event.charCode <= 57)
+        ) {
+            return true;
+        } else {
+            event.preventDefault();
+            return false;
+        }
+    }
 
     console.log(obstId);
     console.log(type)
     return (
         <div className="obstruction-bg mb-2 flex">
-            <Button id={"button" + obstId} variant={"light"} value={type ?? t(type)}
+            <Button id={"button" + obstId} variant={"danger"} value={type ?? t(type)}
                    onClick={(e) => {
                        showButton()
                        showExtraQuestion(e)}}>{t(type)}</Button>
@@ -85,6 +97,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
             <div className="m-1" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type" + obstId}
+                                 defaultValue={type}
                                  onChange={(e) => {
                                      changeObst(e)
                                      showExtraQuestion(e)
@@ -108,7 +121,8 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.length')}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
-                                                  defaultValue={length} onChange={(e) => changeObst(e)}/>
+                                                  defaultValue={length} onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -117,7 +131,8 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
-                                                  onChange={(e) => changeObst(e)}/>
+                                                  onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress}/>
 
                                 </FloatingLabel>
                             </Col>
@@ -127,7 +142,8 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
-                                                  onChange={(e) => changeObst(e)}/>
+                                                  onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>

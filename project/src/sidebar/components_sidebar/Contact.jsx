@@ -45,7 +45,9 @@ function Contact() {
                     </FloatingLabel>) : (
 
                         <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
-                                    id="phoneNumber" name="phoneNumber" type="tel"
+                                    enableSearch={true}
+                                    searchPlaceholder={""}
+                                    disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
                                     value={contact.phone_number} onChange={changePhoneNumber}/>
                     )))
                 }

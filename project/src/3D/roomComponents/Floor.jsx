@@ -10,10 +10,27 @@ export const Floor = ({ width, height, depth, position }) => {
         map: './textures/laminate_floor/laminate_floor_02_diff_1k.jpg',
         displacement: './textures/laminate_floor/laminate_floor_02_disp_1k.jpg',
         aoMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
-        roughnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
+        // roughnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg', // uit om glans te voorkomen
         metalnessMap: './textures/laminate_floor/laminate_floor_02_arm_1k.jpg',
         normalMap: './textures/laminate_floor/laminate_floor_02_nor_gl_1k.jpg',
     });
+
+    // const floorTexture = useTexture({
+    //     map: './textures/wood068/Wood068_1K-JPG_Color.jpg', // Color map
+    //     displacementMap: './textures/wood068/Wood068_1K-JPG_Displacement.jpg', // Displacement map for height information
+    //     normalMap: './textures/wood068/Wood068_1K-JPG_NormalGL.jpg',
+    // });
+
+    // const floorTexture = useTexture({
+    //     map: './textures/laminate_floor_01/laminate_floor_diff_1k.jpg',
+    //     displacement: './textures/laminate_floor_01/laminate_floor_disp_1k.jpg',
+    //     aoMap: './textures/laminate_floor_01/laminate_floor_arm_1k.jpg',
+    //     // roughnessMap: './textures/laminate_floor/laminate_floor_arm_1k.jpg', // uit om glans te voorkomen
+    //     metalnessMap: './textures/laminate_floor_01/laminate_floor_arm_1k.jpg',
+    //     normalMap: './textures/laminate_floor_01/laminate_floor_nor_gl_1k.jpg',
+    // });
+
+
 
     // Apply texture repetition to all textures
     useEffect(() => {
@@ -45,8 +62,9 @@ export const Floor = ({ width, height, depth, position }) => {
             height={height}
             depth={depth}
             position={position}
-            color="blue"
+            color="white"
             textures={floorTexture}
+            addColorToTexture={true}
         />
     );
 };
