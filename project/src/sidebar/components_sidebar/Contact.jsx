@@ -22,7 +22,7 @@ function Contact() {
     }
 
     const changePhoneNumber = (event) => {
-        setContact({...contact, phoneNumber: event})
+        setContact({...contact, phone_number: event})
     }
 
     return (
@@ -46,8 +46,8 @@ function Contact() {
                         <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
                                     enableSearch={true}
                                     searchPlaceholder={""}
-                                    disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
-                                    value={contact.phoneNumber} onChange={changePhoneNumber}/>
+                                    disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
+                                    value={contact.phone_number} onChange={changePhoneNumber}/>
                     )))
                 }
             </Form>
