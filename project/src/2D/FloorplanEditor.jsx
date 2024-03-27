@@ -1,11 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useThree, useFrame } from '@react-three/fiber';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useThree, useFrame, extend } from '@react-three/fiber';
+import { Sprite, CanvasTexture } from 'three';
 import * as THREE from 'three';
+
+// Helper function to create a text sprite
+function createTextSprite(text) {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  context.font = '48px serif';
+  context.fillStyle = 'rgba(255, 255, 255, 1.0)';
+  context.fillText(text, 0, 50);
+
+  const texture = new CanvasTexture(context.canvas);
+  const material = new THREE.SpriteMaterial({ map: texture });
+  const sprite = new THREE.Sprite(material);
+
+  // Scale the sprite appropriately
+  sprite.scale.set(0.5, 0.25, 1);
+
+  return sprite;
+}
 
 export function FloorplanEditor() {
   const { scene, mouse, camera } = useThree();
   const [points, setPoints] = useState([]);
   const [line, setLine] = useState(null);
+  const [textSprites, setTextSprites] = useState([]);
+
 
   const addPoint = useCallback((point) => {
     setPoints((prevPoints) => [...prevPoints, point]);
@@ -23,8 +44,25 @@ export function FloorplanEditor() {
         line.geometry.dispose(); // Dispose of the old geometry
         line.geometry = geometry;
       }
+
+      // Remove previous text sprites
+      textSprites.forEach(sprite => scene.remove(sprite));
+      const newTextSprites = [];
+
+      // Calculate distances and add text sprites
+      for (let i = 1; i < points.length; i++) {
+        const distance = points[i].distanceTo(points[i - 1]).toFixed(2);
+        const midpoint = new THREE.Vector3().addVectors(points[i], points[i - 1]).multiplyScalar(0.5);
+        const sprite = createTextSprite(`${distance}m`);
+        sprite.position.copy(midpoint);
+        scene.add(sprite);
+        newTextSprites.push(sprite);
+      }
+
+      setTextSprites(newTextSprites);
     }
-  });
+  }
+  );
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -32,6 +70,7 @@ export function FloorplanEditor() {
       event.preventDefault();
 
       // Calculate normalized device coordinates (NDC)
+      // this is where mouse currently is
       const rect = event.target.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       const y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
