@@ -1,4 +1,4 @@
-import {passRoomDimensions} from "../helperfuncs/helperspace.js";
+import {passRoomDimensions} from "../helperfuncs/Helperspace.js";
 
 describe('First test',()=>{
 
@@ -55,9 +55,9 @@ describe('First test',()=>{
     cy.get('[datatest-id="btn-nav-sidebar-previous"]').click();
     //TODO: delete line below when rectangular button is fixed
     cy.get('[datatest-id="btn-space-room-rectangular"]').click();
-    cy.get('[datatest-id="input-space-room-rectangularlength"]').should('have.value', inputValues[0]);
-    cy.get('[datatest-id="input-space-room-rectangularwidth"]').should('have.value', inputValues[1]);
-    cy.get('[datatest-id="input-space-room-rectangularheight"]').should('have.value', inputValues[2]);
+    cy.get('[datatest-id="input-space-room-rectangular-length"]').should('have.value', inputValues[0]);
+    cy.get('[datatest-id="input-space-room-rectangular-width"]').should('have.value', inputValues[1]);
+    cy.get('[datatest-id="input-space-room-rectangular-height"]').should('have.value', inputValues[2]);
   })
 
   it("Adding and deleting obstructions");

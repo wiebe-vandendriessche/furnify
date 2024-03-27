@@ -29,13 +29,14 @@ function Contact() {
 
         <div className={"m-2"}>
             <div className={"mb-3"}>
-                <h5>
+                <h5 datatest-id={"question-contact"}>
                     {t('contact.q_contact')}
                 </h5>
             </div>
             <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
+                                                            datatest-id={"label-contact-"+key}
                                                             className={"mb-2"}
                                                             controlId="floatingInput"
                                                             label={t("contact."+key)}>
@@ -44,9 +45,7 @@ function Contact() {
                     </FloatingLabel>) : (
 
                         <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
-                                    enableSearch={true}
-                                    searchPlaceholder={""}
-                                    disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
+                                    id="phoneNumber" name="phoneNumber" type="tel"
                                     value={contact.phone_number} onChange={changePhoneNumber}/>
                     )))
                 }

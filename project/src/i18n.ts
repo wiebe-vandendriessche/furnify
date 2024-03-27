@@ -76,8 +76,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "Do you have specific preferences for the layout of your living space?",
-                        prefrences:{
+                        q_preferences: "Do you have specific preferences for the layout of your living space?",
+                        preferences:{
                             wall:"Wall",
                             partition_wall:"Partition wall",
                             in_the_middle_of_space:"In the middle of space",
@@ -164,8 +164,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
-                        prefrences:{
+                        q_preferences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
+                        preferences:{
                             wall:"Muur",
                             partition_wall:"Scheidingswand",
                             in_the_middle_of_space:"Te midden van ruimte",
@@ -251,8 +251,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
-                        prefrences:{
+                        q_preferences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
+                        preferences:{
                             wall:"Mur",
                             partition_wall:"Cloison",
                             in_the_middle_of_space:"Au milieu de l'espace",
@@ -338,8 +338,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "Haben Sie spezielle Vorlieben für die Gestaltung Ihres Wohnraums?",
-                        prefrences: {
+                        q_preferences: "Haben Sie spezielle Vorlieben für die Gestaltung Ihres Wohnraums?",
+                        preferences: {
                             wall: "Wand",
                             partition_wall: "Trennwand",
                             in_the_middle_of_space: "In der Mitte des Raums",
@@ -425,8 +425,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "¿Tienes preferencias específicas para la distribución de tu espacio habitable?",
-                        prefrences: {
+                        q_preferences: "¿Tienes preferencias específicas para la distribución de tu espacio habitable?",
+                        preferences: {
                             wall: "Pared",
                             partition_wall: "Pared divisoria",
                             in_the_middle_of_space: "En el medio del espacio",
@@ -512,8 +512,8 @@ i18n
                         }
                     },
                     questionnaire_specs: {
-                        q_prefrences: "Hai preferenze specifiche per la disposizione del tuo spazio abitativo?",
-                        prefrences: {
+                        q_preferences: "Hai preferenze specifiche per la disposizione del tuo spazio abitativo?",
+                        preferences: {
                             wall: "Muro",
                             partition_wall: "Muro divisorio",
                             in_the_middle_of_space: "In mezzo allo spazio",

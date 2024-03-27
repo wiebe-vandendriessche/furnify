@@ -88,8 +88,8 @@ export function Questionnaire_space() {
             <Form>
                 <div className={"mb-4"}>
                     <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5>{t('questionnaire_space.q_dimensions')}</h5>
+                        <div className={"mb-3"} >
+                            <h5 datatest-id={"question-space-dimensions"} >{t('questionnaire_space.q_dimensions')}</h5>
                         </div>
                         <div className="m-1">
                             <ButtonGroup>
@@ -123,9 +123,10 @@ export function Questionnaire_space() {
                                                     controlId={"rectangular" + key}
                                                     label={t('questionnaire_space.' + key)}
                                                     className="mb-4"
+                                                    datatest-id={"label-space-room-rectangular-"+key}
                                                 >
                                                     <Form.Control
-                                                        datatest-id={"input-space-room-rectangular"+key}
+                                                        datatest-id={"input-space-room-rectangular-"+key}
                                                         type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
                                                                   name={key} onChange={changeDim}/>
@@ -141,7 +142,7 @@ export function Questionnaire_space() {
                 </div>
                 <Form.Group>
                     <div className={"mb-3"}>
-                        <h5>{t('questionnaire_space.q_aspects')}</h5>
+                        <h5 datatest-id={"question-space-aspects"} >{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
                         <Button datatest-id={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
