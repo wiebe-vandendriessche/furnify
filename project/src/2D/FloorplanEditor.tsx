@@ -8,9 +8,9 @@ class DrawablePoint extends Vector3 { }
 class DrawableLine {
   private geometry: BufferGeometry;
   private material: LineBasicMaterial;
-  public line: Line | null = null;
-  public start: DrawablePoint;
-  public end: DrawablePoint;
+  public line: Line;
+  private start: DrawablePoint;
+  private end: DrawablePoint;
 
   constructor(start: DrawablePoint, end: DrawablePoint) {
     this.start = start;
@@ -21,59 +21,43 @@ class DrawableLine {
   }
 
   update(end: DrawablePoint) {
+    this.end = end; // Update de eindpositie
     if (this.line) {
-      const start = this.geometry.attributes.position.array.slice(0, 3) as unknown as [number, number, number];
-      const startPoint = new Vector3(...start);
-      this.geometry.setFromPoints([startPoint, end]);
+      this.geometry.setFromPoints([this.start, this.end]);
       this.geometry.attributes.position.needsUpdate = true;
     }
   }
 
+
   addToScene(scene: THREE.Scene) {
-    if (this.line) {
-      scene.add(this.line);
-    }
+    scene.add(this.line);
   }
 
   removeFromScene(scene: THREE.Scene) {
-    if (this.line) {
-      scene.remove(this.line);
-      if (this.geometry) this.geometry.dispose();
-      if (this.material) this.material.dispose();
-      this.line = null;
-    }
+    scene.remove(this.line);
+    this.geometry.dispose();
+    this.material.dispose();
   }
 }
 
-interface TextSpriteProps {
-  text: string;
-  position: Vector3;
-}
-
-const TextSprite: React.FC<TextSpriteProps> = ({ text, position }) => {
+const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, position }) => {
   const { scene } = useThree();
-  const spriteRef = useRef<Sprite>();
 
   useEffect(() => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    if (!context) {
-      console.error('Unable to get canvas context for text sprite');
-      return;
-    }
+    if (!context) throw new Error("Unable to get canvas context");
 
     context.font = '64px serif';
     context.fillStyle = 'rgba(0, 0, 0, 1.0)';
-    context.fillText(text, 0, 64); // Je zou de canvas grootte kunnen aanpassen op basis van de tekstgrootte
+    context.fillText(text, 0, 64);
 
     const texture = new CanvasTexture(canvas);
     const material = new SpriteMaterial({ map: texture });
     const sprite = new Sprite(material);
 
     sprite.position.copy(position);
-    sprite.scale.set(0.5, 0.25, 1); // Pas schaal aan op basis van je behoeften
-    spriteRef.current = sprite;
-
+    sprite.scale.set(0.5, 0.5, 0.5);
     scene.add(sprite);
 
     return () => {
@@ -89,27 +73,48 @@ const TextSprite: React.FC<TextSpriteProps> = ({ text, position }) => {
     };
   }, [text, position, scene]);
 
-  return null; // Dit component rendert niets direct in de DOM
+  return null;
 };
-
-
 
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
   const [points, setPoints] = useState<DrawablePoint[]>([]);
-  const [lines, setLines] = useState<DrawableLine[]>([]);
   const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
-  let [tempLine, setTempLine] = useState<DrawableLine | null>(null);
+  const [lines, setLines] = useState<DrawableLine[]>([]);
+  const tempLineRef = useRef<DrawableLine | null>(null);
 
   const addPoint = useCallback((point: DrawablePoint) => {
-    setPoints(prevPoints => [...prevPoints, point]);
-    // Voeg direct een lijn toe als er al minstens één punt bestaat
-    if (points.length > 0) {
-      const newLine = new DrawableLine(points[points.length - 1], point);
-      newLine.addToScene(scene);
-      setLines(prevLines => [...prevLines, newLine]);
+    setPoints(prevPoints => {
+      // Voeg het nieuwe punt toe aan de bestaande punten
+      const updatedPoints = [...prevPoints, point];
+
+      // Controleer of we nu genoeg punten hebben om een lijn te tekenen
+      if (updatedPoints.length > 1) {
+        // Pak het voorlaatste punt als startpunt
+        const start = updatedPoints[updatedPoints.length - 2];
+        const newLine = new DrawableLine(start, point);
+        newLine.addToScene(scene);
+        setLines(prevLines => [...prevLines, newLine]);
+      }
+
+      return updatedPoints;
+    });
+  }, [scene]);
+
+  const handleClick = useCallback((event: MouseEvent) => {
+    event.preventDefault();
+
+    if (currentMousePosition) {
+      addPoint(new DrawablePoint(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z));
+      // Verwijder de tijdelijke lijn na het toevoegen van een nieuw punt
+      if (tempLineRef.current) {
+        tempLineRef.current.removeFromScene(scene);
+        tempLineRef.current = null; // Reset de ref na verwijdering
+      }
     }
-  }, [points, scene]);
+  }, [addPoint, currentMousePosition, scene]);
+
+
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -129,65 +134,46 @@ export const FloorplanEditor: React.FC = () => {
 
       if (intersection) {
         setCurrentMousePosition(intersection);
-        // Update de tijdelijke lijn
-        if (points.length > 0 && !tempLine) {
-          let temp = new DrawableLine(points[points.length - 1], intersection);
-          temp.addToScene(scene);
-          setTempLine(temp);
-        } else if (tempLine) {
-          tempLine.update(intersection);
-        }
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (tempLine) {
-        tempLine.removeFromScene(scene);
-      }
-    };
-  }, [camera, points, tempLine, scene]);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [camera]);
+
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      event.preventDefault();
-
-      if (currentMousePosition) {
-        addPoint(new DrawablePoint(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z));
-        if (tempLine) {
-          tempLine.removeFromScene(scene);
-          setTempLine(null);
-        }
-      }
-    };
-
+    // Voeg de handleClick als event listener toe aan het window object
     window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
-  }, [addPoint, currentMousePosition, tempLine, scene]);
+    return () => {
+      // Verwijder de event listener wanneer de component wordt ontmanteld
+      window.removeEventListener('click', handleClick);
+    };
+  }, [handleClick]);
 
   useFrame(() => {
-    if (points.length > 0 && currentMousePosition) {
-      // Verwijder eerst de vorige tijdelijke lijn uit de scene voor het geval dat
-      if (tempLine) {
-        tempLine.removeFromScene(scene);
+    if (currentMousePosition) {
+      if (!tempLineRef.current && points.length > 0) {
+        // Creëer de tijdelijke lijn als deze nog niet bestaat
+        const tempLine = new DrawableLine(points[points.length - 1], currentMousePosition);
+        tempLine.addToScene(scene);
+        tempLineRef.current = tempLine;
+      } else if (tempLineRef.current) {
+        // Update de bestaande tijdelijke lijn
+        tempLineRef.current.update(currentMousePosition);
       }
-
-      // Creëer een nieuwe tijdelijke lijn met het laatste punt en de huidige muispositie
-      const lastPoint = points[points.length - 1];
-      tempLine = new DrawableLine(lastPoint, currentMousePosition);
-      tempLine.addToScene(scene);
-      setTempLine(tempLine);
     }
   });
 
 
-  // Gebruik useMemo om te voorkomen dat de tekst sprites opnieuw berekend worden bij elke render
-  const lineLengthSprites = useMemo(() => lines.map((line, index) => {
-    const length = line.start.distanceTo(line.end).toFixed(2);
-    const midpoint = new Vector3().addVectors(line.start, line.end).multiplyScalar(0.5);
-    return <TextSprite key={index} text={`${length} units`} position={midpoint} />;
-  }), [lines]);
+
+  const lineLengthSprites = useMemo(() => points.slice(1).map((point, index) => {
+    const start = points[index];
+    const end = point;
+    const length = start.distanceTo(end).toFixed(2);
+    const midpoint = new Vector3().addVectors(start, end).multiplyScalar(0.5);
+    return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
+  }), [points]);
 
   return (
     <>
@@ -197,13 +183,11 @@ export const FloorplanEditor: React.FC = () => {
           <meshStandardMaterial color={'red'} />
         </mesh>
       ))}
-      {/* Hier gebruik je TextSprite */}
-      {lines.map((line, index) => {
-        const length = line.start.distanceTo(line.end).toFixed(2);
-        const midpoint = new Vector3().addVectors(line.start, line.end).multiplyScalar(0.5);
-        return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
-      })}
+      {lines.map((line, index) => (
+        <primitive key={index} object={line.line} />
+      ))}
+      {lineLengthSprites}
     </>
   );
-}
-// export default FloorplanEditor
+
+};
