@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycaster, BufferGeometry, LineBasicMaterial, Line } from 'three';
 import * as THREE from 'three';
@@ -9,8 +9,12 @@ class DrawableLine {
   private geometry: BufferGeometry;
   private material: LineBasicMaterial;
   public line: Line | null = null;
+  public start: DrawablePoint;
+  public end: DrawablePoint;
 
   constructor(start: DrawablePoint, end: DrawablePoint) {
+    this.start = start;
+    this.end = end;
     this.geometry = new BufferGeometry().setFromPoints([start, end]);
     this.material = new LineBasicMaterial({ color: 0x0000ff });
     this.line = new Line(this.geometry, this.material);
@@ -41,45 +45,54 @@ class DrawableLine {
   }
 }
 
-class TextSprite {
-  sprite: Sprite;
+interface TextSpriteProps {
+  text: string;
+  position: Vector3;
+}
 
-  constructor(text: string, position: Vector3) {
+const TextSprite: React.FC<TextSpriteProps> = ({ text, position }) => {
+  const { scene } = useThree();
+  const spriteRef = useRef<Sprite>();
+
+  useEffect(() => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    if (!context) throw new Error("Failed to get canvas context");
+    if (!context) {
+      console.error('Unable to get canvas context for text sprite');
+      return;
+    }
+
     context.font = '64px serif';
     context.fillStyle = 'rgba(0, 0, 0, 1.0)';
-    context.fillText(text, 0, 50);
+    context.fillText(text, 0, 64); // Je zou de canvas grootte kunnen aanpassen op basis van de tekstgrootte
 
     const texture = new CanvasTexture(canvas);
     const material = new SpriteMaterial({ map: texture });
-    this.sprite = new Sprite(material);
-    this.sprite.position.copy(position);
-    this.sprite.scale.set(0.5, 0.25, 1);
+    const sprite = new Sprite(material);
 
-    canvas.width = context.measureText(text).width;
-    canvas.height = 64; // Adjust based on font size
-    context.fillStyle = 'rgba(0, 0, 0, 1.0)';
-    context.fillText(text, 0, 50);
-    texture.needsUpdate = true;
-  }
+    sprite.position.copy(position);
+    sprite.scale.set(0.5, 0.25, 1); // Pas schaal aan op basis van je behoeften
+    spriteRef.current = sprite;
 
-  addToScene(scene: THREE.Scene) {
-    scene.add(this.sprite);
-  }
+    scene.add(sprite);
 
-  removeFromScene(scene: THREE.Scene) {
-    scene.remove(this.sprite);
-    if (this.sprite.material) {
-      const spriteMaterial = this.sprite.material as SpriteMaterial;
-      if (spriteMaterial.map) {
-        spriteMaterial.map.dispose();
+    return () => {
+      scene.remove(sprite);
+      if (sprite.material) {
+        const spriteMaterial = sprite.material as SpriteMaterial;
+        if (spriteMaterial.map) {
+          spriteMaterial.map.dispose();
+        }
+        spriteMaterial.dispose();
       }
-      spriteMaterial.dispose();
-    }
-  }
-}
+      material.dispose();
+    };
+  }, [text, position, scene]);
+
+  return null; // Dit component rendert niets direct in de DOM
+};
+
+
 
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
@@ -128,12 +141,12 @@ export const FloorplanEditor: React.FC = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    // return () => {
-    //   window.removeEventListener('mousemove', handleMouseMove);
-    //   if (tempLine) {
-    //     tempLine.removeFromScene(scene);
-    //   }
-    // };
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (tempLine) {
+        tempLine.removeFromScene(scene);
+      }
+    };
   }, [camera, points, tempLine, scene]);
 
   useEffect(() => {
@@ -159,7 +172,7 @@ export const FloorplanEditor: React.FC = () => {
       if (tempLine) {
         tempLine.removeFromScene(scene);
       }
-  
+
       // Creëer een nieuwe tijdelijke lijn met het laatste punt en de huidige muispositie
       const lastPoint = points[points.length - 1];
       tempLine = new DrawableLine(lastPoint, currentMousePosition);
@@ -169,6 +182,13 @@ export const FloorplanEditor: React.FC = () => {
   });
 
 
+  // Gebruik useMemo om te voorkomen dat de tekst sprites opnieuw berekend worden bij elke render
+  const lineLengthSprites = useMemo(() => lines.map((line, index) => {
+    const length = line.start.distanceTo(line.end).toFixed(2);
+    const midpoint = new Vector3().addVectors(line.start, line.end).multiplyScalar(0.5);
+    return <TextSprite key={index} text={`${length} units`} position={midpoint} />;
+  }), [lines]);
+
   return (
     <>
       {points.map((point, index) => (
@@ -177,9 +197,13 @@ export const FloorplanEditor: React.FC = () => {
           <meshStandardMaterial color={'red'} />
         </mesh>
       ))}
-      {/* Render logica voor lijnen en tekst sprites kan hier toegevoegd worden als dat nodig is */}
+      {/* Hier gebruik je TextSprite */}
+      {lines.map((line, index) => {
+        const length = line.start.distanceTo(line.end).toFixed(2);
+        const midpoint = new Vector3().addVectors(line.start, line.end).multiplyScalar(0.5);
+        return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
+      })}
     </>
   );
-};
-
-export default FloorplanEditor;
+}
+// export default FloorplanEditor
