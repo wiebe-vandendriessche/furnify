@@ -9,7 +9,7 @@ import logo_dm from "../assets/logo_dm.png";
 import Questionnaire_space from "./components_sidebar/questionnaire_space";
 import Questionnaire_specs from "./components_sidebar/questionnaire_specs";
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
-
+import { check } from "../algorithm/module_choice.ts";
 
 function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
@@ -39,6 +39,7 @@ function Sidebar() {
             case 2:
                 return <Questionnaire_specs/>
             case 3:
+                check()
                 return <Contact/>
             case 4:
                 return <p>Nothing to see here</p>

@@ -9,7 +9,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useTranslation } from 'react-i18next'
 import { Col, FloatingLabel, Row, ToggleButton } from "react-bootstrap";
-import { height_check } from "../../algorithm/module_choice.ts"
+
 
 
 function Questionnaire_space() {
@@ -34,7 +34,7 @@ function Questionnaire_space() {
 
     const changeHeight = (event) => {
         setDimensions({ ...dimensions, height: event.target.value })
-        height_check(event.target.value)
+        
     }
     const changeObstacleType = (event) => {
         setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {

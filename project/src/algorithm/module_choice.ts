@@ -1,18 +1,19 @@
 import { parseCsvData } from "./read_file_csv";
+const MARGE = 1
+let modules: String[] | undefined = undefined;
 
-const MIN_HEIGHT = 2.24;
-
-export const height_check = (height: number) => {
-    if (height < MIN_HEIGHT) {
-        console.log("Kamer is niet hoog genoeg voor de module, minimuum hoogte: " + MIN_HEIGHT + " cm, jouw hoogte: " + height + " cm")
-    } else {
-        console.log("kamer van " + height + "cm is hoog genoeg");
+export const check = (height: number) => {
+    
+    if(modules == undefined){
+        get_modules();
     }
+}
 
+const get_modules = () => {
     try {
         const parsedData = parseCsvData();
         console.log(parsedData);
-        console.log('test') // Do something with the parsed data
+        parsedData.then(e => modules = e)
     } catch (error) {
         console.error('Error parsing CSV:', error);
     }
