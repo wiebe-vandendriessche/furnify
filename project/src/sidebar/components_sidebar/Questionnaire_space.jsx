@@ -159,9 +159,15 @@ export function Questionnaire_space() {
                         <h5 datatest-id={"question-space-aspects"} >{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
-                        <Button datatest-id={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
-                        <Button datatest-id={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
-                        <Button datatest-id={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
+                        <Button datatest-id={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={"window"}>
+                            {t('obstructions.window')}
+                        </Button>
+                        <Button datatest-id={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={"door"}>
+                            {t('obstructions.door')}
+                        </Button>
+                        <Button datatest-id={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={"other"}>
+                            {t('obstructions.other')}
+                        </Button>
                         <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}

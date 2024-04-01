@@ -137,8 +137,8 @@ i18n
                         },
                         q_window:{
                             opening_window:"Kan het raam naar binnen openen?",
-                            yes:"ja",
-                            no:"nee"
+                            yes: "ja",
+                            no: "nee"
                         }
                     },
                     questionnaire_func: {

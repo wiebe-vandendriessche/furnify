@@ -17,18 +17,20 @@ function Contact() {
     }, [])
 
     const {contact, setContact} = useContactContext();
+    //saving changes
     const changeContact = (event) => {
-        setContact({...contact, [event.target.name]: event.target.value})
+        setContact({...contact, [event.target.name]: event.target.value});
     }
 
-    const changePhoneNumber = (event) => {
-        setContact({...contact, phone_number: event})
+    const changePhoneNumber = (num, country) => {
+        setContact({...contact, phone_number: {number: num, country: country}});
     }
 
     return (
 
         <div className={"m-2"}>
             <div className={"mb-3"}>
+                {/**/}
                 <h5 datatest-id={"question-contact"}>
                     {t('contact.q_contact')}
                 </h5>
@@ -43,12 +45,12 @@ function Contact() {
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (
-
-                        <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
+                        //onlyCountries sets all countries that can be chose to show
+                        <PhoneInput key={key} className={"mb-2"} country={contact.phone_number.country} onlyCountries={["be", "nl"]}
                                     enableSearch={true}
                                     searchPlaceholder={""}
                                     disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
-                                    value={contact.phone_number} onChange={changePhoneNumber}/>
+                                    value={contact.phone_number.number} onChange={(value, country)=>changePhoneNumber(value, country.countryCode)}/>
                     )))
                 }
             </Form>

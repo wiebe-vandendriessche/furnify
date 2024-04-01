@@ -15,7 +15,21 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
 
     it("Sidebar space", ()=>{
         let space={ q_dimensions: "Wat zijn de afmetingen van de woonruimte?", rectangular: "Rechthoekig", dimLength: "Lengte", dimWidth: "Breedte",
-                dimHeight: "Hoogte", other: "Anders", q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte."
+                dimHeight: "Hoogte", other: "Anders", q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+            obstructions: { window:"Raam", door:"Deur", radiator:"Radiator", walloutlet:"Stopcontact",
+                switch:"Schakelaar", sloping_Wall:"Schuine wand", other:"Andere",
+                q_door:{
+                    opening_door:"Hoe opent de deur?",
+                    inside_left:"Binnen in de ruimte, naar links",
+                    inside_right:"Binnen in de ruimte, naar rechts",
+                    outside:"Buiten de ruimte"
+                },
+                q_window:{
+                    opening_window:"Kan het raam naar binnen openen?",
+                    yes:"ja",
+                    no:"nee"
+                }
+            }
         }
         checkSpace(space);
     });

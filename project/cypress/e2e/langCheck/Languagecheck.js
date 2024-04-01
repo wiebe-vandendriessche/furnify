@@ -7,6 +7,15 @@ export function checkSpace(space){
     cy.get('[datatest-id="label-space-room-rectangular-width"]').should('have.text', space.dimWidth);
     cy.get('[datatest-id="label-space-room-rectangular-height"]').should('have.text', space.dimHeight);
     cy.get('[datatest-id="question-space-aspects"]').should('have.text', space.q_aspects);
+    cy.get('[datatest-id="btn-space-aspect-window"]').should('have.text', space.obstructions.window).click();
+    cy.get('[datatest-id="btn-space-aspect-door"]').should('have.text', space.obstructions.door).click();
+    cy.get('[datatest-id="btn-space-aspect-other"]').should('have.text', space.obstructions.other);
+    cy.get('[datatest-id="btn-obstacle-expand-window"]').should('have.text', space.obstructions.window).click();
+    cy.get('[datatest-id="question-obstacle-window-opening"]').should('include.text', space.obstructions.q_window.opening_window);
+    cy.get('[datatest-id="btn-obstacle-delete-window"]').click();
+    cy.get('[datatest-id="btn-obstacle-expand-window"]').should('not.exist');
+    cy.get('[datatest-id="btn-obstacle-expand-door"]').should('have.text', space.obstructions.door).click();
+    cy.get('[datatest-id="question-obstacle-door-opening"]').should('include.text', space.obstructions.q_door.opening_door);
     //cy.get('[datatest-id=""]').should('have.text', space.add_aspect);
 }
 
