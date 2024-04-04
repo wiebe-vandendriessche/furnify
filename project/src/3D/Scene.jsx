@@ -9,7 +9,7 @@ import { Tv_wand } from './models/Tv_wand.jsx';
 import { Bed } from './models/Bed.jsx';
 import { Bed_assembly } from './models/Bed_assembly.jsx';
 import { DCube } from './Draggables/DCube.jsx';
-import { Grid, useDrag } from './Draggables/Grid.jsx'
+import { Surface } from './Draggables/Surface.jsx';
 
 
 
@@ -25,9 +25,11 @@ const Scene = () => {
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
-            <Grid scale={10}>
-                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth}/>
-            </Grid>
+            <Surface surfX={width} surfZ={depth}>
+                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                <DCube position={[-1, 1, 2]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+            </Surface>
             <OrbitControls makeDefault />
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
             <hemisphereLight color="lightblue" groundColor="0xf7e497" intensity={0.5} />

@@ -1,19 +1,16 @@
 import { MathUtils, Color } from 'three'
 import { useCallback, useRef, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
-import { Grid, useDrag } from './Grid'
+import { useDrag } from './Surface'
 
-export const DCube = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, ...props }) => {
+export const DCube = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
     
     const ref = useRef()
-    
     const pos = useRef(position)
 
-    // adjust boundaries
-    const maxX2 = maxX/2 - 0.8;
-    const maxZ2 = maxZ/2 - 0.8;
+    const maxX2 = maxX / 2 - 0.8;
+    const maxZ2 = maxZ / 2 - 0.8;
 
     const onDrag = useCallback(({ x, z }) => {
         // Apply boundary checks
@@ -21,17 +18,18 @@ export const DCube = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Ma
         const newZ = Math.max(-maxZ2, Math.min(maxZ2, z));
         pos.current = [newX, position[1], newZ];
     }, [maxX, maxZ, position]);
-    
+
     const [events, active, hovered] = useDrag(onDrag)
-    
+
     useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered])
-    
+
     useFrame((state, delta) => {
         easing.damp3(ref.current.position, pos.current, 0.1, delta)
         easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta)
     })
 
     return (
+        
         <mesh ref={ref} castShadow receiveShadow {...events} {...props}>
             <boxGeometry />
             <meshStandardMaterial />

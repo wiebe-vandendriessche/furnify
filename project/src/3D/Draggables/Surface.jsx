@@ -3,13 +3,13 @@ import { createContext, useRef, useContext, useCallback, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { easing } from 'maath'
 
-const v = new Vector3()
-const p = new Plane(new Vector3(0, 1, 0), 0)
-const context = createContext()
+const vector = new Vector3()
+const plane = new Plane(new Vector3(0, 1, 0), 0)
+const surfaceContext = createContext()
 
 function useDrag(onDrag) {
   const controls = useThree((state) => state.controls)
-  const activatePlane = useContext(context)
+  const activatePlane = useContext(surfaceContext)
   const [hovered, hover] = useState(false)
   const [active, activate] = useState(false)
   const out = useCallback(() => hover(false), [])
@@ -39,34 +39,32 @@ function useDrag(onDrag) {
   const move = useCallback(
     (e) => {
       e.stopPropagation()
-      if (active && e.ray.intersectPlane(p, v)) onDrag(v)
+      if (active && e.ray.intersectPlane(plane, vector)) onDrag(vector)
     },
     [onDrag, active]
   )
   return [{ onPointerOver: over, onPointerOut: out, onPointerDown: down, onPointerUp: up, onPointerMove: move }, active, hovered]
 }
 
-function Grid({ children, scale, divisions = 10, ...props }) {
-  const grid = useRef()
+function Surface({ children, surfX, surfZ, ...props }) {
   const plane = useRef()
   const [active, activate] = useState(false)
+
   useFrame((state, delta) => {
-    easing.damp(grid.current.material, 'opacity', active ? 1 : 0.9, 0.1, delta)
-    easing.damp(plane.current.material, 'opacity', active ? 1 : 0.25, 0.1, delta)
+    easing.damp(plane.current.material, 'opacity', active ? 0.25 : 0, 0.1, delta)
   })
+
   return (
     <group {...props}>
-      <group scale={scale}>
-        <gridHelper ref={grid} args={[1, divisions, '#888', '#bbb']} /> 
+      <group scale={[surfX,1,surfZ]} position={[0,0.02,0]}>
         <mesh receiveShadow ref={plane} rotation-x={-Math.PI / 2}>
           <planeGeometry />
           <meshStandardMaterial transparent color="lightblue" polygonOffset polygonOffsetUnits={1} polygonOffsetFactor={1} />
         </mesh>
       </group>
-      <context.Provider value={activate}>{children}</context.Provider>
+      <surfaceContext.Provider value={activate}>{children}</surfaceContext.Provider>
     </group>
   )
 }
 
-export { Grid, useDrag }
-
+export { Surface, useDrag }
