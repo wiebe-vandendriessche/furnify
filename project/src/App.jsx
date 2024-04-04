@@ -1,5 +1,4 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Sky, Stars } from '@react-three/drei'
 // import Room from './components/roomComponents/Room'
 import { useEffect, useState } from 'react'
 import './App.css'
