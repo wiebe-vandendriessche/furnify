@@ -10,6 +10,7 @@ import { Bed } from './models/Bed.jsx';
 import { Bed_assembly } from './models/Bed_assembly.jsx';
 import { DCube } from './Draggables/DCube.jsx';
 import { Surface } from './Draggables/Surface.jsx';
+import { DModel } from './Draggables/DModel.jsx';
 
 
 
@@ -28,7 +29,7 @@ const Scene = () => {
             <Surface surfX={width} surfZ={depth}>
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
-                <DCube position={[-1, 1, 2]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
             </Surface>
             <OrbitControls makeDefault />
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
