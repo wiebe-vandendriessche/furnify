@@ -1,6 +1,6 @@
 import React from 'react'
-import { Canvas } from '@react-three/fiber';
-import { useState } from 'react'
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
+import { useState, useRef } from 'react'
 import { OrbitControls, Sky, Stars } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
@@ -8,6 +8,9 @@ import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
 import { Tv_wand } from './models/Tv_wand.jsx';
 import { Bed } from './models/Bed.jsx';
 import { Bed_assembly } from './models/Bed_assembly.jsx';
+import { DCube } from './Draggables/DCube.jsx';
+import { Surface } from './Draggables/Surface.jsx';
+
 
 
 const Scene = () => {
@@ -16,18 +19,20 @@ const Scene = () => {
     let depth = dimensions.length;
     let height = dimensions.height;
     return (
-        <Canvas className="canvas" camera={{position: [10, 6, 8]}} style={{ backgroundColor: 'lightblue' }}>
+        <Canvas className="canvas" camera={{ position: [10, 6, 8] }} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
             <directionalLight position={[-10, 6, -8]} />
-            <Tv_wand />
-            <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3}/>
+            <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
-            <OrbitControls />
-
+            <Surface surfX={width} surfZ={depth}>
+                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                <DCube position={[-1, 1, 2]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+            </Surface>
+            <OrbitControls makeDefault />
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
-            
-            <hemisphereLight color="lightblue" groundColor="0xf7e497" intensity={0.5}/>
+            <hemisphereLight color="lightblue" groundColor="0xf7e497" intensity={0.5} />
             <axesHelper />
         </Canvas>
     )
