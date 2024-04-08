@@ -63,5 +63,4 @@ export function checkContact(contact){
     cy.get('[datatest-id="label-contact-lastname"]').should('have.text', contact.lastname);
     cy.get('[datatest-id="label-contact-email"]').should('have.text', contact.email);
     cy.get('[datatest-id="label-contact-address"]').should('have.text', contact.address);
-    //cy.get('[datatest-id="label-contact-"]').should('have.text',);
 }

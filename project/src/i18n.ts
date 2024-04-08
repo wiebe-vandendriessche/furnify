@@ -232,8 +232,8 @@ i18n
                         q_space:"Quel espace de vie souhaitez-vous optimiser?",
                         space:{
                             guest_room:"Chambre d'amis",
-                            living_room:"le salon",
-                            bedroom:"chambre à coucher",
+                            living_room:"Le salon",
+                            bedroom:"Chambre à coucher",
                         },
                         q_function:"Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
                         functions:{
