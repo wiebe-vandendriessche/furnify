@@ -1,4 +1,4 @@
-﻿naam;hoogte;diepte;breedte140;breedte160;breedte180;dicht ;open;besparing;opkladbed;zetel;bureau;kast met zijschappen;kast;bed bewegend;kast bewegend;bureau bewegend;2de kast bewegend
+﻿naam;hoogte;diepte;breedte140;breedte160;breedte180;dicht;open;besparing;opkladbed;zetel;bureau;kast_met_zijschappen;kast;bed_bewegend;kast_bewegend;bureau_bewegend;tweede_kast_bewegend
 opklapbed;2211;400;1541;1741;1941;400;2190;4;true;false;false;false;false;false;false;false;false
 opklapbed_zetel;2211;400;1541;1741;1941;1225;2190;10;true;true;false;false;false;false;false;false;false
 bureau;2211;400;1685;1885;2085;400;1000;2;false;false;true;false;false;false;false;false;false
