@@ -102,13 +102,13 @@ export function Questionnaire_space() {
                 <div className={"mb-4"}>
                     <Form.Group>
                         <div className={"mb-3"} >
-                            <h5 datatest-id={"question-space-dimensions"} >{t('questionnaire_space.q_dimensions')}</h5>
+                            <h5 data-testid={"question-space-dimensions"} >{t('questionnaire_space.q_dimensions')}</h5>
                         </div>
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
                                     onClick={()=>{changeForm(true)}}
-                                    datatest-id={"btn-space-room-rectangular"}
+                                    data-testid={"btn-space-room-rectangular"}
                                     type="radio"
                                     value="Rectangular"
                                     variant="danger"
@@ -117,7 +117,7 @@ export function Questionnaire_space() {
                                     {t('questionnaire_space.rectangular')}
                                 </ToggleButton>
                                 <ToggleButton
-                                    datatest-id={"btn-space-room-other"}
+                                    data-testid={"btn-space-room-other"}
                                     type="radio"
                                     value="Other"
                                     variant="danger"
@@ -136,10 +136,10 @@ export function Questionnaire_space() {
                                                     controlId={"rectangular" + key}
                                                     label={t('questionnaire_space.' + key)}
                                                     className="mb-4"
-                                                    datatest-id={"label-space-room-rectangular-"+key}
+                                                    data-testid={"label-space-room-rectangular-"+key}
                                                 >
                                                     <Form.Control
-                                                        datatest-id={"input-space-room-rectangular-"+key}
+                                                        data-testid={"input-space-room-rectangular-"+key}
                                                         type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
                                                                   name={key} onChange={changeDim}
@@ -156,16 +156,16 @@ export function Questionnaire_space() {
                 </div>
                 <Form.Group>
                     <div className={"mb-3"}>
-                        <h5 datatest-id={"question-space-aspects"} >{t('questionnaire_space.q_aspects')}</h5>
+                        <h5 data-testid={"question-space-aspects"} >{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
-                        <Button datatest-id={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={"window"}>
+                        <Button data-testid={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={"window"}>
                             {t('obstructions.window')}
                         </Button>
-                        <Button datatest-id={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={"door"}>
+                        <Button data-testid={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={"door"}>
                             {t('obstructions.door')}
                         </Button>
-                        <Button datatest-id={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={"other"}>
+                        <Button data-testid={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={"other"}>
                             {t('obstructions.other')}
                         </Button>
                         <div className={"aspect"}>

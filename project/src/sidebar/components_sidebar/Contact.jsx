@@ -31,19 +31,19 @@ function Contact() {
         <div className={"m-2"}>
             <div className={"mb-3"}>
                 {/**/}
-                <h5 datatest-id={"question-contact"}>
+                <h5 data-testid={"question-contact"}>
                     {t('contact.q_contact')}
                 </h5>
             </div>
             <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
-                                                            datatest-id={"label-contact-"+key}
+                                                            data-testid={"label-contact-"+key}
                                                             className={"mb-2"}
                                                             controlId="floatingInput"
                                                             label={t("contact."+key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
-                                      datatest-id={"input-contact-"+key}
+                                      data-testid={"input-contact-"+key}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (
                         //onlyCountries sets all countries that can be chose to show
@@ -51,7 +51,7 @@ function Contact() {
                                     enableSearch={true}
                                     searchPlaceholder={""}
                                     disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
-                                    datatest-id={"input-contact-phone"}
+                                    data-testid={"input-contact-phone"}
                                     value={contact.phone_number.number} onChange={(value, country)=>changePhoneNumber(value, country.countryCode)}/>
                     )))
                 }

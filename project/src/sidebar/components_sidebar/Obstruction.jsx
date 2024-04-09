@@ -84,12 +84,12 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                    datatest-id={"btn-obstacle-expand-"+type}
+                    data-testid={"btn-obstacle-expand-"+type}
                     variant={"danger"} value={type ?? t("obstructions."+type)}
                    onClick={(e) => {
                        showButton()
                        showExtraQuestion(e)}}>{t("obstructions."+type)}</Button>
-            <Button className={"fa-rectangle-xmark"}  datatest-id={"btn-obstacle-delete-"+type}
+            <Button className={"fa-rectangle-xmark"}  data-testid={"btn-obstacle-delete-"+type}
                     variant={"danger"} id={"delete" + obstId}
                     onClick={(e) => deleteObst(e)}>
                 x
@@ -121,7 +121,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.length')}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
-                                                  datatest-id={"input-obst-"+type+"-length"}
+                                                  data-testid={"input-obst-"+type+"-length"}
                                                   defaultValue={length} onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
@@ -132,7 +132,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
-                                                  datatest-id={"input-obst-"+type+"-width"}
+                                                  data-testid={"input-obst-"+type+"-width"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
 
@@ -145,7 +145,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
-                                                  datatest-id={"input-obst-"+type+"-height"}
+                                                  data-testid={"input-obst-"+type+"-height"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
@@ -156,7 +156,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                 </Form.Group>
 
                 <Form.Group hidden={hideDoor}>
-                    <Form.Label datatest-id={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
+                    <Form.Label data-testid={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton
@@ -167,7 +167,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeInsideLeftDoor()
                                     changeDoor(e)
                                 }}
-                                datatest-id={"btn-obstacle-door-inside-l"}
+                                data-testid={"btn-obstacle-door-inside-l"}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -183,7 +183,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeInsideRightDoor()
                                     changeDoor(e)
                                 }}
-                                datatest-id={"btn-obstacle-door-inside-r"}
+                                data-testid={"btn-obstacle-door-inside-r"}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -200,7 +200,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeDoor(e)
                                 }}
                                 type="radio"
-                                datatest-id={"btn-obstacle-door-outside"}
+                                data-testid={"btn-obstacle-door-outside"}
                                 value="Other"
                                 variant="danger"
                                 checked={outsideDoor}>
@@ -210,7 +210,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                     </div>
                 </Form.Group>
                 <Form.Group hidden={hideWindow}>
-                    <Form.Label datatest-id={"question-obstacle-window-opening"}>{t('obstructions.q_window.opening_window')}</Form.Label>
+                    <Form.Label data-testid={"question-obstacle-window-opening"}>{t('obstructions.q_window.opening_window')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton
@@ -219,7 +219,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                 variant="danger"
                                 name={"yes" + obstId}
                                 controlId={"yes" + obstId}
-                                datatest-id={"btn-obstacle-window-inside"}
+                                data-testid={"btn-obstacle-window-inside"}
                                 checked={insideWindow}
                                 onClick={(event) => {
                                     setinsideWindow(!insideWindow)
@@ -230,7 +230,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                 className="mb-4"
                                 type="radio"
                                 variant="danger"
-                                datatest-id={"btn-obstacle-window-outside"}
+                                data-testid={"btn-obstacle-window-outside"}
                                 name={"no" + obstId}
                                 controlId={"yes" + obstId}
                                 checked={!insideWindow}

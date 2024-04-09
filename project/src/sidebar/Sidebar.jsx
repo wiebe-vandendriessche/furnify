@@ -62,8 +62,8 @@ export function Sidebar() {
                         </a>
                         {showNextPart()}
                         <div className="bottom_btn">
-                            <button datatest-id="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>
-                            <button datatest-id="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>
+                            <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>
+                            <button data-testid="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>
                         </div>
 
                     </div>
