@@ -40,7 +40,7 @@ export function Questionnaire_spec() {
                                               checked={"wall" === specs.layout}>
                                     {t('questionnaire_specs.preferences.wall')}
                                 </ToggleButton>
-                                <ToggleButton variant={"danger"} type="radio" id="Partition" value={"partition"}
+                                <ToggleButton variant={"danger"} type="radio" id="partition" value={"partition"}
                                               name="layout"
                                               datatest-id={"btn-specs-preferences-partition_wall"}
                                               onChange={changeSpecs} checked={"partition" === specs.layout}>
@@ -64,20 +64,20 @@ export function Questionnaire_spec() {
                                     <ButtonGroup>
                                         <ToggleButton variant={"danger"} type="radio" id="matBirch" value={"birch"}
                                                       name="material"
-                                                      datatest-id={"btn-material-birch"}
+                                                      datatest-id={"btn-specs-material-birch"}
                                                       onChange={changeSpecs}
                                                       checked={specs.material === "birch"}>
                                             {t('questionnaire_specs.materials.birch')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="matOak" value={"oak"}
                                                       name="material"
-                                                      datatest-id={"btn-material-oak"}
+                                                      datatest-id={"btn-specs-material-oak"}
                                                       onChange={changeSpecs} checked={specs.material === "oak"}>
                                             {t('questionnaire_specs.materials.oak')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="matWalnut" name="material"
                                                       value={"walnut"}
-                                                      datatest-id={"btn-material-walnut"}
+                                                      datatest-id={"btn-specs-material-walnut"}
                                                       onChange={changeSpecs} checked={specs.material === "walnut"}>
                                             {t('questionnaire_specs.materials.walnut')}
                                         </ToggleButton>
@@ -86,12 +86,12 @@ export function Questionnaire_spec() {
                                 <Col>
                                     <ButtonGroup>
                                         <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
-                                                      datatest-id={"btn-color-white"}
+                                                      datatest-id={"btn-specs-color-white"}
                                                       onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
                                             {t('questionnaire_specs.materials.white')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
-                                                      datatest-id={"btn-color-black"}
+                                                      datatest-id={"btn-specs-color-black"}
                                                       onChange={changeSpecs} checked={specs.color === "#000000"}>
                                             {t('questionnaire_specs.materials.black')}
                                         </ToggleButton>
@@ -107,7 +107,7 @@ export function Questionnaire_spec() {
                     <FormGroup>
                         <div className={"mb-3"}><h5 datatest-id={"question-specs-other"} >{t('questionnaire_specs.q_other')}</h5></div>
                     </FormGroup>
-                    <Form.Control as={"textarea"} rows="3" cols="40" value={varia.requirements}
+                    <Form.Control as={"textarea"} datatest-id={"area-specs-requirements"} rows="3" cols="40" value={varia.requirements}
                                   name="requirements" onChange={changeVaria}></Form.Control>
                 </div>
             </Form>

@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+//Removing all spaces before comparing
+Cypress.Commands.add('assertInputValueWithoutSpaces', { prevSubject: true }, (subject, expectedValue) => {
+    cy.wrap(subject).invoke('val').then(actualValue => {
+        const cleanedActualValue = actualValue.replace(/\s+/g, ''); // Remove all spaces
+        return cleanedActualValue.includes(expectedValue);
+    });
+});

@@ -5,3 +5,9 @@ export function passRoomDimensions(params){
     cy.get('[datatest-id="input-space-room-rectangular-height"]').clear().type(params[2]);
 
 }
+
+export function passObstacleDimensions(params){
+    cy.get('[datatest-id="input-obst-'+params.type+'-length"]').clear().type(params.Length);
+    cy.get('[datatest-id="input-obst-'+params.type+'-height"]').clear().type(params.Height);
+    cy.get('[datatest-id="input-obst-'+params.type+'-width"]').clear().type(params.Width);
+}

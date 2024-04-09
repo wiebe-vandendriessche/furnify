@@ -43,6 +43,7 @@ function Contact() {
                                                             controlId="floatingInput"
                                                             label={t("contact."+key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
+                                      datatest-id={"input-contact-"+key}
                                       onChange={changeContact}/>
                     </FloatingLabel>) : (
                         //onlyCountries sets all countries that can be chose to show
@@ -50,6 +51,7 @@ function Contact() {
                                     enableSearch={true}
                                     searchPlaceholder={""}
                                     disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
+                                    datatest-id={"input-contact-phone"}
                                     value={contact.phone_number.number} onChange={(value, country)=>changePhoneNumber(value, country.countryCode)}/>
                     )))
                 }

@@ -46,11 +46,11 @@ export function checkSpecs(specs){
     cy.get('[datatest-id="btn-specs-preferences-partition_wall"]').should('have.text', specs.preferences.partition_wall);
     cy.get('[datatest-id="btn-specs-preferences-middle_wall"]').should('have.text', specs.preferences.in_the_middle_of_space);
     cy.get('[datatest-id="question-specs-materials"]').should('have.text', specs.q_materials);
-    cy.get('[datatest-id="btn-material-birch"]').should('have.text', specs.materials.birch);
-    cy.get('[datatest-id="btn-material-oak"]').should('have.text', specs.materials.oak);
-    cy.get('[datatest-id="btn-material-walnut"]').should('have.text', specs.materials.walnut);
-    cy.get('[datatest-id="btn-color-white"]').should('have.text', specs.materials.white);
-    cy.get('[datatest-id="btn-color-black"]').should('have.text', specs.materials.black);
+    cy.get('[datatest-id="btn-specs-material-birch"]').should('have.text', specs.materials.birch);
+    cy.get('[datatest-id="btn-specs-material-oak"]').should('have.text', specs.materials.oak);
+    cy.get('[datatest-id="btn-specs-material-walnut"]').should('have.text', specs.materials.walnut);
+    cy.get('[datatest-id="btn-specs-color-white"]').should('have.text', specs.materials.white);
+    cy.get('[datatest-id="btn-specs-color-black"]').should('have.text', specs.materials.black);
     cy.get('[datatest-id="question-specs-other"]').should('have.text', specs.q_other);
 }
 

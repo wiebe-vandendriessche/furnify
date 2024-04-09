@@ -121,6 +121,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.length')}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
+                                                  datatest-id={"input-obst-"+type+"-length"}
                                                   defaultValue={length} onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
@@ -131,8 +132,10 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                                  datatest-id={"input-obst-"+type+"-width"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
+
 
                                 </FloatingLabel>
                             </Col>
@@ -142,6 +145,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                                  datatest-id={"input-obst-"+type+"-height"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>

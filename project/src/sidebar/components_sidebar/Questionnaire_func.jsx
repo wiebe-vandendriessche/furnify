@@ -80,8 +80,8 @@ export function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
-                                    <div className="mb-3" >
-                                        <ButtonGroup defaultValue={varia.mattress ?? " "}>
+                                    <div className="mb-3" datatest-id={"div-func-options-mattress"}>
+                                        <ButtonGroup defaultValue={varia.mattress ?? "none"}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
                                                           datatest-id={"btn-func-bed-soft"} onChange={changeVaria}
@@ -98,9 +98,9 @@ export function Questionnaire_functional() {
                                                           checked={"sturdy" == varia.mattress}>
                                                 {t('questionnaire_func.bed.sturdy')}
                                             </ToggleButton>
-                                            <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
+                                            <ToggleButton variant={"danger"} type="radio" id="none" name="mattress"
                                                           datatest-id={"btn-func-bed-apply"} onChange={changeVaria}
-                                                          checked={" " == varia.mattress}>
+                                                          checked={"none" == varia.mattress}>
                                                 {t('questionnaire_func.bed.apply')}
                                             </ToggleButton>
                                         </ButtonGroup>
