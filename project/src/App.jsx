@@ -7,12 +7,14 @@ import Sidebar from './sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
 import Scene from './3D/Scene'
 import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
-import { FloorplanEditor } from './2D/FloorplanEditor'
+import { FloorplanScene } from './2D/FloorplanScene'
 
 
 function App() {
 
   const { i18n } = useTranslation();
+
+  const showFloorplan = true;
 
   useEffect(() => {
     const lng = navigator.language;
@@ -24,14 +26,8 @@ function App() {
       <Sidebar />
       <main>
         <div className="container">
-          {/* <Scene /> */}
-          <Canvas orthographic camera={{ position: [0, 0, 5], zoom: 100 }}>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <FloorplanEditor />
-            <axesHelper />
-            {/* <OrbitControls /> */}
-          </Canvas>
+          {showFloorplan && <FloorplanScene />}
+          {!showFloorplan && <Scene />}
         </div>
       </main>
     </div>
