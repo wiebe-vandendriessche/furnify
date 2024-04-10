@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber';
 import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycaster, BufferGeometry, LineBasicMaterial, Line } from 'three';
 import * as THREE from 'three';
-import { DrawableLine, LinePrimitive } from './components/Line';
+import { DrawableLine, LinePrimitive, TextSprite } from './components/Line';
 import { DrawablePoint, Point } from './components/Point';
 
 const useMousePosition = (camera) => {
@@ -30,36 +30,6 @@ const useMousePosition = (camera) => {
   }, [camera]);
 
   return currentMousePosition;
-};
-
-const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, position }) => {
-  const { scene } = useThree();
-
-  useEffect(() => {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (!context) throw new Error("Unable to get canvas context");
-
-    context.font = '64px serif';
-    context.fillStyle = 'rgba(0, 0, 0, 1.0)';
-    context.fillText(text, 0, 64);
-
-    const texture = new CanvasTexture(canvas);
-    const material = new SpriteMaterial({ map: texture });
-    const sprite = new Sprite(material);
-
-    sprite.position.copy(position);
-    sprite.scale.set(0.5, 0.5, 0.5);
-    scene.add(sprite);
-
-    return () => {
-      scene.remove(sprite);
-      texture.dispose();
-      material.dispose();
-    };
-  }, [text, position, scene]);
-
-  return null;
 };
 
 export const FloorplanEditor: React.FC = () => {

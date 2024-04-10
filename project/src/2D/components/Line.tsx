@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { DrawablePoint } from './Point';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Line } from 'three';
+import { useThree } from '@react-three/fiber';
 
 export class DrawableLine {
   private geometry: THREE.BufferGeometry;
@@ -38,3 +39,33 @@ export class DrawableLine {
 }
 
 export const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;
+
+export const TextSprite: React.FC<{ text: string; position: THREE.Vector3 }> = ({ text, position }) => {
+  const { scene } = useThree();
+
+  useEffect(() => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    if (!context) throw new Error("Unable to get canvas context");
+
+    context.font = '64px serif';
+    context.fillStyle = 'rgba(0, 0, 0, 1.0)';
+    context.fillText(text, 0, 64);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.SpriteMaterial({ map: texture });
+    const sprite = new THREE.Sprite(material);
+
+    sprite.position.copy(position);
+    sprite.scale.set(0.5, 0.5, 0.5);
+    scene.add(sprite);
+
+    return () => {
+      scene.remove(sprite);
+      texture.dispose();
+      material.dispose();
+    };
+  }, [text, position, scene]);
+
+  return null;
+};
