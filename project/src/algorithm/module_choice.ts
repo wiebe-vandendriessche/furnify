@@ -4,20 +4,30 @@ const MARGE = 1
 let modules: Module[] = []
 
 export const check = (val: any) => {
-let func = val.functionalities
+    let func = val.functionalities
+    let dim = val.dimensions
 
     if (modules.length == 0) {
         get_modules();
     }
-    let result: Module[] = [];
-    //console.log(modules)
-    //console.log(func)
+
+    //check if the exact combination is possible
+    let result_type: Module[] = [];
     modules.forEach(mod => {
         if (mod.type(func.bed, func.desk, func.sofa, func.storagespace)) {
-            result.push(mod)
+            result_type.push(mod)
         }
     })
-    console.log(result)
+    //maybe set a second test if the result is empty
+
+    // check size is correct
+    let result_size: Module[] = [];
+    result_type.forEach(mod =>{
+        if(mod.correct_size(dim.height, dim.depth, dim.width)){
+            result_size.push(mod)
+        }
+    })
+    console.log(result_size)
 }
 
 const get_modules = () => {
