@@ -2,43 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber';
 import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycaster, BufferGeometry, LineBasicMaterial, Line } from 'three';
 import * as THREE from 'three';
-
-
-class DrawablePoint extends Vector3 {}
-
-class DrawableLine {
-  private geometry: BufferGeometry;
-  private material: LineBasicMaterial;
-  public line: Line;
-  private start: DrawablePoint;
-  private end: DrawablePoint;
-
-  constructor(start: DrawablePoint, end: DrawablePoint) {
-    this.start = start;
-    this.end = end;
-    this.geometry = new BufferGeometry().setFromPoints([start, end]);
-    this.material = new LineBasicMaterial({ color: 0x0000ff });
-    this.line = new Line(this.geometry, this.material);
-  }
-
-  update(end: DrawablePoint) {
-    if (!this.end.equals(end)) {
-      this.end.copy(end);
-      this.geometry.setFromPoints([this.start, this.end]);
-      this.geometry.attributes.position.needsUpdate = true;
-    }
-  }
-
-  addToScene(scene: THREE.Scene) {
-    scene.add(this.line);
-  }
-
-  removeFromScene(scene: THREE.Scene) {
-    scene.remove(this.line);
-    this.geometry.dispose();
-    this.material.dispose();
-  }
-}
+import { DrawableLine } from './components/DrawableLine';
+import { DrawablePoint } from './components/DrawablePoint';
 
 const useMousePosition = (camera) => {
   const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
