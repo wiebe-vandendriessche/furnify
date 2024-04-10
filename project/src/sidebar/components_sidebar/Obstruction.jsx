@@ -49,12 +49,12 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     const [hideDoor, setHideDoor] = useState(true);
     const [hideWindow, setHideWindow] = useState(true);
     const showExtraQuestion = (event) => {
-        showWichQuestion(event.target.value)
+        showWhichQuestion(event.target.value)
     }
-    const showWichQuestion = (value) => {
+    const showWhichQuestion = (value) => {
         setHideDoor(true)
         setHideWindow(true)
-        if (value == t('obstructions.door')) {
+        if (value == "door") {
             setHideDoor(false)
             if (door == 'left') {
                 changeInsideLeftDoor()
@@ -63,34 +63,34 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
             } else if (door == 'out') {
                 changeOutsideDoor()
             }
-        } else if (value == t('obstructions.window')) {
+        } else if (value == "window") {
             setHideWindow(false)
         }
     }
     const [insideWindow, setinsideWindow] = useState(window);
 
     function handleKeyPress(event) {
-        // Allow digits (0-9) and prevent backspace (charCode 8)
-        if (
-            (event.charCode !== 8 && event.charCode === 0) ||
-            (event.charCode >= 48 && event.charCode <= 57)
-        ) {
-            return true;
-        } else {
+        //prevent use of negative values
+        if(event.charCode==45){
+            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
+        return true;
     }
 
     console.log(obstId);
     console.log(type)
     return (
         <div className="obstruction-bg mb-2 flex">
-            <Button id={"button" + obstId} variant={"danger"} value={type ?? t(type)}
+            <Button id={"button" + obstId}
+                    data-testid={"btn-obstacle-expand-"+type}
+                    variant={"danger"} value={type ?? t("obstructions."+type)}
                    onClick={(e) => {
                        showButton()
-                       showExtraQuestion(e)}}>{t(type)}</Button>
-            <Button className={"fa-rectangle-xmark"} variant={"danger"} id={"delete" + obstId}
+                       showExtraQuestion(e)}}>{t("obstructions."+type)}</Button>
+            <Button className={"fa-rectangle-xmark"}  data-testid={"btn-obstacle-delete-"+type}
+                    variant={"danger"} id={"delete" + obstId}
                     onClick={(e) => deleteObst(e)}>
                 x
             </Button>
@@ -102,13 +102,13 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                      changeObst(e)
                                      showExtraQuestion(e)
                                  }}>
-                        <option value={t('obstructions.other')}>{t('obstructions.other')}</option>
-                        <option value={t('obstructions.window')}>{t('obstructions.window')}</option>
-                        <option value={t('obstructions.door')}>{t('obstructions.door')}</option>
-                        <option value={t('obstructions.radiator')}>{t('obstructions.radiator')}</option>
-                        <option value={t('obstructions.walloutlet')}>{t('obstructions.walloutlet')}</option>
-                        <option value={t('obstructions.switch')}>{t('obstructions.switch')}</option>
-                        <option value={t('obstructions.sloping_Wall')}>{t('obstructions.sloping_Wall')}</option>
+                        <option value={"other"}>{t('obstructions.other')}</option>
+                        <option value={"window"}>{t('obstructions.window')}</option>
+                        <option value={"door"}>{t('obstructions.door')}</option>
+                        <option value={"radiator"}>{t('obstructions.radiator')}</option>
+                        <option value={"walloutlet"}>{t('obstructions.walloutlet')}</option>
+                        <option value={"switch"}>{t('obstructions.switch')}</option>
+                        <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
 
                     </Form.Select>
                 </Form.Group>
@@ -121,6 +121,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.length')}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
+                                                  data-testid={"input-obst-"+type+"-length"}
                                                   defaultValue={length} onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
@@ -131,8 +132,10 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                                  data-testid={"input-obst-"+type+"-width"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
+
 
                                 </FloatingLabel>
                             </Col>
@@ -142,6 +145,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                                  data-testid={"input-obst-"+type+"-height"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}/>
                                 </FloatingLabel>
@@ -152,7 +156,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                 </Form.Group>
 
                 <Form.Group hidden={hideDoor}>
-                    <Form.Label> {t('obstructions.q_door.opening_door')}</Form.Label>
+                    <Form.Label data-testid={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton
@@ -163,6 +167,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeInsideLeftDoor()
                                     changeDoor(e)
                                 }}
+                                data-testid={"btn-obstacle-door-inside-l"}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -178,6 +183,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeInsideRightDoor()
                                     changeDoor(e)
                                 }}
+                                data-testid={"btn-obstacle-door-inside-r"}
                                 type="radio"
                                 value="Rectangular"
                                 variant="danger"
@@ -194,6 +200,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeDoor(e)
                                 }}
                                 type="radio"
+                                data-testid={"btn-obstacle-door-outside"}
                                 value="Other"
                                 variant="danger"
                                 checked={outsideDoor}>
@@ -203,7 +210,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                     </div>
                 </Form.Group>
                 <Form.Group hidden={hideWindow}>
-                    <Form.Label>{t('obstructions.q_window.opening_window')}</Form.Label>
+                    <Form.Label data-testid={"question-obstacle-window-opening"}>{t('obstructions.q_window.opening_window')}</Form.Label>
                     <div>
                         <ButtonGroup>
                             <ToggleButton
@@ -212,6 +219,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                 variant="danger"
                                 name={"yes" + obstId}
                                 controlId={"yes" + obstId}
+                                data-testid={"btn-obstacle-window-inside"}
                                 checked={insideWindow}
                                 onClick={(event) => {
                                     setinsideWindow(!insideWindow)
@@ -222,6 +230,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                 className="mb-4"
                                 type="radio"
                                 variant="danger"
+                                data-testid={"btn-obstacle-window-outside"}
                                 name={"no" + obstId}
                                 controlId={"yes" + obstId}
                                 checked={!insideWindow}

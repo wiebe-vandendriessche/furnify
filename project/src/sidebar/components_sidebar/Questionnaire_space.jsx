@@ -82,16 +82,13 @@ export function Questionnaire_space() {
 
     //prevent user from typing negative values
     function handleKeyPress(event) {
-        // Allow digits (0-9) and prevent backspace (charCode 8)
-        if (
-            (event.charCode !== 8 && event.charCode === 0) ||
-            (event.charCode >= 48 && event.charCode <= 57)
-        ) {
-            return true;
-        } else {
+        //prevent use of negative values
+        if(event.charCode==45){
+            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
+        return true;
     }
 
     const changeForm=(bool)=>{
@@ -104,13 +101,14 @@ export function Questionnaire_space() {
             <Form>
                 <div className={"mb-4"}>
                     <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5>{t('questionnaire_space.q_dimensions')}</h5>
+                        <div className={"mb-3"} >
+                            <h5 data-testid={"question-space-dimensions"} >{t('questionnaire_space.q_dimensions')}</h5>
                         </div>
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
                                     onClick={()=>{changeForm(true)}}
+                                    data-testid={"btn-space-room-rectangular"}
                                     type="radio"
                                     value="Rectangular"
                                     variant="danger"
@@ -119,6 +117,7 @@ export function Questionnaire_space() {
                                     {t('questionnaire_space.rectangular')}
                                 </ToggleButton>
                                 <ToggleButton
+                                    data-testid={"btn-space-room-other"}
                                     type="radio"
                                     value="Other"
                                     variant="danger"
@@ -137,8 +136,11 @@ export function Questionnaire_space() {
                                                     controlId={"rectangular" + key}
                                                     label={t('questionnaire_space.' + key)}
                                                     className="mb-4"
+                                                    data-testid={"label-space-room-rectangular-"+key}
                                                 >
-                                                    <Form.Control type="number" min={0} step={0.1} value={value}
+                                                    <Form.Control
+                                                        data-testid={"input-space-room-rectangular-"+key}
+                                                        type="number" min={0} step={0.1} value={value}
                                                                   size="sm"
                                                                   name={key} onChange={changeDim}
                                                                   onKeyPress={handleKeyPress}/>
@@ -154,12 +156,18 @@ export function Questionnaire_space() {
                 </div>
                 <Form.Group>
                     <div className={"mb-3"}>
-                        <h5>{t('questionnaire_space.q_aspects')}</h5>
+                        <h5 data-testid={"question-space-aspects"} >{t('questionnaire_space.q_aspects')}</h5>
                     </div>
                     <div className={"m-1"}>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
+                        <Button data-testid={"btn-space-aspect-window"} onClick={addObstacles} variant="danger" value={"window"}>
+                            {t('obstructions.window')}
+                        </Button>
+                        <Button data-testid={"btn-space-aspect-door"} onClick={addObstacles} variant="danger" value={"door"}>
+                            {t('obstructions.door')}
+                        </Button>
+                        <Button data-testid={"btn-space-aspect-other"} onClick={addObstacles} variant="danger" value={"other"}>
+                            {t('obstructions.other')}
+                        </Button>
                         <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
                                                                    length={item.obstLength} width={item.width}
