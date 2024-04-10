@@ -133,7 +133,7 @@ function Questionnaire_space() {
                             <Col>
                                 <FloatingLabel
                                     controlId="rectangularLength"
-                                    label={t('questionnaire_space.length')}
+                                    label={t('questionnaire_space.length') + " (m)"}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.length} size="sm"
@@ -143,7 +143,7 @@ function Questionnaire_space() {
                             <Col>
                                 <FloatingLabel
                                     controlId="rectangularWidth"
-                                    label={t('questionnaire_space.width')}
+                                    label={t('questionnaire_space.width') + " (m)"}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.width} size="sm"
@@ -153,7 +153,7 @@ function Questionnaire_space() {
                             <Col>
                                 <FloatingLabel
                                     controlId="rectangularHeight"
-                                    label={t('questionnaire_space.height')}
+                                    label={t('questionnaire_space.height') + " (m)"}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" min={0} step={0.1} value={dimensions.height} size="sm"

@@ -16,10 +16,10 @@ export class Module {
 
     constructor(mod: any) {
         this._name = mod.naam;
-        this._height = +mod.hoogte; 
-        this._depth = +mod.diepte; 
-        this._open = +mod.open;
-        this._closed = +mod.dicht; 
+        this._height = +mod.hoogte /1000; 
+        this._depth = +mod.diepte/1000; 
+        this._open = +mod.open/1000;
+        this._closed = +mod.dicht/1000; 
         this._saved = +mod.besparing; 
 
         if (mod.zetel == 'true') {
@@ -38,10 +38,10 @@ export class Module {
             this._desk = true;
         }
 
-        this._width_options.push({ key: 140, value: +mod.breedte140 })
-        this._width = +mod.breedte140 // the default is the smallest value
-        this._width_options.push({ key: 160, value: +mod.breedte160 })
-        this._width_options.push({ key: 180, value: +mod.breedte180 })
+        this._width_options.push({ key: 140, value: +mod.breedte140/1000 })
+        this._width = +mod.breedte140/1000 // the default is the smallest value
+        this._width_options.push({ key: 160, value: +mod.breedte160/1000 })
+        this._width_options.push({ key: 180, value: +mod.breedte180/1000 })
     }
 
     public get name(): string {
@@ -88,12 +88,15 @@ export class Module {
 
     /**
     * Sees if the module would fit in the room
-    * @param {number} height 
-    * @param {number} depth 
-    * @param {number} width 
+    * @param {number} height in meters
+    * @param {number} length in meters
+    * @param {number} width in meters
     * @return {boolean} possible fit
     */
-    public correct_size(height: number, depth: number, width: number) {
-        return ((this._height < height) && (this._width < width) && (this._open < depth)) || ((this._height < height) && (this._width < depth) && (this._open < width))
+    public correct_size(height: number, length: number, width: number) {
+        console.log("this height: " + this._height + ", height room: " + height)
+        console.log("this width: " + this._width + ", width room: " + width)
+        console.log("this depth: " + this._depth + ", depth room: " + length)
+        return ((this._height < height) && (this._width < width) && (this._open < length)) || ((this._height < height) && (this._width < length) && (this._open < width))
     }
 }

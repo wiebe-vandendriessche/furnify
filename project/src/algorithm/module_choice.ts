@@ -23,7 +23,7 @@ export const check = (val: any) => {
     // check size is correct
     let result_size: Module[] = [];
     result_type.forEach(mod =>{
-        if(mod.correct_size(dim.height, dim.depth, dim.width)){
+        if(mod.correct_size(dim.height, dim.length, dim.width)){
             result_size.push(mod)
         }
     })

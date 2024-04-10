@@ -105,7 +105,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                             <Col>
                                 <FloatingLabel
                                     controlId={"length" + obstId}
-                                    label={t('questionnaire_space.length')}
+                                    label={t('questionnaire_space.length') + ' (cm)'}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" name={"length" + obstId} min={0} step={0.1} defaultValue={length} onChange={(e) => changeLength(e)} />
@@ -114,7 +114,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                             <Col>
                                 <FloatingLabel
                                     controlId={"width" + obstId}
-                                    label={t('questionnaire_space.width')}
+                                    label={t('questionnaire_space.width') + ' (cm)'}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" name={"width" + obstId} min={0} step={0.1} defaultValue={width} onChange={(e) => changeWidth(e)} />
@@ -124,7 +124,7 @@ function Obstruction({ deleteObst, changeLength, changeHeight, changeWidth, chan
                             <Col>
                                 <FloatingLabel
                                     controlId={"height" + obstId}
-                                    label={t('questionnaire_space.height')}
+                                    label={t('questionnaire_space.height') + ' (cm)'}
                                     className="mb-4"
                                 >
                                     <Form.Control type="number" name={"height" + obstId} min={0} step={0.1} defaultValue={height} onChange={(e) => changeHeight(e)} />
