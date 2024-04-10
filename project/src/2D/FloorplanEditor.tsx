@@ -22,6 +22,7 @@ import * as THREE from "three";
 import { DrawableLine, LinePrimitive, TextSprite } from "./components/Line";
 import { DrawablePoint, Point } from "./components/Point";
 import { use } from "i18next";
+import { useDrawing } from "../contexts/2dContext";
 
 const useMousePosition = (camera) => {
   const [currentMousePosition, setCurrentMousePosition] =
@@ -59,22 +60,19 @@ export const FloorplanEditor: React.FC = () => {
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
   const currentMousePosition = useMousePosition(camera);
 
-  const [isDrawing, setIsDrawing] = useState(true);
+  const { isDrawing, toggleDrawing, drawingCanvasRef } = useDrawing();
 
   // when d is pressed, toggle drawing
   // possibly replace this with pressing a button onscreen
   useEffect(() => {
-    const toggleDrawing = (event: KeyboardEvent) => {
+    const toggleDrawingKey = (event: KeyboardEvent) => {
       if (event.key === "d" || event.key === "D") {
-        setIsDrawing((prev) => {
-          console.log("Drawing is now ", !prev);
-          return !prev;
-        });
+        toggleDrawing();
       }
     };
 
-    window.addEventListener("keydown", toggleDrawing);
-    return () => window.removeEventListener("keydown", toggleDrawing);
+    window.addEventListener("keydown", toggleDrawingKey);
+    return () => window.removeEventListener("keydown", toggleDrawingKey);
   }, []);
 
   const addPoint = useCallback(
@@ -97,10 +95,7 @@ export const FloorplanEditor: React.FC = () => {
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
-      setIsDrawing((prev) => {
-        console.log("Drawing is now ", !prev);
-        return !prev;
-      });
+      toggleDrawing();
     };
 
     const handleClick = (event: MouseEvent) => {
