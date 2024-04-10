@@ -3,10 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
-import { useDrawing } from "../contexts/2dContext";
+import { use2d } from "../contexts/2dContext";
 
 export const FloorplanScene = () => {
-  const { isDrawing, toggleDrawing, drawingCanvasRef } = useDrawing();
+  const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   return (
     <>
       {/* <div> sui </div> */}

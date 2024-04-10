@@ -22,7 +22,7 @@ import * as THREE from "three";
 import { DrawableLine, LinePrimitive, TextSprite } from "./components/Line";
 import { DrawablePoint, Point } from "./components/Point";
 import { use } from "i18next";
-import { useDrawing } from "../contexts/2dContext";
+import { use2d } from "../contexts/2dContext";
 import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 const useMousePosition = (camera) => {
@@ -60,7 +60,7 @@ export const FloorplanEditor: React.FC = () => {
   const tempLineRef = useRef<DrawableLine | null>(null);
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
   const currentMousePosition = useMousePosition(camera);
-  const { isDrawing, toggleDrawing, drawingCanvasRef } = useDrawing();
+  const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const snapThreshold: number = 0.5;
 
   // when d is pressed, toggle drawing
@@ -78,6 +78,7 @@ export const FloorplanEditor: React.FC = () => {
 
   const addPoint = useCallback(
     (newPoint: DrawablePoint) => {
+      // function to check if cursor is close to start, so close the shape
       const isCloseToStart = (point: DrawablePoint) => {
         if (points.length < 2) return false;
         const start = points[0];

@@ -2,7 +2,7 @@ import React, { createContext, useState, useRef, useContext } from "react";
 
 const DrawingContext = createContext();
 
-export const useDrawing = () => useContext(DrawingContext);
+export const use2d = () => useContext(DrawingContext);
 
 export const DrawingProvider = ({ children }) => {
   const [isDrawing, setIsDrawing] = useState(false);
