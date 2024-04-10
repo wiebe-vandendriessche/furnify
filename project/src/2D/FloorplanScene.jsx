@@ -20,7 +20,7 @@ export const FloorplanScene = () => {
         <pointLight position={[10, 10, 10]} />
         <FloorplanEditor />
         <axesHelper />
-        {/* <OrbitControls /> */}
+        <OrbitControls enableZoom={true} enablePan={true} enableRotate={false} />
       </Canvas>
     </>
   );
