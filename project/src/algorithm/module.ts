@@ -9,7 +9,7 @@ export class Module {
     private _sofa: boolean = false;
     private _desk: boolean = false;
     private _storage: boolean = false;
-    private _width_options: { key: number,value: number; }[] = [];
+    private _width_options: { key: number, value: number; }[] = [];
 
 
 
@@ -22,11 +22,11 @@ export class Module {
         this._saved = +mod.besparing;
 
         if (mod.zetel == 'true') {
-            this._sofa = true
+            this._sofa = true;
         }
 
         if (mod.opkladbed == 'true' || mod.bed_bewegend == 'true') {
-            this._bed = true
+            this._bed = true;
         }
 
         if (mod.kast_met_zijschappen == 'true' || mod.kast == 'true' ||
@@ -37,9 +37,9 @@ export class Module {
             this._desk = true;
         }
 
-        this._width_options.push({key: 140, value: +mod.breedte140})
-        this._width_options.push({key: 160, value: +mod.breedte160})
-        this._width_options.push({key: 180, value: +mod.breedte180})
+        this._width_options.push({ key: 140, value: +mod.breedte140 })
+        this._width_options.push({ key: 160, value: +mod.breedte160 })
+        this._width_options.push({ key: 180, value: +mod.breedte180 })
     }
 
     public get name(): string {
@@ -75,7 +75,16 @@ export class Module {
         return this._width_options[size].value;
     }
 
-    public type(bed: boolean, desk: boolean, sofa: boolean, storage: boolean){
-        return this._bed == bed && this._desk == desk && this._sofa == sofa && this._storage == storage
+
+    /**
+    * Sees if the module contains these types
+    * @param {boolean} bed
+    * @param {boolean} desk
+    * @param {boolean} sofa
+    * @param {boolean} storage
+    * @return {boolean} type
+    */
+    public type(bed: boolean, desk: boolean, sofa: boolean, storage: boolean) {
+        return (this._bed == bed && this._desk == desk && this._sofa == sofa && this._storage == storage)
     }
 }

@@ -10,10 +10,12 @@ import Questionnaire_space from "./components_sidebar/questionnaire_space";
 import Questionnaire_specs from "./components_sidebar/questionnaire_specs";
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
 import { check } from "../algorithm/module_choice.ts";
+import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 
 function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
+    const value = useConfiguratorContext();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -39,7 +41,7 @@ function Sidebar() {
             case 2:
                 return <Questionnaire_specs/>
             case 3:
-                check()
+                check(value)
                 return <Contact/>
             case 4:
                 return <p>Nothing to see here</p>
