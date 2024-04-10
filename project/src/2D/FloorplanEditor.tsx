@@ -130,7 +130,7 @@ export const FloorplanEditor: React.FC = () => {
   }, [addPoint, currentMousePosition, scene, isDrawing]);
 
   useFrame(() => {
-    if (currentMousePosition && latestPointRef.current && isDrawing) {
+    if (isDrawing && currentMousePosition && latestPointRef.current) {
       if (!tempLineRef.current) {
         const tempLine = new DrawableLine(
           latestPointRef.current,
@@ -141,6 +141,9 @@ export const FloorplanEditor: React.FC = () => {
       } else {
         tempLineRef.current.update(currentMousePosition);
       }
+    } else if (tempLineRef.current) {
+      tempLineRef.current.removeFromScene(scene);
+      tempLineRef.current = null;
     }
   });
 
