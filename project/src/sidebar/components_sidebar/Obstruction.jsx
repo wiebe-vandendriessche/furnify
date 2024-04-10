@@ -118,7 +118,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                             <Col>
                                 <FloatingLabel
                                     controlId={"length" + obstId}
-                                    label={t('questionnaire_space.length')}
+                                    label={t('questionnaire_space.length') + ' (cm)'}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
                                                   data-testid={"input-obst-"+type+"-length"}
@@ -129,7 +129,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                             <Col>
                                 <FloatingLabel
                                     controlId={"width" + obstId}
-                                    label={t('questionnaire_space.width')}
+                                    label={t('questionnaire_space.width') + ' (cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
                                                   data-testid={"input-obst-"+type+"-width"}
@@ -142,7 +142,7 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                             <Col>
                                 <FloatingLabel
                                     controlId={"height" + obstId}
-                                    label={t('questionnaire_space.height')}
+                                    label={t('questionnaire_space.height') + ' (cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
                                                   data-testid={"input-obst-"+type+"-height"}
