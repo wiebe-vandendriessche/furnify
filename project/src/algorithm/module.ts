@@ -74,6 +74,7 @@ export class Module {
         if (size == 140 ||size === 160 || size || 180)
             this._width = this._width_options[size].value;
     }
+
     /**
     * Sees if the module contains these types
     * @param {boolean} bed
@@ -87,6 +88,21 @@ export class Module {
     }
 
     /**
+    * Sees if the module contains the types if one can differ
+    * @param {boolean} bed
+    * @param {boolean} desk
+    * @param {boolean} sofa
+    * @param {boolean} storage
+    * @return {boolean} softer type
+    */
+    public softer_type(bed: boolean, desk: boolean, sofa: boolean, storage: boolean) {
+        return ((this._bed == bed && this._desk == desk && this._sofa == sofa) ||
+        (this._bed == bed && this._desk == desk && this._storage == storage) ||
+        (this._bed == bed && this._sofa == sofa && this._storage == storage) ||
+        (this._desk == desk && this._sofa == sofa && this._storage == storage) )
+    }
+
+    /**
     * Sees if the module would fit in the room
     * @param {number} height in meters
     * @param {number} length in meters
@@ -94,9 +110,6 @@ export class Module {
     * @return {boolean} possible fit
     */
     public correct_size(height: number, length: number, width: number) {
-        console.log("this height: " + this._height + ", height room: " + height)
-        console.log("this width: " + this._width + ", width room: " + width)
-        console.log("this depth: " + this._depth + ", depth room: " + length)
         return ((this._height < height) && (this._width < width) && (this._open < length)) || ((this._height < height) && (this._width < length) && (this._open < width))
     }
 }

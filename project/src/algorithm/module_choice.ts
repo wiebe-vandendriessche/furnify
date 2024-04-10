@@ -17,7 +17,19 @@ export const check = (val: any) => {
         if (mod.type(func.bed, func.desk, func.sofa, func.storagespace)) {
             result_type.push(mod)
         }
-    })
+    }) 
+    if(result_type.length == 0){
+        console.log("combination is not possible, looking for a softer one")
+        modules.forEach(mod => {
+            if (mod.softer_type(func.bed, func.desk, func.sofa, func.storagespace)) {
+                result_type.push(mod)
+            }
+        })
+        if( result_type.length == 0){
+            console.log("softer combinations not found, please change the demands")
+            return
+        }
+    }
     //maybe set a second test if the result is empty
 
     // check size is correct
