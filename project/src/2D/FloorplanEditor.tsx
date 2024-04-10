@@ -23,6 +23,7 @@ import { DrawableLine, LinePrimitive, TextSprite } from "./components/Line";
 import { DrawablePoint, Point } from "./components/Point";
 import { use } from "i18next";
 import { useDrawing } from "../contexts/2dContext";
+import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 const useMousePosition = (camera) => {
   const [currentMousePosition, setCurrentMousePosition] =
@@ -100,6 +101,11 @@ export const FloorplanEditor: React.FC = () => {
 
     const handleClick = (event: MouseEvent) => {
       if (!isDrawing) return;
+      if (drawingCanvasRef.current && !drawingCanvasRef.current.contains(event.target)) {
+        console.log("clicked outside drawing canvas");
+        toggleDrawing();
+        return;
+      }
       event.preventDefault();
       if (currentMousePosition) {
         addPoint(
