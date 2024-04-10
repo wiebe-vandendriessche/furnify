@@ -60,8 +60,8 @@ export const FloorplanEditor: React.FC = () => {
   const tempLineRef = useRef<DrawableLine | null>(null);
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
   const currentMousePosition = useMousePosition(camera);
-
   const { isDrawing, toggleDrawing, drawingCanvasRef } = useDrawing();
+  const snapThreshold: number = 0.5;
 
   // when d is pressed, toggle drawing
   // possibly replace this with pressing a button onscreen
@@ -77,21 +77,59 @@ export const FloorplanEditor: React.FC = () => {
   }, []);
 
   const addPoint = useCallback(
-    (point: DrawablePoint) => {
-      latestPointRef.current = point;
+    (newPoint: DrawablePoint) => {
+      const isCloseToStart = (point: DrawablePoint) => {
+        if (points.length < 2) return false;
+        const start = points[0];
+        return (
+          Math.sqrt(
+            Math.pow(point.x - start.x, 2) + Math.pow(point.y - start.y, 2)
+          ) < snapThreshold
+        );
+      };
+      // console.log("test: ", isDrawing);
+
+      // closing the shape
+      if (isDrawing && points.length > 1 && isCloseToStart(newPoint)) {
+        newPoint = points[0];
+        toggleDrawing();
+        if (tempLineRef.current) {
+          tempLineRef.current.removeFromScene(scene);
+          tempLineRef.current = null;
+        }
+      }
+      // add the point normally
+      latestPointRef.current = newPoint;
       setPoints((prevPoints) => {
-        const updatedPoints = [...prevPoints, point];
+        const updatedPoints = [...prevPoints, newPoint];
         if (updatedPoints.length > 1) {
           const start = updatedPoints[updatedPoints.length - 2];
-          const newLine = new DrawableLine(start, point);
+          const newLine = new DrawableLine(start, newPoint);
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
         }
         return updatedPoints;
       });
     },
-    [scene]
+    [scene, isDrawing, points]
   );
+
+  // const addPoint = useCallback(
+  //   (point: DrawablePoint) => {
+  //     latestPointRef.current = point;
+  //     setPoints((prevPoints) => {
+  //       const updatedPoints = [...prevPoints, point];
+  //       if (updatedPoints.length > 1) {
+  //         const start = updatedPoints[updatedPoints.length - 2];
+  //         const newLine = new DrawableLine(start, point);
+  //         newLine.addToScene(scene);
+  //         setLines((prevLines) => [...prevLines, newLine]);
+  //       }
+  //       return updatedPoints;
+  //     });
+  //   },
+  //   [scene]
+  // );
 
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
@@ -101,7 +139,10 @@ export const FloorplanEditor: React.FC = () => {
 
     const handleClick = (event: MouseEvent) => {
       if (!isDrawing) return;
-      if (drawingCanvasRef.current && !drawingCanvasRef.current.contains(event.target)) {
+      if (
+        drawingCanvasRef.current &&
+        !drawingCanvasRef.current.contains(event.target)
+      ) {
         console.log("clicked outside drawing canvas");
         toggleDrawing();
         return;
@@ -165,7 +206,13 @@ export const FloorplanEditor: React.FC = () => {
         <LinePrimitive key={index} line={line.line} />
       ))}
       {lineLengthSprites}
-      {isDrawing && tempLineRef.current && <TextSprite key={points.length} text={`${tempLineRef.current.getLength().toFixed(2)}m`} position={tempLineRef.current.getMidPoint()}/>}
+      {isDrawing && tempLineRef.current && (
+        <TextSprite
+          key={points.length}
+          text={`${tempLineRef.current.getLength().toFixed(2)}m`}
+          position={tempLineRef.current.getMidPoint()}
+        />
+      )}
     </>
   );
 };
