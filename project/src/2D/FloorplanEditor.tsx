@@ -3,7 +3,8 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycaster, BufferGeometry, LineBasicMaterial, Line } from 'three';
 import * as THREE from 'three';
 
-class DrawablePoint extends Vector3 { }
+
+class DrawablePoint extends Vector3 {}
 
 class DrawableLine {
   private geometry: BufferGeometry;
@@ -21,13 +22,12 @@ class DrawableLine {
   }
 
   update(end: DrawablePoint) {
-    this.end = end; // Update de eindpositie
-    if (this.line) {
+    if (!this.end.equals(end)) {
+      this.end.copy(end);
       this.geometry.setFromPoints([this.start, this.end]);
       this.geometry.attributes.position.needsUpdate = true;
     }
   }
-
 
   addToScene(scene: THREE.Scene) {
     scene.add(this.line);
@@ -39,6 +39,33 @@ class DrawableLine {
     this.material.dispose();
   }
 }
+
+const useMousePosition = (camera) => {
+  const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = (event.target as HTMLElement).getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      const mousePosition = new Vector2(x, y);
+      const raycaster = new Raycaster();
+      raycaster.setFromCamera(mousePosition, camera);
+
+      const planeZ = new Plane(new Vector3(0, 0, 1), 0);
+      const intersection = new Vector3();
+      raycaster.ray.intersectPlane(planeZ, intersection);
+
+      if (intersection) setCurrentMousePosition(intersection);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [camera]);
+
+  return currentMousePosition;
+};
 
 const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, position }) => {
   const { scene } = useThree();
@@ -62,13 +89,7 @@ const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, posit
 
     return () => {
       scene.remove(sprite);
-      if (sprite.material) {
-        const spriteMaterial = sprite.material as SpriteMaterial;
-        if (spriteMaterial.map) {
-          spriteMaterial.map.dispose();
-        }
-        spriteMaterial.dispose();
-      }
+      texture.dispose();
       material.dispose();
     };
   }, [text, position, scene]);
@@ -76,118 +97,78 @@ const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, posit
   return null;
 };
 
+const Point: React.FC<{ point: Vector3 }> = ({ point }) => (
+  <mesh position={[point.x, point.y, point.z]}>
+    <sphereGeometry args={[0.1, 32, 32]} />
+    <meshStandardMaterial color={'red'} />
+  </mesh>
+);
+
+const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;
+
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
   const [points, setPoints] = useState<DrawablePoint[]>([]);
-  const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
   const [lines, setLines] = useState<DrawableLine[]>([]);
   const tempLineRef = useRef<DrawableLine | null>(null);
+  const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
+  const currentMousePosition = useMousePosition(camera);
 
   const addPoint = useCallback((point: DrawablePoint) => {
-    setPoints(prevPoints => {
-      // Voeg het nieuwe punt toe aan de bestaande punten
+    latestPointRef.current = point;
+    setPoints((prevPoints) => {
       const updatedPoints = [...prevPoints, point];
-
-      // Controleer of we nu genoeg punten hebben om een lijn te tekenen
       if (updatedPoints.length > 1) {
-        // Pak het voorlaatste punt als startpunt
         const start = updatedPoints[updatedPoints.length - 2];
         const newLine = new DrawableLine(start, point);
         newLine.addToScene(scene);
-        setLines(prevLines => [...prevLines, newLine]);
+        setLines((prevLines) => [...prevLines, newLine]);
       }
-
       return updatedPoints;
     });
   }, [scene]);
 
-  const handleClick = useCallback((event: MouseEvent) => {
-    event.preventDefault();
-
-    if (currentMousePosition) {
-      addPoint(new DrawablePoint(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z));
-      // Verwijder de tijdelijke lijn na het toevoegen van een nieuw punt
-      if (tempLineRef.current) {
-        tempLineRef.current.removeFromScene(scene);
-        tempLineRef.current = null; // Reset de ref na verwijdering
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      event.preventDefault();
+      if (currentMousePosition) {
+        addPoint(new DrawablePoint(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z));
+        if (tempLineRef.current) {
+          tempLineRef.current.removeFromScene(scene);
+          tempLineRef.current = null;
+        }
       }
-    }
+    };
+
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, [addPoint, currentMousePosition, scene]);
 
-
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      event.preventDefault();
-
-      const rect = (event.target as HTMLElement).getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-      const mousePosition = new Vector2(x, y);
-      const raycaster = new Raycaster();
-      raycaster.setFromCamera(mousePosition, camera);
-
-      const planeZ = new Plane(new Vector3(0, 0, 1), 0);
-      const intersection = new Vector3();
-      raycaster.ray.intersectPlane(planeZ, intersection);
-
-      if (intersection) {
-        setCurrentMousePosition(intersection);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [camera]);
-
-
-  useEffect(() => {
-    // Voeg de handleClick als event listener toe aan het window object
-    window.addEventListener('click', handleClick);
-    return () => {
-      // Verwijder de event listener wanneer de component wordt ontmanteld
-      window.removeEventListener('click', handleClick);
-    };
-  }, [handleClick]);
-
   useFrame(() => {
-    if (currentMousePosition) {
-      if (!tempLineRef.current && points.length > 0) {
-        // Creëer de tijdelijke lijn als deze nog niet bestaat
-        const tempLine = new DrawableLine(points[points.length - 1], currentMousePosition);
+    if (currentMousePosition && latestPointRef.current) {
+      if (!tempLineRef.current) {
+        const tempLine = new DrawableLine(latestPointRef.current, currentMousePosition);
         tempLine.addToScene(scene);
         tempLineRef.current = tempLine;
-      } else if (tempLineRef.current) {
-        // Update de bestaande tijdelijke lijn
+      } else {
         tempLineRef.current.update(currentMousePosition);
       }
     }
   });
 
-
-
-  const lineLengthSprites = useMemo(() => points.slice(1).map((point, index) => {
+  const lineLengthSprites = points.slice(1).map((point, index) => {
     const start = points[index];
     const end = point;
     const length = start.distanceTo(end).toFixed(2);
     const midpoint = new Vector3().addVectors(start, end).multiplyScalar(0.5);
     return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
-  }), [points]);
+  });
 
   return (
     <>
-      {points.map((point, index) => (
-        <mesh key={index} position={[point.x, point.y, point.z]}>
-          <sphereGeometry args={[0.1, 32, 32]} />
-          <meshStandardMaterial color={'red'} />
-        </mesh>
-      ))}
-      {lines.map((line, index) => (
-        <primitive key={index} object={line.line} />
-      ))}
+      {points.map((point, index) => <Point key={index} point={point} />)}
+      {lines.map((line, index) => <LinePrimitive key={index} line={line.line} />)}
       {lineLengthSprites}
     </>
   );
-
 };
