@@ -36,6 +36,14 @@ export class DrawableLine {
     this.geometry.dispose();
     this.material.dispose();
   }
+
+  getLength(): number {
+    return this.start.distanceTo(this.end);
+  }
+
+  getMidPoint(): THREE.Vector3 {
+    return new THREE.Vector3().addVectors(this.start, this.end).multiplyScalar(0.5);
+  }
 }
 
 export const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;

@@ -165,6 +165,7 @@ export const FloorplanEditor: React.FC = () => {
         <LinePrimitive key={index} line={line.line} />
       ))}
       {lineLengthSprites}
+      {isDrawing && tempLineRef.current && <TextSprite key={points.length} text={`${tempLineRef.current.getLength().toFixed(2)}m`} position={tempLineRef.current.getMidPoint()}/>}
     </>
   );
 };
