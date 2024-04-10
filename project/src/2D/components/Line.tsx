@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import { DrawablePoint } from './DrawablePoint';
+import { DrawablePoint } from './Point';
+import React from 'react';
+import { Line } from 'three';
 
 export class DrawableLine {
   private geometry: THREE.BufferGeometry;
@@ -34,3 +36,5 @@ export class DrawableLine {
     this.material.dispose();
   }
 }
+
+export const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;

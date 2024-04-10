@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber';
 import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycaster, BufferGeometry, LineBasicMaterial, Line } from 'three';
 import * as THREE from 'three';
-import { DrawableLine } from './components/DrawableLine';
-import { DrawablePoint } from './components/DrawablePoint';
+import { DrawableLine, LinePrimitive } from './components/Line';
+import { DrawablePoint, Point } from './components/Point';
 
 const useMousePosition = (camera) => {
   const [currentMousePosition, setCurrentMousePosition] = useState<Vector3 | null>(null);
@@ -61,15 +61,6 @@ const TextSprite: React.FC<{ text: string; position: Vector3 }> = ({ text, posit
 
   return null;
 };
-
-const Point: React.FC<{ point: Vector3 }> = ({ point }) => (
-  <mesh position={[point.x, point.y, point.z]}>
-    <sphereGeometry args={[0.1, 32, 32]} />
-    <meshStandardMaterial color={'red'} />
-  </mesh>
-);
-
-const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;
 
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
