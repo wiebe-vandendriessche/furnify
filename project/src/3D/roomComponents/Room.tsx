@@ -7,7 +7,6 @@ import { WallWithWindow } from './WallWithWindow';
 import { Floor } from './Floor';
 import { useState, useEffect } from 'react';
 import * as THREE from 'three';
-import { SideWallWithWindow } from './SideWallWithWindow';
 import { useRoomWallLightupContext } from '../../contexts/RoomWallLightupContext';
 
 
@@ -80,7 +79,8 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         visible={backWallVisible}
         windows={[
           { x: 0, y: 0, w_width: 1, w_height: 1 },
-          { x: 2, y: 1, w_width: 1, w_height: 1 }
+          { x: 2, y: 1, w_width: 1, w_height: 1 },
+          { x: 4, y: 0.5, w_width: 1, w_height: 1 }
         ]}
         giveColor={selectedWall === "back" ? true : false} // Change color based on selectedWall
         wall={"back"}
