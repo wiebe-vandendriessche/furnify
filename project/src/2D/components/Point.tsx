@@ -6,7 +6,7 @@ export class DrawablePoint extends Vector3 {}
 
 export const Point: React.FC<{ point: Vector3 }> = ({ point }) => (
     <mesh position={[point.x, point.y, point.z]}>
-      <sphereGeometry args={[0.05, 32, 32]} />
+      <sphereGeometry args={[0.05, 16, 16]} />
       <meshStandardMaterial color={'red'} />
     </mesh>
   );
