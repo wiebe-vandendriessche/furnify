@@ -69,7 +69,7 @@ export const FloorplanEditor: React.FC = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
   const currentMousePosition = useMousePosition(camera);
-  const snapThreshold: number = 0.5;
+  const snapThreshold: number = 0.4;
 
   /**
    * Clear the scene of all points and lines
@@ -101,7 +101,7 @@ export const FloorplanEditor: React.FC = () => {
    * Visual feedback for when the cursor is near the start point
    */
   useEffect(() => {
-    if (!isDrawing || points.length < 1) {
+    if (!isDrawing || points.length < 2) {
       setIsNearStart(false);
       return;
     }
@@ -247,7 +247,7 @@ export const FloorplanEditor: React.FC = () => {
   /**
    * Display the length of each line
    */
-  const lineLengthSprites = points.slice(1).map((point, index) => {
+  const lineLengthSprites = points.slice(1).map((point: DrawablePoint, index: number) => {
     const start = points[index];
     const end = point;
     const length = start.distanceTo(end).toFixed(2);
