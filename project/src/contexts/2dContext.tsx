@@ -8,7 +8,7 @@ const DrawingContext = createContext<any>(null);
 export const use2d = () => useContext(DrawingContext);
 
 export const DrawingProvider = ({ children }) => {
-  const [isDrawing, setIsDrawing] = useState(false);
+  const [isDrawing, setIsDrawing] = useState(true);
   const drawingCanvasRef = useRef(null);
 
   const [orthogonalMode, setOrthogonalMode] = useState(false);
