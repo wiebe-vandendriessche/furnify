@@ -61,7 +61,32 @@ export const FloorplanEditor: React.FC = () => {
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
   const currentMousePosition = useMousePosition(camera);
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
-  const snapThreshold: number = 0.30;
+  const [isNearStart, setIsNearStart] = useState<boolean>(false);
+  const snapThreshold: number = 0.5;
+
+  useEffect(() => {
+    if (!isDrawing || points.length < 1) {
+      setIsNearStart(false);
+      return;
+    }
+
+    const checkProximity = (event: MouseEvent) => {
+      if (!currentMousePosition || points.length < 1) return;
+
+      const start = points[0];
+      const distance = currentMousePosition.distanceTo(start);
+
+      if (distance < snapThreshold) {
+        console.log("near start");
+        setIsNearStart(true);
+      } else {
+        setIsNearStart(false);
+      }
+    };
+
+    window.addEventListener("mousemove", checkProximity);
+    return () => window.removeEventListener("mousemove", checkProximity);
+  }, [currentMousePosition, isDrawing, points]);
 
   // when d is pressed, toggle drawing
   // possibly replace this with pressing a button onscreen
@@ -88,7 +113,6 @@ export const FloorplanEditor: React.FC = () => {
           ) < snapThreshold
         );
       };
-      // console.log("test: ", isDrawing);
 
       // closing the shape
       if (isDrawing && points.length > 1 && isCloseToStart(newPoint)) {
@@ -201,7 +225,12 @@ export const FloorplanEditor: React.FC = () => {
   return (
     <>
       {points.map((point, index) => (
-        <Point key={index} point={point} />
+        <Point
+          key={index}
+          point={point}
+          color={isNearStart && index === 0 ? "yellow" : "red"}
+          scale={isNearStart && index === 0 ? 1.5 : 1}
+        />
       ))}
       {lines.map((line, index) => (
         <LinePrimitive key={index} line={line.line} />

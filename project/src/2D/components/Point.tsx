@@ -4,9 +4,9 @@ import { CanvasTexture, SpriteMaterial, Sprite, Vector3, Vector2, Plane, Raycast
 
 export class DrawablePoint extends Vector3 {}
 
-export const Point: React.FC<{ point: Vector3 }> = ({ point }) => (
-    <mesh position={[point.x, point.y, point.z]}>
+export const Point: React.FC<{ point: Vector3, color: string, scale: number }> = ({ point, color = 'red', scale = 1 }) => (
+    <mesh position={[point.x, point.y, point.z]} scale={[scale, scale, scale]}>
       <sphereGeometry args={[0.05, 16, 16]} />
-      <meshStandardMaterial color={'red'} />
+      <meshStandardMaterial color={color} />
     </mesh>
   );
