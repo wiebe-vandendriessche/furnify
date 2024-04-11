@@ -16,7 +16,7 @@ export const FloorplanScene = () => {
 
   return (
     <>
-      <div ref={drawingCanvasRef} className="canvas">
+      <div className="canvas">
         <div
           className="editor-controls"
           style={{
