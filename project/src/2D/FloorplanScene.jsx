@@ -20,7 +20,6 @@ export const FloorplanScene = () => {
 
   const handleRemoveButtonClick = (event) => {
     event.stopPropagation();
-    console.log("Remove button clicked");
     removeAll();
   };
 
@@ -32,12 +31,10 @@ export const FloorplanScene = () => {
 
 
   const handleMouseEnter = () => {
-    console.log("Mouse entered canvas");
     setIsHoveringCanvas(true);
   };
   
   const handleMouseLeave = () => {
-    console.log("Mouse left canvas");
     setIsHoveringCanvas(false);
   };
 
