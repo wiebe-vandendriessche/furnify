@@ -9,6 +9,7 @@ import "./Floorplan.css";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
+  const { removeAll } = use2d();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -18,44 +19,43 @@ export const FloorplanScene = () => {
   const handleRemoveButtonClick = (event) => {
     event.stopPropagation();
     console.log("Remove button clicked");
+    removeAll();
   };
 
   return (
     <>
-        <div className="editor-controls">
-          <button
-            className={`btn-circle btn-lg ${
-              isDrawing ? "clicked" : "unclicked"
-            }`}
-            onClick={handleDrawingButtonClick}
-          >
-            <PencilSquare />
-          </button>
-
-          <button
-            className={`btn-circle btn-lg unclicked`}
-            onClick={handleRemoveButtonClick}
-          >
-            <Trash />
-          </button>
-        </div>
-
-        <Canvas
-          ref={drawingCanvasRef}
-          className="canvas"
-          orthographic
-          camera={{ position: [0, 0, 5], zoom: 100 }}
+      <div className="editor-controls">
+        <button
+          className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"}`}
+          onClick={handleDrawingButtonClick}
         >
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <FloorplanEditor />
-          <axesHelper />
-          <OrbitControls
-            enableZoom={true}
-            enablePan={true}
-            enableRotate={false}
-          />
-        </Canvas>
+          <PencilSquare />
+        </button>
+
+        <button
+          className={`btn-circle btn-lg unclicked`}
+          onClick={handleRemoveButtonClick}
+        >
+          <Trash />
+        </button>
+      </div>
+
+      <Canvas
+        ref={drawingCanvasRef}
+        className="canvas"
+        orthographic
+        camera={{ position: [0, 0, 5], zoom: 100 }}
+      >
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <FloorplanEditor />
+        <axesHelper />
+        <OrbitControls
+          enableZoom={true}
+          enablePan={true}
+          enableRotate={false}
+        />
+      </Canvas>
     </>
   );
 };

@@ -64,14 +64,38 @@ const useMousePosition = (camera) => {
  */
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
-  const [points, setPoints] = useState<DrawablePoint[]>([]);
-  const [lines, setLines] = useState<DrawableLine[]>([]);
-  const tempLineRef = useRef<DrawableLine | null>(null);
-  const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
+  const { points, setPoints, latestPointRef } = use2d();
+  const { lines, setLines, tempLineRef } = use2d();
   const currentMousePosition = useMousePosition(camera);
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
   const snapThreshold: number = 0.5;
+
+  /**
+   * Clear the scene of all points and lines
+   */
+  const clearScene = () => {
+    lines.forEach(line => {
+      if (line.line) scene.remove(line.line);
+      if (line.geometry) line.geometry.dispose();
+      if (line.material) line.material.dispose();
+    });
+    if (tempLineRef.current) {
+      tempLineRef.current.removeFromScene(scene);
+      tempLineRef.current = null;
+    }
+    if (latestPointRef.current) latestPointRef.current = null;
+  };
+
+  /**
+   * Clear the scene when points and lines are cleared
+   */
+  useEffect(() => {
+    // Whenever points or lines are cleared, ensure we also clear them from the scene
+    if (points.length === 0 && lines.length === 0) {
+      clearScene();
+    }
+  }, [points, lines]);
 
   /**
    * Visual feedback for when the cursor is near the start point
