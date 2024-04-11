@@ -67,6 +67,7 @@ export const FloorplanEditor: React.FC = () => {
   const { points, setPoints, latestPointRef } = use2d();
   const { lines, setLines, tempLineRef } = use2d();
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
+  const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
@@ -227,7 +228,7 @@ export const FloorplanEditor: React.FC = () => {
    * Update the temp line when drawing
    */
   useFrame(() => {
-    if (isDrawing && currentMousePosition && latestPointRef.current) {
+    if (isDrawing && currentMousePosition && latestPointRef.current && isHoveringCanvas) {
       if (!tempLineRef.current) {
         const tempLine = new DrawableLine(
           latestPointRef.current,
