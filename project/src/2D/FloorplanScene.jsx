@@ -33,7 +33,7 @@ export const FloorplanScene = () => {
         </div>
 
         <Canvas
-          // ref={drawingCanvasRef}
+          ref={drawingCanvasRef}
           className="canvas"
           orthographic
           camera={{ position: [0, 0, 5], zoom: 100 }}

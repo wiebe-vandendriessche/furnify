@@ -2,7 +2,7 @@
 
 .canvas {
     width: 100vw; /* Ensures it takes the full viewport width */
-    height: 80vh; /* Ensures it takes the full viewport height */
+    height: 100vh; /* Ensures it takes the full viewport height */
     display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
     padding: 0;
     margin: 0;
