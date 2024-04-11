@@ -25,6 +25,11 @@ import { use } from "i18next";
 import { use2d } from "../contexts/2dContext";
 import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
+/**
+ * Keeps track of the current mouse position in 3D space
+ * @param camera 
+ * @returns current mouse position in 3D space: Vector3 | null
+ */
 const useMousePosition = (camera) => {
   const [currentMousePosition, setCurrentMousePosition] =
     useState<Vector3 | null>(null);
@@ -53,6 +58,10 @@ const useMousePosition = (camera) => {
   return currentMousePosition;
 };
 
+/**
+ * FloorplanEditor component logic and rendering
+ * @returns FloorplanEditor component
+ */
 export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
   const [points, setPoints] = useState<DrawablePoint[]>([]);
@@ -64,6 +73,9 @@ export const FloorplanEditor: React.FC = () => {
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
   const snapThreshold: number = 0.5;
 
+  /**
+   * Visual feedback for when the cursor is near the start point
+   */
   useEffect(() => {
     if (!isDrawing || points.length < 1) {
       setIsNearStart(false);
@@ -88,8 +100,10 @@ export const FloorplanEditor: React.FC = () => {
     return () => window.removeEventListener("mousemove", checkProximity);
   }, [currentMousePosition, isDrawing, points]);
 
-  // when d is pressed, toggle drawing
-  // possibly replace this with pressing a button onscreen
+  /**
+   * Toggle drawing with the "d" key
+   * possibly replace this with pressing a button onscreen
+   */
   useEffect(() => {
     const toggleDrawingKey = (event: KeyboardEvent) => {
       if (event.key === "d" || event.key === "D") {
@@ -101,6 +115,9 @@ export const FloorplanEditor: React.FC = () => {
     return () => window.removeEventListener("keydown", toggleDrawingKey);
   }, []);
 
+  /**
+   * Logic for adding points to the scene
+   */
   const addPoint = useCallback(
     (newPoint: DrawablePoint) => {
       // function to check if cursor is close to start, so close the shape
@@ -139,23 +156,9 @@ export const FloorplanEditor: React.FC = () => {
     [scene, isDrawing, points]
   );
 
-  // const addPoint = useCallback(
-  //   (point: DrawablePoint) => {
-  //     latestPointRef.current = point;
-  //     setPoints((prevPoints) => {
-  //       const updatedPoints = [...prevPoints, point];
-  //       if (updatedPoints.length > 1) {
-  //         const start = updatedPoints[updatedPoints.length - 2];
-  //         const newLine = new DrawableLine(start, point);
-  //         newLine.addToScene(scene);
-  //         setLines((prevLines) => [...prevLines, newLine]);
-  //       }
-  //       return updatedPoints;
-  //     });
-  //   },
-  //   [scene]
-  // );
-
+  /**
+   * Handle left and right clicks
+   */
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
@@ -196,6 +199,9 @@ export const FloorplanEditor: React.FC = () => {
     };
   }, [addPoint, currentMousePosition, scene, isDrawing]);
 
+  /**
+   * Update the temp line when drawing
+   */
   useFrame(() => {
     if (isDrawing && currentMousePosition && latestPointRef.current) {
       if (!tempLineRef.current) {
@@ -214,6 +220,9 @@ export const FloorplanEditor: React.FC = () => {
     }
   });
 
+  /**
+   * Display the length of each line
+   */
   const lineLengthSprites = points.slice(1).map((point, index) => {
     const start = points[index];
     const end = point;
