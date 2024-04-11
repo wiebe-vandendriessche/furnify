@@ -11,6 +11,7 @@ export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const { removeAll } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
+  const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -27,6 +28,17 @@ export const FloorplanScene = () => {
     event.stopPropagation();
     console.log("Orthogonal button clicked");
     toggleOrthogonalMode();
+  };
+
+
+  const handleMouseEnter = () => {
+    console.log("Mouse entered canvas");
+    setIsHoveringCanvas(true);
+  };
+  
+  const handleMouseLeave = () => {
+    console.log("Mouse left canvas");
+    setIsHoveringCanvas(false);
   };
 
   return (
@@ -47,7 +59,9 @@ export const FloorplanScene = () => {
         </button>
 
         <button
-          className={`btn-circle btn-lg ${orthogonalMode ? "clicked" : "unclicked"}`}
+          className={`btn-circle btn-lg ${
+            orthogonalMode ? "clicked" : "unclicked"
+          }`}
           onClick={handleOrthogonalButtonClick}
         >
           <Rulers />
@@ -59,6 +73,8 @@ export const FloorplanScene = () => {
         className="canvas"
         orthographic
         camera={{ position: [0, 0, 5], zoom: 100 }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <ambientLight />
         <pointLight position={[10, 10, 10]} />

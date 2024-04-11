@@ -13,6 +13,8 @@ export const DrawingProvider = ({ children }) => {
 
   const [orthogonalMode, setOrthogonalMode] = useState(false);
 
+  const [isHoveringCanvas, setIsHoveringCanvas] = useState(false);
+
   const [points, setPoints] = useState<DrawablePoint[]>([]);
   const [lines, setLines] = useState<DrawableLine[]>([]);
   const tempLineRef = useRef<DrawableLine | null>(null);
@@ -54,7 +56,9 @@ export const DrawingProvider = ({ children }) => {
     latestPointRef,
     removeAll,
     orthogonalMode,
-    toggleOrthogonalMode
+    toggleOrthogonalMode,
+    isHoveringCanvas,
+    setIsHoveringCanvas,
   };
 
   return (
