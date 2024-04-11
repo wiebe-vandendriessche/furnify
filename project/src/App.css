@@ -6,6 +6,7 @@
     display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
     padding: 0;
     margin: 0;
+    z-index: 0;
 }
 
 .container {

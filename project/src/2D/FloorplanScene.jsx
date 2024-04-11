@@ -4,6 +4,8 @@ import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
+import { PencilSquare } from "react-bootstrap-icons";
+import "./Floorplan.css";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
@@ -11,25 +13,31 @@ export const FloorplanScene = () => {
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
     toggleDrawing();
-  }
-
+  };
 
   return (
     <>
-      <div className="canvas">
-        <div
-          className="editor-controls"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            margin: "10px",
-            zIndex: 100,
-          }}
-        >
-          <button onClick={handleDrawingButtonClick}>
-            {isDrawing ? "Stop Drawing" : "Start Drawing"}
-          </button>
+      {/* <div className="canvas"> */}
+        <div className="editor-controls">
+          {isDrawing && (
+            <button
+              className="btn-circle btn-lg clicked"
+              onClick={handleDrawingButtonClick}
+            >
+              {/* {isDrawing ? "Stop Drawing " : "Start Drawing "} */}
+              <PencilSquare />
+            </button>
+          )}
+
+          {!isDrawing && (
+            <button
+              className="btn-circle btn-lg unclicked"
+              onClick={handleDrawingButtonClick}
+            >
+              {/* {isDrawing ? "Stop Drawing " : "Start Drawing "} */}
+              <PencilSquare />
+            </button>
+          )}
         </div>
 
         <Canvas
@@ -48,7 +56,7 @@ export const FloorplanScene = () => {
             enableRotate={false}
           />
         </Canvas>
-      </div>
+      {/* </div> */}
     </>
   );
 };
