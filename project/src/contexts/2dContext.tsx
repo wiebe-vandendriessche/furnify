@@ -23,11 +23,11 @@ export const DrawingProvider = ({ children }) => {
       return !prev;
     });
 
+  // Remove all elements from the canvas
   const removeAll = () => {
     let confirmation = window.confirm(
       "Are you sure you want to remove everything?"
     );
-
     if (confirmation) {
       setPoints([]);
       setLines([]);
