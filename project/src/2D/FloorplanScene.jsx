@@ -4,7 +4,7 @@ import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
-import { PencilSquare } from "react-bootstrap-icons";
+import { PencilSquare, Trash } from "react-bootstrap-icons";
 import "./Floorplan.css";
 
 export const FloorplanScene = () => {
@@ -15,35 +15,47 @@ export const FloorplanScene = () => {
     toggleDrawing();
   };
 
+  const handleRemoveButtonClick = (event) => {
+    event.stopPropagation();
+    console.log("Remove button clicked");
+  };
+
   return (
     <>
-      {/* <div className="canvas"> */}
-      <div className="editor-controls">
-        <button
-          className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"}`}
-          onClick={handleDrawingButtonClick}
-        >
-          <PencilSquare />
-        </button>
-      </div>
+        <div className="editor-controls">
+          <button
+            className={`btn-circle btn-lg ${
+              isDrawing ? "clicked" : "unclicked"
+            }`}
+            onClick={handleDrawingButtonClick}
+          >
+            <PencilSquare />
+          </button>
 
-      <Canvas
-        ref={drawingCanvasRef}
-        className="canvas"
-        orthographic
-        camera={{ position: [0, 0, 5], zoom: 100 }}
-      >
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <FloorplanEditor />
-        <axesHelper />
-        <OrbitControls
-          enableZoom={true}
-          enablePan={true}
-          enableRotate={false}
-        />
-      </Canvas>
-      {/* </div> */}
+          <button
+            className={`btn-circle btn-lg unclicked`}
+            onClick={handleRemoveButtonClick}
+          >
+            <Trash />
+          </button>
+        </div>
+
+        <Canvas
+          ref={drawingCanvasRef}
+          className="canvas"
+          orthographic
+          camera={{ position: [0, 0, 5], zoom: 100 }}
+        >
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <FloorplanEditor />
+          <axesHelper />
+          <OrbitControls
+            enableZoom={true}
+            enablePan={true}
+            enableRotate={false}
+          />
+        </Canvas>
     </>
   );
 };
