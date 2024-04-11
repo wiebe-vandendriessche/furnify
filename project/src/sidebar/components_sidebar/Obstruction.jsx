@@ -1,14 +1,15 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./Questionnaire.css"
 import Form from "react-bootstrap/Form";
-import {ButtonGroup, Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
+import { ButtonGroup, Col, FloatingLabel, Row, ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, obstId, length, width, height, door, window}) {
+function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, obstId, length, width, height, door, window }) {
     //i18n
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         const lng = navigator.language;
@@ -69,9 +70,46 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     }
     const [insideWindow, setinsideWindow] = useState(window);
 
+
+    const { selectedWall, setSelectedWall } = useRoomWallLightupContext();
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+    const changeSelectedWall = (wall) => {
+        setIsButtonDisabled(true);
+        setSelectedWall(wall);
+        console.log("test changeSelectedWall: " + wall);
+        setTimeout(() => {
+            setSelectedWall(null);
+            setIsButtonDisabled(false);
+            console.log("back to zero");
+        }, 1500); // 1000 milliseconds = 1 second
+    }
+
+
+    // Track the selected position of the window obstruction
+    const [windowWall, setWindowWall] = useState("front");
+    const [windowXpos, setWindowXpos] = useState(0.0);
+    const [windowYpos, setWindowYpos] = useState(0.0);
+
+    const handleWindowXposChange = (event) => {
+        console.log("Changing window x to: " + event.target.value)
+        setWindowXpos(event.target.value);
+    };
+
+    const handleWindowYposChange = (event) => {
+        console.log("Changing window y to: " + event.target.value)
+        setWindowYpos(event.target.value);
+    };
+
+    const handleWindowWallChange = (windowWall) => {
+        // Update the selected position state
+        console.log("setting windowWall to: " + windowWall)
+        setWindowWall(windowWall);
+    };
+
     function handleKeyPress(event) {
         //prevent use of negative values
-        if(event.charCode==45){
+        if (event.charCode == 45) {
             console.log("negative value detected");
             event.preventDefault();
             return false;
@@ -80,28 +118,33 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
     }
 
     console.log(obstId);
+    console.log(windowWall)
+    console.log(windowXpos);
+    console.log(windowYpos);
     console.log(type)
+
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                    data-testid={"btn-obstacle-expand-"+type}
-                    variant={"danger"} value={type ?? t("obstructions."+type)}
-                   onClick={(e) => {
-                       showButton()
-                       showExtraQuestion(e)}}>{t("obstructions."+type)}</Button>
-            <Button className={"fa-rectangle-xmark"}  data-testid={"btn-obstacle-delete-"+type}
-                    variant={"danger"} id={"delete" + obstId}
-                    onClick={(e) => deleteObst(e)}>
+                data-testid={"btn-obstacle-expand-" + type}
+                variant={"danger"} value={type ?? t("obstructions." + type)}
+                onClick={(e) => {
+                    showButton()
+                    showExtraQuestion(e)
+                }}>{t("obstructions." + type)}</Button>
+            <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
+                variant={"danger"} id={"delete" + obstId}
+                onClick={(e) => deleteObst(e)}>
                 x
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type" + obstId}
-                                 defaultValue={type}
-                                 onChange={(e) => {
-                                     changeObst(e)
-                                     showExtraQuestion(e)
-                                 }}>
+                        defaultValue={type}
+                        onChange={(e) => {
+                            changeObst(e)
+                            showExtraQuestion(e)
+                        }}>
                         <option value={"other"}>{t('obstructions.other')}</option>
                         <option value={"window"}>{t('obstructions.window')}</option>
                         <option value={"door"}>{t('obstructions.door')}</option>
@@ -121,9 +164,9 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.length')}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
-                                                  data-testid={"input-obst-"+type+"-length"}
-                                                  defaultValue={length} onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}/>
+                                        data-testid={"input-obst-" + type + "-length"}
+                                        defaultValue={length} onChange={(e) => changeObst(e)}
+                                        onKeyPress={handleKeyPress} />
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -132,9 +175,9 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
-                                                  data-testid={"input-obst-"+type+"-width"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}/>
+                                        data-testid={"input-obst-" + type + "-width"}
+                                        onChange={(e) => changeObst(e)}
+                                        onKeyPress={handleKeyPress} />
 
 
                                 </FloatingLabel>
@@ -145,9 +188,9 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
-                                                  data-testid={"input-obst-"+type+"-height"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}/>
+                                        data-testid={"input-obst-" + type + "-height"}
+                                        onChange={(e) => changeObst(e)}
+                                        onKeyPress={handleKeyPress} />
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -239,6 +282,69 @@ function Obstruction({deleteObst, changeObst, changeDoor, changeWindow, type, ob
                                     changeWindow(event, !insideWindow)
                                 }}
                             >{t('obstructions.q_window.no')}</ToggleButton>
+                        </ButtonGroup>
+                    </div>
+
+                    <Row>
+                        <Col>
+                            <FloatingLabel
+                                controlId={"windowXpos" + obstId}
+                                label="Window X Position"
+                            >
+                                <Form.Control
+                                    type="number"
+                                    value={windowXpos}
+                                    name={"windowXpos"}
+                                    min={0} step={0.1}
+                                    defaultValue={0}
+                                    onChange={handleWindowXposChange}
+                                    placeholder="Enter X Position"
+                                />
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel
+                                controlId={"windowYpos" + obstId}
+                                label="Window Y Position"
+                            >
+                                <Form.Control
+                                    type="number"
+                                    value={windowYpos}
+                                    name={"windowYpos"}
+                                    min={0} step={0.1}
+                                    defaultValue={0}
+                                    onChange={handleWindowYposChange}
+                                    placeholder="Enter Y Position"
+                                />
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+
+                    <Form.Label data-testid={"question-obstacle-window-wall"}>
+                        {t("obstructions.q_window.window_wall")}
+                    </Form.Label>
+                    <div>
+                        <ButtonGroup>
+                            {/* Add radio buttons for window positions */}
+                            {["front", "back", "left", "right"].map((x) => (
+                                <ToggleButton
+                                    key={x}
+                                    className="mb-4"
+                                    type="radio"
+                                    variant="danger"
+                                    name={`windowWall${obstId}`}
+                                    controlId={`windowWall${obstId}`}
+                                    data-testid={`btn-obstacle-window-position-${x}`}
+                                    checked={windowWall === x}
+                                    onClick={() => {
+                                        handleWindowWallChange(x);
+                                        changeSelectedWall(x);
+                                    }}
+                                    disabled={isButtonDisabled} // Set button disabled state
+                                >
+                                    {t(`obstructions.q_window.${x}`)}
+                                </ToggleButton>
+                            ))}
                         </ButtonGroup>
                     </div>
                 </Form.Group>

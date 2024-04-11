@@ -1,15 +1,16 @@
 import React from 'react';
 import * as THREE from 'three';
 import { CSG } from 'three-csg-ts';
-import { useTexture } from '@react-three/drei';
+import { useTexture  } from '@react-three/drei';
 import { useEffect } from 'react';
+import { useFrame } from '@react-three/fiber'
+import { easing } from 'maath'
 
-export const SideWallWithWindow = ({ width, height, depth, position, visible, windowStartHeight, windowStartFromLeft, windowHeight, windowWidth }) => {
+export const SideWallWithWindow = ({ width, height, depth, position, visible, windowStartHeight, windowStartFromLeft, windowHeight, windowWidth, giveColor }) => {
     const windowPos = [0, windowStartHeight, windowStartFromLeft]; // Position of the window relative to the lower left corner of the wall
 
     const wallTexture = useTexture({
         map: './textures/beige_wall/beige_wall_001_ao_1k.jpg',
-        displacement: './textures/beige_wall/beige_wall_001_disp_1k.jpg',
         aoMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
         // roughnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg', // uit om glans te voorkomen
         metalnessMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
@@ -20,7 +21,6 @@ export const SideWallWithWindow = ({ width, height, depth, position, visible, wi
     useEffect(() => {
         const repeatTextures = [
             wallTexture.map,
-            wallTexture.displacement,
             wallTexture.aoMap,
             wallTexture.roughnessMap,
             wallTexture.metalnessMap,
@@ -49,13 +49,15 @@ export const SideWallWithWindow = ({ width, height, depth, position, visible, wi
                     windowHeight={windowHeight}
                     windowWidth={windowWidth}
                     wallTexture={wallTexture}
+                    giveColor={giveColor}
+
                 />
             )}
         </>
     );
 };
 
-const WindowHole = ({ width, height, depth, position, windowPos, windowHeight, windowWidth, wallTexture }) => {
+const WindowHole = ({ width, height, depth, position, windowPos, windowHeight, windowWidth, wallTexture, giveColor }) => {
     // Create geometry for wall and window
     const wallGeometry = new THREE.BoxGeometry(width, height, depth);
     const windowGeometry = new THREE.BoxGeometry(depth, windowHeight, windowWidth);
@@ -75,5 +77,11 @@ const WindowHole = ({ width, height, depth, position, windowPos, windowHeight, w
     // Convert result back to Three.js mesh
     const resultMesh = CSG.toMesh(resultCSG, wallMesh.matrix);
     resultMesh.material = new THREE.MeshStandardMaterial({ ...wallTexture });
+
+
+    useFrame((state, delta) => {
+        easing.dampC(resultMesh.material.color, giveColor ? 'lightblue' : 'white', 0.1, delta)
+    })
+
     return <primitive object={resultMesh} position={position} />;
 };
