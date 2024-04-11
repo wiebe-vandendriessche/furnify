@@ -11,6 +11,8 @@ export const DrawingProvider = ({ children }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const drawingCanvasRef = useRef(null);
 
+  const [orthogonalMode, setOrthogonalMode] = useState(false);
+
   const [points, setPoints] = useState<DrawablePoint[]>([]);
   const [lines, setLines] = useState<DrawableLine[]>([]);
   const tempLineRef = useRef<DrawableLine | null>(null);
@@ -22,6 +24,12 @@ export const DrawingProvider = ({ children }) => {
       console.log("Drawing is now: " + !prev);
       return !prev;
     });
+
+  // Toggle orthogonal mode
+  const toggleOrthogonalMode = () => setOrthogonalMode((prev) => {
+    console.log("Orthogonal mode is now: " + !prev);
+    return !prev;
+  })
 
   // Remove all elements from the canvas
   const removeAll = () => {
@@ -45,6 +53,8 @@ export const DrawingProvider = ({ children }) => {
     tempLineRef,
     latestPointRef,
     removeAll,
+    orthogonalMode,
+    toggleOrthogonalMode
   };
 
   return (

@@ -66,9 +66,9 @@ export const FloorplanEditor: React.FC = () => {
   const { scene, camera } = useThree();
   const { points, setPoints, latestPointRef } = use2d();
   const { lines, setLines, tempLineRef } = use2d();
-  const currentMousePosition = useMousePosition(camera);
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
+  const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.5;
 
   /**

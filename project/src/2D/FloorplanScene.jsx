@@ -4,12 +4,13 @@ import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
-import { PencilSquare, Trash } from "react-bootstrap-icons";
+import { PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
 import "./Floorplan.css";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const { removeAll } = use2d();
+  const { orthogonalMode, toggleOrthogonalMode } = use2d();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -20,6 +21,12 @@ export const FloorplanScene = () => {
     event.stopPropagation();
     console.log("Remove button clicked");
     removeAll();
+  };
+
+  const handleOrthogonalButtonClick = (event) => {
+    event.stopPropagation();
+    console.log("Orthogonal button clicked");
+    toggleOrthogonalMode();
   };
 
   return (
@@ -37,6 +44,13 @@ export const FloorplanScene = () => {
           onClick={handleRemoveButtonClick}
         >
           <Trash />
+        </button>
+
+        <button
+          className={`btn-circle btn-lg ${orthogonalMode ? "clicked" : "unclicked"}`}
+          onClick={handleOrthogonalButtonClick}
+        >
+          <Rulers />
         </button>
       </div>
 
