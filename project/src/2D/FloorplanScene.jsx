@@ -18,44 +18,31 @@ export const FloorplanScene = () => {
   return (
     <>
       {/* <div className="canvas"> */}
-        <div className="editor-controls">
-          {isDrawing && (
-            <button
-              className="btn-circle btn-lg clicked"
-              onClick={handleDrawingButtonClick}
-            >
-              {/* {isDrawing ? "Stop Drawing " : "Start Drawing "} */}
-              <PencilSquare />
-            </button>
-          )}
-
-          {!isDrawing && (
-            <button
-              className="btn-circle btn-lg unclicked"
-              onClick={handleDrawingButtonClick}
-            >
-              {/* {isDrawing ? "Stop Drawing " : "Start Drawing "} */}
-              <PencilSquare />
-            </button>
-          )}
-        </div>
-
-        <Canvas
-          ref={drawingCanvasRef}
-          className="canvas"
-          orthographic
-          camera={{ position: [0, 0, 5], zoom: 100 }}
+      <div className="editor-controls">
+        <button
+          className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"}`}
+          onClick={handleDrawingButtonClick}
         >
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <FloorplanEditor />
-          <axesHelper />
-          <OrbitControls
-            enableZoom={true}
-            enablePan={true}
-            enableRotate={false}
-          />
-        </Canvas>
+          <PencilSquare />
+        </button>
+      </div>
+
+      <Canvas
+        ref={drawingCanvasRef}
+        className="canvas"
+        orthographic
+        camera={{ position: [0, 0, 5], zoom: 100 }}
+      >
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <FloorplanEditor />
+        <axesHelper />
+        <OrbitControls
+          enableZoom={true}
+          enablePan={true}
+          enableRotate={false}
+        />
+      </Canvas>
       {/* </div> */}
     </>
   );
