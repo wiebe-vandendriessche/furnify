@@ -61,7 +61,7 @@ export const FloorplanEditor: React.FC = () => {
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
   const currentMousePosition = useMousePosition(camera);
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
-  const snapThreshold: number = 0.5;
+  const snapThreshold: number = 0.30;
 
   // when d is pressed, toggle drawing
   // possibly replace this with pressing a button onscreen
