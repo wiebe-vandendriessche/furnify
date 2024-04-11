@@ -41,24 +41,6 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   }, [selectedWall]);
 
 
-
-
-
-
-
-  // VOORLOPIG RAAMPJE (wordt in de toekomst uit de form gelezen):
-
-  //PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
-  const raambreedte = 3
-  const raamhoogte = 1
-  //positie relatief van linkeronderhoek
-  const vanlinks = 0.5
-  const starthoogte = 0.5
-  //PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
-
-
-
-
   useFrame(({ camera, clock }) => {
     if (ennableFrame) {
       // Determines how soon walls appear/dissapear when orbiting around the romom
@@ -90,59 +72,58 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
 
   return (
     <group ref={roomRef}>
-      {/* Back Wall */}
       <WallWithWindow
         width={width}
         height={height}
         depth={wallThickness}
         position={[0, height / 2, -depth / 2 + wallThickness / 2]}
         visible={backWallVisible}
-        windowStartHeight={(-height / 2) + raamhoogte / 2 + starthoogte}
-        windowStartFromLeft={(-width / 2) + raambreedte / 2 + 0.3 + vanlinks}
-        windowWidth={raambreedte} // Adjust window width as needed
-        windowHeight={raamhoogte} // Adjust window height as needed
+        windows={[
+          { x: 0, y: 0, w_width: 1, w_height: 1 },
+          { x: 2, y: 1, w_width: 1, w_height: 1 }
+        ]}
         giveColor={selectedWall === "back" ? true : false} // Change color based on selectedWall
+        wall={"back"}
       />
-      {/* Front Wall */}
       <WallWithWindow
         width={width}
         height={height}
         depth={wallThickness}
         position={[0, height / 2, depth / 2 - wallThickness / 2]}
         visible={frontWallVisible}
-        windowStartHeight={(-height / 2) + raamhoogte / 2 + starthoogte}
-        windowStartFromLeft={-((-width / 2) + raambreedte / 2 + 0.3 + vanlinks)}
-        windowWidth={raambreedte} // Adjust window width as needed
-        windowHeight={raamhoogte} // Adjust window height as needed
-        giveColor={selectedWall === "front" ? true : false}  // Change color based on selectedWall
+        windows={[
+          { x: 0, y: 0, w_width: 1, w_height: 1 },
+          { x: 2, y: 1, w_width: 1, w_height: 1 }
+        ]}
+        giveColor={selectedWall === "front" ? true : false} // Change color based on selectedWall
+        wall={"front"}
       />
-      {/* Left Wall */}
-      <SideWallWithWindow
+      <WallWithWindow
         width={wallThickness}
         height={height}
         depth={depth}
         position={[-width / 2 + wallThickness / 2, height / 2, 0]}
         visible={leftWallVisible}
-        windowStartHeight={(-height / 2) + raamhoogte / 2 + starthoogte}
-        windowStartFromLeft={-((-depth / 2) + raambreedte / 2 + 0.3 + vanlinks)}
-        windowWidth={raambreedte} // Adjust window width as needed
-        windowHeight={raamhoogte} // Adjust window height as needed
+        windows={[
+          { x: 0, y: 0, w_width: 1, w_height: 1 },
+          { x: 2, y: 1, w_width: 1, w_height: 1 }
+        ]}
         giveColor={selectedWall === "left" ? true : false} // Change color based on selectedWall
+        wall={"left"}
       />
-      {/* Right Wall */}
-      <SideWallWithWindow
+      <WallWithWindow
         width={wallThickness}
         height={height}
         depth={depth}
         position={[width / 2 - wallThickness / 2, height / 2, 0]}
         visible={rightWallVisible}
-        windowStartHeight={(-height / 2) + raamhoogte / 2 + starthoogte}
-        windowStartFromLeft={(-depth / 2) + raambreedte / 2 + 0.3 + vanlinks}
-        windowWidth={raambreedte} // Adjust window width as needed
-        windowHeight={raamhoogte} // Adjust window height as needed
+        windows={[
+          { x: 0, y: 0, w_width: 1, w_height: 1 },
+          { x: 2, y: 1, w_width: 1, w_height: 1 }
+        ]}
         giveColor={selectedWall === "right" ? true : false} // Change color based on selectedWall
+        wall={"right"}
       />
-      {/* Floor */}
       <Floor
         width={width}
         height={floorThickness}

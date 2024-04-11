@@ -1,14 +1,14 @@
 import React from 'react';
 import * as THREE from 'three';
 import { CSG } from 'three-csg-ts';
-import { useTexture  } from '@react-three/drei';
+import { useTexture } from '@react-three/drei';
 import { useEffect } from 'react';
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 
-export const WallWithWindow = ({ width, height, depth, position, visible, windowStartHeight, windowStartFromLeft, windowHeight, windowWidth, giveColor }) => {
-  
-  const windowPos = [windowStartFromLeft, windowStartHeight, 0]; // Position of the window relative to the lower left corner of the wall
+export const WallWithWindow = ({ width, height, depth, position, visible, windows, giveColor, wall }) => {
+
+  //const windowPos = [windowStartFromLeft, windowStartHeight, 0]; // Position of the window relative to the lower left corner of the wall
 
   const wallTexture = useTexture({
     map: './textures/beige_wall/beige_wall_001_ao_1k.jpg',
@@ -18,7 +18,7 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
     normalMap: './textures/beige_wall/beige_wall_001_arm_1k.jpg',
   });
 
-  
+
 
   // Apply texture repetition to all textures
   useEffect(() => {
@@ -43,48 +43,59 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
   return (
     <>
       {visible && (
-        <WindowHole
+        <WindowMesh
           width={width}
           height={height}
           depth={depth}
           position={position}
-          windowPos={windowPos}
-          windowHeight={windowHeight}
-          windowWidth={windowWidth}
-          wallTexture={wallTexture} // Pass wallTexture as a prop
+          windows={windows}
+          wallTexture={wallTexture}
           giveColor={giveColor}
+          wall={wall}
         />
       )}
     </>
   );
 };
 
-const WindowHole = ({ width, height, depth, position, windowPos, windowHeight, windowWidth,
-  wallTexture, giveColor }) => {
-  // Create geometry for wall and window
+const WindowMesh = ({ width, height, depth, position, windows, wallTexture, giveColor, wall }) => {
   const wallGeometry = new THREE.BoxGeometry(width, height, depth);
-  const windowGeometry = new THREE.BoxGeometry(windowWidth, windowHeight, depth);
-
-  // Move window to appropriate position
-  windowGeometry.translate(windowPos[0], windowPos[1], windowPos[2]);
-
-  // Create Three.js meshes
   const wallMesh = new THREE.Mesh(wallGeometry);
-  const windowMesh = new THREE.Mesh(windowGeometry);
 
-  // Perform subtraction using ThreeCSG
+  const windowCSGs = windows.map(window => {
+    const { x, y, w_width, w_height } = window;
+
+    let windowGeometry;
+
+    if (wall === "back") {
+      windowGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
+      windowGeometry.translate(x + (w_width / 2) - (width / 2) + 0.3, y + (w_height / 2) - (height / 2) , 0);
+    }
+    if (wall === "front"){
+      windowGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
+      windowGeometry.translate(-(x + (w_width / 2) - (width / 2) + 0.3), y + (w_height / 2) - (height / 2) , 0);
+    }
+    if (wall === "left"){
+      windowGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
+      windowGeometry.translate(0,y + (w_height/2) + (-height/2),-(x + (w_width / 2) + (-depth /2)+0.3));
+    }
+    if (wall === "right"){
+      windowGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
+      windowGeometry.translate(0,y + (w_height/2) + (-height/2),x + (w_width / 2) + (-depth /2)+0.3);
+    }
+    
+    const windowMesh = new THREE.Mesh(windowGeometry);
+    return CSG.fromMesh(windowMesh);
+  });
+
   const wallCSG = CSG.fromMesh(wallMesh);
-  const windowCSG = CSG.fromMesh(windowMesh);
-  const resultCSG = wallCSG.subtract(windowCSG);
-
-  // Convert result back to Three.js mesh
+  const resultCSG = windowCSGs.reduce((acc, windowCSG) => acc.subtract(windowCSG), wallCSG);
   const resultMesh = CSG.toMesh(resultCSG, wallMesh.matrix);
   resultMesh.material = new THREE.MeshStandardMaterial({ ...wallTexture });
 
-  
   useFrame((state, delta) => {
-    easing.dampC(resultMesh.material.color, giveColor ? 'lightblue' : 'white', 0.1, delta)
-  })
+    easing.dampC(resultMesh.material.color, giveColor ? 'lightblue' : 'white', 0.1, delta);
+  });
 
   return <primitive object={resultMesh} position={position} />;
 };

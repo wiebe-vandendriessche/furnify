@@ -25,6 +25,13 @@ export const ConfiguratorProvider = ({ children }) => {
         setObstacles
     }
 
+    // Function to filter obstacles by type
+    const filterObstaclesByType = (type) => {
+        return obstacles.filter(obstacle => obstacle.type === type);
+    };
+    console.log("Windows in de configuratorprovider:" + filterObstaclesByType("window"))
+
+
     return (
         <ConfiguratorContext.Provider value={value}>
             {children}

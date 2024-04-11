@@ -1,19 +1,19 @@
 import "../../App.css"
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "./Questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
+import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import Obstruction from "./Obstruction.jsx";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {useTranslation} from 'react-i18next'
-import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
+import { useTranslation } from 'react-i18next'
+import { Col, FloatingLabel, Row, ToggleButton } from "react-bootstrap";
 
 
 export function Questionnaire_space() {
     //i18n
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     const [stateId, setStateId] = useState(1);
     useEffect(() => {
         const lng = navigator.language;
@@ -22,10 +22,10 @@ export function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const {rectangular, setRectangular, dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
+    const { rectangular, setRectangular, dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();
     //Changes values of dimensions in context
     const changeDim = (event) => {
-        setDimensions({...dimensions, [event.target.name]: event.target.value});
+        setDimensions({ ...dimensions, [event.target.name]: event.target.value });
         console.log(event.target.name);
     }
 
@@ -35,9 +35,9 @@ export function Questionnaire_space() {
         console.log(event.target.name);
         console.log(event.target.value)
         setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
-                ...obstacle,
-                [event.target.name]: event.target.value
-            } : obstacle
+            ...obstacle,
+            [event.target.name]: event.target.value
+        } : obstacle
         ))
     }
 
@@ -83,7 +83,7 @@ export function Questionnaire_space() {
     //prevent user from typing negative values
     function handleKeyPress(event) {
         //prevent use of negative values
-        if(event.charCode==45){
+        if (event.charCode == 45) {
             console.log("negative value detected");
             event.preventDefault();
             return false;
@@ -91,7 +91,7 @@ export function Questionnaire_space() {
         return true;
     }
 
-    const changeForm=(bool)=>{
+    const changeForm = (bool) => {
         setRectangular(bool);
     }
 
@@ -107,7 +107,7 @@ export function Questionnaire_space() {
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
-                                    onClick={()=>{changeForm(true)}}
+                                    onClick={() => { changeForm(true) }}
                                     data-testid={"btn-space-room-rectangular"}
                                     type="radio"
                                     value="Rectangular"
@@ -122,7 +122,7 @@ export function Questionnaire_space() {
                                     value="Other"
                                     variant="danger"
                                     checked={!rectangular}
-                                    onClick={()=>{changeForm(false)}}>
+                                    onClick={() => { changeForm(false) }}>
                                     {t('questionnaire_space.other')}
                                 </ToggleButton>
                             </ButtonGroup>
@@ -131,22 +131,22 @@ export function Questionnaire_space() {
                             <Collapse in={rectangular}>
                                 <Row>
                                     {Object.entries(dimensions).map(([key, value]) => (
-                                            <Col key={key}>
-                                                <FloatingLabel
-                                                    controlId={"rectangular" + key}
-                                                    label={t('questionnaire_space.' + key)}
-                                                    className="mb-4"
-                                                    data-testid={"label-space-room-rectangular-"+key}
-                                                >
-                                                    <Form.Control
-                                                        data-testid={"input-space-room-rectangular-"+key}
-                                                        type="number" min={0} step={0.1} value={value}
-                                                                  size="sm"
-                                                                  name={key} onChange={changeDim}
-                                                                  onKeyPress={handleKeyPress}/>
-                                                </FloatingLabel>
-                                            </Col>
-                                        )
+                                        <Col key={key}>
+                                            <FloatingLabel
+                                                controlId={"rectangular" + key}
+                                                label={t('questionnaire_space.' + key)}
+                                                className="mb-4"
+                                                data-testid={"label-space-room-rectangular-" + key}
+                                            >
+                                                <Form.Control
+                                                    data-testid={"input-space-room-rectangular-" + key}
+                                                    type="number" min={0} step={0.1} value={value}
+                                                    size="sm"
+                                                    name={key} onChange={changeDim}
+                                                    onKeyPress={handleKeyPress} />
+                                            </FloatingLabel>
+                                        </Col>
+                                    )
                                     )}
 
                                 </Row>
@@ -170,15 +170,15 @@ export function Questionnaire_space() {
                         </Button>
                         <div className={"aspect"}>
                             {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                                                                   length={item.obstLength} width={item.width}
-                                                                   height={item.height}
-                                                                   door={item.door}
-                                                                   window={item.window}
-                                                                   key={"obst" + item.id}
-                                                                   changeObst={changeObstacle}
-                                                                   changeDoor={changeObstacleDoor}
-                                                                   changeWindow={changeObstacleWindow}
-                                                                   deleteObst={deleteObstacle}/>))}
+                                length={item.obstLength} width={item.width}
+                                height={item.height}
+                                door={item.door}
+                                window={item.window}
+                                key={"obst" + item.id}
+                                changeObst={changeObstacle}
+                                changeDoor={changeObstacleDoor}
+                                changeWindow={changeObstacleWindow}
+                                deleteObst={deleteObstacle} />))}
                         </div>
                     </div>
 
