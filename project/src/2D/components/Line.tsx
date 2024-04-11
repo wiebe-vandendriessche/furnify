@@ -46,9 +46,9 @@ export class DrawableLine {
   }
 }
 
-export const LinePrimitive: React.FC<{ line: Line }> = ({ line }) => <primitive object={line} />;
+export const LinePrimitive: React.FC<{ key: number, line: Line }> = ({ line }) => <primitive object={line} />;
 
-export const TextSprite: React.FC<{ text: string; position: THREE.Vector3 }> = ({ text, position }) => {
+export const TextSprite: React.FC<{ key: number, text: string, position: THREE.Vector3 }> = ({ text, position }) => {
   const { scene } = useThree();
 
   useEffect(() => {
