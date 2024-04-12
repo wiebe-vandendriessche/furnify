@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
 import { House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
+import * as THREE from "three";
 import "./Floorplan.css";
 
 export const FloorplanScene = () => {
@@ -12,7 +13,6 @@ export const FloorplanScene = () => {
   const { removeAll } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
-  const [isCameraHome, setCameraHome] = useState(true);
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -92,8 +92,13 @@ export const FloorplanScene = () => {
         <axesHelper />
         <OrbitControls ref={controlsRef}
           enableZoom={true}
-          enablePan={true}
+          enablePan={!isDrawing}
           enableRotate={false}
+          mouseButtons={{
+            LEFT: THREE.MOUSE.PAN,
+            MIDDLE: THREE.MOUSE.DOLLY,
+            RIGHT: THREE.MOUSE.PAN
+          }}
         />
       </Canvas>
     </>
