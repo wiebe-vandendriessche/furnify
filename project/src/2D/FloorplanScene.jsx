@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
@@ -29,19 +29,20 @@ export const FloorplanScene = () => {
     toggleOrthogonalMode();
   };
 
-
   const handleMouseEnter = () => {
     setIsHoveringCanvas(true);
   };
-  
+
   const handleMouseLeave = () => {
     setIsHoveringCanvas(false);
   };
 
+  const controlsRef = useRef();
+
   const handleHomeButtonClicked = (event) => {
     event.stopPropagation();
-    console.log("Home button clicked");
-  }
+    controlsRef.current.reset();    
+  };
 
   return (
     <>
@@ -70,7 +71,9 @@ export const FloorplanScene = () => {
         </button>
 
         <button
-          className={`btn-circle btn-lg ${isCameraHome ? "clicked" : "unclicked"}`} onClick={handleHomeButtonClicked}>
+          className={`btn-circle btn-lg unclicked`}
+          onClick={handleHomeButtonClicked}
+        >
           <House />
         </button>
       </div>
@@ -87,7 +90,7 @@ export const FloorplanScene = () => {
         <pointLight position={[10, 10, 10]} />
         <FloorplanEditor />
         <axesHelper />
-        <OrbitControls
+        <OrbitControls ref={controlsRef}
           enableZoom={true}
           enablePan={true}
           enableRotate={false}
