@@ -291,7 +291,7 @@ export const FloorplanEditor: React.FC = () => {
 
   return (
     <>
-      {points.map((point, index) => (
+      {points.map((point: DrawablePoint, index: number) => (
         <Point
           key={index}
           point={point}
@@ -299,7 +299,7 @@ export const FloorplanEditor: React.FC = () => {
           scale={isNearStart && index === 0 ? 1.5 : 1}
         />
       ))}
-      {lines.map((line, index) => (
+      {lines.map((line: DrawableLine, index: number) => (
         <LinePrimitive key={index} line={line.line} />
       ))}
       {lineLengthSprites}
