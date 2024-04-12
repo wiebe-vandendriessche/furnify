@@ -25,7 +25,6 @@ export const FloorplanScene = () => {
 
   const handleOrthogonalButtonClick = (event) => {
     event.stopPropagation();
-    console.log("Orthogonal button clicked");
     toggleOrthogonalMode();
   };
 
@@ -37,6 +36,11 @@ export const FloorplanScene = () => {
   const handleMouseLeave = () => {
     setIsHoveringCanvas(false);
   };
+
+  const handleHomeButtonClicked = (event) => {
+    event.stopPropagation();
+    console.log("Home button clicked");
+  }
 
   return (
     <>
