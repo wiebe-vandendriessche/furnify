@@ -67,3 +67,23 @@
   background-color: #f1f1f1;
   color: #000000;
 }
+
+.slider {
+  appearance: none; /* removes browser-specific styling */
+  width: 300px; /* width of slider */
+  height: 25px; /* height of slider */
+  background: #e84646 ; /* #e84646 background */
+  outline: none; /* remove outline */
+  border-radius: 50px; /* round corners */
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.slider::-webkit-slider-thumb {
+appearance: none; /* removes browser-specific styling */
+width: 20px; /* handle width */
+height: 20px; /* handle height */
+border-radius: 50%; /* make it circular */
+background: #FFFFFF; /* white color */
+cursor: pointer; /* cursor on hover */
+}

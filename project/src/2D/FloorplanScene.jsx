@@ -4,7 +4,14 @@ import { useState } from "react";
 import { Line, OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
-import { Grid, Grid3x3, House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
+import {
+  Grid,
+  Grid3x3,
+  House,
+  PencilSquare,
+  Rulers,
+  Trash,
+} from "react-bootstrap-icons";
 import {
   LineBasicMaterial,
   BufferGeometry,
@@ -14,6 +21,7 @@ import {
 import * as THREE from "three";
 import { GridComponent } from "./components/GridComponent";
 import "./Floorplan.css";
+import { SliderComponent } from "./components/Slider";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
@@ -99,6 +107,8 @@ export const FloorplanScene = () => {
         >
           <Grid3x3 />
         </button>
+
+        {showGrid && <SliderComponent gridSize={gridSize} setgridSize={setGridSize} />}
       </div>
 
       <Canvas
@@ -124,7 +134,14 @@ export const FloorplanScene = () => {
             RIGHT: THREE.MOUSE.PAN,
           }}
         />
-        {showGrid && <GridComponent size={100} divisions={100/gridSize} color="lightgrey" centerLineColor="lightgrey" />}
+        {showGrid && (
+          <GridComponent
+            size={100}
+            divisions={100 / gridSize}
+            color="lightgrey"
+            centerLineColor="lightgrey"
+          />
+        )}
       </Canvas>
     </>
   );
