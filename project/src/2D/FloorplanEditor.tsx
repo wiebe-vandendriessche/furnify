@@ -235,10 +235,10 @@ export const FloorplanEditor: React.FC = () => {
     };
 
     window.addEventListener("click", handleClick);
-    window.addEventListener("contextmenu", handleRightClick);
+    // window.addEventListener("contextmenu", handleRightClick);
     return () => {
       window.removeEventListener("click", handleClick);
-      window.removeEventListener("contextmenu", handleRightClick);
+      // window.removeEventListener("contextmenu", handleRightClick);
     };
   }, [addPoint, currentMousePosition, scene, isDrawing]);
 
