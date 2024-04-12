@@ -119,7 +119,7 @@ export const FloorplanScene = () => {
           enablePan={true}
           enableRotate={false}
           mouseButtons={{
-            LEFT: THREE.MOUSE.ROTATE,
+            LEFT: isDrawing ? THREE.MOUSE.ROTATE : THREE.MOUSE.PAN,
             MIDDLE: THREE.MOUSE.DOLLY,
             RIGHT: THREE.MOUSE.PAN,
           }}
