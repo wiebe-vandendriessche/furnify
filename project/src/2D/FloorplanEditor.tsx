@@ -90,6 +90,21 @@ export const FloorplanEditor: React.FC = () => {
   };
 
   /**
+   * function to check if cursor is close to start, so close the shape
+   * @param point
+   * @returns boolean
+   */
+  const isCloseToStart = (point: DrawablePoint) => {
+    if (points.length < 2) return false;
+    const start = points[0];
+    return (
+      Math.sqrt(
+        Math.pow(point.x - start.x, 2) + Math.pow(point.y - start.y, 2)
+      ) < snapThreshold
+    );
+  };
+
+  /**
    * Clear the scene when points and lines are cleared
    */
   useEffect(() => {
@@ -147,17 +162,6 @@ export const FloorplanEditor: React.FC = () => {
   const addPoint = useCallback(
     (newPoint: DrawablePoint) => {
       const lastPoint = points.length > 0 ? points[points.length - 1] : null;
-
-      // function to check if cursor is close to start, so close the shape
-      const isCloseToStart = (point: DrawablePoint) => {
-        if (points.length < 2) return false;
-        const start = points[0];
-        return (
-          Math.sqrt(
-            Math.pow(point.x - start.x, 2) + Math.pow(point.y - start.y, 2)
-          ) < snapThreshold
-        );
-      };
 
       if (orthogonalMode && lastPoint && !isCloseToStart(newPoint)) {
         const dx = Math.abs(newPoint.x - lastPoint.x);
@@ -243,15 +247,16 @@ export const FloorplanEditor: React.FC = () => {
    */
   useFrame(() => {
     if ( isDrawing && currentMousePosition && latestPointRef.current && isHoveringCanvas) {
+      let endPoint = new Vector3( currentMousePosition.x, currentMousePosition.y, currentMousePosition.z);
 
-      let endPoint = new Vector3(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z);
-
-      if (orthogonalMode){
+      if (isCloseToStart(endPoint)) {
+        endPoint = points[0];
+      } else if (orthogonalMode) {
         const lastPoint = latestPointRef.current;
         const dx = Math.abs(endPoint.x - lastPoint.x);
         const dy = Math.abs(endPoint.y - lastPoint.y);
 
-        if (dx > dy){
+        if (dx > dy) {
           endPoint.y = lastPoint.y;
         } else {
           endPoint.x = lastPoint.x;
@@ -259,10 +264,7 @@ export const FloorplanEditor: React.FC = () => {
       }
 
       if (!tempLineRef.current) {
-        const tempLine = new DrawableLine(
-          latestPointRef.current,
-          endPoint
-        );
+        const tempLine = new DrawableLine(latestPointRef.current, endPoint);
         tempLine.addToScene(scene);
         tempLineRef.current = tempLine;
       } else {
