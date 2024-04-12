@@ -79,7 +79,7 @@ export const FloorplanScene = () => {
         ref={drawingCanvasRef}
         className="canvas"
         orthographic
-        camera={cameraPos}
+        camera={{ position: [0, 0, 5], zoom: 100 }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
