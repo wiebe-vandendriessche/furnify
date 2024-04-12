@@ -27,7 +27,7 @@ import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 
 /**
  * Keeps track of the current mouse position in 3D space
- * @param camera 
+ * @param camera
  * @returns current mouse position in 3D space: Vector3 | null
  */
 const useMousePosition = (camera) => {
@@ -68,6 +68,7 @@ export const FloorplanEditor: React.FC = () => {
   const { lines, setLines, tempLineRef } = use2d();
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
+  const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
@@ -76,7 +77,7 @@ export const FloorplanEditor: React.FC = () => {
    * Clear the scene of all points and lines
    */
   const clearScene = () => {
-    lines.forEach(line => {
+    lines.forEach((line) => {
       if (line.line) scene.remove(line.line);
       if (line.geometry) line.geometry.dispose();
       if (line.material) line.material.dispose();
@@ -145,6 +146,8 @@ export const FloorplanEditor: React.FC = () => {
    */
   const addPoint = useCallback(
     (newPoint: DrawablePoint) => {
+      const lastPoint = points.length > 0 ? points[points.length - 1] : null;
+
       // function to check if cursor is close to start, so close the shape
       const isCloseToStart = (point: DrawablePoint) => {
         if (points.length < 2) return false;
@@ -155,6 +158,17 @@ export const FloorplanEditor: React.FC = () => {
           ) < snapThreshold
         );
       };
+
+      if (orthogonalMode && lastPoint) {
+        const dx = Math.abs(newPoint.x - lastPoint.x);
+        const dy = Math.abs(newPoint.y - lastPoint.y);
+
+        if (dx > dy) {
+          newPoint.y = lastPoint.y;
+        } else {
+          newPoint.x = lastPoint.x;
+        }
+      }
 
       // closing the shape
       if (isDrawing && points.length > 1 && isCloseToStart(newPoint)) {
@@ -228,7 +242,12 @@ export const FloorplanEditor: React.FC = () => {
    * Update the temp line when drawing
    */
   useFrame(() => {
-    if (isDrawing && currentMousePosition && latestPointRef.current && isHoveringCanvas) {
+    if (
+      isDrawing &&
+      currentMousePosition &&
+      latestPointRef.current &&
+      isHoveringCanvas
+    ) {
       if (!tempLineRef.current) {
         const tempLine = new DrawableLine(
           latestPointRef.current,
@@ -248,13 +267,15 @@ export const FloorplanEditor: React.FC = () => {
   /**
    * Display the length of each line
    */
-  const lineLengthSprites = points.slice(1).map((point: DrawablePoint, index: number) => {
-    const start = points[index];
-    const end = point;
-    const length = start.distanceTo(end).toFixed(2);
-    const midpoint = new Vector3().addVectors(start, end).multiplyScalar(0.5);
-    return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
-  });
+  const lineLengthSprites = points
+    .slice(1)
+    .map((point: DrawablePoint, index: number) => {
+      const start = points[index];
+      const end = point;
+      const length = start.distanceTo(end).toFixed(2);
+      const midpoint = new Vector3().addVectors(start, end).multiplyScalar(0.5);
+      return <TextSprite key={index} text={`${length}m`} position={midpoint} />;
+    });
 
   return (
     <>
