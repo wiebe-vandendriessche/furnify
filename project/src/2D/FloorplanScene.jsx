@@ -20,6 +20,7 @@ export const FloorplanScene = () => {
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
   const [showGrid, setShowGrid] = useState(false);
+  const [gridSize, setGridSize] = useState(0.1);
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -170,7 +171,7 @@ export const FloorplanScene = () => {
             RIGHT: THREE.MOUSE.PAN,
           }}
         />
-        {showGrid && <GridComponent size={10} divisions={100} color="grey" centerLineColor="grey" />}
+        {showGrid && <GridComponent size={100} divisions={100/gridSize} color="lightgrey" centerLineColor="lightgrey" />}
       </Canvas>
     </>
   );
