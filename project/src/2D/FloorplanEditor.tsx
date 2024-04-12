@@ -189,6 +189,7 @@ export const FloorplanEditor: React.FC = () => {
         const updatedPoints = [...prevPoints, newPoint];
         if (updatedPoints.length > 1) {
           const start = updatedPoints[updatedPoints.length - 2];
+          newPoint.z = 0.1; // just to make sure lines are a bit above the grid
           const newLine = new DrawableLine(start, newPoint);
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
