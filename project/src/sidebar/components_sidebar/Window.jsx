@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, obstId, length, width, height, door, window }) {
+function Window({ deleteObst, changeObst, changeDoor, changeWindow, type, obstId, length, width, height, door, window }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -23,51 +23,9 @@ function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, o
         setShow1(!showButton1)
     };
 
-    const [insideLeftDoor, setInsideLeftDoor] = useState(false);
-    const [insideRightDoor, setInsideRightDoor] = useState(false);
-    const [outsideDoor, setOutsideDoor] = useState(false);
-
-    const changeInsideLeftDoor = () => {
-
-        setInsideLeftDoor(true)
-        setInsideRightDoor(false)
-        setOutsideDoor(false)
-
-    }
-    const changeInsideRightDoor = () => {
-
-        setInsideLeftDoor(false)
-        setInsideRightDoor(true)
-        setOutsideDoor(false)
-
-    }
-    const changeOutsideDoor = () => {
-        setInsideLeftDoor(false)
-        setInsideRightDoor(false)
-        setOutsideDoor(true)
-
-    }
-    const [hideDoor, setHideDoor] = useState(true);
     const [hideWindow, setHideWindow] = useState(true);
-    const showExtraQuestion = (event) => {
-        showWhichQuestion(event.target.value)
-    }
-    const showWhichQuestion = (value) => {
-        setHideDoor(true)
-        setHideWindow(true)
-        if (value == "door") {
-            setHideDoor(false)
-            if (door == 'left') {
-                changeInsideLeftDoor()
-            } else if (door == 'right') {
-                changeInsideRightDoor()
-            } else if (door == 'out') {
-                changeOutsideDoor()
-            }
-        } else if (value == "window") {
-            setHideWindow(false)
-        }
-    }
+
+
     const [insideWindow, setinsideWindow] = useState(window);
 
 
@@ -126,58 +84,29 @@ function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, o
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                data-testid={"btn-obstacle-expand-" + type}
-                variant={"danger"} value={type ?? t("obstructions." + type)}
-                onClick={(e) => {
-                    showButton()
-                    showExtraQuestion(e)
-                }}>{t("obstructions." + type)}</Button>
+                    data-testid={"btn-obstacle-expand-" + type}
+                    variant={"danger"} value={type ?? t("obstructions." + type)}
+                    onClick={(e) => {
+                        showButton()
+                    }}>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                    variant={"danger"} id={"delete" + obstId}
+                    onClick={(e) => deleteObst(e)}>
                 x
             </Button>
             <div className="m-1" hidden={showButton2}>
-                <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type" + obstId}
-                        defaultValue={type}
-                        onChange={(e) => {
-                            changeObst(e)
-                            showExtraQuestion(e)
-                        }}>
-                        <option value={"other"}>{t('obstructions.other')}</option>
-                        <option value={"window"}>{t('obstructions.window')}</option>
-                        <option value={"door"}>{t('obstructions.door')}</option>
-                        <option value={"radiator"}>{t('obstructions.radiator')}</option>
-                        <option value={"walloutlet"}>{t('obstructions.walloutlet')}</option>
-                        <option value={"switch"}>{t('obstructions.switch')}</option>
-                        <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
-
-                    </Form.Select>
-                </Form.Group>
                 <Form.Group>
                     <div className="m-1">
                         <Row>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"length" + obstId}
-                                    label={t('questionnaire_space.length')}
-                                >
-                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
-                                        data-testid={"input-obst-" + type + "-length"}
-                                        defaultValue={length} onChange={(e) => changeObst(e)}
-                                        onKeyPress={handleKeyPress} />
-                                </FloatingLabel>
-                            </Col>
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width')}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
-                                        data-testid={"input-obst-" + type + "-width"}
-                                        onChange={(e) => changeObst(e)}
-                                        onKeyPress={handleKeyPress} />
+                                                  data-testid={"input-obst-" + type + "-width"}
+                                                  onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress} />
 
 
                                 </FloatingLabel>
@@ -188,9 +117,9 @@ function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, o
                                     label={t('questionnaire_space.height')}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
-                                        data-testid={"input-obst-" + type + "-height"}
-                                        onChange={(e) => changeObst(e)}
-                                        onKeyPress={handleKeyPress} />
+                                                  data-testid={"input-obst-" + type + "-height"}
+                                                  onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress} />
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -198,61 +127,7 @@ function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, o
                     </div>
                 </Form.Group>
 
-                <Form.Group hidden={hideDoor}>
-                    <Form.Label data-testid={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
-                    <div>
-                        <ButtonGroup>
-                            <ToggleButton
-                                controlid={"left" + obstId}
-                                className="mb-4"
-                                name={"left" + obstId}
-                                onClick={(e) => {
-                                    changeInsideLeftDoor()
-                                    changeDoor(e)
-                                }}
-                                data-testid={"btn-obstacle-door-inside-l"}
-                                type="radio"
-                                value="Rectangular"
-                                variant="danger"
-                                checked={insideLeftDoor}
-                            >
-                                {t('obstructions.q_door.inside_left')}
-                            </ToggleButton>
-                            <ToggleButton
-                                controlid={"right" + obstId}
-                                className="mb-4"
-                                name={"right" + obstId}
-                                onClick={(e) => {
-                                    changeInsideRightDoor()
-                                    changeDoor(e)
-                                }}
-                                data-testid={"btn-obstacle-door-inside-r"}
-                                type="radio"
-                                value="Rectangular"
-                                variant="danger"
-                                checked={insideRightDoor}
-                            >
-                                {t('obstructions.q_door.inside_right')}
-                            </ToggleButton>
-                            <ToggleButton
-                                controlid={"out" + obstId}
-                                className="mb-4"
-                                name={"out" + obstId}
-                                onClick={(e) => {
-                                    changeOutsideDoor()
-                                    changeDoor(e)
-                                }}
-                                type="radio"
-                                data-testid={"btn-obstacle-door-outside"}
-                                value="Other"
-                                variant="danger"
-                                checked={outsideDoor}>
-                                {t('obstructions.q_door.outside')}
-                            </ToggleButton>
-                        </ButtonGroup>
-                    </div>
-                </Form.Group>
-                <Form.Group hidden={hideWindow}>
+                <Form.Group >
                     <Form.Label data-testid={"question-obstacle-window-opening"}>{t('obstructions.q_window.opening_window')}</Form.Label>
                     <div>
                         <ButtonGroup>
@@ -354,4 +229,4 @@ function Obstruction({ deleteObst, changeObst, changeDoor, changeWindow, type, o
     )
 }
 
-export default Obstruction;
+export default Window;

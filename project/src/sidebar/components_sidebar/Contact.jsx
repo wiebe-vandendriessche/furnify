@@ -40,7 +40,7 @@ function Contact() {
                     key !== 'phone_number' ? (<FloatingLabel key={key}
                                                             data-testid={"label-contact-"+key}
                                                             className={"mb-2"}
-                                                            controlId="floatingInput"
+                                                            controlid="floatingInput"
                                                             label={t("contact."+key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       data-testid={"input-contact-"+key}

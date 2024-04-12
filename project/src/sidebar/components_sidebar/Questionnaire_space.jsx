@@ -9,6 +9,8 @@ import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useTranslation } from 'react-i18next'
 import { Col, FloatingLabel, Row, ToggleButton } from "react-bootstrap";
+import Window from "./Window.jsx";
+import Door from "./Door.jsx";
 
 
 export function Questionnaire_space() {
@@ -20,6 +22,15 @@ export function Questionnaire_space() {
         i18n.changeLanguage(lng);
     }, [])
 
+    const sortObstacles=(list1, list2, list3)=> {
+        //merge the lists
+        const allObsts = [...list1, ...list2, ...list3];
+
+        // sort the list according to id
+        allObsts.sort((a, b) => a.id - b.id);
+
+        return allObsts;
+    }
 
     //Uses reactcontext
     const { rectangular, setRectangular, dimensions, setDimensions, obstacles, setObstacles } = useConfiguratorContext();
@@ -34,7 +45,7 @@ export function Questionnaire_space() {
         console.log(event.target)
         console.log(event.target.name);
         console.log(event.target.value)
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
+        setObstacles((prevObstacles) => prevObstacles["other"].map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
             ...obstacle,
             [event.target.name]: event.target.value
         } : obstacle
@@ -42,13 +53,16 @@ export function Questionnaire_space() {
     }
 
     const changeObstacleDoor = (event) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
-            ...obstacle,
-            door: event.target.getAttribute('controlId').split("obst")[0]
-        } : obstacle))
+        console.log("CONTROLID"+event.target.getAttribute("controlid"))
+        console.log("TARGET"+ event.target.getAttribute("controlid"))
+        setObstacles({...obstacles, "door": [obstacles["door"].map((obstacle) => obstacle.id == event.target.getAttribute('controlid').split("obst")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value.split("obst")[0]
+            } : obstacle)]})
+
     }
     const changeObstacleWindow = (event, value) => {
-        setObstacles((prevObstacles) => prevObstacles.map((obstacle) => obstacle.id == event.target.getAttribute('controlId').split("obst")[1] ? {
+        setObstacles((prevObstacles) => prevObstacles["window"].map((obstacle) => obstacle.id == event.target.getAttribute('controlid').split("obst")[1] ? {
             ...obstacle,
             window: value
         } : obstacle))
@@ -57,28 +71,32 @@ export function Questionnaire_space() {
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
-        setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
+        setObstacles((prevObstacles) => prevObstacles["other"].filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
     const addObstacles = (event) => {
         setStateId(stateId + 1)
-        if (obstacles.length > 0) {
+        const valueType=event.currentTarget.getAttribute("value");
+        if (obstacles[valueType]) {
+            console.log(obstacles[event.currentTarget.getAttribute("value")])
             console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
-            setObstacles([...obstacles, {
-                type: event.currentTarget.getAttribute("value"),
-                width: 0,
-                height: 0,
-                obstLength: 0,
-                id: stateId,
-                door: 0,
-                window: true
-            }]);
+            setObstacles({
+                ...obstacles, [valueType]: [...obstacles[valueType], {
+                    type: event.currentTarget.getAttribute("value"),
+                    width: 0,
+                    height: 0,
+                    obstLength: 0,
+                    id: stateId,
+                }]
+            });
         } else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
-            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
+            setObstacles(...obstacles, obstacles[valueType]=[{ type: valueType, width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
         }
         console.log(stateId)
+        console.log(obstacles)
     }
+
 
     //prevent user from typing negative values
     function handleKeyPress(event) {
@@ -133,7 +151,7 @@ export function Questionnaire_space() {
                                     {Object.entries(dimensions).map(([key, value]) => (
                                         <Col key={key}>
                                             <FloatingLabel
-                                                controlId={"rectangular" + key}
+                                                controlid={"rectangular" + key}
                                                 label={t('questionnaire_space.' + key)}
                                                 className="mb-4"
                                                 data-testid={"label-space-room-rectangular-" + key}
@@ -169,16 +187,85 @@ export function Questionnaire_space() {
                             {t('obstructions.other')}
                         </Button>
                         <div className={"aspect"}>
-                            {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                                length={item.obstLength} width={item.width}
-                                height={item.height}
-                                door={item.door}
-                                window={item.window}
-                                key={"obst" + item.id}
-                                changeObst={changeObstacle}
-                                changeDoor={changeObstacleDoor}
-                                changeWindow={changeObstacleWindow}
-                                deleteObst={deleteObstacle} />))}
+                            {
+
+                                sortObstacles(obstacles["window"], obstacles["door"], obstacles["other"]).map(item=>{
+                                    if(item.type=="window"){
+                                        return <Window
+                                            obstId={"obst" + item.id}
+                                            type={item.type}
+                                            length={item.obstLength}
+                                            width={item.width}
+                                            height={item.height}
+                                            door={item.door}
+                                            window={item.window}
+                                            key={"obst" + item.id}
+                                            changeObst={changeObstacle}
+                                            changeDoor={changeObstacleDoor}
+                                            changeWindow={changeObstacleWindow}
+                                            deleteObst={deleteObstacle}
+                                        />;
+                                    }
+                                    else if(item.type=="door"){
+                                        return <Door
+                                            obstId={"obst" + item.id}
+                                            type={item.type}
+                                            length={item.obstLength}
+                                            width={item.width}
+                                            height={item.height}
+                                            door={item.door}
+                                            window={item.window}
+                                            key={"obst" + item.id}
+                                            changeObst={changeObstacle}
+                                            changeDoor={changeObstacleDoor}
+                                            changeWindow={changeObstacleWindow}
+                                            deleteObst={deleteObstacle}
+                                        />
+                                    }
+                                    else{
+                                        return <Obstruction
+                                            obstId={"obst" + item.id}
+                                            type={item.type}
+                                            length={item.obstLength}
+                                            width={item.width}
+                                            height={item.height}
+                                            door={item.door}
+                                            window={item.window}
+                                            key={"obst" + item.id}
+                                            changeObst={changeObstacle}
+                                            changeDoor={changeObstacleDoor}
+                                            changeWindow={changeObstacleWindow}
+                                            deleteObst={deleteObstacle}
+                                        />
+                                    }
+                                })
+                                /*Object.keys(obstacles).map(key => {
+                                    const item = obstacles[key];
+                                    if (key == "other" && obstacles["other"].length>0) {
+                                        return obstacles["other"].map((item) => (
+
+                                        ))
+
+                                    }
+                                    else if(key=="door" && obstacles["key"].length>0){
+
+                                    }
+                                })
+
+                                obstacles.map((item) => {
+                                    console.log(item);
+                                    /*<Obstruction obstId={"obst" + item.id} type={item.type}
+                                                 length={item.obstLength} width={item.width}
+                                                 height={item.height}
+                                                 door={item.door}
+                                                 window={item.window}
+                                                 key={"obst" + item.id}
+                                                 changeObst={changeObstacle}
+                                                 changeDoor={changeObstacleDoor}
+                                                 changeWindow={changeObstacleWindow}
+                                                 deleteObst={deleteObstacle}/>
+
+                                })*/}
                         </div>
                     </div>
 

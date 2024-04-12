@@ -9,7 +9,7 @@ export const ConfiguratorProvider = ({ children }) => {
 
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, office_space: false, storage_space: false })
     const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birch", layout:""})
-    const [obstacles, setObstacles] = useState([]);
+    const [obstacles, setObstacles] = useState({door: [], window: [], other: []});
     const [rectangular, setRectangular] = useState(true);
 
     const value = {
@@ -24,12 +24,6 @@ export const ConfiguratorProvider = ({ children }) => {
         obstacles,
         setObstacles
     }
-
-    // Function to filter obstacles by type
-    const filterObstaclesByType = (type) => {
-        return obstacles.filter(obstacle => obstacle.type === type);
-    };
-    console.log("Windows in de configuratorprovider:" + filterObstaclesByType("window"))
 
 
     return (
