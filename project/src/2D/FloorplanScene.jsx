@@ -41,7 +41,9 @@ export const FloorplanScene = () => {
 
   const handleHomeButtonClicked = (event) => {
     event.stopPropagation();
-    controlsRef.current.reset();    
+    if (controlsRef.current) {
+      controlsRef.current.reset();    
+    }    
   };
 
   return (
@@ -92,7 +94,8 @@ export const FloorplanScene = () => {
         <axesHelper />
         <OrbitControls ref={controlsRef}
           enableZoom={true}
-          enablePan={!isDrawing}
+          // enablePan={!isDrawing}
+          enablePan={false}
           enableRotate={false}
           mouseButtons={{
             LEFT: THREE.MOUSE.PAN,
