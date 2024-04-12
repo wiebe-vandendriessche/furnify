@@ -1,10 +1,10 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { useEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
-import { PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
+import { House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
 import "./Floorplan.css";
 
 export const FloorplanScene = () => {
@@ -12,6 +12,7 @@ export const FloorplanScene = () => {
   const { removeAll } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
+  const [isCameraHome, setCameraHome] = useState(true);
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -67,13 +68,18 @@ export const FloorplanScene = () => {
         >
           <Rulers />
         </button>
+
+        <button
+          className={`btn-circle btn-lg ${isCameraHome ? "clicked" : "unclicked"}`} onClick={handleHomeButtonClicked}>
+          <House />
+        </button>
       </div>
 
       <Canvas
         ref={drawingCanvasRef}
         className="canvas"
         orthographic
-        camera={{ position: [0, 0, 5], zoom: 100 }}
+        camera={cameraPos}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
