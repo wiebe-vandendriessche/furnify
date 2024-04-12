@@ -158,10 +158,8 @@ export const FloorplanEditor: React.FC = () => {
           ) < snapThreshold
         );
       };
-      console.log(orthogonalMode);
 
       if (orthogonalMode && lastPoint && !isCloseToStart(newPoint)) {
-        console.log("we should be in here");
         const dx = Math.abs(newPoint.x - lastPoint.x);
         const dy = Math.abs(newPoint.y - lastPoint.y);
 
@@ -244,21 +242,31 @@ export const FloorplanEditor: React.FC = () => {
    * Update the temp line when drawing
    */
   useFrame(() => {
-    if (
-      isDrawing &&
-      currentMousePosition &&
-      latestPointRef.current &&
-      isHoveringCanvas
-    ) {
+    if ( isDrawing && currentMousePosition && latestPointRef.current && isHoveringCanvas) {
+
+      let endPoint = new Vector3(currentMousePosition.x, currentMousePosition.y, currentMousePosition.z);
+
+      if (orthogonalMode){
+        const lastPoint = latestPointRef.current;
+        const dx = Math.abs(endPoint.x - lastPoint.x);
+        const dy = Math.abs(endPoint.y - lastPoint.y);
+
+        if (dx > dy){
+          endPoint.y = lastPoint.y;
+        } else {
+          endPoint.x = lastPoint.x;
+        }
+      }
+
       if (!tempLineRef.current) {
         const tempLine = new DrawableLine(
           latestPointRef.current,
-          currentMousePosition
+          endPoint
         );
         tempLine.addToScene(scene);
         tempLineRef.current = tempLine;
       } else {
-        tempLineRef.current.update(currentMousePosition);
+        tempLineRef.current.update(endPoint);
       }
     } else if (tempLineRef.current) {
       tempLineRef.current.removeFromScene(scene);
