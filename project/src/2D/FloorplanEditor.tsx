@@ -158,8 +158,10 @@ export const FloorplanEditor: React.FC = () => {
           ) < snapThreshold
         );
       };
+      console.log(orthogonalMode);
 
-      if (orthogonalMode && lastPoint) {
+      if (orthogonalMode && lastPoint && !isCloseToStart(newPoint)) {
+        console.log("we should be in here");
         const dx = Math.abs(newPoint.x - lastPoint.x);
         const dy = Math.abs(newPoint.y - lastPoint.y);
 
@@ -192,7 +194,7 @@ export const FloorplanEditor: React.FC = () => {
         return updatedPoints;
       });
     },
-    [scene, isDrawing, points]
+    [scene, isDrawing, points, orthogonalMode]
   );
 
   /**
