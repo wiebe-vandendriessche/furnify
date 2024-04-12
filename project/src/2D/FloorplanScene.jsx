@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Line, OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
-import { House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
+import { Grid, Grid3x3, House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
 import {
   LineBasicMaterial,
   BufferGeometry,
@@ -19,6 +19,7 @@ export const FloorplanScene = () => {
   const { removeAll } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
+  const [showGrid, setShowGrid] = useState(false);
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -52,7 +53,10 @@ export const FloorplanScene = () => {
     }
   };
 
-  extend({ LineSegments });
+  const handleGridButtonCLicked = (event) => {
+    event.stopPropagation();
+    setShowGrid((prev) => !prev);
+  };
 
   const GridComponent = ({
     size = 100,
@@ -134,6 +138,13 @@ export const FloorplanScene = () => {
         >
           <House />
         </button>
+
+        <button
+          className={`btn-circle btn-lg ${showGrid ? "clicked" : "unclicked"}`}
+          onClick={handleGridButtonCLicked}
+        >
+          <Grid3x3 />
+        </button>
       </div>
 
       <Canvas
@@ -151,20 +162,15 @@ export const FloorplanScene = () => {
         <OrbitControls
           ref={controlsRef}
           enableZoom={true}
-          enablePan={!isDrawing}
+          enablePan={true}
           enableRotate={false}
           mouseButtons={{
-            LEFT: THREE.MOUSE.PAN,
+            LEFT: THREE.MOUSE.ROTATE,
             MIDDLE: THREE.MOUSE.DOLLY,
             RIGHT: THREE.MOUSE.PAN,
           }}
         />
-        <GridComponent
-          size={10}
-          divisions={100}
-          color="grey"
-          centerLineColor="white"
-        />
+        {showGrid && <GridComponent size={10} divisions={100} color="grey" centerLineColor="grey" />}
       </Canvas>
     </>
   );
