@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 
 // eslint-disable-next-line react/prop-types
-function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId, length, width, height, door, obstacle }) {
+function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, door, doorXpos, doorWall }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -16,39 +16,10 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
         i18n.changeLanguage(lng);
     }, [])
 
-    const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
         setShow2(!showButton2)
-        setShow1(!showButton1)
     };
-
-    const [insideLeftDoor, setInsideLeftDoor] = useState(false);
-    const [insideRightDoor, setInsideRightDoor] = useState(false);
-    const [outsideDoor, setOutsideDoor] = useState(false);
-
-    const changeInsideLeftDoor = () => {
-
-        setInsideLeftDoor(true)
-        setInsideRightDoor(false)
-        setOutsideDoor(false)
-
-    }
-    const changeInsideRightDoor = () => {
-
-        setInsideLeftDoor(false)
-        setInsideRightDoor(true)
-        setOutsideDoor(false)
-
-    }
-    const changeOutsideDoor = () => {
-        setInsideLeftDoor(false)
-        setInsideRightDoor(false)
-        setOutsideDoor(true)
-
-    }
-
-
 
     const { selectedWall, setSelectedWall } = useRoomWallLightupContext();
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -65,22 +36,8 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
     }
 
 
-    // Track the selected position of the obstacle obstruction
-    const [obstacleWall, setObstacleWall] = useState("front");
-    const [doorXpos, setDoorXpos] = useState(0.0);
-
-    const handleObstacleXposChange = (event) => {
-        console.log("Changing door x to: " + event.target.value)
-        setDoorXpos(event.target.value);
-    };
 
 
-
-    const handleObstacleWallChange = (obstacleWall) => {
-        // Update the selected position state
-        console.log("setting obstacleWall to: " + obstacleWall)
-        setObstacleWall(obstacleWall);
-    };
 
     function handleKeyPress(event) {
         //prevent use of negative values
@@ -93,7 +50,7 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
     }
 
     console.log(obstId);
-    console.log(obstacleWall)
+    console.log(doorWall)
     console.log(doorXpos);
     console.log(type)
 
@@ -102,9 +59,7 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
             <Button id={"button" + obstId}
                     data-testid={"btn-obstacle-expand-" + type}
                     variant={"danger"} value={type ?? t("obstructions." + type)}
-                    onClick={(e) => {
-                        showButton()
-                    }}>{t("obstructions." + type)}</Button>
+                    onClick={showButton}>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                     variant={"danger"} id={"delete" + obstId}
                     onClick={(e) => deleteObst(e)}>
@@ -121,8 +76,10 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress} />
+                                                  onChange={(e) => changeDoor(e)}
+                                                  onKeyPress={handleKeyPress}
+                                                  id={"width"+obstId}
+                                    />
 
 
                                 </FloatingLabel>
@@ -134,8 +91,10 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
                                                   data-testid={"input-obst-" + type + "-height"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress} />
+                                                  onChange={(e) => changeDoor(e)}
+                                                  onKeyPress={handleKeyPress}
+                                                  id={"height"+obstId}
+                                    />
                                 </FloatingLabel>
                             </Col>
                         </Row>
@@ -148,50 +107,47 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
                     <div>
                         <ButtonGroup>
                             <ToggleButton
-                                controlid={"left" + obstId}
+                                controlid={"left-opening_door-" + obstId}
                                 className="mb-4"
                                 name={"door"}
                                 onClick={(e) => {
-                                    changeInsideLeftDoor()
-                                    changeDoor(e)
+                                    changeOpening(e)
                                 }}
                                 data-testid={"btn-obstacle-door-inside-l"}
                                 type="radio"
                                 value={"left" + obstId}
                                 variant="danger"
-                                checked={insideLeftDoor}
+                                checked={"left"==door}
                             >
                                 {t('obstructions.q_door.inside_left')}
                             </ToggleButton>
                             <ToggleButton
-                                controlid={"right" + obstId}
+                                controlid={"right-opening_door-" + obstId}
                                 className="mb-4"
                                 name={"door"}
                                 onClick={(e) => {
-                                    changeInsideRightDoor()
-                                    changeDoor(e)
+                                    changeOpening(e)
                                 }}
                                 data-testid={"btn-obstacle-door-inside-r"}
                                 type="radio"
                                 value={"right" + obstId}
                                 variant="danger"
-                                checked={insideRightDoor}
+                                checked={"right"==door}
                             >
                                 {t('obstructions.q_door.inside_right')}
                             </ToggleButton>
                             <ToggleButton
-                                controlid={"out" + obstId}
+                                controlid={"out-opening_door-" + obstId}
                                 className="mb-4"
                                 name={"door"}
                                 onClick={(e) => {
-                                    changeOutsideDoor()
-                                    changeDoor(e)
+                                    changeOpening(e)
                                 }}
                                 type="radio"
                                 data-testid={"btn-obstacle-door-outside"}
                                 value={"out" + obstId}
                                 variant="danger"
-                                checked={outsideDoor}>
+                                checked={"out"==door}>
                                 {t('obstructions.q_door.outside')}
                             </ToggleButton>
                         </ButtonGroup>
@@ -206,9 +162,11 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
                                     type="number"
                                     name={"doorXpos"}
                                     min={0} step={0.1}
-                                    defaultValue={doorXpos}
-                                    onChange={handleObstacleXposChange}
+                                    value={doorXpos}
+                                    onKeyPress={handleKeyPress}
+                                    onChange={changeDoor}
                                     placeholder="Enter X Position"
+                                    id={"xpos"+obstId}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -228,14 +186,14 @@ function Door({ deleteObst, changeObst, changeDoor, changeObstacle, type, obstId
                                     type="radio"
                                     variant="danger"
                                     name={`obstacleWall${obstId}`}
-                                    controlid={`obstacleWall${obstId}`}
-                                    data-testid={`btn-obstacle-obstacle-position-${x}`}
-                                    checked={obstacleWall === x}
-                                    onClick={() => {
-                                        handleObstacleWallChange(x);
+                                    controlid={`${x}-obstacleWall-${obstId}`}
+                                    data-testid={`btn-obstacle-door-position-${x}`}
+                                    onClick={(e) => {
                                         changeSelectedWall(x);
+                                        changeOpening(e);
                                     }}
                                     disabled={isButtonDisabled} // Set button disabled state
+                                    checked={x==doorWall}
                                 >
                                     {t(`obstructions.q_window.${x}`)}
                                 </ToggleButton>
