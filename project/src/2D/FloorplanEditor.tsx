@@ -35,16 +35,16 @@ const useMousePosition = (camera) => {
     useState<Vector3 | null>(null);
 
   useEffect(() => {
+    const raycaster = new Raycaster();
+    const planeZ = new Plane(new Vector3(0, 0, 1), 0);
+    const mousePosition = new Vector2();
+
     const handleMouseMove = (event: MouseEvent) => {
       const rect = (event.target as HTMLElement).getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      mousePosition.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mousePosition.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-      const mousePosition = new Vector2(x, y);
-      const raycaster = new Raycaster();
       raycaster.setFromCamera(mousePosition, camera);
-
-      const planeZ = new Plane(new Vector3(0, 0, 1), 0);
       const intersection = new Vector3();
       raycaster.ray.intersectPlane(planeZ, intersection);
 
@@ -247,8 +247,17 @@ export const FloorplanEditor: React.FC = () => {
    * Update the temp line when drawing
    */
   useFrame(() => {
-    if ( isDrawing && currentMousePosition && latestPointRef.current && isHoveringCanvas) {
-      let endPoint = new Vector3( currentMousePosition.x, currentMousePosition.y, currentMousePosition.z);
+    if (
+      isDrawing &&
+      currentMousePosition &&
+      latestPointRef.current &&
+      isHoveringCanvas
+    ) {
+      let endPoint = new Vector3(
+        currentMousePosition.x,
+        currentMousePosition.y,
+        currentMousePosition.z
+      );
 
       if (isCloseToStart(endPoint)) {
         endPoint = points[0];
