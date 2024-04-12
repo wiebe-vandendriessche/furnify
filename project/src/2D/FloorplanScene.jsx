@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import React, { useEffect, useRef, useMemo } from "react";
+import { Canvas, useThree, extend } from "@react-three/fiber";
 import { useState } from "react";
-import { OrbitControls } from "@react-three/drei";
+import { Line, OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
 import { House, PencilSquare, Rulers, Trash } from "react-bootstrap-icons";
+import {
+  LineBasicMaterial,
+  BufferGeometry,
+  LineSegments,
+  Vector3,
+} from "three";
 import * as THREE from "three";
 import "./Floorplan.css";
 
@@ -42,8 +48,58 @@ export const FloorplanScene = () => {
   const handleHomeButtonClicked = (event) => {
     event.stopPropagation();
     if (controlsRef.current) {
-      controlsRef.current.reset();    
-    }    
+      controlsRef.current.reset();
+    }
+  };
+
+  extend({ LineSegments });
+
+  const GridComponent = ({
+    size = 100,
+    divisions = 10,
+    color = "grey",
+    centerLineColor = "white",
+  }) => {
+    const material = new THREE.LineBasicMaterial({ color });
+    const centerLineMaterial = new THREE.LineBasicMaterial({
+      color: centerLineColor,
+    });
+
+    // Prepare points for grid lines
+    const points = [];
+    const step = size / divisions;
+    const halfSize = size / 2;
+
+    // Generate horizontal lines (parallel to X-axis)
+    for (let i = 0; i <= divisions; i++) {
+      points.push([
+        new THREE.Vector3(-halfSize, i * step - halfSize, 0),
+        new THREE.Vector3(halfSize, i * step - halfSize, 0),
+      ]);
+    }
+
+    // Generate vertical lines (parallel to Y-axis)
+    for (let i = 0; i <= divisions; i++) {
+      points.push([
+        new THREE.Vector3(i * step - halfSize, -halfSize, 0),
+        new THREE.Vector3(i * step - halfSize, halfSize, 0),
+      ]);
+    }
+
+    // JSX to render all lines
+    return (
+      <>
+        {points.map((line, index) => (
+          <Line
+            key={index}
+            points={line}
+            color={index % (divisions + 1) === 0 ? centerLineColor : color}
+            lineWidth={1} // Adjust line width as necessary
+            userData={{ test: "line" }} // Custom user data
+          />
+        ))}
+      </>
+    );
   };
 
   return (
@@ -91,17 +147,23 @@ export const FloorplanScene = () => {
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <FloorplanEditor />
-        <axesHelper />
-        <OrbitControls ref={controlsRef}
+        <axesHelper position={[0, 0, 1]} />
+        <OrbitControls
+          ref={controlsRef}
           enableZoom={true}
-          // enablePan={!isDrawing}
-          enablePan={false}
+          enablePan={!isDrawing}
           enableRotate={false}
           mouseButtons={{
             LEFT: THREE.MOUSE.PAN,
             MIDDLE: THREE.MOUSE.DOLLY,
-            RIGHT: THREE.MOUSE.PAN
+            RIGHT: THREE.MOUSE.PAN,
           }}
+        />
+        <GridComponent
+          size={10}
+          divisions={100}
+          color="grey"
+          centerLineColor="white"
         />
       </Canvas>
     </>
