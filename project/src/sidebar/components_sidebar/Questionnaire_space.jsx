@@ -260,7 +260,7 @@ export function Questionnaire_space() {
                                             <Col key={key}>
                                                 <FloatingLabel
                                                     controlid={"rectangular" + key}
-                                                    label={t('questionnaire_space.' + key)}
+                                                    label={t('questionnaire_space.' + key) +' (m)'}
                                                     className="mb-4"
                                                     data-testid={"label-space-room-rectangular-" + key}
                                                 >
