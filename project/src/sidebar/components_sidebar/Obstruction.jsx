@@ -67,7 +67,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     controlid={"obstLength" + obstId}
                                     label={t('questionnaire_space.length') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1}
+                                    <Form.Control type="number" name={"obstLength"} min={0} step={1}
                                                   data-testid={"input-obst-"+type+"-length"}
                                                   defaultValue={obstLength} onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}
@@ -80,7 +80,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
                                                   data-testid={"input-obst-"+type+"-width"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}
@@ -95,7 +95,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
                                                   data-testid={"input-obst-"+type+"-height"}
                                                   onChange={(e) => changeObst(e)}
                                                   onKeyPress={handleKeyPress}
