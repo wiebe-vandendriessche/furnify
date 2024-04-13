@@ -50,7 +50,12 @@ i18n
                         q_window:{
                             opening_window:"Can the window open to the inside?",
                             yes:"yes",
-                            no:"no"
+                            no:"no",
+                            window_wall:"Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right"
                         }
                     },
                     questionnaire_func: {

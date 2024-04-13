@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-export const ConfiguratorContext = createContext(null);
+const ConfiguratorContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const ConfiguratorProvider = ({ children }) => {
@@ -9,8 +9,23 @@ export const ConfiguratorProvider = ({ children }) => {
 
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, office_space: false, storage_space: false })
     const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birch", layout:""})
-    const [obstacles, setObstacles] = useState([]);
+    const [obstacles, setObstacles] = useState({door: [], window: [], other: []});
     const [rectangular, setRectangular] = useState(true);
+
+    // Function to return doors
+    const getDoors = () => {
+        return obstacles.door;
+    }
+
+    // Function to return windows
+    const getWindows = () => {
+        return obstacles.window;
+    }
+
+    // Function to return other obstacles
+    const getOtherObstacles = () => {
+        return obstacles.other;
+    }
 
     const value = {
         rectangular,
@@ -22,8 +37,12 @@ export const ConfiguratorProvider = ({ children }) => {
         functionalities,
         setFunctionalities,
         obstacles,
-        setObstacles
+        setObstacles,
+        getDoors,
+        getWindows,
+        getOtherObstacles
     }
+
 
     return (
         <ConfiguratorContext.Provider value={value}>
