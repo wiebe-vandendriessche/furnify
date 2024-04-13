@@ -17,7 +17,8 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 - **/src/sidebar:** Bevat code voor de sidebar.
 - **/src/sidebar/components:** Bevat code voor de componenten van de sidebar.
 - **/src/i18n.ts:** Bevat de configuratie voor de internationalisatie.
-
+- **/cypress/e2e:** Bevat alle tests die kunnen worden uitgevoerd
+- **/cypress/screenshots:** Bij foutgelopen tests bevinden zich in deze map screenshots met wat er op het moment van het uitvoeren van de test te zien was
 
 ## Setup
 
@@ -48,3 +49,21 @@ sudo cp -r furnify2/project/dist/* /var/www/html
 npm run preview
 ```
 
+### Uitvoeren testen
+#### Zonder beeld
+**start dev test server (niet om te deployen):**
+```bash
+npm run dev
+```
+**voer de tests uit:**
+````bash
+npm run testViewless
+````
+#### Met beeld
+```bash
+npm run dev
+```
+**voer de tests uit:**
+````bash
+npm run test
+````
