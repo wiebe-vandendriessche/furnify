@@ -74,7 +74,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
                                                   onChange={(e) => changeDoor(e)}
                                                   onKeyPress={handleKeyPress}
@@ -89,7 +89,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
                                                   data-testid={"input-obst-" + type + "-height"}
                                                   onChange={(e) => changeDoor(e)}
                                                   onKeyPress={handleKeyPress}
@@ -158,7 +158,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 <Form.Control
                                     type="number"
                                     name={"doorXpos"}
-                                    min={0} step={0.1}
+                                    min={0} step={1}
                                     value={doorXpos}
                                     onKeyPress={handleKeyPress}
                                     onChange={changeDoor}

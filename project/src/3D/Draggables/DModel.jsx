@@ -21,14 +21,14 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         if (x >= 0) {
             newX = Math.min(maxX2 - 2, x);
         } else {
-            newX = Math.max(-maxX2 + 0.4, x);
+            newX = Math.max(-maxX2 + 0.3, x);
         }
 
         let newZ;
         if (z >= 0) {
-            newZ = Math.min(maxZ2 - 1.4, z);
+            newZ = Math.min(maxZ2 - 1.3, z);
         } else {
-            newZ = Math.max(-maxZ2 + 0.4, z);
+            newZ = Math.max(-maxZ2 + 0.3, z);
         }
 
         pos.current = [newX, position[1], newZ];
