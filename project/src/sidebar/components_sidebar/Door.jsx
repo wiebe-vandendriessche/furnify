@@ -72,7 +72,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width')}
+                                    label={t('questionnaire_space.width') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
@@ -87,7 +87,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <Col>
                                 <FloatingLabel
                                     controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height')}
+                                    label={t('questionnaire_space.height') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
                                                   data-testid={"input-obst-" + type + "-height"}
@@ -153,7 +153,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                         <Col>
                             <FloatingLabel
                                 controlid={"doorXpos" + obstId}
-                                label="Obstacle X Position"
+                                label="Obstacle X Position (m)"
                             >
                                 <Form.Control
                                     type="number"
@@ -162,7 +162,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     value={doorXpos}
                                     onKeyPress={handleKeyPress}
                                     onChange={changeDoor}
-                                    placeholder="Enter X Position"
+                                    placeholder="Enter X Position (m)"
                                     id={"xpos"+obstId}
                                 />
                             </FloatingLabel>

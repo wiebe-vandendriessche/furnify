@@ -13,6 +13,8 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
+    const [stateId, setStateId] = useState(1);
+
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -32,7 +34,7 @@ export function Sidebar() {
     const showNextPart = () => {
         switch (part) {
             case 0:
-                return <Questionnaire_space />
+                return <Questionnaire_space stateId={stateId} setStateId={setStateId}/>
             case 1:
                 return <Questionnaire_func />
             case 2:

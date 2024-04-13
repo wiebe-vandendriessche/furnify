@@ -76,7 +76,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width')}
+                                    label={t('questionnaire_space.width')+ '(cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
@@ -91,7 +91,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <Col>
                                 <FloatingLabel
                                     controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height')}
+                                    label={t('questionnaire_space.height')+ '(cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
                                                   data-testid={"input-obst-" + type + "-height"}
@@ -141,7 +141,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                         <Col>
                             <FloatingLabel
                                 controlid={"windowXpos" + obstId}
-                                label="Window X Position"
+                                label="Window X Position (cm)"
                             >
                                 <Form.Control
                                     type="number"
@@ -149,7 +149,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     min={0} step={0.1}
                                     value={windowXpos}
                                     onChange={changeWindow}
-                                    placeholder="Enter X Position"
+                                    placeholder="Enter X Position (cm)"
                                     id={"xpos"+obstId}
                                 />
                             </FloatingLabel>
@@ -157,7 +157,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                         <Col>
                             <FloatingLabel
                                 controlid={"windowYpos" + obstId}
-                                label="Window Y Position"
+                                label="Window Y Position (cm)"
                             >
                                 <Form.Control
                                     type="number"
@@ -165,7 +165,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     name={"windowYpos"}
                                     min={0} step={0.1}
                                     onChange={changeWindow}
-                                    placeholder="Enter Y Position"
+                                    placeholder="Enter Y Position (cm)"
                                     id={"ypos"+obstId}
                                 />
                             </FloatingLabel>

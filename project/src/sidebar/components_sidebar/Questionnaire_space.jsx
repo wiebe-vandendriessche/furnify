@@ -1,5 +1,5 @@
 import "../../App.css"
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import "./Questionnaire.css"
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import Obstruction from "./Obstruction.jsx";
@@ -13,10 +13,9 @@ import Window from "./Window.jsx";
 import Door from "./Door.jsx";
 
 
-export function Questionnaire_space() {
+export function Questionnaire_space({stateId, setStateId}) {
     //i18n
     const {t, i18n} = useTranslation();
-    const [stateId, setStateId] = useState(1);
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
