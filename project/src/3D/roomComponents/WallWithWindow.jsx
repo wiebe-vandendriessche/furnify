@@ -64,35 +64,32 @@ const WindowMesh = ({ width, height, depth, position, windows, wallTexture, give
   console.log("DE WINDOWS doorgegeven: " + wall)
   console.log(windows)
   const windowCSGs = windows.map(window => {
-    const x = window.windowXpos
-    console.log(x)
-    const y = window.windowYpos
-    console.log(y)
-    const w_width = window.width
-    console.log(w_width)
-    const w_height = window.height
-    console.log(w_height)
+    // Parse window attributes as numbers
+    const x = parseFloat(window.windowXpos);
+    const y = parseFloat(window.windowYpos);
+    const w_width = parseFloat(window.width);
+    const w_height = parseFloat(window.height);
 
-  
+
     let windowGeometry;
 
     if (wall === "back") {
       windowGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
-      windowGeometry.translate(x + (w_width / 2) - (width / 2) + 0.3, y + (w_height / 2) - (height / 2) , 0);
+      windowGeometry.translate(x + (w_width / 2) - (width / 2) + 0.3, y + (w_height / 2) - (height / 2), 0);
     }
-    if (wall === "front"){
+    if (wall === "front") {
       windowGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
-      windowGeometry.translate(-(x + (w_width / 2) - (width / 2) + 0.3), y + (w_height / 2) - (height / 2) , 0);
+      windowGeometry.translate(-(x + (w_width / 2) - (width / 2) + 0.3), y + (w_height / 2) - (height / 2), 0);
     }
-    if (wall === "left"){
+    if (wall === "left") {
       windowGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
-      windowGeometry.translate(0,y + (w_height/2) + (-height/2),-(x + (w_width / 2) + (-depth /2)+0.3));
+      windowGeometry.translate(0, y + (w_height / 2) + (-height / 2), -(x + (w_width / 2) + (-depth / 2) + 0.3));
     }
-    if (wall === "right"){
+    if (wall === "right") {
       windowGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
-      windowGeometry.translate(0,y + (w_height/2) + (-height/2),x + (w_width / 2) + (-depth /2)+0.3);
+      windowGeometry.translate(0, y + (w_height / 2) + (-height / 2), x + (w_width / 2) + (-depth / 2) + 0.3);
     }
-    
+
     const windowMesh = new THREE.Mesh(windowGeometry);
     return CSG.fromMesh(windowMesh);
   });

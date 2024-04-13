@@ -24,7 +24,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const [rightWallVisible, setRightWallVisible] = useState(false);
 
   const { getWindows } = useConfiguratorContext()
-  
+
   const windows = getWindows();
   console.log("test in room: ")
   console.log(windows)
@@ -72,7 +72,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
     //  camera.lookAt(new THREE.Vector3(0, height / 2, 0));
   });
 
-  
+
 
   return (
     <group ref={roomRef}>
@@ -112,10 +112,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         depth={depth}
         position={[width / 2 - wallThickness / 2, height / 2, 0]}
         visible={rightWallVisible}
-        windows={[
-          { windowXpos: 0, windowYpos: 0, width: 1, height: 1 },
-          { windowXpos: 2, windowYpos: 1, width: 1, height: 1 }
-        ]}
+        windows={windows.filter(window => window.windowWall === "right")}
         giveColor={selectedWall === "right" ? true : false} // Change color based on selectedWall
         wall={"right"}
       />
