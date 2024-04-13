@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 
 // eslint-disable-next-line react/prop-types
-function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, door, doorXpos, doorWall }) {
+function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, openingDoor, doorXpos, doorWall }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -109,45 +109,42 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <ToggleButton
                                 controlid={"left-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"}
+                                name={"door"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}
                                 data-testid={"btn-obstacle-door-inside-l"}
                                 type="radio"
-                                value={"left" + obstId}
                                 variant="danger"
-                                checked={"left"==door}
+                                checked={"left"==openingDoor}
                             >
                                 {t('obstructions.q_door.inside_left')}
                             </ToggleButton>
                             <ToggleButton
                                 controlid={"right-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"}
+                                name={"door"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}
                                 data-testid={"btn-obstacle-door-inside-r"}
                                 type="radio"
-                                value={"right" + obstId}
                                 variant="danger"
-                                checked={"right"==door}
+                                checked={"right"==openingDoor}
                             >
                                 {t('obstructions.q_door.inside_right')}
                             </ToggleButton>
                             <ToggleButton
                                 controlid={"out-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"}
+                                name={"door"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}
                                 type="radio"
                                 data-testid={"btn-obstacle-door-outside"}
-                                value={"out" + obstId}
                                 variant="danger"
-                                checked={"out"==door}>
+                                checked={"out"==openingDoor}>
                                 {t('obstructions.q_door.outside')}
                             </ToggleButton>
                         </ButtonGroup>

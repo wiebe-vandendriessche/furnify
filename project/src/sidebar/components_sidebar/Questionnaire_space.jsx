@@ -34,6 +34,40 @@ export function Questionnaire_space() {
         return allObsts;
     }
 
+    function createObstacle(valueType) {
+        switch (valueType) {
+            case "door":
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    id: stateId,
+                    opening_door: "right",
+                    obstacleWall: "front",
+                    doorXpos: 0
+                };
+            case "window":
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    id: stateId,
+                    windowWall: "front",
+                    inside_window: "no",
+                    windowXpos: 0,
+                    windowYpos: 0
+                };
+            default:
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    obstLength: 0,
+                    id: stateId,
+                };
+        }
+    }
+
     //Uses reactcontext
     const {rectangular, setRectangular, dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
     //Changes values of dimensions in context
@@ -143,91 +177,23 @@ export function Questionnaire_space() {
     const addObstacles = (event) => {
         setStateId(stateId + 1)
         const valueType = event.currentTarget.getAttribute("value");
+        let obst=createObstacle(valueType);
         if (obstacles[valueType].length>0) {
             console.log(obstacles[event.currentTarget.getAttribute("value")])
             console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
-            if(valueType=="door"){
-                setObstacles({
-                    ...obstacles, [valueType]: [...obstacles[valueType], {
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        id: stateId,
-                        opening_door: "right",
-                        obstacleWall: "front",
-                        doorXpos: 0
-                    }]
-                });
-            }
-            else if(valueType=="window"){
-                setObstacles({
-                    ...obstacles, [valueType]: [...obstacles[valueType], {
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        id: stateId,
-                        windowWall: "front",
-                        inside_window: "no",
-                        windowXpos: 0,
-                        windowYpos: 0
-                    }]
-                });
-            }
-            else{
-                setObstacles({
-                    ...obstacles, [valueType] : [{
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        length,
-                        obstLength: 0,
-                        id: stateId,
-                    }]
+            setObstacles({
+                    ...obstacles, [valueType]: [...obstacles[valueType], obst]
                 });
             }
 
-        } else {
+        else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
-            if(valueType=="door"){
-                setObstacles({
-                    ...obstacles, [valueType] : [{
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        id: stateId,
-                        opening_door: "right",
-                        obstacleWall: "front",
-                        doorXpos: 0
-                    }]
+            setObstacles({
+                    ...obstacles, [valueType] : [obst]
                 });
-            }
-            else if (valueType=="window"){
-                setObstacles({
-                    ...obstacles, [valueType] : [{
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        id: stateId,
-                        windowWall: "front",
-                        inside_window: "no",
-                        windowXpos: 0,
-                        windowYpos: 0
-                    }]
-                });
-            }
-            else{
-                setObstacles({
-                    ...obstacles, [valueType] : [{
-                        type: valueType,
-                        width: 0,
-                        height: 0,
-                        length,
-                        obstLength: 0,
-                        id: stateId,
-                    }]
-                });
-            }
+
+
         }
         console.log(stateId)
         console.log(obstacles)
@@ -337,6 +303,7 @@ export function Questionnaire_space() {
                                 console.log(item);
                                 console.log("type:" + item.type);
                                 console.log("id: " + item.id);
+                                console.log("opening:"+item.opening_door)
                                 console.log("item nadien:");
                                 console.log(item);
                                 if (item.type === "window") {
@@ -362,7 +329,7 @@ export function Questionnaire_space() {
                                         type={item.type}
                                         width={item.width}
                                         height={item.height}
-                                        door={item.opening_door}
+                                        openingDoor={item.opening_door}
                                         key={"obst" + item.id}
                                         doorXpos={item.doorXpos}
                                         changeDoor={changeDoor}
@@ -380,6 +347,7 @@ export function Questionnaire_space() {
                                         key={"obst" + item.id}
                                         changeObst={changeObstacle}
                                         deleteObst={deleteObstacle}
+                                        obstLength={item.obstLength}
                                     />;
                                 }
                             })}

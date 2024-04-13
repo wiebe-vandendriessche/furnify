@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeObst, type, obstId, width, height}) {
+function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength}) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -64,26 +64,28 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height}) {
                         <Row>
                             <Col>
                                 <FloatingLabel
-                                    controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width')}
+                                    controlid={"obstLength" + obstId}
+                                    label={t('questionnaire_space.length')}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
-                                        data-testid={"input-obst-" + type + "-width"}
+                                    <Form.Control type="number" name={"obstLength"} min={0} step={0.1} defaultValue={obstLength}
+                                        data-testid={"input-obst-" + type + "-obstLength"}
                                         onChange={(e) => changeObst(e)}
-                                        onKeyPress={handleKeyPress} />
+                                        onKeyPress={handleKeyPress}
+                                    id={"length"+obstId}/>
 
 
                                 </FloatingLabel>
                             </Col>
                             <Col>
                                 <FloatingLabel
-                                    controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height')}
+                                    controlid={"width" + obstId}
+                                    label={t('questionnaire_space.width')}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1}
-                                                  data-testid={"input-obst-" + type + "-height"}
-                                                  defaultValue={height} onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress} />
+                                    <Form.Control type="number" name={"width"} min={0} step={0.1}
+                                                  data-testid={"input-obst-" + type + "-width"}
+                                                  defaultValue={width} onChange={(e) => changeObst(e)}
+                                                  onKeyPress={handleKeyPress}
+                                                  id={"width"+obstId}/>
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -94,7 +96,8 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height}) {
                                     <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
                                         data-testid={"input-obst-" + type + "-height"}
                                         onChange={(e) => changeObst(e)}
-                                        onKeyPress={handleKeyPress} />
+                                        onKeyPress={handleKeyPress}
+                                    id={"height"+obstId}/>
                                 </FloatingLabel>
                             </Col>
                         </Row>
