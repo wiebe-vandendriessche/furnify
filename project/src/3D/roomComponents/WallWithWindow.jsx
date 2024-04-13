@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 
-export const WallWithWindow = ({ width, height, depth, position, visible, windows, giveColor, wall }) => {
+export const WallWithWindow = ({ width, height, depth, position, visible, windows, doors, giveColor, wall }) => {
 
   //const windowPos = [windowStartFromLeft, windowStartHeight, 0]; // Position of the window relative to the lower left corner of the wall
 
@@ -49,6 +49,7 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
           depth={depth}
           position={position}
           windows={windows}
+          doors={doors}
           wallTexture={wallTexture}
           giveColor={giveColor}
           wall={wall}
@@ -58,11 +59,46 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
   );
 };
 
-const WindowMesh = ({ width, height, depth, position, windows, wallTexture, giveColor, wall }) => {
+const WindowMesh = ({ width, height, depth, position, windows, doors, wallTexture, giveColor, wall }) => {
+  
+  
   const wallGeometry = new THREE.BoxGeometry(width, height, depth);
   const wallMesh = new THREE.Mesh(wallGeometry);
   console.log("DE WINDOWS doorgegeven: " + wall)
   console.log(windows)
+  console.log("DE DOORS doorgegeven: " + wall)
+  console.log(doors)
+
+  const doorCSGs = doors.map(door => {
+    const y = 0;
+    const x = parseFloat(door.doorXpos);
+    const w_width = parseFloat(door.width);
+    const w_height = parseFloat(door.height);
+
+    let doorGeometry;
+
+    if (wall === "back") {
+      doorGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
+      doorGeometry.translate(x + (w_width / 2) - (width / 2) + 0.3, y + (w_height / 2) - (height / 2), 0);
+    }
+    if (wall === "front") {
+      doorGeometry = new THREE.BoxGeometry(w_width, w_height, depth);
+      doorGeometry.translate(-(x + (w_width / 2) - (width / 2) + 0.3), y + (w_height / 2) - (height / 2), 0);
+    }
+    if (wall === "left") {
+      doorGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
+      doorGeometry.translate(0, y + (w_height / 2) + (-height / 2), -(x + (w_width / 2) + (-depth / 2) + 0.3));
+    }
+    if (wall === "right") {
+      doorGeometry = new THREE.BoxGeometry(depth, w_height, w_width);
+      doorGeometry.translate(0, y + (w_height / 2) + (-height / 2), x + (w_width / 2) + (-depth / 2) + 0.3);
+    }
+
+    const doorMesh = new THREE.Mesh(doorGeometry);
+    return CSG.fromMesh(doorMesh);
+  });
+
+
   const windowCSGs = windows.map(window => {
     // Parse window attributes as numbers
     const x = parseFloat(window.windowXpos);
@@ -95,7 +131,7 @@ const WindowMesh = ({ width, height, depth, position, windows, wallTexture, give
   });
 
   const wallCSG = CSG.fromMesh(wallMesh);
-  const resultCSG = windowCSGs.reduce((acc, windowCSG) => acc.subtract(windowCSG), wallCSG);
+  const resultCSG = [...windowCSGs, ...doorCSGs].reduce((acc, csg) => acc.subtract(csg), wallCSG);
   const resultMesh = CSG.toMesh(resultCSG, wallMesh.matrix);
   resultMesh.material = new THREE.MeshStandardMaterial({ ...wallTexture });
 

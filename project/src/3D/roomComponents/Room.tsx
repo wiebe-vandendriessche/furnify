@@ -23,11 +23,10 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const [leftWallVisible, setLeftWallVisible] = useState(true);
   const [rightWallVisible, setRightWallVisible] = useState(false);
 
-  const { getWindows } = useConfiguratorContext()
+  const { getWindows, getDoors } = useConfiguratorContext()
 
   const windows = getWindows();
-  console.log("test in room: ")
-  console.log(windows)
+  const doors = getDoors();
 
   useEffect(() => {
     if (selectedWall != null) {
@@ -83,6 +82,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         position={[0, height / 2, -depth / 2 + wallThickness / 2]}
         visible={backWallVisible}
         windows={windows.filter(window => window.windowWall === "back")}
+        doors={doors.filter(door => door.obstacleWall === "back")}
         giveColor={selectedWall === "back" ? true : false} // Change color based on selectedWall
         wall={"back"}
       />
@@ -93,6 +93,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         position={[0, height / 2, depth / 2 - wallThickness / 2]}
         visible={frontWallVisible}
         windows={windows.filter(window => window.windowWall === "front")}
+        doors={doors.filter(door => door.obstacleWall === "front")}
         giveColor={selectedWall === "front" ? true : false} // Change color based on selectedWall
         wall={"front"}
       />
@@ -103,6 +104,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         position={[-width / 2 + wallThickness / 2, height / 2, 0]}
         visible={leftWallVisible}
         windows={windows.filter(window => window.windowWall === "left")}
+        doors={doors.filter(door => door.obstacleWall === "left")}
         giveColor={selectedWall === "left" ? true : false} // Change color based on selectedWall
         wall={"left"}
       />
@@ -113,6 +115,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         position={[width / 2 - wallThickness / 2, height / 2, 0]}
         visible={rightWallVisible}
         windows={windows.filter(window => window.windowWall === "right")}
+        doors={doors.filter(door => door.obstacleWall === "right")}
         giveColor={selectedWall === "right" ? true : false} // Change color based on selectedWall
         wall={"right"}
       />
