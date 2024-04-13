@@ -109,7 +109,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <ToggleButton
                                 controlid={"left-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"+obstId}
+                                name={"opening-"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}
@@ -123,7 +123,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <ToggleButton
                                 controlid={"right-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"+obstId}
+                                name={"opening-"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}
@@ -137,7 +137,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                             <ToggleButton
                                 controlid={"out-opening_door-" + obstId}
                                 className="mb-4"
-                                name={"door"+obstId}
+                                name={"opening-"+obstId}
                                 onClick={(e) => {
                                     changeOpening(e)
                                 }}

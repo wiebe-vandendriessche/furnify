@@ -11,3 +11,11 @@ export function passObstacleDimensions(params){
     cy.get('[data-testid="input-obst-'+params.type+'-height"]').clear().type(params.Height);
     cy.get('[data-testid="input-obst-'+params.type+'-width"]').clear().type(params.Width);
 }
+
+export function passWindoorDimensions(params){
+    cy.get('[data-testid="input-obst-'+params.type+'-height"]').scrollIntoView();
+    cy.get('[data-testid="input-obst-'+params.type+'-height"]').clear().type(params.Height);
+    cy.get('[data-testid="input-obst-'+params.type+'-width"]').scrollIntoView();
+    cy.get('[data-testid="input-obst-'+params.type+'-width"]').clear().type(params.Width);
+}
+
