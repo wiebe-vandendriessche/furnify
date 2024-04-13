@@ -71,9 +71,9 @@ const WindowMesh = ({ width, height, depth, position, windows, doors, wallTextur
 
   const doorCSGs = doors.map(door => {
     const y = 0;
-    const x = parseFloat(door.doorXpos);
-    const w_width = parseFloat(door.width);
-    const w_height = parseFloat(door.height);
+    const x = parseFloat(door.doorXpos) / 100;
+    const w_width = parseFloat(door.width) / 100;
+    const w_height = parseFloat(door.height) / 100;
 
     let doorGeometry;
 
@@ -101,10 +101,10 @@ const WindowMesh = ({ width, height, depth, position, windows, doors, wallTextur
 
   const windowCSGs = windows.map(window => {
     // Parse window attributes as numbers
-    const x = parseFloat(window.windowXpos);
-    const y = parseFloat(window.windowYpos);
-    const w_width = parseFloat(window.width);
-    const w_height = parseFloat(window.height);
+    const x = parseFloat(window.windowXpos) / 100;
+    const y = parseFloat(window.windowYpos) / 100;
+    const w_width = parseFloat(window.width) / 100;
+    const w_height = parseFloat(window.height) / 100;
 
 
     let windowGeometry;

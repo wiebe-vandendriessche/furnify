@@ -78,7 +78,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width')+ '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={0.1} defaultValue={width}
+                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
                                                   onChange={(e) => changeWindow(e)}
                                                   onKeyPress={handleKeyPress}
@@ -93,7 +93,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height')+ '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={0.1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
                                                   data-testid={"input-obst-" + type + "-height"}
                                                   onChange={(e) => changeWindow(e)}
                                                   onKeyPress={handleKeyPress}
@@ -146,7 +146,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                 <Form.Control
                                     type="number"
                                     name={"windowXpos"}
-                                    min={0} step={0.1}
+                                    min={0} step={1}
                                     value={windowXpos}
                                     onChange={changeWindow}
                                     placeholder="Enter X Position (cm)"
@@ -163,7 +163,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     type="number"
                                     value={windowYpos}
                                     name={"windowYpos"}
-                                    min={0} step={0.1}
+                                    min={0} step={1}
                                     onChange={changeWindow}
                                     placeholder="Enter Y Position (cm)"
                                     id={"ypos"+obstId}
