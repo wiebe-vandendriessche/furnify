@@ -38,3 +38,12 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 26/03/24,13:30,17:30, Contact, presentatie en objecten importeren,,
 27/03/24,13:00,16:00, Contact, 2d vloerplan,69,
 28/03/24,11:30,13:42, Extern, 2d vloerplan,69, een meer object oriented approach proberen
+10/04/2024,12:00,13:00, Extern, 2d vloerplan opzoekwerk,69, 
+10/04/2024,14:00,20:00, Extern, 2d vloerplan features toevoegen,69, grote refactoring + lengte lijn die nu wordt getekend wordt getoond + stoppen met tekenen is mogelijk en automatisch als je in vragenlijst klikt + bugs opgelost
+10/04/2024,20:30,23:30, Extern, 2d vloerplan features toevoegen,69, kamer kan gesloten worden + snapping naar laatste punt gebeurt automatisch
+11/04/2024,12:00,13:30, Extern, 2d vloerplan features toevoegen,69, 
+11/04/2024,14:30,18:30, Extern, 2d vloerplan features toevoegen,69, 
+11/04/2024,20:00,23:20, Extern, 2d vloerplan features toevoegen,69,
+11/04/2024,12:00,14:00, Extern, 2d vloerplan features opzoekwerk over orthogonal mode en dragging points,69,
+11/04/2024,15:00,20:00, Extern, 2d vloerplan features toevoegen,69, orthogonal mode + gebruiksvriendelijkheid verbeteren
+11/04/2024,20:30,00:00, Extern, 2d vloerplan features toevoegen,69, sukkelen om grid toe te voegen
