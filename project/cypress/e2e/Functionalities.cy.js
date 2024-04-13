@@ -1,4 +1,4 @@
-import {passRoomDimensions, passObstacleDimensions} from "../helperfuncs/Helperspace.js";
+import {passRoomDimensions, passWindoorDimensions} from "../helperfuncs/Helperspace.js";
 
 describe('First test',()=>{
 
@@ -75,14 +75,20 @@ describe('First test',()=>{
     cy.get('[data-testid="btn-obstacle-expand-door"]').scrollIntoView();
 
   });
-   it("Adding obstruction, changing data of that obstruction and making sure data didn't disappear", ()=>{
-      let params={type: "window", Length: 1.5, Width: 1.2, Height: 0.5}
-      //making sure button to add a window is visible
+   it("Adding obstructions, changing data of those obstruction and making sure that the data didn't disappear", ()=>{
+      let windowParams={type: "window", Width: 1.2, Height: 0.5};
+      let doorParams={type: "window", Width: 1.2, Height: 0.5};
+      //making sure button to add a window and a door is visible
       cy.get('[data-testid="btn-space-aspect-window"]').should("be.visible").click();
+      cy.get('[data-testid="btn-space-aspect-door"]').should("be.visible").click();
       //when clicking the button a window-obstacle should be added, now we want to expand it
+      cy.get('[data-testid="btn-obstacle-expand-window"]').scrollIntoView();
       cy.get('[data-testid="btn-obstacle-expand-window"]').click();
+      cy.get('[data-testid="btn-obstacle-expand-door"]').scrollIntoView();
+      cy.get('[data-testid="btn-obstacle-expand-door"]').click();
       //Entering dimensions
-      passObstacleDimensions(params);
+      passWindoorDimensions(windowParams);
+      passWindoorDimensions(doorParams);
       //Navigating to next part of questionnaire
       cy.get('[data-testid="btn-nav-sidebar-next"]').click();
       //and back
@@ -90,9 +96,10 @@ describe('First test',()=>{
       //Expanding the button again
       cy.get('[data-testid="btn-obstacle-expand-window"]').click();
       //Checking if all values are still the same
-      cy.get('[data-testid="input-obst-'+params.type+'-length"').should('have.value', params.Length);
-      cy.get('[data-testid="input-obst-'+params.type+'-width"').should('have.value', params.Width);
-      cy.get('[data-testid="input-obst-'+params.type+'-height"').should('have.value', params.Height);
+      cy.get('[data-testid="input-obst-'+windowParams.type+'-width"').should('have.value', windowParams.Width);
+      cy.get('[data-testid="input-obst-'+windowParams.type+'-height"').should('have.value', windowParams.Height);
+      cy.get('[data-testid="input-obst-'+doorParams.type+'-width"').should('have.value', doorParams.Width);
+      cy.get('[data-testid="input-obst-'+doorParams.type+'-height"').should('have.value', doorParams.Height);
 
 
    });
