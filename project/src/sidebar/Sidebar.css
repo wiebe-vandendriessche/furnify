@@ -46,8 +46,12 @@
     justify-content: center;
     width: 100%;
     height: 15vh;
+    pointer-events: none;
 }
 
+.bottom_btn > button{
+    pointer-events: auto;
+}
 /*render for mobile*/
 @media screen and (max-width: 450px) {
 
