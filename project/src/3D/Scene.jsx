@@ -47,9 +47,10 @@ const Scene = () => {
                     // Pass any other necessary props to DObstruction
                     />
                 ))}
-                {/* Your existing code... */}
+                {/* 
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                */}
                 <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
             </Surface>
 
