@@ -38,7 +38,9 @@ const Scene = () => {
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
             </Surface>
-            <OrbitControls makeDefault />
+
+            <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={20} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2}/>
+
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
             <hemisphereLight color="lightblue" groundColor="0xf7e497" intensity={0.5} />
             <axesHelper />
