@@ -8,6 +8,7 @@ import { Floor } from './Floor';
 import { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useRoomWallLightupContext } from '../../contexts/RoomWallLightupContext';
+import { useConfiguratorContext } from '../../contexts/ConfiguratorContext';
 
 
 export const Room = ({ width, depth, height, wallThickness, floorThickness }) => {
@@ -22,9 +23,13 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const [leftWallVisible, setLeftWallVisible] = useState(true);
   const [rightWallVisible, setRightWallVisible] = useState(false);
 
+  const { getWindows } = useConfiguratorContext()
+  
+  const windows = getWindows();
+  console.log("test in room: ")
+  console.log(windows)
 
   useEffect(() => {
-    console.log("test in room: " + selectedWall);
     if (selectedWall != null) {
       setEnnableFrame(false)
       setBackWallVisible(true);
@@ -67,7 +72,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
     //  camera.lookAt(new THREE.Vector3(0, height / 2, 0));
   });
 
-
+  
 
   return (
     <group ref={roomRef}>
@@ -77,11 +82,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         depth={wallThickness}
         position={[0, height / 2, -depth / 2 + wallThickness / 2]}
         visible={backWallVisible}
-        windows={[
-          { x: 0, y: 0, w_width: 1, w_height: 1 },
-          { x: 2, y: 1, w_width: 1, w_height: 1 },
-          { x: 4, y: 0.5, w_width: 1, w_height: 1 }
-        ]}
+        windows={windows.filter(window => window.windowWall === "back")}
         giveColor={selectedWall === "back" ? true : false} // Change color based on selectedWall
         wall={"back"}
       />
@@ -91,10 +92,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         depth={wallThickness}
         position={[0, height / 2, depth / 2 - wallThickness / 2]}
         visible={frontWallVisible}
-        windows={[
-          { x: 0, y: 0, w_width: 1, w_height: 1 },
-          { x: 2, y: 1, w_width: 1, w_height: 1 }
-        ]}
+        windows={windows.filter(window => window.windowWall === "front")}
         giveColor={selectedWall === "front" ? true : false} // Change color based on selectedWall
         wall={"front"}
       />
@@ -104,10 +102,7 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         depth={depth}
         position={[-width / 2 + wallThickness / 2, height / 2, 0]}
         visible={leftWallVisible}
-        windows={[
-          { x: 0, y: 0, w_width: 1, w_height: 1 },
-          { x: 2, y: 1, w_width: 1, w_height: 1 }
-        ]}
+        windows={windows.filter(window => window.windowWall === "left")}
         giveColor={selectedWall === "left" ? true : false} // Change color based on selectedWall
         wall={"left"}
       />
@@ -118,8 +113,8 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         position={[width / 2 - wallThickness / 2, height / 2, 0]}
         visible={rightWallVisible}
         windows={[
-          { x: 0, y: 0, w_width: 1, w_height: 1 },
-          { x: 2, y: 1, w_width: 1, w_height: 1 }
+          { windowXpos: 0, windowYpos: 0, width: 1, height: 1 },
+          { windowXpos: 2, windowYpos: 1, width: 1, height: 1 }
         ]}
         giveColor={selectedWall === "right" ? true : false} // Change color based on selectedWall
         wall={"right"}

@@ -61,10 +61,19 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
 const WindowMesh = ({ width, height, depth, position, windows, wallTexture, giveColor, wall }) => {
   const wallGeometry = new THREE.BoxGeometry(width, height, depth);
   const wallMesh = new THREE.Mesh(wallGeometry);
-
+  console.log("DE WINDOWS doorgegeven: " + wall)
+  console.log(windows)
   const windowCSGs = windows.map(window => {
-    const { x, y, w_width, w_height } = window;
+    const x = window.windowXpos
+    console.log(x)
+    const y = window.windowYpos
+    console.log(y)
+    const w_width = window.width
+    console.log(w_width)
+    const w_height = window.height
+    console.log(w_height)
 
+  
     let windowGeometry;
 
     if (wall === "back") {
