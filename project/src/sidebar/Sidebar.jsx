@@ -14,7 +14,7 @@ import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 
 
 export function Sidebar() {
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
     const value = useConfiguratorContext();
