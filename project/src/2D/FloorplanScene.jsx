@@ -68,7 +68,6 @@ export const FloorplanScene = () => {
     event.stopPropagation();
     setShowGrid((prev) => !prev);
     setSnappingMode((prev) => !prev);
-    console.log("snapping: " + snappingMode);
   };
 
   return (

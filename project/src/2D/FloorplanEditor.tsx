@@ -132,7 +132,7 @@ export const FloorplanEditor: React.FC = () => {
       const distance = currentMousePosition.distanceTo(start);
 
       if (distance < snapThreshold) {
-        console.log("near start");
+        // console.log("near start");
         setIsNearStart(true);
       } else {
         setIsNearStart(false);
@@ -225,7 +225,7 @@ export const FloorplanEditor: React.FC = () => {
         drawingCanvasRef.current &&
         !drawingCanvasRef.current.contains(event.target)
       ) {
-        console.log("clicked outside drawing canvas");
+        // console.log("clicked outside drawing canvas");
         toggleDrawing();
         return;
       }
@@ -284,7 +284,7 @@ export const FloorplanEditor: React.FC = () => {
       }
 
       if (snappingMode) {
-        console.log("trying to snap");
+        // console.log("trying to snap");
         const snappedX = Math.round(endPoint.x / gridSize) * gridSize;
         const snappedY = Math.round(endPoint.y / gridSize) * gridSize;
         endPoint.set(snappedX, snappedY, endPoint.z);
