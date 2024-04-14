@@ -1,7 +1,7 @@
 {
-  "name": "project",
+  "name": "furnify2",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -11,6 +11,52 @@
     "test": "cypress open",
     "testViewless": "cypress run --headless --browser chrome"
   },
+  "repository": {
+		"type": "git",
+		"url": "git+https://gitlab.stud.atlantis.ugent.be/vop2324/furnify2"
+	},
+  "contributors": [
+		{
+			"name": "Wiebe Vandendriessche",
+			"url": "https://gitlab.stud.atlantis.ugent.be/wievdndr",
+			"img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/393/avatar.png?width=400",
+			"info": [
+				"🔥"
+			]
+		},
+		{
+			"name": "Thomas Lonneville",
+			"url": "https://gitlab.stud.atlantis.ugent.be/tlonnevi",
+			"img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/373/avatar.png?width=400",
+			"info": [
+				"🔥"
+			]
+		},
+    {
+			"name": "Xander Vanparys",
+			"url": "https://gitlab.stud.atlantis.ugent.be/xvparys",
+			"img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/376/avatar.png?width=400",
+			"info": [
+				"🔥"
+			]
+		},
+    {
+			"name": "Alexandra Ganseman",
+			"url": "https://gitlab.stud.atlantis.ugent.be/algansem",
+			"img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/268/avatar.png?width=400",
+			"info": [
+				"🔥"
+			]
+		},
+    {
+			"name": "Nathan Salabiaku",
+			"url": "https://gitlab.stud.atlantis.ugent.be/nathan.s",
+			"img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/301/avatar.png?width=400",
+			"info": [
+				"🔥"
+			]
+		}
+	],
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@react-three/drei": "^9.99.0",
@@ -32,6 +78,7 @@
     "three-csg-ts": "^3.1.14"
   },
   "devDependencies": {
+    "@appnest/readme": "^1.2.7",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
