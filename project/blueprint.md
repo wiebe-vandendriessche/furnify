@@ -4,8 +4,6 @@ Welkom op {{ pkg.name }}. Dit is versie {{ pkg.version }}!
 
 Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vite op Node.js. Het stelt gebruikers in staat om aan de hand van een vragenlijst de kamer te configureren met de verschillende modules van Furnify.
 
-## Inhoudsopgave
-
 {{ template:toc }}
 
 ## Repository-indeling
