@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3b725b0e-8c8c-444f-81ae-827f2967f27e" name="Changes" comment="send data to client done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,9 +13,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="3-questionnaire" />
+        <entry key="$PROJECT_DIR$" value="70-css-bootstrap-cleanup" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,7 +95,7 @@
       <workItem from="1709676879367" duration="1458000" />
       <workItem from="1709725975726" duration="34561000" />
       <workItem from="1711716627507" duration="20636000" />
-      <workItem from="1712932538450" duration="14244000" />
+      <workItem from="1712932538450" duration="14930000" />
     </task>
     <task id="LOCAL-00001" summary="layout improvement and dark mode implemented without toggle button">
       <created>1709159854028</created>
@@ -176,7 +181,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713110079908</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="send data to client done">
+      <option name="closed" value="true" />
+      <created>1713112582544</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713112582544</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
