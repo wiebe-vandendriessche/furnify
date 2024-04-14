@@ -40,6 +40,8 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
     - **/src/3D/Scene.jsx:** Bevat de compositie van de 3D scene die wordt getoond op het canvas.
   - **/src/algorithm/:** Bevat algoritme componenten.
     - **/src/algoritm/module_choise.ts:** Bevat code voor bepalen van correcte module.
+    - **/src/algoritm/module.ts:** Klasse voor de modules met getters en bepalingfuncties.
+    - **/src/algoritm/read_file_csv.ts:** Bevat code voor inlezen van csv bestand.
   - **/src/assets/:**  Bevat afbeeldingen.
   - **/src/contexts/:** Bevat contexten (data die realtime aangepast en gebruikt kan worden in de volledige applicatie).
   - **/src/sidebar/:** Bevat sidebar componenten.
