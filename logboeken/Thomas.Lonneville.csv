@@ -28,3 +28,18 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 19/03/24, 17:30, 18:15, Extern, laten uitvoeren van test op gitlab (eindelijk gelukt),13,
 20/03/24, 13:30, 16:30, Contacturen, GDPR+ kijken voor testing internationalisatie,13,
 24/03/24, 20:00, 21:00, Extern, werken aan presentatie,,
+26/03/24, 13:30, 17:30, Contacturen, presentatie + image van cypress pushen naar gitlab + test proberen uitvoeren,13,
+27/03/24, 13:00, 16:00, Contacturen, Schrijven extra testen proberen uitvoeren in meerdere talen,13,
+27/03/24, 17:45, 19:00, Extern, Schrijven testen + knop rectangular + fout in functie handleKeyPress oplossen,13 en 98,
+1/04/24,9:00,11:00,Extern, Nieuwe testen toevoegen + data-testid toevoegen,13,
+8/04/24, 9:00,12:30,Extern, Testen in andere talen toevoegen + probleem met package-lock oplossen, 13,
+9/04/24, 9:00,12:30,Extern, afwerken test, 13 ,
+9/04/24, 15:00,18:30,Extern, helpen van Alexandra bij probleem met herladen + inlezen bestand op productie, 111 ,
+10/04/24, 9:45, 12:00, Extern, proberen vormen van ramen en deuren op muur, 106, mislukt
+10/04/24, 13:45, 14:00, Extern, aanpassen test door nieuwe veranderingen, 13,
+12/04/24, 9:00, 12:30, Extern, herstructureren van obstructie componenten, 137,
+12/04/24, 14:00,19:00,Extern, toevoegen van nieuwe componenten window en door + debuggen van fout die optreedt bij aanpassen antwoord op door, 137,
+12/04/24, 20:00,22:15,Extern, Verder werken aan opslaan waarden componenten, 137, nog kleine bug bij vraag over openen deur
+13/04/24, 9:30, 10:00, Extern, bug eindelijk gevonden, 137,
+13/04/24, 10:30, 12:00, Extern, test aanpassen voor nieuwe versies + proberen kijken om te linken met 3D (Wiebe heeft het opgelost), 13,
+14/04/24, 13:00,15:30, Extern, verslag over testing + oplossen opmaakfoutje en falende tests,, 
