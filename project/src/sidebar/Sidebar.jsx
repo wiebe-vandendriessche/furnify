@@ -63,9 +63,10 @@ function Sidebar() {
 
     const onSubmit = e => {
         e.preventDefault();
-        let obs = "";
+        let obs = "_";
         Object.entries(obstacles).forEach((obstacle) => {
-            const [value] = obstacle;
+            // eslint-disable-next-line no-unused-vars
+            const [key,value] = obstacle;
             obs += value.id + ". " + value.type;
             switch (value.type) {
                 case 'Window':
@@ -91,16 +92,16 @@ function Sidebar() {
         let func = "";
         Object.entries(functionalities).forEach(([key, value]) => {
             if (value) {
-                func += key;
+                func += key+" ";
             }
         });
 
         let color = specs.color === "#FFFFFF" ? "black" : "white";
 
         const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
-        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}
-                    &DIMENSIONS=${dim}&OBSTACLES=${obs}&ROOM=${varia.room}&FUNCTIONAL=${func}
-                    &LAYOUT=${specs.layout}&MATERIAL=${specs.material}&COLOR=${color}&ADDRESS=${contact.address}`, { param: 'c' }, (_, data) => {
+        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
+                    &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
             const { msg, result } = data
             console.log(result,msg)
             alert(msg);
