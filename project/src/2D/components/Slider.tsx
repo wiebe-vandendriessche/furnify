@@ -11,7 +11,7 @@ export function SliderComponent({ gridSize, setgridSize }) {
   };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'row'}}>
+    <div style={{display: 'flex', flexDirection: 'row', margin: '0px 0px 0px 10px'}}>
       <input
         className="slider"
         type="range"
@@ -21,7 +21,7 @@ export function SliderComponent({ gridSize, setgridSize }) {
         value={gridSize}  // Bind the slider's value to the component's state
         onChange={handleSliderChange}  // Set the method to call on value change
       />
-      <div>Value: {gridSize}</div>
+      <div style={{margin: '0px 0px 0px 10px'}}>Grid size: {gridSize}m</div>
     </div>
   );
 }
