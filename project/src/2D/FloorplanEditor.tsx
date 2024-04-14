@@ -70,6 +70,8 @@ export const FloorplanEditor: React.FC = () => {
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
+  const { snappingMode, setSnappingMode } = use2d();
+  const { gridSize, setGridSize } = use2d();
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
 
@@ -183,13 +185,21 @@ export const FloorplanEditor: React.FC = () => {
           tempLineRef.current = null;
         }
       }
+
+      // snapping to grid
+      if (snappingMode && gridSize > 0 && !isCloseToStart(newPoint)) {
+        const snappedX = Math.round(newPoint.x / gridSize) * gridSize;
+        const snappedY = Math.round(newPoint.y / gridSize) * gridSize;
+        newPoint.set(snappedX, snappedY, newPoint.z);
+      }
+
       // add the point normally
       latestPointRef.current = newPoint;
       setPoints((prevPoints) => {
         const updatedPoints = [...prevPoints, newPoint];
         if (updatedPoints.length > 1) {
           const start = updatedPoints[updatedPoints.length - 2];
-          newPoint.z = 0.1; // just to make sure lines are a bit above the grid
+          // newPoint.z = 0.1; // just to make sure lines are a bit above the grid
           const newLine = new DrawableLine(start, newPoint);
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
@@ -197,7 +207,7 @@ export const FloorplanEditor: React.FC = () => {
         return updatedPoints;
       });
     },
-    [scene, isDrawing, points, orthogonalMode]
+    [scene, isDrawing, points, orthogonalMode, snappingMode, gridSize]
   );
 
   /**
@@ -271,6 +281,13 @@ export const FloorplanEditor: React.FC = () => {
         } else {
           endPoint.x = lastPoint.x;
         }
+      }
+
+      if (snappingMode) {
+        console.log("trying to snap");
+        const snappedX = Math.round(endPoint.x / gridSize) * gridSize;
+        const snappedY = Math.round(endPoint.y / gridSize) * gridSize;
+        endPoint.set(snappedX, snappedY, endPoint.z);
       }
 
       if (!tempLineRef.current) {

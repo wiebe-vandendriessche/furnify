@@ -8,8 +8,8 @@ export class DrawableLine {
   private geometry: THREE.BufferGeometry;
   private material: THREE.LineBasicMaterial;
   public line: THREE.Line;
-  private start: DrawablePoint;
-  private end: DrawablePoint;
+  public start: DrawablePoint;
+  public end: DrawablePoint;
   
   constructor(start: DrawablePoint, end: DrawablePoint) {
     this.start = start;

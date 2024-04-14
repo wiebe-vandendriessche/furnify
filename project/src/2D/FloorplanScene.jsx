@@ -28,8 +28,9 @@ export const FloorplanScene = () => {
   const { removeAll } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
+  const { gridSize, setGridSize } = use2d();
   const [showGrid, setShowGrid] = useState(false);
-  const [gridSize, setGridSize] = useState(0.1);
+  const { snappingMode, setSnappingMode } = use2d();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -66,6 +67,8 @@ export const FloorplanScene = () => {
   const handleGridButtonCLicked = (event) => {
     event.stopPropagation();
     setShowGrid((prev) => !prev);
+    setSnappingMode((prev) => !prev);
+    console.log("snapping: " + snappingMode);
   };
 
   return (

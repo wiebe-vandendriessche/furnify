@@ -15,10 +15,14 @@ export const DrawingProvider = ({ children }) => {
 
   const [isHoveringCanvas, setIsHoveringCanvas] = useState(false);
 
+  const [gridSize, setGridSize] = useState(0.1);
+
   const [points, setPoints] = useState<DrawablePoint[]>([]);
   const [lines, setLines] = useState<DrawableLine[]>([]);
   const tempLineRef = useRef<DrawableLine | null>(null);
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
+
+  const [snappingMode, setSnappingMode] = useState(false);
 
   // Toggle drawing state
   const toggleDrawing = () =>
@@ -59,6 +63,10 @@ export const DrawingProvider = ({ children }) => {
     toggleOrthogonalMode,
     isHoveringCanvas,
     setIsHoveringCanvas,
+    gridSize,
+    setGridSize,
+    snappingMode, 
+    setSnappingMode
   };
 
   return (

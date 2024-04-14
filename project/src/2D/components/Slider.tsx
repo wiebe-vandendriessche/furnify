@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export function SliderComponent({ gridSize, setgridSize }) {
   // Initialize state with the default value of the slider
-//   const [gridSize, setgridSize] = useState(50);
+  // const [gridSize, setgridSize] = useState(50);
 
   // Handle changing the slider
   const handleSliderChange = (event) => {
