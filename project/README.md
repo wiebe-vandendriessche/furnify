@@ -8,17 +8,11 @@ Welkom op furnify2. Dit is versie 2.0.0!
 Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vite op Node.js. Het stelt gebruikers in staat om aan de hand van een vragenlijst de kamer te configureren met de verschillende modules van Furnify.
 
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#inhoudsopgave)
-
-## ➤ Inhoudsopgave
-
-
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 ## ➤ Table of Contents
 
 * [➤ furnify2](#-furnify2)
-	* [➤ Inhoudsopgave](#-inhoudsopgave)
 	* [➤ Repository-indeling](#-repository-indeling)
 	* [➤ Developer server opstarten](#-developer-server-opstarten)
 	* [➤ Tests Uitvoeren](#-tests-uitvoeren)
