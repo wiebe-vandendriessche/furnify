@@ -34,8 +34,17 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 24/03/24,14:00,16:00,Extern, draggable + gridsysteem (snappen in grid),95,
 26/03/24,13:30,17:30,Contacturen, tussentijdse presentatie Pollefliet + dragging,95,
 27/03/24,13:00,16:00,Contacturen, dragging,95,
-04/04/24,09:00,12:00,Contacturen, perfecting and finishing dragging,95,
-04/04/24,14:00,19:30,Contacturen, dragging model within boundaries,107,
+04/04/24,09:00,12:00,Extern, perfecting and finishing dragging,95,
+04/04/24,14:00,19:30,Extern, dragging model within boundaries,107,
+10/04/24,18:00,21:20,Extern, adding resizable windows,106,
+11/04/24,10:00,12:00,Extern, perfecting windows and window positioning,106,
+11/04/24,13:00,18:00,Extern, multiple windows on a wall,106,
+11/04/24,19:00,20:30,Extern, different windows per wall and make them easy to insert (update obstruction form needed),106,
+13/04/24,10:00,12:30,Extern, link 3d with window,145,
+13/04/24,13:30,15:00,Extern, link 3d with window and add door,145,
+13/04/24,15:00,16:30,Extern, link 3d with window and add door,145,
+13/04/24,17:00,19:00,Extern, link 3d with other type of obstruction and make them draggable + lock orbitcontrols,108 en 109,
+14/04/24,9:30,12:00,Extern, nieuwe README adhv automatische generator blueprint.md,139,
 
 
 

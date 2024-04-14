@@ -10,27 +10,52 @@ import { Bed } from './models/Bed.jsx';
 import { Bed_assembly } from './models/Bed_assembly.jsx';
 import { DCube } from './Draggables/DCube.jsx';
 import { Surface } from './Draggables/Surface.jsx';
-
+import { DModel } from './Draggables/DModel.jsx';
+import { DObstruction } from './Draggables/DObstruction.jsx';
 
 
 const Scene = () => {
     const { dimensions } = useConfiguratorContext();
+
+    console.log(dimensions)
+
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
+
+    const { getOtherObstacles } = useConfiguratorContext();
+    const obstacles = getOtherObstacles();
+
     return (
         <Canvas className="canvas" camera={{ position: [10, 6, 8] }} style={{ backgroundColor: 'lightblue' }}>
             <ambientLight intensity={.5} />
             <directionalLight position={[-10, 6, -8]} />
+
             <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
+
             <fog attach="fog" args={['lightblue', 1, 500]} />
             <Ground />
             <Surface surfX={width} surfZ={depth}>
+                {/* Render DObstruction for each obstacle */}
+                {obstacles.map((obstacle) => (
+                    <DObstruction
+                        key={obstacle.id}
+                        position={[0,0,0]}
+                        dimensions={[obstacle.width /100, obstacle.height/100, obstacle.obstLength/100]}
+                        maxX={width} 
+                        maxZ={depth}
+                    // Pass any other necessary props to DObstruction
+                    />
+                ))}
+                {/* 
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
-                <DCube position={[-1, 1, 2]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
+                */}
+                <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
             </Surface>
-            <OrbitControls makeDefault />
+
+            <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={20} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
+
             <Stars radius={500} depth={50} count={8000} factor={15} saturation={50} fade speed={1} />
             <hemisphereLight color="lightblue" groundColor="0xf7e497" intensity={0.5} />
             <axesHelper />

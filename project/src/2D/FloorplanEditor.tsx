@@ -221,27 +221,28 @@ export const FloorplanEditor: React.FC = () => {
 
     const handleClick = (event: MouseEvent) => {
       if (!isDrawing) return;
+
       if (
         drawingCanvasRef.current &&
-        !drawingCanvasRef.current.contains(event.target)
+        drawingCanvasRef.current.contains(event.target)
       ) {
-        // console.log("clicked outside drawing canvas");
+        event.preventDefault();
+        if (currentMousePosition) {
+          addPoint(
+            new DrawablePoint(
+              currentMousePosition.x,
+              currentMousePosition.y,
+              currentMousePosition.z
+            )
+          );
+          if (tempLineRef.current) {
+            tempLineRef.current.removeFromScene(scene);
+            tempLineRef.current = null;
+          }
+        }
+      } else {
         toggleDrawing();
         return;
-      }
-      event.preventDefault();
-      if (currentMousePosition) {
-        addPoint(
-          new DrawablePoint(
-            currentMousePosition.x,
-            currentMousePosition.y,
-            currentMousePosition.z
-          )
-        );
-        if (tempLineRef.current) {
-          tempLineRef.current.removeFromScene(scene);
-          tempLineRef.current = null;
-        }
       }
     };
 

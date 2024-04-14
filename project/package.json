@@ -1,7 +1,7 @@
 {
-  "name": "project",
+  "name": "furnify2",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -11,6 +11,52 @@
     "test": "cypress open",
     "testViewless": "cypress run --headless --browser chrome"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.stud.atlantis.ugent.be/vop2324/furnify2"
+  },
+  "contributors": [
+    {
+      "name": "Wiebe Vandendriessche",
+      "url": "https://gitlab.stud.atlantis.ugent.be/wievdndr",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/393/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Thomas Lonneville",
+      "url": "https://gitlab.stud.atlantis.ugent.be/tlonnevi",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/373/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Xander Vanparys",
+      "url": "https://gitlab.stud.atlantis.ugent.be/xvparys",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/376/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Alexandra Ganseman",
+      "url": "https://gitlab.stud.atlantis.ugent.be/algansem",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/268/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Nathan Salabiaku",
+      "url": "https://gitlab.stud.atlantis.ugent.be/nathan.s",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/301/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    }
+  ],
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@react-three/drei": "^9.99.0",
@@ -18,10 +64,13 @@
     "@react-three/rapier": "^1.3.0",
     "@use-gesture/react": "^10.3.1",
     "bootstrap": "^5.3.3",
-    "cypress": "^13.7.0",
     "bootstrap-icons": "^1.11.3",
+    "cypress": "^13.7.0",
     "i18next": "^23.10.0",
     "i18next-browser-languagedetector": "^7.2.0",
+    "papaparse": "^5.4.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-bootstrap-icons": "^1.11.3",
@@ -29,9 +78,12 @@
     "react-i18next": "^14.0.5",
     "react-icons": "^5.0.1",
     "react-phone-input-2": "^2.15.1",
-    "react-router-dom": "^6.22.1"
+    "react-router-dom": "^6.22.1",
+    "three-csg": "^1.0.0",
+    "three-csg-ts": "^3.1.14"
   },
   "devDependencies": {
+    "@appnest/readme": "^1.1.20",
     "@types/react": "^18.2.72",
     "@types/react-dom": "^18.2.22",
     "@types/three": "^0.162.0",

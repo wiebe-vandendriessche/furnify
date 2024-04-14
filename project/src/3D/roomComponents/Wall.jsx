@@ -37,15 +37,18 @@ export const Wall = ({ width, height, depth, position, visible }) => {
   }, [width, depth]);
 
   return (
-    <ColoredBox
-      width={width}
-      height={height}
-      depth={depth}
-      position={position}
-      color="lightgrey"
-      visible={visible}
-      textures={wallTexture}
-      addColorToTexture={true}
-    />
+    <>
+      <ColoredBox
+        width={width}
+        height={height}
+        depth={depth}
+        position={position}
+        color="lightgrey"
+        visible={visible}
+        textures={wallTexture}
+        addColorToTexture={true}
+      />
+      
+    </>
   );
 };
