@@ -47,3 +47,7 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 11/04/24,12:00,14:00, Extern, 2d vloerplan features opzoekwerk over orthogonal mode en dragging points,69,
 11/04/24,15:00,20:00, Extern, 2d vloerplan features toevoegen,69, orthogonal mode + gebruiksvriendelijkheid verbeteren
 11/04/24,20:30,00:00, Extern, 2d vloerplan features toevoegen,69, sukkelen om grid toe te voegen
+12/04/24,12:00:14:00, Extern, 2d vloerplan features toevoegen, 69, snapping to startpoint
+12/04/24,17:00,19:00, Extern, 2d vloerplan features toevoegen, 69, grid volledig gedaan
+12/04/24,19:30,23:40, Extern, 2d vloerplan features toevoegen, 69, grid volledig gedaan
+14/04/24,14:30,18:22, Extern, 2d vloerplan features toevoegen, 69, snap to grid + merge met main
