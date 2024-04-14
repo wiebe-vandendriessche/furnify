@@ -9,6 +9,12 @@ import logo_dm from "../assets/logo_dm.png";
 import Questionnaire_space from "./components_sidebar/questionnaire_space";
 import Questionnaire_specs from "./components_sidebar/questionnaire_specs";
 import {AiOutlineClose, AiOutlineMenu} from "react-icons/ai";
+import {Form} from "react-bootstrap";
+import jsonp from "jsonp";
+import {useContactContext} from "../contexts/ContactContext.jsx"
+import {useConfiguratorContext} from "../contexts/ConfiguratorContext.jsx"
+import {useVariaContext} from "../contexts/VariaContext.jsx"
+
 
 
 function Sidebar() {
@@ -29,6 +35,12 @@ function Sidebar() {
     const showNext = () => {
         return part == 3;
     }
+    const { contact } = useContactContext();
+
+    const { dimensions,functionalities,specs,obstacles} = useConfiguratorContext();
+
+    const {varia} = useVariaContext();
+
 
     const showNextPart = () => {
         switch (part) {
@@ -47,6 +59,55 @@ function Sidebar() {
         }
     }
 
+
+
+    const onSubmit = e => {
+        e.preventDefault();
+        let obs = "";
+        Object.entries(obstacles).forEach((obstacle) => {
+            const [value] = obstacle;
+            obs += value.id + ". " + value.type;
+            switch (value.type) {
+                case 'Window':
+                    if (value.window) {
+                        obs += " open on the inside";
+                    } else {
+                        obs += " open on the outside";
+                    }
+                    break;
+                case 'Door':
+                    obs+= " open "+ value.door
+                    break;
+                default:
+                    // Handle default case if needed
+                    break;
+            }
+            obs += " height:" + value.height + " length:" + value.obstLength + " width:" + value.width + "\n";
+        });
+        let dim=""
+        Object.entries(dimensions).map(([key, value]) => (
+            dim+=key+":"+value+" "
+        ));
+        let func = "";
+        Object.entries(functionalities).forEach(([key, value]) => {
+            if (value) {
+                func += key;
+            }
+        });
+
+        let color = specs.color === "#FFFFFF" ? "black" : "white";
+
+        const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
+        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}
+                    &DIMENSIONS=${dim}&OBSTACLES=${obs}&ROOM=${varia.room}&FUNCTIONAL=${func}
+                    &LAYOUT=${specs.layout}&MATERIAL=${specs.material}&COLOR=${color}&ADDRESS=${contact.address}`, { param: 'c' }, (_, data) => {
+            const { msg, result } = data
+            console.log(result,msg)
+            alert(msg);
+        });
+    };
+
+
     return (
         <>
             <IconContext.Provider value={{color: "undefined"}}>
@@ -60,12 +121,13 @@ function Sidebar() {
                                 <img id="logo" src={logo} alt="furnify"/>
                             </picture>
                         </a>
-                        {showNextPart()}
-                        <div className="bottom_btn">
+                        <Form onSubmit={onSubmit}>
+                            {showNextPart()}
+                        </Form>
+                        <div className={"bottom_btn"}>
                             <button onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft/></button>
                             <button onClick={nextPart} hidden={showNext()}><FaAnglesRight/></button>
                         </div>
-
                     </div>
                 </nav>
                 <div onClick={showSidebar} className="menu-bars">

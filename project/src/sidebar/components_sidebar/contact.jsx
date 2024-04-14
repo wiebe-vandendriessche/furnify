@@ -7,6 +7,7 @@ import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
 import {FloatingLabel} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Contact() {
     const {t, i18n} = useTranslation();
@@ -33,24 +34,26 @@ function Contact() {
                     {t('contact.q_contact')}
                 </h5>
             </div>
-            <Form>
+            <div className={"mb-3"}>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
-                                                            className={"mb-2"}
-                                                            controlId="floatingInput"
-                                                            label={t("contact."+key)}>
-                        <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
-                                      onChange={changeContact}/>
+                                                             className={"mb-2"}
+                                                             controlId="floatingInput"
+                                                             label={t("contact." + key)}>
+                        <Form.Control name={key} placeholder={key} defaultValue={value}
+                                      onChange={changeContact} required/>
                     </FloatingLabel>) : (
 
                         <PhoneInput key={key} className={"mb-2"} country={'be'} onlyCountries={["be", "nl"]}
                                     enableSearch={true}
                                     searchPlaceholder={""}
-                                    disableSearchIcon={true} id="phoneNumber" name="phoneNumber" type="tel"
-                                    value={contact.phoneNumber} onChange={changePhoneNumber}/>
+                                    disableSearchIcon={true} id="phoneNumber" name="phone_number" type="tel"
+                                    value={contact.phoneNumber} onChange={changePhoneNumber} required/>
                     )))
                 }
-            </Form>
+            </div>
+
+            <Button variant={"danger"} type={"submit"}>submit</Button>
         </div>
     )
 }

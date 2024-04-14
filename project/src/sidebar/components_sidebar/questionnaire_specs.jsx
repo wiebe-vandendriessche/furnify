@@ -28,81 +28,81 @@ function Questionnaire_spec() {
     }
     return (
         <div className="m-2">
-            <Form>
-                <div className="mb-4">
-                    <FormGroup>
-                        <div className={"mb-3"}><h5>{t('questionnaire_specs.q_prefrences')}</h5></div>
-                        <div className={"m-1"}>
-                            <ButtonGroup>
-                                <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="layout"
-                                              onChange={changeSpecs}
-                                              checked={"wall" === specs.layout}>
-                                    {t('questionnaire_specs.prefrences.wall')}
-                                </ToggleButton>
-                                <ToggleButton variant={"danger"} type="radio" id="Partition" value={"partition"}
-                                              name="layout"
-                                              onChange={changeSpecs} checked={"partition" === specs.layout}>
-                                    {t('questionnaire_specs.prefrences.partition_wall')}
-                                </ToggleButton>
-                                <ToggleButton variant={"danger"} type="radio" id="middle" name="layout" value={"middle"}
-                                              onChange={changeSpecs} checked={"middle" === specs.layout}>
-                                    {t('questionnaire_specs.prefrences.in_the_middle_of_space')}
-                                </ToggleButton>
-                            </ButtonGroup>
-                        </div>
-                    </FormGroup>
-                </div>
-                <div className={"d-inline-flex mb-4"}>
-                    <FormGroup>
-                        <div className={"mb-3"}><h5>{t('questionnaire_specs.q_materials')}</h5></div>
-                        <div className={"m-1"}>
-                            <Row>
-                                <Col>
-                                    <ButtonGroup>
-                                        <ToggleButton variant={"danger"} type="radio" id="matBirch" value={"birch"}
-                                                      name="material"
-                                                      onChange={changeSpecs}
-                                                      checked={specs.material === "birch"}>
-                                            {t('questionnaire_specs.materials.birch')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="matOak" value={"oak"}
-                                                      name="material"
-                                                      onChange={changeSpecs} checked={specs.material === "oak"}>
-                                            {t('questionnaire_specs.materials.oak')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="matWalnut" name="material"
-                                                      value={"walnut"}
-                                                      onChange={changeSpecs} checked={specs.material === "walnut"}>
-                                            {t('questionnaire_specs.materials.walnut')}
-                                        </ToggleButton>
-                                    </ButtonGroup>
-                                </Col>
-                                <Col>
-                                    <ButtonGroup>
-                                        <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
-                                                      onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
-                                            {t('questionnaire_specs.materials.white')}
-                                        </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
-                                                      onChange={changeSpecs} checked={specs.color === "#000000"}>
-                                            {t('questionnaire_specs.materials.black')}
-                                        </ToggleButton>
-                                    </ButtonGroup>
-                                </Col>
-                            </Row>
+            <div className="mb-4">
+                <FormGroup>
+                    <div className={"mb-3"}><h5>{t('questionnaire_specs.q_prefrences')}</h5></div>
+                    <div className={"m-1"}>
+                        <ButtonGroup>
+                            <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="layout"
+                                          onChange={changeSpecs}
+                                          checked={"wall" === specs.layout}>
+                                {t('questionnaire_specs.prefrences.wall')}
+                            </ToggleButton>
+                            <ToggleButton variant={"danger"} type="radio" id="Partition" value={"partition"}
+                                          name="layout"
+                                          onChange={changeSpecs} checked={"partition" === specs.layout}>
+                                {t('questionnaire_specs.prefrences.partition_wall')}
+                            </ToggleButton>
+                            <ToggleButton variant={"danger"} type="radio" id="middle" name="layout" value={"middle"}
+                                          onChange={changeSpecs} checked={"middle" === specs.layout}>
+                                {t('questionnaire_specs.prefrences.in_the_middle_of_space')}
+                            </ToggleButton>
+                        </ButtonGroup>
+                    </div>
+                </FormGroup>
+            </div>
+            <div className={"d-inline-flex mb-4"}>
+                <FormGroup>
+                    <div className={"mb-3"}><h5>{t('questionnaire_specs.q_materials')}</h5></div>
+                    <div className={"m-1"}>
+                        <Row>
+                            <Col>
+                                <ButtonGroup>
+                                    <ToggleButton variant={"danger"} type="radio" id="matBirch" value={"birch"}
+                                                  name="material"
+                                                  onChange={changeSpecs}
+                                                  checked={specs.material === "birch"}>
+                                        {t('questionnaire_specs.materials.birch')}
+                                    </ToggleButton>
+                                    <ToggleButton variant={"danger"} type="radio" id="matOak" value={"oak"}
+                                                  name="material"
+                                                  onChange={changeSpecs} checked={specs.material === "oak"}>
+                                        {t('questionnaire_specs.materials.oak')}
+                                    </ToggleButton>
+                                    <ToggleButton variant={"danger"} type="radio" id="matWalnut" name="material"
+                                                  value={"walnut"}
+                                                  onChange={changeSpecs} checked={specs.material === "walnut"}>
+                                        {t('questionnaire_specs.materials.walnut')}
+                                    </ToggleButton>
+                                </ButtonGroup>
+                            </Col>
+                            <Col>
+                                <ButtonGroup>
+                                    <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color"
+                                                  value="#FFFFFF"
+                                                  onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
+                                        {t('questionnaire_specs.materials.white')}
+                                    </ToggleButton>
+                                    <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color"
+                                                  value="#000000"
+                                                  onChange={changeSpecs} checked={specs.color === "#000000"}>
+                                        {t('questionnaire_specs.materials.black')}
+                                    </ToggleButton>
+                                </ButtonGroup>
+                            </Col>
+                        </Row>
 
 
-                        </div>
-                    </FormGroup>
-                </div>
-                <div className="mb-4">
-                    <FormGroup>
-                        <div className={"mb-3"}><h5>{t('questionnaire_specs.q_other')}</h5></div>
-                    </FormGroup>
-                    <Form.Control as={"textarea"} rows="3" cols="40" value={varia.requirements}
-                                  name="requirements" onChange={changeVaria}></Form.Control>
-                </div>
-            </Form>
+                    </div>
+                </FormGroup>
+            </div>
+            <div className="mb-4">
+                <FormGroup>
+                    <div className={"mb-3"}><h5>{t('questionnaire_specs.q_other')}</h5></div>
+                </FormGroup>
+                <Form.Control as={"textarea"} rows="3" cols="40" value={varia.requirements}
+                              name="requirements" onChange={changeVaria}></Form.Control>
+            </div>
         </div>
     )
 }

@@ -5,7 +5,6 @@ import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
 import {ToggleButton, Collapse, ButtonGroup, Form} from "react-bootstrap";
-import {matchRoutes} from "react-router-dom";
 
 function Questionnaire_functional() {
     const {t, i18n} = useTranslation();
@@ -36,80 +35,78 @@ function Questionnaire_functional() {
     return (
 
         <div className="m-2">
-            <Form>
-                <div className="mb-4">
-                    <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5>{t('questionnaire_func.q_space')}</h5>
+            <div className="mb-4">
+                <Form.Group>
+                    <div className={"mb-3"}>
+                        <h5>{t('questionnaire_func.q_space')}</h5>
+                    </div>
+                    <div className={"m-1"}>
+                        <ButtonGroup>
+                            {space.map((space) => (
+                                <ToggleButton
+                                    key={space.id}
+                                    id={space.id}
+                                    name={"room"}
+                                    type="radio"
+                                    variant="danger"
+                                    value={space.name}
+                                    onChange={changeVaria}
+                                    checked={varia.room == space.id}>
+                                    {space.name}
+                                </ToggleButton>
+                            ))}
+                        </ButtonGroup>
+                    </div>
+                </Form.Group>
+            </div>
+
+            <div className={"mb-3"}>
+                <Form.Group>
+                    <div className={"mb-3"}>
+                        <h5>{t('questionnaire_func.q_function')}</h5>
+                    </div>
+                    <div className={"m-1"}>
+                        <div className={"flex"}>
+                            {Object.entries(functionalities).map(([key, value]) => (
+                                <ToggleButton key={key} className={"tbtn"} type="checkbox"
+                                              variant={"outline-danger"}
+                                              id={key}
+                                              onChange={changeFunctionalities}
+                                              checked={value}>{t('questionnaire_func.functions.' + key)}</ToggleButton>
+                            ))}
                         </div>
                         <div className={"m-1"}>
-                            <ButtonGroup>
-                                {space.map((space) => (
-                                    <ToggleButton
-                                        key={space.id}
-                                        id={space.id}
-                                        name={"room"}
-                                        type="radio"
-                                        variant="danger"
-                                        value={space.name}
-                                        onChange={changeVaria}
-                                        checked={varia.room == space.id}>
-                                        {space.name}
-                                    </ToggleButton>
-                                ))}
-                            </ButtonGroup>
-                        </div>
-                    </Form.Group>
-                </div>
+                            <Collapse in={functionalities.bed}>
+                                <div className="mb-3">
+                                    <ButtonGroup defaultValue={varia.mattress ?? " "}>
 
-                <div className={"mb-3"}>
-                    <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5>{t('questionnaire_func.q_function')}</h5>
+                                        <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"soft" == varia.mattress}>
+                                            {t('questionnaire_func.bed.soft')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"medium" == varia.mattress}>
+                                            {t('questionnaire_func.bed.medium')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id="sturdy" name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={"sturdy" == varia.mattress}>
+                                            {t('questionnaire_func.bed.sturdy')}
+                                        </ToggleButton>
+                                        <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
+                                                      onChange={changeVaria}
+                                                      checked={" " == varia.mattress}>
+                                            {t('questionnaire_func.bed.apply')}
+                                        </ToggleButton>
+                                    </ButtonGroup>
+                                </div>
+                            </Collapse>
                         </div>
-                        <div className={"m-1"}>
-                            <div className={"flex"}>
-                                {Object.entries(functionalities).map(([key, value]) => (
-                                    <ToggleButton key={key} className={"tbtn"} type="checkbox"
-                                                  variant={"outline-danger"}
-                                                  id={key}
-                                                  onChange={changeFunctionalities}
-                                                  checked={value}>{t('questionnaire_func.functions.' + key)}</ToggleButton>
-                                ))}
-                            </div>
-                            <div className={"m-1"}>
-                                <Collapse in={functionalities.bed}>
-                                    <div className="mb-3" >
-                                        <ButtonGroup defaultValue={varia.mattress ?? " "}>
-
-                                            <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
-                                                          onChange={changeVaria}
-                                                          checked={"soft" == varia.mattress}>
-                                                {t('questionnaire_func.bed.soft')}
-                                            </ToggleButton>
-                                            <ToggleButton variant={"danger"} type="radio" id="medium" name="mattress"
-                                                          onChange={changeVaria}
-                                                          checked={"medium" == varia.mattress}>
-                                                {t('questionnaire_func.bed.medium')}
-                                            </ToggleButton>
-                                            <ToggleButton variant={"danger"} type="radio" id="sturdy" name="mattress"
-                                                          onChange={changeVaria}
-                                                          checked={"sturdy" == varia.mattress}>
-                                                {t('questionnaire_func.bed.sturdy')}
-                                            </ToggleButton>
-                                            <ToggleButton variant={"danger"} type="radio" id=" " name="mattress"
-                                                          onChange={changeVaria}
-                                                          checked={" " == varia.mattress}>
-                                                {t('questionnaire_func.bed.apply')}
-                                            </ToggleButton>
-                                        </ButtonGroup>
-                                    </div>
-                                </Collapse>
-                            </div>
-                        </div>
-                    </Form.Group>
-                </div>
-            </Form>
+                    </div>
+                </Form.Group>
+            </div>
         </div>
 
 

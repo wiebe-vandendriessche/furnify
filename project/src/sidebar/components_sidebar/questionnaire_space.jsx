@@ -76,7 +76,15 @@ function Questionnaire_space() {
             }]);
         } else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
-            setObstacles([{ type: event.currentTarget.getAttribute("value"), width: 0, height: 0, obstLength: 0, id: stateId, door: 0, window: true }]);
+            setObstacles([{
+                type: event.currentTarget.getAttribute("value"),
+                width: 0,
+                height: 0,
+                obstLength: 0,
+                id: stateId,
+                door: 0,
+                window: true
+            }]);
         }
         console.log(stateId)
     }
@@ -96,85 +104,84 @@ function Questionnaire_space() {
     }
 
 
-
     return (
         <div className={"m-2"}>
-            <Form>
-                <div className={"mb-4"}>
-                    <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5>{t('questionnaire_space.q_dimensions')}</h5>
-                        </div>
-                        <div className="m-1">
-                            <ButtonGroup>
-                                <ToggleButton
-                                    onClick={() => setOpen(!open)}
-                                    type="radio"
-                                    value="Rectangular"
-                                    variant="danger"
-                                    checked={open}
-                                >
-                                    {t('questionnaire_space.rectangular')}
-                                </ToggleButton>
-                                <ToggleButton
-                                    type="radio"
-                                    value="Other"
-                                    variant="danger"
-                                    checked={!open}
-                                    onClick={() => setOpen(false)}>
-                                    {t('questionnaire_space.other')}
-                                </ToggleButton>
-                            </ButtonGroup>
-                        </div>
-                        <div className={"m-3"}>
-                            <Collapse in={open}>
-                                <Row>
-                                    {Object.entries(dimensions).map(([key, value]) => (
-                                            <Col key={key}>
-                                                <FloatingLabel
-                                                    controlId={"rectangular" + key}
-                                                    label={t('questionnaire_space.' + key)}
-                                                    className="mb-4"
-                                                >
-                                                    <Form.Control type="number" min={0} step={0.1} value={value}
-                                                                  size="sm"
-                                                                  name={key} onChange={changeDim}
-                                                                  onKeyPress={handleKeyPress}/>
-                                                </FloatingLabel>
-                                            </Col>
-                                        )
-                                    )}
-
-                                </Row>
-                            </Collapse>
-                        </div>
-                    </Form.Group>
-                </div>
+            <div className={"mb-4"}>
                 <Form.Group>
                     <div className={"mb-3"}>
-                        <h5>{t('questionnaire_space.q_aspects')}</h5>
+                        <h5>{t('questionnaire_space.q_dimensions')}</h5>
                     </div>
-                    <div className={"m-1"}>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.window')}>{t('obstructions.window')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.door')}>{t('obstructions.door')}</Button>
-                        <Button onClick={addObstacles} variant="danger" value={t('obstructions.other')}>{t('obstructions.other')}</Button>
-                        <div className={"aspect"}>
-                            {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
-                                                                   length={item.obstLength} width={item.width}
-                                                                   height={item.height}
-                                                                   door={item.door}
-                                                                   window={item.window}
-                                                                   key={"obst" + item.id}
-                                                                   changeObst={changeObstacle}
-                                                                   changeDoor={changeObstacleDoor}
-                                                                   changeWindow={changeObstacleWindow}
-                                                                   deleteObst={deleteObstacle}/>))}
-                        </div>
+                    <div className="m-1">
+                        <ButtonGroup>
+                            <ToggleButton
+                                onClick={() => setOpen(!open)}
+                                type="radio"
+                                value="Rectangular"
+                                variant="danger"
+                                checked={open}
+                            >
+                                {t('questionnaire_space.rectangular')}
+                            </ToggleButton>
+                            <ToggleButton
+                                type="radio"
+                                value="Other"
+                                variant="danger"
+                                checked={!open}
+                                onClick={() => setOpen(false)}>
+                                {t('questionnaire_space.other')}
+                            </ToggleButton>
+                        </ButtonGroup>
                     </div>
+                    <div className={"m-3"}>
+                        <Collapse in={open}>
+                            <Row>
+                                {Object.entries(dimensions).map(([key, value]) => (
+                                        <Col key={key}>
+                                            <FloatingLabel
+                                                controlId={"rectangular" + key}
+                                                label={t('questionnaire_space.' + key)}
+                                                className="mb-4"
+                                            >
+                                                <Form.Control type="number" min={0} step={0.1} value={value}
+                                                              size="sm"
+                                                              name={key} onChange={changeDim}
+                                                              onKeyPress={handleKeyPress}/>
+                                            </FloatingLabel>
+                                        </Col>
+                                    )
+                                )}
 
+                            </Row>
+                        </Collapse>
+                    </div>
                 </Form.Group>
+            </div>
+            <Form.Group>
+                <div className={"mb-3"}>
+                    <h5>{t('questionnaire_space.q_aspects')}</h5>
+                </div>
+                <div className={"m-1"}>
+                    <Button onClick={addObstacles} variant="danger"
+                            value={t('obstructions.window')}>{t('obstructions.window')}</Button>
+                    <Button onClick={addObstacles} variant="danger"
+                            value={t('obstructions.door')}>{t('obstructions.door')}</Button>
+                    <Button onClick={addObstacles} variant="danger"
+                            value={t('obstructions.other')}>{t('obstructions.other')}</Button>
+                    <div className={"aspect"}>
+                        {obstacles.map((item) => (<Obstruction obstId={"obst" + item.id} type={item.type}
+                                                               length={item.obstLength} width={item.width}
+                                                               height={item.height}
+                                                               door={item.door}
+                                                               window={item.window}
+                                                               key={"obst" + item.id}
+                                                               changeObst={changeObstacle}
+                                                               changeDoor={changeObstacleDoor}
+                                                               changeWindow={changeObstacleWindow}
+                                                               deleteObst={deleteObstacle}/>))}
+                    </div>
+                </div>
 
-            </Form>
+            </Form.Group>
         </div>
     )
 }
