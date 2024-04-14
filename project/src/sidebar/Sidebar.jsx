@@ -6,15 +6,18 @@ import Questionnaire_func from "./components_sidebar/Questionnaire_func.jsx";
 import Contact from "./components_sidebar/Contact";
 import logo from "../assets/logo_lm.png";
 import logo_dm from "../assets/logo_dm.png";
-import Questionnaire_space from "./components_sidebar/Questionnaire_space";
-import Questionnaire_specs from "./components_sidebar/Questionnaire_specs";
+import Questionnaire_space from "./components_sidebar/questionnaire_space.jsx";
+import Questionnaire_specs from "./components_sidebar/questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { check } from "../algorithm/module_choice.ts";
+import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
+
 
 export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
-
+    const value = useConfiguratorContext();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -40,7 +43,8 @@ export function Sidebar() {
             case 2:
                 return <Questionnaire_specs />
             case 3:
-                return <Contact />
+                check(value)
+                return <Contact/>
             case 4:
                 return <p>Nothing to see here</p>
             default:

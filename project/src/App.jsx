@@ -1,21 +1,12 @@
 import { Canvas } from '@react-three/fiber'
 // import Room from './components/roomComponents/Room'
-import { useEffect, useState } from 'react'
 import './App.css'
 import Sidebar from './sidebar/Sidebar'
-import { useTranslation } from 'react-i18next'
 import Scene from './3D/Scene'
-import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
 
 
 function App() {
 
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    const lng = navigator.language;
-    i18n.changeLanguage(lng);
-  }, [])
 
   return (
       <div className="App">
