@@ -9,7 +9,9 @@ input{
     border: solid transparent;
     width: 100%;
 }
-
+.form-floating > label{
+    z-index: 1;
+}
 .fa-rectangle-xmark{
     padding: 1px 10px;
     color: white;

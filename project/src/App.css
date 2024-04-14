@@ -10,9 +10,12 @@
 }
 
 .container {
-    width: 100vw; /* Ensures it takes the full viewport width */
-    height: 100vh; /* Ensures it takes the full viewport height */
-    display: block; /* Ensures the canvas is a block-level element, removing any default inline spacing */
+    width: 100vw;
+    /* Ensures it takes the full viewport width */
+    height: 100vh;
+    /* Ensures it takes the full viewport height */
+    display: block;
+    /* Ensures the canvas is a block-level element, removing any default inline spacing */
     padding: 0;
     margin: 0;
 }
@@ -80,15 +83,15 @@ button:hover {
     -webkit-box-shadow: 0 0 0.5rem #e84646;
 }
 
-.form-control{
+.form-control {
     background-color: white;
 }
 
-.form-floating{
+.form-floating {
     color: black;
 }
 
-.aspect{
+.aspect {
     height: 40vh;
     padding: 10px;
     border-radius: 10px;
@@ -117,13 +120,26 @@ button:hover {
         color: #ffffff;
     }
 
-    .aspect{
+    .aspect {
         border-color: rgba(172, 172, 172, 0.09);
         background-color: #f1f1f1;
     }
 
-    .obstruction-bg{
+    .obstruction-bg {
         background-color: #ffffff;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #dc3545;
+        border: .2em solid #ffffff;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b02a37;
     }
 }
 
@@ -146,13 +162,26 @@ button:hover {
         background-color: #e84646;
     }
 
-    .aspect{
+    .aspect {
         border-color: rgba(26, 26, 26, 0.89);
         background-color: #121212;
     }
 
-    .obstruction-bg{
+    .obstruction-bg {
         background-color: #242424;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #242424;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #dc3545;
+        border: .2em solid #242424;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b02a37;
     }
 
 }
@@ -163,3 +192,18 @@ button:hover {
     }
 }
 
+
+/* custom scrollbar */
+
+::-webkit-scrollbar {
+    width: 1.3em;
+}
+
+::-webkit-scrollbar-track {
+    margin-block: .7em;
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+}
