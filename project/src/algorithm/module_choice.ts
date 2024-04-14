@@ -30,7 +30,7 @@ export const check = (val: any) => {
             return
         }
     }
-    //maybe set a second test if the result is empty
+    
 
     // check size is correct
     let result_size: Module[] = [];
@@ -39,6 +39,9 @@ export const check = (val: any) => {
             result_size.push(mod)
         }
     })
+    if( result_size.length == 0){
+        console.log("Room is not big enough for the combination")
+    }
     console.log(result_size)
 }
 
