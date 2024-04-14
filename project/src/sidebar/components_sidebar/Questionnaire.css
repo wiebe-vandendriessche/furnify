@@ -12,6 +12,10 @@ input{
 .form-floating > label{
     z-index: 1;
 }
+
+.btn-group > .btn-check:checked:not(:hover) {
+    z-index: 0;
+}
 .fa-rectangle-xmark{
     padding: 1px 10px;
     color: white;
