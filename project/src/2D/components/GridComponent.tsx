@@ -29,9 +29,9 @@ export const GridComponent = ({
 
     for (let i = 0; i <= divisions; i++) {
       // Horizontal lines
-      points.push(new Vector3(-halfSize, i * step - halfSize, 0), new THREE.Vector3(halfSize, i * step - halfSize, 0));
+      points.push(new Vector3(-halfSize, i * step - halfSize, 0), new THREE.Vector3(halfSize, i * step - halfSize, -0.01));
       // Vertical lines
-      points.push(new Vector3(i * step - halfSize, -halfSize, 0), new THREE.Vector3(i * step - halfSize, halfSize, 0));
+      points.push(new Vector3(i * step - halfSize, -halfSize, 0), new THREE.Vector3(i * step - halfSize, halfSize, -0.01));
     }
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
