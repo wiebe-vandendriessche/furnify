@@ -35,13 +35,13 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                data-testid={"btn-obstacle-expand-" + type}
-                variant={"danger"} value={type ?? t("obstructions." + type)}
-                onClick={showButton
-                }>{t("obstructions." + type)}</Button>
+                    data-testid={"btn-obstacle-expand-" + type}
+                    variant={"danger"} value={type ?? t("obstructions." + type)}
+                    onClick={showButton
+                    }>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                    variant={"danger"} id={"delete" + obstId}
+                    onClick={(e) => deleteObst(e)}>
                 x
             </Button>
             <div className="m-1" hidden={showButton2}>

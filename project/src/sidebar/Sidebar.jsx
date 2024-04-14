@@ -11,6 +11,11 @@ import Questionnaire_specs from "./components_sidebar/Questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
+import {useContactContext} from "../contexts/ContactContext.jsx"
+import {useVariaContext} from "../contexts/VariaContext.jsx"
+import jsonp from "jsonp";
+import {Form} from "react-bootstrap";
+
 
 
 export function Sidebar() {
@@ -33,8 +38,15 @@ export function Sidebar() {
     const showNext = () => {
         return part == 3;
     }
+    const { contact } = useContactContext();
+
+    const { dimensions,functionalities,specs,obstacles} = useConfiguratorContext();
+
+    const {varia} = useVariaContext();
+
 
     const showNextPart = () => {
+        console.log(obstacles)
         switch (part) {
             case 0:
                 return <Questionnaire_space stateId={stateId} setStateId={setStateId}/>
@@ -52,6 +64,69 @@ export function Sidebar() {
         }
     }
 
+
+
+    const onSubmit = e => {
+        e.preventDefault();
+        let obs = "_";
+        Object.entries(obstacles).forEach(([type, items]) => {
+            items.forEach((item) => {
+                obs += item.id + ". " + item.type;
+                switch (item.type) {
+                    case 'window':
+                        if (item.inside_window === 'yes') {
+                            obs += " open on the inside";
+                        } else {
+                            obs += " open on the outside";
+                        }
+                        obs += " width:" + item.width + " height:" + item.height;
+                        break;
+                    case 'door':
+                        obs += " open " + item.opening_door;
+                        obs += " width:" + item.width + " height:" + item.height;
+                        break;
+                    default:
+                        obs += " width:" + item.width + " length:" + item.obstLength + " height:" + item.height;
+                        break;
+                }
+                if (item.obstacleWall) {
+                    obs += " obstacle wall:" + item.obstacleWall;
+                }
+                if (item.windowWall) {
+                    obs += " window wall:" + item.windowWall;
+                }
+                if (item.windowXpos && item.windowYpos) {
+                    obs += " position:" + item.windowXpos + "," + item.windowYpos;
+                }
+                obs += "\n";
+            });
+        });
+
+        let dim=""
+        Object.entries(dimensions).map(([key, value]) => (
+            dim+=key+":"+value+" "
+        ));
+
+        let func = "";
+        Object.entries(functionalities).forEach(([key, value]) => {
+            if (value) {
+                func += key+" ";
+            }
+        });
+
+        let color = specs.color === "#FFFFFF" ? "black" : "white";
+
+        const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
+        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
+                    &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
+            const { msg, result } = data
+            console.log(result,msg)
+            alert(msg);
+        });
+    };
+
+
     return (
         <>
             <IconContext.Provider value={{ color: "undefined" }}>
@@ -65,7 +140,10 @@ export function Sidebar() {
                                 <img id="logo" src={logo} alt="furnify" />
                             </picture>
                         </a>
-                        {showNextPart()}
+                        <Form onSubmit={onSubmit}>
+                            {showNextPart()}
+                        </Form>
+
                         <div className="bottom_btn">
                             <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft /></button>
                             <button data-testid="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}><FaAnglesRight /></button>

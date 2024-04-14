@@ -7,6 +7,7 @@ import {useTranslation} from 'react-i18next'
 import {useEffect} from 'react'
 import {FloatingLabel} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Contact() {
     const {t, i18n} = useTranslation();
@@ -38,10 +39,10 @@ function Contact() {
             <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
-                                                            data-testid={"label-contact-"+key}
-                                                            className={"mb-2"}
-                                                            controlid="floatingInput"
-                                                            label={t("contact."+key)}>
+                                                             data-testid={"label-contact-"+key}
+                                                             className={"mb-2"}
+                                                             controlid="floatingInput"
+                                                             label={t("contact."+key)}>
                         <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
                                       data-testid={"input-contact-"+key}
                                       onChange={changeContact}/>
@@ -56,6 +57,7 @@ function Contact() {
                     )))
                 }
             </Form>
+            <Button variant={"danger"} type={"submit"}>submit</Button>
         </div>
     )
 }

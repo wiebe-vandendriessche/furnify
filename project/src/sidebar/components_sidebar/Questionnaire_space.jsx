@@ -84,10 +84,10 @@ export function Questionnaire_space({stateId, setStateId}) {
         setObstacles({
             ...obstacles,
             other: obstacles["other"].map((obstacle)=>obstacle.id==event.target.id.split("obst")[1]?{
-                ...obstacle,
-                [event.target.name]: event.target.value}:
-            obstacle)})
-        }
+                    ...obstacle,
+                    [event.target.name]: event.target.value}:
+                obstacle)})
+    }
 
 
     const changeDoor= (event)=>{
@@ -99,16 +99,16 @@ export function Questionnaire_space({stateId, setStateId}) {
             door: obstacles["door"].map((obstacle)=> obstacle.id == event.target.id.split("door")[1]?{
                 ...obstacle,
                 [event.target.name]: event.target.value}:obstacle)
-            })
-        }
+        })
+    }
     const changeWindow= (event)=>{
         setObstacles({
             ...obstacles,
             window: obstacles["window"].map((obstacle)=> obstacle.id == event.target.id.split("window")[1]?{
                 ...obstacle,
                 [event.target.name]: event.target.value}:obstacle)
-            })
-        }
+        })
+    }
 
 
 
@@ -183,15 +183,15 @@ export function Questionnaire_space({stateId, setStateId}) {
             console.log("value: " + event.currentTarget.getAttribute("value"))
             console.log(stateId)
             setObstacles({
-                    ...obstacles, [valueType]: [...obstacles[valueType], obst]
-                });
-            }
+                ...obstacles, [valueType]: [...obstacles[valueType], obst]
+            });
+        }
 
         else {
             console.log("value: " + event.currentTarget.getAttribute("value"))
             setObstacles({
-                    ...obstacles, [valueType] : [obst]
-                });
+                ...obstacles, [valueType] : [obst]
+            });
 
 
         }

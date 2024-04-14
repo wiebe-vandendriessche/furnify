@@ -140,6 +140,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                     <Row>
                         <Col>
                             <FloatingLabel
+                                style={{fontSize: '0.8rem'}}
                                 controlid={"windowXpos" + obstId}
                                 label="Window X Position (cm)"
                             >
@@ -158,6 +159,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <FloatingLabel
                                 controlid={"windowYpos" + obstId}
                                 label="Window Y Position (cm)"
+                                style={{fontSize: '0.8rem'}}
                             >
                                 <Form.Control
                                     type="number"

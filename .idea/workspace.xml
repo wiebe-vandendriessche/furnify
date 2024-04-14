@@ -4,26 +4,92 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b725b0e-8c8c-444f-81ae-827f2967f27e" name="Changes" comment="fix css">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="3b725b0e-8c8c-444f-81ae-827f2967f27e" name="Changes" comment="merge with send-data-to-client">
+      <change afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/.coveralls.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/component.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/src/browser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/src/debug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/src/inspector-log.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/debug/src/node.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/.zuul.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/History.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/component.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/jsonp/test/basic.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/ms/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/ms/license.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/ms/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/ms/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03-03-24_17_23_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03-03-24_17_23__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_01_38_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_01_38__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_15_42_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_15_42__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_20_24_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_20_24__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_22_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-03-24_22_41__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_14_11_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_14_11__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_15_15_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_15_15__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_23_24_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06-03-24_23_24__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_32_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_32__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_53_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_53__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_54_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_09-03-24_10_54__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/contact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/contact.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/obstruction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/obstruction.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_func.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_func.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_space.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_space.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_specs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components/questionnaire_specs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Contact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Contact.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Obstruction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Obstruction.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_func.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_func.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_space.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_space.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_specs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_specs.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="3-questionnaire" />
+        <entry key="$PROJECT_DIR$" value="send-data-to-client" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,21 +105,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\intelliJ\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "D:\\Informatica\\jaar3\\VOP\\furnify2\\project\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Informatica\jaar3\VOP\3q3\project\src\assets" />
@@ -199,6 +265,7 @@
     <MESSAGE value="update logbook" />
     <MESSAGE value="add title to contact.jsx" />
     <MESSAGE value="fix css" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix css" />
+    <MESSAGE value="merge with send-data-to-client" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge with send-data-to-client" />
   </component>
 </project>
