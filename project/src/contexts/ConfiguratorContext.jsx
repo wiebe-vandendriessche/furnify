@@ -10,6 +10,7 @@ export const ConfiguratorProvider = ({ children }) => {
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, office_space: false, storage_space: false })
     const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birck", layout:""})
     const [obstacles, setObstacles] = useState([]);
+    const [rectangular, setRectangular] = useState(false);
 
     const value = {
         dimensions,
@@ -19,7 +20,9 @@ export const ConfiguratorProvider = ({ children }) => {
         functionalities,
         setFunctionalities,
         obstacles,
-        setObstacles
+        setObstacles,
+        rectangular, 
+        setRectangular
     }
 
     return (

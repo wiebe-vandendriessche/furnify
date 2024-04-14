@@ -22,7 +22,7 @@ export function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const {dimensions, setDimensions, obstacles, setObstacles} = useConfiguratorContext();
+    const {dimensions, setDimensions, obstacles, setObstacles, rectangular, setRectangular} = useConfiguratorContext();
     //Changes values of dimensions in context
     const changeDim = (event) => {
         setDimensions({...dimensions, [event.target.name]: event.target.value});
@@ -59,7 +59,7 @@ export function Questionnaire_space() {
         let obstacleIndex = event.currentTarget.id.split("obst")[1]
         setObstacles((prevObstacles) => prevObstacles.filter((obstacle) => (obstacle.id != obstacleIndex)));
     }
-    const [open, setOpen] = useState(false);
+    
     const addObstacles = (event) => {
         setStateId(stateId + 1)
         if (obstacles.length > 0) {
@@ -108,11 +108,11 @@ export function Questionnaire_space() {
                         <div className="m-1">
                             <ButtonGroup>
                                 <ToggleButton
-                                    onClick={() => setOpen(!open)}
+                                    onClick={() => setRectangular(!rectangular)}
                                     type="radio"
                                     value="Rectangular"
                                     variant="danger"
-                                    checked={open}
+                                    checked={rectangular}
                                 >
                                     {t('questionnaire_space.rectangular')}
                                 </ToggleButton>
@@ -120,14 +120,14 @@ export function Questionnaire_space() {
                                     type="radio"
                                     value="Other"
                                     variant="danger"
-                                    checked={!open}
-                                    onClick={() => setOpen(false)}>
+                                    checked={!rectangular}
+                                    onClick={() => setRectangular(false)}>
                                     {t('questionnaire_space.other')}
                                 </ToggleButton>
                             </ButtonGroup>
                         </div>
                         <div className={"m-3"}>
-                            <Collapse in={open}>
+                            <Collapse in={rectangular}>
                                 <Row>
                                     {Object.entries(dimensions).map(([key, value]) => (
                                             <Col key={key}>

@@ -6,7 +6,7 @@ import './App.css'
 import Sidebar from './sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
 import Scene from './3D/Scene'
-import { ConfiguratorProvider } from './contexts/ConfiguratorContext'
+import { ConfiguratorProvider, useConfiguratorContext } from './contexts/ConfiguratorContext'
 import { FloorplanScene } from './2D/FloorplanScene'
 
 
@@ -15,6 +15,7 @@ function App() {
   const { i18n } = useTranslation();
 
   const showFloorplan = true;
+  const { rectangular, setRectangular } = useConfiguratorContext();
 
   useEffect(() => {
     const lng = navigator.language;
@@ -26,8 +27,8 @@ function App() {
       <Sidebar />
       <main>
         <div className="container">
-          {showFloorplan && <FloorplanScene />}
-          {!showFloorplan && <Scene />}
+          {rectangular && <Scene />}
+          {!rectangular && <FloorplanScene />}
         </div>
       </main>
     </div>
