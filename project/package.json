@@ -68,6 +68,7 @@
     "cypress": "^13.7.0",
     "i18next": "^23.10.0",
     "i18next-browser-languagedetector": "^7.2.0",
+    "jsonp": "^0.2.1",
     "papaparse": "^5.4.1",
     "path": "^0.12.7",
     "process": "^0.11.10",
