@@ -42,9 +42,10 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 10/04/24,14:00,20:00, Extern, 2d vloerplan features toevoegen,69, grote refactoring + lengte lijn die nu wordt getekend wordt getoond + stoppen met tekenen is mogelijk en automatisch als je in vragenlijst klikt + bugs opgelost
 10/04/24,20:30,23:30, Extern, 2d vloerplan features toevoegen,69, kamer kan gesloten worden + snapping naar laatste punt gebeurt automatisch
 11/04/24,12:00,13:30, Extern, 2d vloerplan features toevoegen,69, 
-11/04/24,14:30,18:30, Extern, 2d vloerplan features toevoegen,69, 
+11/04/24,15:00,18:30, Extern, 2d vloerplan features toevoegen,69, 
 11/04/24,20:00,23:20, Extern, 2d vloerplan features toevoegen,69,
 12/04/24,12:00,14:00, Extern, 2d vloerplan features opzoekwerk over orthogonal mode en dragging points,69,
-12/04/24,15:00,20:00, Extern, 2d vloerplan features toevoegen,69, orthogonal mode + gebruiksvriendelijkheid verbeteren
-12/04/24,20:30,23:59, Extern, 2d vloerplan features toevoegen,69, sukkelen om grid toe te voegen
+12/04/24,15:30,20:00, Extern, 2d vloerplan features toevoegen,69, orthogonal mode + gebruiksvriendelijkheid verbeteren
+12/04/24,21:00,23:59, Extern, 2d vloerplan features toevoegen,69, sukkelen om grid toe te voegen
 14/04/24,14:30,18:22, Extern, 2d vloerplan features toevoegen, 69, snap to grid + merge met main
+15/04/24,15:00,15:30, Extern, presentatie klant voorbereiden en main mergen op aparte branch, ,
