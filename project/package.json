@@ -17,14 +17,6 @@
   },
   "contributors": [
     {
-      "name": "Wiebe Vandendriessche",
-      "url": "https://gitlab.stud.atlantis.ugent.be/wievdndr",
-      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/393/avatar.png?width=400",
-      "info": [
-        "🔥"
-      ]
-    },
-    {
       "name": "Thomas Lonneville",
       "url": "https://gitlab.stud.atlantis.ugent.be/tlonnevi",
       "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/373/avatar.png?width=400",
@@ -36,6 +28,14 @@
       "name": "Xander Vanparys",
       "url": "https://gitlab.stud.atlantis.ugent.be/xvparys",
       "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/376/avatar.png?width=400",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Wiebe Vandendriessche",
+      "url": "https://gitlab.stud.atlantis.ugent.be/wievdndr",
+      "img": "https://gitlab.stud.atlantis.ugent.be/uploads/-/system/user/avatar/393/avatar.png?width=400",
       "info": [
         "🔥"
       ]
