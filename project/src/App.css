@@ -184,6 +184,15 @@ button:hover {
         background: #b02a37;
     }
 
+    .nav-menu{
+        background-color: #242424;
+        color: white;
+    }
+
+    .menu-bars{
+        color: white;
+    }
+
 }
 
 @media (min-width: 0px) {

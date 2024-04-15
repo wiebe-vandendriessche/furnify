@@ -5,7 +5,17 @@
     margin: 10px;
     color: #000000;
     cursor: pointer;
-    z-index: 1;
+    z-index: 999;
+}
+
+.menu-bars-closed {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin: 10px;
+    color: #000000;
+    cursor: pointer;
+    z-index: 100;
 }
 
 .nav-menu {
@@ -19,7 +29,7 @@
     top: 0;
     right: -100%;
     transition: 850ms;
-    z-index: 1;
+    z-index: 999;
     overflow-x: hidden;
     padding: 20px;
 }
@@ -75,12 +85,5 @@
 
 /*specific color changes in sidebar for darkmode*/
 @media (prefers-color-scheme: dark) {
-    .nav-menu{
-        background-color: #242424;
-        color: white;
-    }
 
-    .menu-bars{
-        color: white;
-    }
 }

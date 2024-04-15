@@ -1,7 +1,7 @@
 .editor-controls {
   position: absolute;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   top: 0;
   left: 0;
   margin: 10px;
@@ -69,6 +69,7 @@
 }
 
 .slider {
+  display: flex;
   appearance: none; /* removes browser-specific styling */
   width: 300px; /* width of slider */
   height: 25px; /* height of slider */

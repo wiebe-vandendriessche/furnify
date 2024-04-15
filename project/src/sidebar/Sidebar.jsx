@@ -46,7 +46,6 @@ export function Sidebar() {
 
 
     const showNextPart = () => {
-        console.log(obstacles)
         switch (part) {
             case 0:
                 return <Questionnaire_space stateId={stateId} setStateId={setStateId}/>
@@ -127,6 +126,7 @@ export function Sidebar() {
     };
 
 
+
     return (
         <>
             <IconContext.Provider value={{ color: "undefined" }}>
@@ -152,11 +152,12 @@ export function Sidebar() {
                     </div>
                 </nav>
                 <div onClick={showSidebar} className="menu-bars">
-                    {sidebar ? <AiOutlineClose size={40} /> : <AiOutlineMenu size={40} />}
+                    {sidebar ? <AiOutlineClose className={"menu-bars-closed"} size={40} /> : <AiOutlineMenu size={40} />}
                 </div>
+
             </IconContext.Provider>
         </>
     )
-}
+    }
 
-export default Sidebar;
+    export default Sidebar;
