@@ -32,6 +32,11 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 - **/public/textures/:** Bevat de textures gebruikt voor het 3D model.
 - **/public/models/:** Bevat de models gebruikt voor het 3D model.
 - **/src/:** Bevat de broncode van de applicatie.
+  - **/src/2D/:** Bevat alle componenten voor het 2D vloerplan.
+    - **/src/2D/components/:** Bevat alle basiscomponenten waaruit het vloerplan bestaat.
+    - **/src/2D/hooks/:** Bevat hulpfuncties voor de logica van het vloerplan.
+    - **/src/2D/FloorplanEditor.tsx:** Bevat de logica voor de werking van het vloerplan.
+    - **/src/2D/FloorplanScene.jsx:** Bevat de compositie van de 3D scene die wordt getoond 
   - **/src/3D/:** Bevat alle 3D componenten.
     - **/src/3D/Draggables/:** Bevat alle versleepbare 3D componenten.
     - **/src/3D/models/:** Bevat alle meshes van de models uit /public/models.
@@ -52,7 +57,6 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
   - **/src/main.jsx:** Bevat React app met alle contextproviders.
 - **/index.html** Bevat de html index.
 - **/README.md** Bevat de README, gegenereerd door blueprint.md.
-**Config:**
 - **/blueprint.md** Genereerd de README.
 - **/cypress.config.cjs** Configuratie van testen.
 - **/package.json** Packages.
