@@ -11,7 +11,7 @@ export function SliderComponent({ gridSize, setgridSize }) {
   };
 
   return (
-    <div style={{display: 'flex', flexDirection: 'row', margin: '0px 0px 0px 10px'}}>
+    <div style={{display: 'flex', flexWrap: 'wrap', margin: '0px 0px 0px 10px'}}>
       <input
         className="slider"
         type="range"
