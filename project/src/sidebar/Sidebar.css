@@ -85,5 +85,13 @@
 
 /*specific color changes in sidebar for darkmode*/
 @media (prefers-color-scheme: dark) {
+    .nav-menu{
+        background-color: #242424;
+        color: white;
+    }
+
+    .menu-bars{
+        color: white;
+    }
 
 }
