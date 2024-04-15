@@ -152,7 +152,7 @@ export function Sidebar() {
                     </div>
                 </nav>
                 <div onClick={showSidebar} className="menu-bars">
-                    {sidebar ? <AiOutlineClose className={"menu-bars-closed"} size={40} /> : <AiOutlineMenu size={40} />}
+                    {sidebar ? <AiOutlineClose size={40} /> : <AiOutlineMenu size={40} />}
                 </div>
 
             </IconContext.Provider>
