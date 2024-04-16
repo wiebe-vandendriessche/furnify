@@ -6,6 +6,7 @@ let modules: Module[] = []
 export const check = (val: any) => {
     let func = val.functionalities
     let dim = val.dimensions
+    console.log("ALGORITHM: ")
     console.log(val.functionalities)
 
     if (modules.length == 0) {
@@ -14,6 +15,7 @@ export const check = (val: any) => {
 
     //check if the exact combination is possible
     let result_type: Module[] = [];
+    console.log("ALGORITHM: ")
     console.log(modules)
     modules.forEach(mod => {
         if (mod.type(func.bed, func.office_space, func.sofa, func.storage_space)) {
@@ -21,14 +23,14 @@ export const check = (val: any) => {
         }
     }) 
     if(result_type.length == 0){
-        console.log("combination is not possible, looking for a softer one")
+        console.log("ALGORITHM: " + "combination is not possible, looking for a softer one")
         modules.forEach(mod => {
             if (mod.softer_type(func.bed, func.office_space, func.sofa, func.storage_space)) {
                 result_type.push(mod)
             }
         })
         if( result_type.length == 0){
-            console.log("softer combinations not found, please change the demands")
+            console.log("ALGORITHM: " + "softer combinations not found, please change the demands")
             return
         }
     }
@@ -42,17 +44,18 @@ export const check = (val: any) => {
         }
     })
     if( result_size.length == 0){
-        console.log("Room is not big enough for the combination")
+        console.log("ALGORITHM: " + "Room is not big enough for the combination")
     }
+    console.log("ALGORITHM: ")
     console.log(result_size)
 }
 
 const get_modules = () => {
     try {
         const parsedData = parseCsvData();
-        console.log(parsedData);
         parsedData.then(e => e.forEach(ev => modules.push(new Module(ev))))
     } catch (error) {
+        console.log("ALGORITHM: ")
         console.error('Error parsing CSV:', error);
     }
 }
