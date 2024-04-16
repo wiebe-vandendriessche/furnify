@@ -35,6 +35,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     }, [maxX, maxZ, position]);
 
+
     const [events, active, hovered] = useDrag(onDrag)
 
     useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered])
