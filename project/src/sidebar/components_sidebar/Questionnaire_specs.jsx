@@ -29,32 +29,6 @@ export function Questionnaire_spec() {
     return (
         <div className="m-2">
             <Form>
-                <div className="mb-4">
-                    <FormGroup>
-                        <div className={"mb-3"}><h5 data-testid={"question-specs-preferences"}>{t('questionnaire_specs.q_preferences')}</h5></div>
-                        <div className={"m-1"}>
-                            <ButtonGroup>
-                                <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="layout"
-                                              onChange={changeSpecs}
-                                              data-testid={"btn-specs-preferences-wall"}
-                                              checked={"wall" === specs.layout}>
-                                    {t('questionnaire_specs.preferences.wall')}
-                                </ToggleButton>
-                                <ToggleButton variant={"danger"} type="radio" id="partition" value={"partition"}
-                                              name="layout"
-                                              data-testid={"btn-specs-preferences-partition_wall"}
-                                              onChange={changeSpecs} checked={"partition" === specs.layout}>
-                                    {t('questionnaire_specs.preferences.partition_wall')}
-                                </ToggleButton>
-                                <ToggleButton variant={"danger"} type="radio" id="middle" name="layout" value={"middle"}
-                                              data-testid={"btn-specs-preferences-middle_wall"}
-                                              onChange={changeSpecs} checked={"middle" === specs.layout}>
-                                    {t('questionnaire_specs.preferences.in_the_middle_of_space')}
-                                </ToggleButton>
-                            </ButtonGroup>
-                        </div>
-                    </FormGroup>
-                </div>
                 <div className={"d-inline-flex mb-4"}>
                     <FormGroup>
                         <div className={"mb-3"}><h5 data-testid={"question-specs-materials"}>{t('questionnaire_specs.q_materials')}</h5></div>
