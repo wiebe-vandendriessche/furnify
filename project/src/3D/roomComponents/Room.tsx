@@ -71,14 +71,12 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
     //  camera.lookAt(new THREE.Vector3(0, height / 2, 0));
   });
 
-  const renderFixValue = 0.001;
-
   return (
     <group ref={roomRef}>
       <WallWithWindow
-        width={width + renderFixValue}
-        height={height + renderFixValue}
-        depth={wallThickness + renderFixValue}
+        width={width}
+        height={height}
+        depth={wallThickness}
         position={[0, height / 2, -depth / 2 + wallThickness / 2]}
         visible={backWallVisible}
         windows={windows.filter(window => window.windowWall === "back")}
@@ -87,9 +85,9 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         wall={"back"}
       />
       <WallWithWindow
-        width={width + renderFixValue}
-        height={height + renderFixValue}
-        depth={wallThickness + renderFixValue}
+        width={width}
+        height={height}
+        depth={wallThickness}
         position={[0, height / 2, depth / 2 - wallThickness / 2]}
         visible={frontWallVisible}
         windows={windows.filter(window => window.windowWall === "front")}
