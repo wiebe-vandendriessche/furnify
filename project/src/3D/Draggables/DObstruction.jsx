@@ -19,6 +19,9 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, c = new 
         pos.current = [newX, pos.current[1], newZ];
     }, [maxX2, maxZ2, dimensions, clamp]);
 
+
+    //--make sure object is never outside boundary--
+
     const updatePosition = useCallback(() => {
         const [x, y, z] = pos.current;
         let newX = clamp(x, -maxX2 + (dimensions[0] / 2) + 0.3, maxX2 - (dimensions[0] / 2) - 0.3);
@@ -27,12 +30,15 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, c = new 
     }, [dimensions, maxX2, maxZ2, clamp]);
 
     useEffect(() => {
-        updatePosition(); // Initial position update
+        updatePosition();
     }, [dimensions, updatePosition]);
+
+    //----------------------------------------------
+
 
     const [events, active, hovered] = useDrag(onDrag)
 
-    // Update positionheight whenever dimensions height changes
+    //--make sure positions changes according to given height
     useEffect(() => {
         pos.current[1] = dimensions[1] / 2; // Set positionheight to half of dimensions height
     }, [dimensions]);
