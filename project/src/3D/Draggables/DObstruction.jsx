@@ -14,31 +14,25 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, c = new 
 
     const onDrag = useCallback(({ x, z }) => {
         // Apply boundary checks
-        let newX = clamp(x, -maxX2 + (dimensions[0] / 2) + 0.3, maxX2 - (dimensions[0] / 2) - 0.3);
-        let newZ = clamp(z, -maxZ2 + (dimensions[2] / 2) + 0.3, maxZ2 - (dimensions[2] / 2) - 0.3);
+        let newX;
+        if (x >= 0) {
+            newX = Math.min(maxX2 - (dimensions[0]/2) - 0.3 , x);
+        } else {
+            newX = Math.max(-maxX2 + (dimensions[0]/2) + 0.3 , x);
+        }
+
+        let newZ;
+        if (z >= 0) {
+            newZ = Math.min(maxZ2 - (dimensions[2]/2) - 0.3, z);
+        } else {
+            newZ = Math.max(-maxZ2 + (dimensions[2]/2) + 0.3, z);
+        }
         pos.current = [newX, pos.current[1], newZ];
-    }, [maxX2, maxZ2, dimensions, clamp]);
-
-
-    //--make sure object is never outside boundary--
-
-    const updatePosition = useCallback(() => {
-        const [x, y, z] = pos.current;
-        let newX = clamp(x, -maxX2 + (dimensions[0] / 2) + 0.3, maxX2 - (dimensions[0] / 2) - 0.3);
-        let newZ = clamp(z, -maxZ2 + (dimensions[2] / 2) + 0.3, maxZ2 - (dimensions[2] / 2) - 0.3);
-        pos.current = [newX, y, newZ];
-    }, [dimensions, maxX2, maxZ2, clamp]);
-
-    useEffect(() => {
-        updatePosition();
-    }, [dimensions, updatePosition]);
-
-    //----------------------------------------------
-
+    }, [maxX, maxZ, dimensions]);
 
     const [events, active, hovered] = useDrag(onDrag)
 
-    //--make sure positions changes according to given height
+    // Update positionheight whenever dimensions height changes
     useEffect(() => {
         pos.current[1] = dimensions[1] / 2; // Set positionheight to half of dimensions height
     }, [dimensions]);
