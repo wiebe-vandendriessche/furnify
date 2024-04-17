@@ -35,7 +35,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
         setTimeout(() => {
             setSelectedWall(null);
             setIsButtonDisabled(false);
-            console.log("back to zero");
         }, 1500); // 1000 milliseconds = 1 second
     }
 
@@ -43,19 +42,11 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
     function handleKeyPress(event) {
         //prevent use of negative values
         if (event.charCode == 45) {
-            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
         return true;
     }
-
-    console.log(obstId);
-    console.log(windowWall)
-    console.log(windowXpos);
-    console.log(windowYpos);
-    console.log(type)
-
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}

@@ -42,7 +42,6 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
     function handleKeyPress(event) {
         //prevent use of negative values
         if (event.charCode == 45) {
-            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
