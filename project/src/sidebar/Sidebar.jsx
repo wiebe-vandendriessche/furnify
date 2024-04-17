@@ -54,7 +54,7 @@ export function Sidebar() {
             case 2:
                 return <Questionnaire_specs />
             case 3:
-                check(value)
+                check(value, varia)
                 return <Contact/>
             case 4:
                 return <p>Nothing to see here</p>

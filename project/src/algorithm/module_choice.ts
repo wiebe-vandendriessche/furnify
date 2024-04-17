@@ -3,9 +3,10 @@ import { parseCsvData } from "./read_file_csv";
 const MARGE = 1
 let modules: Module[] = []
 
-export const check = (val: any) => {
+export const check = (val: any, varia: any) => {
     let func = val.functionalities
     let dim = val.dimensions
+    
     console.log("ALGORITHM: ")
     console.log(val.functionalities)
 
@@ -13,10 +14,15 @@ export const check = (val: any) => {
         get_modules();
     }
 
+    if(func.bed == true){
+        modules.forEach(mod => { mod.width_options = varia.size}) 
+    }
+
     //check if the exact combination is possible
     let result_type: Module[] = [];
     console.log("ALGORITHM: ")
     console.log(modules)
+    
     modules.forEach(mod => {
         if (mod.type(func.bed, func.office_space, func.sofa, func.storage_space)) {
             result_type.push(mod)
@@ -34,6 +40,7 @@ export const check = (val: any) => {
             return
         }
     }
+    
     
 
     // check size is correct
