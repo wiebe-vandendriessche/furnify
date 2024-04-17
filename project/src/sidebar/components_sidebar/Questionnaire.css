@@ -13,7 +13,7 @@ input{
     z-index: 1;
 }
 
-.btn-group > .btn-check:checked:not(:hover) {
+.btn-group > .btn-check:checked:not(:hover), .btn-group > .btn-check:checked:not(:hover) + .btn {
     z-index: 0;
 }
 .fa-rectangle-xmark{

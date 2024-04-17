@@ -23,7 +23,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
     function handleKeyPress(event) {
         //prevent use of negative values
         if (event.charCode == 45) {
-            console.log("negative value detected");
             event.preventDefault();
             return false;
         }
