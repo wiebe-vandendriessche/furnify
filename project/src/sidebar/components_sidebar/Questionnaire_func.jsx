@@ -52,8 +52,8 @@ export function Questionnaire_functional() {
                                     
                                     <div className="mb-3" data-testid={"div-func-options-mattress"}>
                                     
-                                        <h8 data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</h8>
-                                    
+                                        <span data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</span>
+
                                         <ButtonGroup defaultValue={varia.mattress ?? "none"}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
@@ -82,10 +82,10 @@ export function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
-                                    
+
                                     <div className="mb-3" data-testid={"div-func-options-size"}>
-                                    
-                                        <h8 data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</h8>
+
+                                        <span data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</span>
                                     
                                         <ButtonGroup defaultValue={varia.size ?? "140"}>
 
