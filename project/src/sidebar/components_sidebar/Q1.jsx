@@ -65,7 +65,7 @@ export function Q1({stateId, setStateId}) {
     }
 
     //Uses reactcontext
-    const {obstacles, setObstacles} = useConfiguratorContext();
+    const {dimensions, obstacles, setObstacles} = useConfiguratorContext();
 
     //Changes values of dimensions in context
 
@@ -240,6 +240,7 @@ export function Q1({stateId, setStateId}) {
                                         changeWindow={changeWindow}
                                         deleteObst={deleteWindowObstacle}
                                         windowWall={item.windowWall}
+                                        maxHeight={dimensions.height}
                                     />;
                                 } else if (item.type === "door") {
                                     console.log("OPENING");
@@ -256,6 +257,7 @@ export function Q1({stateId, setStateId}) {
                                         changeOpening={changeOpeningDoor}
                                         deleteObst={deleteDoorObstacle}
                                         doorWall={item.obstacleWall}
+                                        maxHeight={dimensions.height}
                                     />;
                                 } else {
                                     return <Obstruction
@@ -268,6 +270,7 @@ export function Q1({stateId, setStateId}) {
                                         changeObst={changeObstacle}
                                         deleteObst={deleteObstacle}
                                         obstLength={item.obstLength}
+                                        maxHeight={dimensions.height}
                                     />;
                                 }
                             })}

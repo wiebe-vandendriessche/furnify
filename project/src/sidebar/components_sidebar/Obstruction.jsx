@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength}) {
+function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight}) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -20,14 +20,20 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
         setShow2(!showButton2)
     };
 
-    function handleKeyPress(event) {
-        //prevent use of negative values
-        if (event.charCode == 45) {
-            console.log("negative value detected");
-            event.preventDefault();
-            return false;
+    function handleInput(event) {
+
+        if(!Number.isNaN(event.key) && event.target.name=="height"){
+            if(event.target.value>maxHeight*100.0){
+                event.preventDefault();
+            }
         }
-        return true;
+    }
+
+    function negativeValues(event){
+        //prevent use of negative values
+        if (event.key=="-") {
+            event.preventDefault();
+        }
     }
 
     console.log(type)
@@ -69,8 +75,12 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={1}
                                                   data-testid={"input-obst-"+type+"-length"}
-                                                  defaultValue={obstLength} onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}
+                                                  value={obstLength}
+                                                  onChange={(e) => {
+                                                      handleInput(e)
+                                                      changeObst(e)
+                                                  }}
+                                                  onKeyPress={negativeValues}
                                                   id={"length"+obstId}
                                     />
                                 </FloatingLabel>
@@ -80,10 +90,13 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
+                                    <Form.Control type="number" name={"width"} min={0} step={1} value={width}
                                                   data-testid={"input-obst-"+type+"-width"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}
+                                                  onChange={(e) => {
+                                                      handleInput(e)
+                                                      changeObst(e)
+                                                  }}
+                                                  onKeyPress={negativeValues}
                                                   id={"width"+obstId}
                                     />
 
@@ -95,10 +108,13 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} value={height}
                                                   data-testid={"input-obst-"+type+"-height"}
-                                                  onChange={(e) => changeObst(e)}
-                                                  onKeyPress={handleKeyPress}
+                                                  onChange={(e) => {
+                                                      handleInput(e)
+                                                      changeObst(e)
+                                                  }}
+                                                  onKeyPress={negativeValues}
                                                   id={"height"+obstId}
                                     />
                                 </FloatingLabel>

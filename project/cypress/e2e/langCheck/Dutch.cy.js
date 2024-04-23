@@ -35,7 +35,26 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
         checkSpace(space);
     });
 
-
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+            obstructions: { window:"Raam", door:"Deur", radiator:"Radiator", walloutlet:"Stopcontact",
+                switch:"Schakelaar", sloping_Wall:"Schuine wand", other:"Andere",
+                q_door:{
+                    opening_door:"Hoe opent de deur?",
+                    inside_left:"Binnen in de ruimte, naar links",
+                    inside_right:"Binnen in de ruimte, naar rechts",
+                    outside:"Buiten de ruimte"
+                },
+                q_window:{
+                    opening_window:"Kan het raam naar binnen openen?",
+                    yes:"ja",
+                    no:"nee"
+                }
+            }
+        }
+        checkObstacles(obst);
+    } )
 
     it("Sidebar functional", ()=>{
         let functional={  q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
