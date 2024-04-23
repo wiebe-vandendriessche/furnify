@@ -15,6 +15,7 @@ import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
 import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
+import Q1 from "./components_sidebar/Q1.jsx";
 
 
 
@@ -36,7 +37,7 @@ export function Sidebar() {
         return part == 0;
     }
     const showNext = () => {
-        return part == 3;
+        return part == 4;
     }
     const { contact } = useContactContext();
 
@@ -48,15 +49,17 @@ export function Sidebar() {
     const showNextPart = () => {
         switch (part) {
             case 0:
-                return <Questionnaire_space stateId={stateId} setStateId={setStateId}/>
+                return <Questionnaire_space />
             case 1:
-                return <Questionnaire_func />
+                return <Q1 stateId={stateId} setStateId={setStateId}/>
             case 2:
-                return <Questionnaire_specs />
+                return <Questionnaire_func />
             case 3:
+                return <Questionnaire_specs />
+            case 4:
                 check(value)
                 return <Contact/>
-            case 4:
+            case 5:
                 return <p>Nothing to see here</p>
             default:
                 return <p>This is some default text</p>

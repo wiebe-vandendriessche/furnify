@@ -6,26 +6,35 @@ export function checkSpace(space){
     cy.get('[data-testid="label-space-room-rectangular-length"]').should('include.text', space.dimLength);
     cy.get('[data-testid="label-space-room-rectangular-width"]').should('include.text', space.dimWidth);
     cy.get('[data-testid="label-space-room-rectangular-height"]').should('include.text', space.dimHeight);
-    cy.get('[data-testid="question-space-aspects"]').should('include.text', space.q_aspects);
-    cy.get('[data-testid="btn-space-aspect-window"]').should('include.text', space.obstructions.window).click();
-    cy.get('[data-testid="btn-space-aspect-door"]').should('include.text', space.obstructions.door).click();
-    cy.get('[data-testid="btn-space-aspect-other"]').should('include.text', space.obstructions.other);
-    cy.get('[data-testid="btn-obstacle-expand-window"]').should('include.text', space.obstructions.window).click();
-    cy.get('[data-testid="question-obstacle-window-opening"]').should('include.text', space.obstructions.q_window.opening_window);
+    cy.get('[data-testid="question-func-space"]').should('include.text', space.q_space);
+    cy.get('[data-testid="btn-func-room-guestroom"]').should('include.text', space.space.guest_room);
+    cy.get('[data-testid="btn-func-room-living_room"]').should('include.text', space.space.living_room);
+    cy.get('[data-testid="btn-func-room-bedroom"]').should('include.text', space.space.bedroom);
+    cy.get('[data-testid="question-specs-preferences"]').should('include.text', space.q_preferences);
+    cy.get('[data-testid="btn-specs-preferences-wall"]').should('include.text', space.preferences.wall);
+    cy.get('[data-testid="btn-specs-preferences-partition_wall"]').should('include.text', space.preferences.partition_wall);
+    cy.get('[data-testid="btn-specs-preferences-middle_wall"]').should('include.text', space.preferences.in_the_middle_of_space);
+}
+
+export function checkObstacles(obst){
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
+    cy.get('[data-testid="question-space-aspects"]').should('include.text', obst.q_aspects);
+    cy.get('[data-testid="btn-space-aspect-window"]').should('include.text', obst.obstructions.window).click();
+    cy.get('[data-testid="btn-space-aspect-door"]').should('include.text', obst.obstructions.door).click();
+    cy.get('[data-testid="btn-space-aspect-other"]').should('include.text', obst.obstructions.other);
+    cy.get('[data-testid="btn-obstacle-expand-window"]').should('include.text', obst.obstructions.window).click();
+    cy.get('[data-testid="question-obstacle-window-opening"]').should('include.text', obst.obstructions.q_window.opening_window);
     cy.get('[data-testid="btn-obstacle-delete-window"]').click();
     cy.get('[data-testid="btn-obstacle-expand-window"]').should('not.exist');
-    cy.get('[data-testid="btn-obstacle-expand-door"]').should('include.text', space.obstructions.door).click();
-    cy.get('[data-testid="question-obstacle-door-opening"]').should('include.text', space.obstructions.q_door.opening_door);
-    //cy.get('[data-testid=""]').should('include.text', space.add_aspect);
+    cy.get('[data-testid="btn-obstacle-expand-door"]').should('include.text', obst.obstructions.door).click();
+    cy.get('[data-testid="question-obstacle-door-opening"]').should('include.text', obst.obstructions.q_door.opening_door);
+
 }
 
 export function checkFunc(func){
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
-    cy.get('[data-testid="question-func-space"]').should('include.text', func.q_space);
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="question-func-function"]').should('include.text', func.q_function);
-    cy.get('[data-testid="btn-func-room-guestroom"]').should('include.text', func.space.guest_room);
-    cy.get('[data-testid="btn-func-room-living_room"]').should('include.text', func.space.living_room);
-    cy.get('[data-testid="btn-func-room-bedroom"]').should('include.text', func.space.bedroom);
     cy.get('[data-testid="btn-func-bed"]').should('include.text', func.functions.bed).click();
     cy.get('[data-testid="btn-func-office_space"]').should('include.text', func.functions.office_space);
     cy.get('[data-testid="btn-func-sofa"]').should('include.text', func.functions.sofa);
@@ -41,10 +50,7 @@ export function checkFunc(func){
 export function checkSpecs(specs){
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
-    cy.get('[data-testid="question-specs-preferences"]').should('include.text', specs.q_preferences);
-    cy.get('[data-testid="btn-specs-preferences-wall"]').should('include.text', specs.preferences.wall);
-    cy.get('[data-testid="btn-specs-preferences-partition_wall"]').should('include.text', specs.preferences.partition_wall);
-    cy.get('[data-testid="btn-specs-preferences-middle_wall"]').should('include.text', specs.preferences.in_the_middle_of_space);
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="question-specs-materials"]').should('include.text', specs.q_materials);
     cy.get('[data-testid="btn-specs-material-birch"]').should('include.text', specs.materials.birch);
     cy.get('[data-testid="btn-specs-material-oak"]').should('include.text', specs.materials.oak);
@@ -55,6 +61,7 @@ export function checkSpecs(specs){
 }
 
 export function checkContact(contact){
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();

@@ -19,8 +19,7 @@ describe('First test',()=>{
 
     //use of data-testid
     cy.get('[data-testid="btn-nav-sidebar-next"]');
-    //Multiple aspect buttons
-    cy.get('[data-testid="btn-space-aspect-window"]');
+
   });
 
   it('Clicking sidebar should close it', ()=>{
@@ -41,6 +40,13 @@ describe('First test',()=>{
     //  selecting rectangular form
     cy.get('[data-testid="btn-space-room-rectangular"]').click();
     passRoomDimensions(inputValues);
+    cy.get('[data-testid="btn-specs-preferences-partition_wall"]').click();
+    cy.get('input#partition').should("be.checked");
+      //Clicking on button guestroom
+    cy.get('input#guestroom').should("not.be.checked");
+    cy.get('[data-testid="btn-func-room-guestroom"]').should("be.visible").click();
+    cy.get('input#guestroom').should("be.checked");
+
     // navigating to next part of questionnaire
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     // and back
@@ -49,16 +55,21 @@ describe('First test',()=>{
     cy.get('[data-testid="input-space-room-rectangular-length"]').should('have.value', inputValues[0]);
     cy.get('[data-testid="input-space-room-rectangular-width"]').should('have.value', inputValues[1]);
     cy.get('[data-testid="input-space-room-rectangular-height"]').should('have.value', inputValues[2]);
+    cy.get('input#guestroom').should("be.checked");
+    cy.get('input#partition').should("be.checked");
+
   })
 
   it("Adding and deleting obstructions", ()=>{
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
+    //Multiple aspect buttons
+    cy.get('[data-testid="btn-space-aspect-window"]');
     let amount=5;
     //adding a certain amount of obstructions
     for(let i=0; i<amount; i++){
       cy.get('[data-testid="btn-space-aspect-window"]').click();
     }
     cy.get('[data-testid="btn-space-aspect-door"]').click();
-
     //amount of window-obstructions should equal amount of obstructions added
     cy.get('[data-testid="btn-obstacle-expand-window"]').should("have.length", amount);
     //should find door-obstruction and scroll it into view
@@ -76,6 +87,7 @@ describe('First test',()=>{
 
   });
    it("Adding obstructions, changing data of those obstruction and making sure that the data didn't disappear", ()=>{
+      cy.get('[data-testid="btn-nav-sidebar-next"]').click();
       let windowParams={type: "window", Width: 1.2, Height: 0.5};
       let doorParams={type: "window", Width: 1.2, Height: 0.5};
       //making sure button to add a window and a door is visible
@@ -101,17 +113,13 @@ describe('First test',()=>{
       cy.get('[data-testid="input-obst-'+doorParams.type+'-width"').should('have.value', doorParams.Width);
       cy.get('[data-testid="input-obst-'+doorParams.type+'-height"').should('have.value', doorParams.Height);
 
-
    });
 
    it("Questionnaire functional- selecting room and needed functions", ()=>{
 
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
+       cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
 
-       //Clicking on button guestroom
-       cy.get('input#guestroom').should("not.be.checked");
-       cy.get('[data-testid="btn-func-room-guestroom"]').should("be.visible").click();
-       cy.get('input#guestroom').should("be.checked");
 
        //Matress options should not be visible when bed isn't clicked
        cy.get('[data-testid="div-func-options-mattress"]').should("not.be.visible");
@@ -125,17 +133,15 @@ describe('First test',()=>{
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-previous"]').should("be.visible").click();
        cy.get('input#medium').should("be.checked");
-       cy.get('input#guestroom').should("be.checked");
    });
 
    it("Questionnaire specifications- selecting options and inserting text into text-area", ()=>{
        let text="This is a test"
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
+       cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
 
        //Clicking on preferred options and inserting text
-       cy.get('[data-testid="btn-specs-preferences-partition_wall"]').click();
-       cy.get('input#partition').should("be.checked");
        cy.get('[data-testid="btn-specs-material-oak"]').click();
        cy.get('input#matOak').should("be.checked");
        cy.get('input#matBirch').should("not.be.checked");
@@ -160,6 +166,7 @@ describe('First test',()=>{
        let contact={firstname: "Test_Firstname", lastname: "Test_Lastname", email: "firstname.lastname@gmail.com",
            wrongPhoneInput1: "123 45 6ZEVEN7 890123", wrongPhoneInput2: "1234567890123", phoneInput: "123456789"}
 
+       cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();

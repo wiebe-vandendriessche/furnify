@@ -1,4 +1,4 @@
-import {checkContact, checkFunc, checkSpace, checkSpecs} from "./Languagecheck.js";
+import {checkContact, checkFunc, checkSpace, checkSpecs, checkObstacles} from "./Languagecheck.js";
 
 describe("Checking text in Italian is correctly rendered", ()=>{
     beforeEach('visit application in Dutch', ()=>{
@@ -16,7 +16,25 @@ describe("Checking text in Italian is correctly rendered", ()=>{
     it("Sidebar space", ()=>{
         let space={
             q_dimensions: "Quali sono le dimensioni dello spazio abitativo?", rectangular: "Rettangolare", dimLength: "Lunghezza",
-            dimWidth: "Larghezza", dimHeight: "Altezza", other: "Altro", q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo.",
+            dimWidth: "Larghezza", dimHeight: "Altezza", other: "Altro",
+            q_space: "Quale spazio abitativo desideri ottimizzare?",
+            space: {
+                guest_room: "Stanza degli ospiti",
+                living_room: "Soggiorno",
+                bedroom: "Camera da letto",
+            },
+            q_preferences: "Hai preferenze specifiche per la disposizione del tuo spazio abitativo?",
+            preferences: {
+                wall: "Muro",
+                partition_wall: "Muro divisorio",
+                in_the_middle_of_space: "In mezzo allo spazio",
+            }}
+        checkSpace(space);
+    });
+
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo.",
             obstructions: { window: "Finestra", door: "Porta", radiator: "Termosifone", walloutlet: "Presa di corrente a parete", switch: "Interruttore",
                 sloping_Wall: "Muro inclinato", other: "Altro",
                 q_door:{
@@ -30,18 +48,12 @@ describe("Checking text in Italian is correctly rendered", ()=>{
                     yes:"si",
                     no:"no"
                 }
-            }}
-        checkSpace(space);
-    });
-
+            }
+        }
+        checkObstacles(obst);
+    } )
     it("Sidebar functional", ()=>{
         let functional={
-            q_space: "Quale spazio abitativo desideri ottimizzare?",
-            space: {
-                guest_room: "Stanza degli ospiti",
-                living_room: "Soggiorno",
-                bedroom: "Camera da letto",
-            },
             q_function: "Quali sono le caratteristiche più importanti di cui hai bisogno per sfruttare al meglio il tuo spazio abitativo?",
             functions: {
                 bed: "Letto",
@@ -62,12 +74,6 @@ describe("Checking text in Italian is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_preferences: "Hai preferenze specifiche per la disposizione del tuo spazio abitativo?",
-            preferences: {
-                wall: "Muro",
-                partition_wall: "Muro divisorio",
-                in_the_middle_of_space: "In mezzo allo spazio",
-            },
             q_materials: "Quali materiali preferisci per la finitura dei tuoi mobili modulari?",
             materials: {
                 white: "Bianco",

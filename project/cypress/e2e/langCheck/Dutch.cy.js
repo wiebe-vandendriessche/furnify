@@ -1,4 +1,4 @@
-import {checkContact, checkFunc, checkSpace, checkSpecs} from "./Languagecheck.js";
+import {checkContact, checkFunc, checkSpace, checkSpecs, checkObstacles} from "./Languagecheck.js";
 
 describe("Checking text in Dutch is correctly rendered", ()=>{
     beforeEach('visit application in Dutch', ()=>{
@@ -14,8 +14,30 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
         });  });
 
     it("Sidebar space", ()=>{
+
+
         let space={ q_dimensions: "Wat zijn de afmetingen van de woonruimte?", rectangular: "Rechthoekig", dimLength: "Lengte", dimWidth: "Breedte",
-                dimHeight: "Hoogte", other: "Anders", q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+                dimHeight: "Hoogte", other: "Anders",
+            q_space:"Welke woonruimte wenst u te optimaliseren?",
+            space:{
+                guest_room:"Logeerkamer",
+                living_room:"Woonkamer",
+                bedroom:"Slaapkamer",
+            },
+            q_preferences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
+            preferences:{
+                wall:"Muur",
+                partition_wall:"Scheidingswand",
+                in_the_middle_of_space:"Te midden van ruimte",
+            }
+
+        }
+        checkSpace(space);
+    });
+
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
             obstructions: { window:"Raam", door:"Deur", radiator:"Radiator", walloutlet:"Stopcontact",
                 switch:"Schakelaar", sloping_Wall:"Schuine wand", other:"Andere",
                 q_door:{
@@ -31,17 +53,11 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
                 }
             }
         }
-        checkSpace(space);
-    });
-
+        checkObstacles(obst);
+    } )
 
     it("Sidebar functional", ()=>{
-        let functional={ q_space:"Welke woonruimte wenst u te optimaliseren?",
-            space:{
-                guest_room:"Logeerkamer",
-                living_room:"Woonkamer",
-                bedroom:"Slaapkamer",
-            }, q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+        let functional={  q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
             functions:{
                 bed:"Bed",
                 office_space:"Bureauruimte",
@@ -61,12 +77,6 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_preferences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
-            preferences:{
-                wall:"Muur",
-                partition_wall:"Scheidingswand",
-                in_the_middle_of_space:"Te midden van ruimte",
-            },
             q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
             materials:{
                 color:"kleur",

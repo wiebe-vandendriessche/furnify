@@ -2,18 +2,15 @@ import "../../App.css"
 import {useEffect} from "react";
 import "./Questionnaire.css"
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
-import Obstruction from "./Obstruction.jsx";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import {useTranslation} from 'react-i18next'
-import {Col, FloatingLabel, Row, ToggleButton} from "react-bootstrap";
-import Window from "./Window.jsx";
-import Door from "./Door.jsx";
+import {Col, FloatingLabel, FormGroup, Row, ToggleButton} from "react-bootstrap";
+import {useVariaContext} from "../../contexts/VariaContext.jsx";
 
 
-export function Questionnaire_space({stateId, setStateId}) {
+export function Questionnaire_space() {
     //i18n
     const {t, i18n} = useTranslation();
     useEffect(() => {
@@ -21,154 +18,34 @@ export function Questionnaire_space({stateId, setStateId}) {
         i18n.changeLanguage(lng);
     }, [])
 
-    const sortObstacles = (list1, list2, list3) => {
-        //merge the lists
-        const allObsts = [...list1, ...list2, ...list3];
-        // sort the list according to id
-        allObsts.sort((a, b) => a.id - b.id);
-        return allObsts;
-    }
-
-    function createObstacle(valueType) {
-        switch (valueType) {
-            case "door":
-                return {
-                    type: valueType,
-                    width: 0,
-                    height: 0,
-                    id: stateId,
-                    opening_door: "right",
-                    obstacleWall: "front",
-                    doorXpos: 0
-                };
-            case "window":
-                return {
-                    type: valueType,
-                    width: 0,
-                    height: 0,
-                    id: stateId,
-                    windowWall: "front",
-                    inside_window: "no",
-                    windowXpos: 0,
-                    windowYpos: 0
-                };
-            default:
-                return {
-                    type: valueType,
-                    width: 0,
-                    height: 0,
-                    obstLength: 0,
-                    id: stateId,
-                };
-        }
-    }
 
     //Uses reactcontext
-    const {dimensions, setDimensions, obstacles, setObstacles, rectangular, setRectangular} = useConfiguratorContext();
+    const {dimensions, setDimensions, rectangular, setRectangular} = useConfiguratorContext();
 
     //Changes values of dimensions in context
     const changeDim = (event) => {
         setDimensions({...dimensions, [event.target.name]: event.target.value});
     }
 
-    const changeObstacle = (event) => {
-        setObstacles({
-            ...obstacles,
-            other: obstacles["other"].map((obstacle)=>obstacle.id==event.target.id.split("obst")[1]?{
-                    ...obstacle,
-                    [event.target.name]: event.target.value}:
-                obstacle)})
+    const {varia, setVaria} = useVariaContext();
+
+    const changeVaria = (event) => {
+        setVaria({...varia, [event.target.name]: [event.target.id]})
     }
 
+    const space = [
+        {name: t('questionnaire_func.space.guest_room'), id: "guestroom"},
+        {name: t('questionnaire_func.space.living_room'), id: "living_room"},
+        {name: t('questionnaire_func.space.bedroom'), id: "bedroom"},
+    ];
 
-    const changeDoor= (event)=>{
-        setObstacles({
-            ...obstacles,
-            door: obstacles["door"].map((obstacle)=> obstacle.id == event.target.id.split("door")[1]?{
-                ...obstacle,
-                [event.target.name]: event.target.value}:obstacle)
-        })
-    }
-    const changeWindow= (event)=>{
-        setObstacles({
-            ...obstacles,
-            window: obstacles["window"].map((obstacle)=> obstacle.id == event.target.id.split("window")[1]?{
-                ...obstacle,
-                [event.target.name]: event.target.value}:obstacle)
-        })
+    //Uses reactcontext
+    const {specs, setSpecs} = useConfiguratorContext();
+
+    const changeSpecs = (event) => {
+        setSpecs({...specs, [event.target.name]: event.target.value})
     }
 
-
-
-    //Opening door done separate, because it doesn't work otherwise
-    const changeOpeningDoor = (event) => {
-        let param=event.target.getAttribute("controlid").split("-");
-        setObstacles({
-            ...obstacles,
-            door: obstacles["door"].map((obstacle) => obstacle.id == param[2].split("door")[1] ? {
-                ...obstacle,
-                [param[1]]: param[0]
-            } : obstacle)
-        })
-
-    }
-    const changeOpeningWindow = (event) => {
-        let param=event.target.getAttribute("controlid").split("-");
-        setObstacles({
-            ...obstacles,
-            window: obstacles["window"].map((obstacle) => obstacle.id == param[2].split("window")[1] ? {
-                ...obstacle,
-                [param[1]]: param[0]
-            } : obstacle)
-        })
-
-    }
-
-    const deleteObstacle = (event) => {
-        event.preventDefault();
-        let obstacleIndex = event.currentTarget.id.split("obst")[1];
-        setObstacles((prevObstacles) => ({
-            ...prevObstacles,
-            other: prevObstacles.other.filter((obstacle) => obstacle.id != obstacleIndex)
-        }));
-    };
-
-    const deleteDoorObstacle = (event) => {
-        event.preventDefault();
-        let obstacleIndex = event.currentTarget.id.split("door")[1];
-        setObstacles((prevObstacles) => ({
-            ...prevObstacles,
-            door: prevObstacles.door.filter((obstacle) => obstacle.id != obstacleIndex)
-        }));
-    };
-    const deleteWindowObstacle = (event) => {
-        event.preventDefault();
-        let obstacleIndex = event.currentTarget.id.split("window")[1];
-        setObstacles((prevObstacles) => ({
-            ...prevObstacles,
-            window: prevObstacles.window.filter((obstacle) => obstacle.id != obstacleIndex)
-        }));
-    };
-
-    const addObstacles = (event) => {
-        setStateId(stateId + 1)
-        const valueType = event.currentTarget.getAttribute("value");
-        let obst=createObstacle(valueType);
-        if (obstacles[valueType].length>0) {
-            setObstacles({
-                ...obstacles, [valueType]: [...obstacles[valueType], obst]
-            });
-        }
-
-        else {
-            console.log("value: " + event.currentTarget.getAttribute("value"))
-            setObstacles({
-                ...obstacles, [valueType] : [obst]
-            });
-
-
-        }
-    }
 
 
     //prevent user from typing negative values
@@ -184,9 +61,37 @@ export function Questionnaire_space({stateId, setStateId}) {
     const changeForm = (bool) => {
         setRectangular(bool);
     }
+
+
     return (
         <div className={"m-2"}>
             <Form>
+                <div className="mb-4">
+                    <Form.Group>
+                        <div className={"mb-3"}>
+                            <h5 data-testid={"question-func-space"}>{t('questionnaire_func.q_space')}</h5>
+                        </div>
+                        <div className={"m-1"}>
+                            <ButtonGroup>
+                                {space.map((space) => (
+                                    <ToggleButton
+                                        data-testid={"btn-func-room-" + space.id}
+                                        key={space.id}
+                                        id={space.id}
+                                        name={"room"}
+                                        type="radio"
+                                        variant="danger"
+                                        value={space.name}
+                                        onChange={changeVaria}
+                                        checked={varia.room == space.id}>
+                                        {space.name}
+                                    </ToggleButton>
+                                ))}
+                            </ButtonGroup>
+                        </div>
+                    </Form.Group>
+                </div>
+
                 <div className={"mb-4"}>
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -226,7 +131,7 @@ export function Questionnaire_space({stateId, setStateId}) {
                                             <Col key={key}>
                                                 <FloatingLabel
                                                     controlid={"rectangular" + key}
-                                                    label={t('questionnaire_space.' + key) +' (m)'}
+                                                    label={t('questionnaire_space.' + key) + ' (m)'}
                                                     className="mb-4"
                                                     data-testid={"label-space-room-rectangular-" + key}
                                                 >
@@ -246,73 +151,34 @@ export function Questionnaire_space({stateId, setStateId}) {
                         </div>
                     </Form.Group>
                 </div>
-                <Form.Group>
-                    <div className={"mb-3"}>
-                        <h5 data-testid={"question-space-aspects"}>{t('questionnaire_space.q_aspects')}</h5>
-                    </div>
-                    <div className={"m-1"}>
-                        <Button data-testid={"btn-space-aspect-window"} onClick={addObstacles} variant="danger"
-                                value={"window"}>
-                            {t('obstructions.window')}
-                        </Button>
-                        <Button data-testid={"btn-space-aspect-door"} onClick={addObstacles} variant="danger"
-                                value={"door"}>
-                            {t('obstructions.door')}
-                        </Button>
-                        <Button data-testid={"btn-space-aspect-other"} onClick={addObstacles} variant="danger"
-                                value={"other"}>
-                            {t('obstructions.other')}
-                        </Button>
-                        <div className={"aspect"}>
-                            {sortObstacles(obstacles["window"], obstacles["door"], obstacles["other"]).map(item => {
-                                if (item.type === "window") {
-                                    return <Window
-                                        obstId={"window" + item.id}
-                                        type={item.type}
-                                        width={item.width}
-                                        height={item.height}
-                                        insideWindow={item.inside_window}
-                                        key={"obst" + item.id}
-                                        windowXpos={item.windowXpos}
-                                        windowYpos={item.windowYpos}
-                                        changeOpening={changeOpeningWindow}
-                                        changeWindow={changeWindow}
-                                        deleteObst={deleteWindowObstacle}
-                                        windowWall={item.windowWall}
-                                    />;
-                                } else if (item.type === "door") {
-                                    return <Door
-                                        obstId={"door" + item.id}
-                                        type={item.type}
-                                        width={item.width}
-                                        height={item.height}
-                                        openingDoor={item.opening_door}
-                                        key={"obst" + item.id}
-                                        doorXpos={item.doorXpos}
-                                        changeDoor={changeDoor}
-                                        changeOpening={changeOpeningDoor}
-                                        deleteObst={deleteDoorObstacle}
-                                        doorWall={item.obstacleWall}
-                                    />;
-                                } else {
-                                    return <Obstruction
-                                        obstId={"obst" + item.id}
-                                        type={item.type}
-                                        length={item.obstLength}
-                                        width={item.width}
-                                        height={item.height}
-                                        key={"obst" + item.id}
-                                        changeObst={changeObstacle}
-                                        deleteObst={deleteObstacle}
-                                        obstLength={item.obstLength}
-                                    />;
-                                }
-                            })}
+                <div className="mb-4">
+                    <FormGroup>
+                        <div className={"mb-3"}><h5
+                            data-testid={"question-specs-preferences"}>{t('questionnaire_specs.q_preferences')}</h5>
                         </div>
-                    </div>
-
-                </Form.Group>
-
+                        <div className={"m-1"}>
+                            <ButtonGroup>
+                                <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="layout"
+                                              onChange={changeSpecs}
+                                              data-testid={"btn-specs-preferences-wall"}
+                                              checked={"wall" === specs.layout}>
+                                    {t('questionnaire_specs.preferences.wall')}
+                                </ToggleButton>
+                                <ToggleButton variant={"danger"} type="radio" id="partition" value={"partition"}
+                                              name="layout"
+                                              data-testid={"btn-specs-preferences-partition_wall"}
+                                              onChange={changeSpecs} checked={"partition" === specs.layout}>
+                                    {t('questionnaire_specs.preferences.partition_wall')}
+                                </ToggleButton>
+                                <ToggleButton variant={"danger"} type="radio" id="middle" name="layout" value={"middle"}
+                                              data-testid={"btn-specs-preferences-middle_wall"}
+                                              onChange={changeSpecs} checked={"middle" === specs.layout}>
+                                    {t('questionnaire_specs.preferences.in_the_middle_of_space')}
+                                </ToggleButton>
+                            </ButtonGroup>
+                        </div>
+                    </FormGroup>
+                </div>
             </Form>
         </div>
     )

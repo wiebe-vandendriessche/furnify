@@ -1,4 +1,4 @@
-import {checkContact, checkFunc, checkSpace, checkSpecs} from "./Languagecheck.js";
+import {checkContact, checkFunc, checkSpace, checkSpecs, checkObstacles} from "./Languagecheck.js";
 
 describe("Checking text in German is correctly rendered", ()=>{
     beforeEach('visit application in Dutch', ()=>{
@@ -20,7 +20,26 @@ describe("Checking text in German is correctly rendered", ()=>{
                 dimWidth: "Breite",
                 dimHeight: "Höhe",
                 other: "Andere",
-                q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten.",
+            q_space: "Welchen Wohnraum möchten Sie optimieren?",
+            space: {
+                guest_room: "Gästezimmer",
+                living_room: "Wohnzimmer",
+                bedroom: "Schlafzimmer",
+            },
+            q_preferences: "Haben Sie spezielle Vorlieben für die Gestaltung Ihres Wohnraums?",
+            preferences: {
+                wall: "Wand",
+                partition_wall: "Trennwand",
+                in_the_middle_of_space: "In der Mitte des Raums",
+            }
+        };
+
+        checkSpace(space);
+    });
+
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten.",
             obstructions: {
                 window: "Fenster",
                 door: "Tür",
@@ -40,20 +59,12 @@ describe("Checking text in German is correctly rendered", ()=>{
                     yes:"ja",
                     no:"nein"
                 }
-            }};
-
-        checkSpace(space);
-    });
-
-
+            }
+        }
+        checkObstacles(obst);
+    } )
     it("Sidebar functional", ()=>{
         let functional={
-            q_space: "Welchen Wohnraum möchten Sie optimieren?",
-            space: {
-                guest_room: "Gästezimmer",
-                living_room: "Wohnzimmer",
-                bedroom: "Schlafzimmer",
-            },
             q_function: "Welche sind die wichtigsten Funktionen, die Sie benötigen, um das Beste aus Ihrem Wohnraum zu machen?",
             functions: {
                 bed: "Bett",
@@ -74,12 +85,6 @@ describe("Checking text in German is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_preferences: "Haben Sie spezielle Vorlieben für die Gestaltung Ihres Wohnraums?",
-            preferences: {
-                wall: "Wand",
-                partition_wall: "Trennwand",
-                in_the_middle_of_space: "In der Mitte des Raums",
-            },
             q_materials: "Welche Materialien bevorzugen Sie zur Fertigstellung Ihrer modularen Möbel?",
             materials: {
                 white: "Weiß",
