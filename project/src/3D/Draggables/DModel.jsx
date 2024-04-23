@@ -16,35 +16,48 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const maxZ2 = maxZ / 2;
 
     const onDrag = useCallback(({ x, z }) => {
-        const newX = clamp(x, -maxX2 + 0.3, maxX2 - 2);
-        const newZ = clamp(z, -maxZ2 + 0.3, maxZ2 - 1.3);
+        // Calculate the distance to each wall
+        const distanceToRightWall = maxX2 - x;
+        const distanceToLeftWall = maxX2 + x;
+        const distanceToTopWall = maxZ2 - z;
+        const distanceToBottomWall = maxZ2 + z;
+
+        // Find the nearest wall
+        const nearestWallDistance = Math.min(distanceToRightWall, distanceToLeftWall, distanceToTopWall, distanceToBottomWall);
+
+        // Calculate the new position based on the nearest wall
+        let newX = x;
+        let newZ = z;
+
+        if (nearestWallDistance === distanceToRightWall) {
+            newX = maxX2 - 2;
+        } else if (nearestWallDistance === distanceToLeftWall) {
+            newX = -maxX2 + 0.3;
+        } else if (nearestWallDistance === distanceToTopWall) {
+            newZ = maxZ2 - 1.3;
+        } else if (nearestWallDistance === distanceToBottomWall) {
+            newZ = -maxZ2 + 0.3;
+        }
+
         pos.current = [newX, position[1], newZ];
-    }, [maxX, maxZ, position, clamp]);
+    }, [maxX2, maxZ2, position]);
 
-
-    //--make sure object is never outside boundary--
-
-    const updatePosition = useCallback(() => {
-        const [x, y, z] = pos.current;
-        const newX = clamp(x, -maxX2 + 0.3, maxX2 - 2);
-        const newZ = clamp(z, -maxZ2 + 0.3, maxZ2 - 1.3);
-        pos.current = [newX, y, newZ];
-    }, [maxX2, maxZ2, clamp]);
 
     useEffect(() => {
-        updatePosition();
-    }, [updatePosition]);
+        const [x, y, z] = pos.current;
+        const newX = clamp(x, -maxX + 0.3, maxX - 2);
+        const newZ = clamp(z, -maxZ + 0.3, maxZ - 1.3);
+        pos.current = [newX, y, newZ];
+    }, [maxX, maxZ, clamp]);
 
-    //----------------------------------------------
+    const [events, active, hovered] = useDrag(onDrag);
 
-    const [events, active, hovered] = useDrag(onDrag)
-
-    useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered])
+    useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered]);
 
     useFrame((state, delta) => {
-        easing.damp3(ref.current.position, pos.current, 0.1, delta)
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta)
-    })
+        easing.damp3(ref.current.position, pos.current, 0.1, delta);
+        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta);
+    });
 
     return (
         <>
