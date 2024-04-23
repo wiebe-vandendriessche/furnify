@@ -21,12 +21,15 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
     };
 
     function handleInput(event) {
-
-        if(!Number.isNaN(event.key) && event.target.name=="height"){
+        //Only check on height
+        if(!Number.isNaN(event.nativeEvent.data) && event.target.name=="height"){
             if(event.target.value>maxHeight*100.0){
+                alert("prevented")
                 event.preventDefault();
+                return;
             }
         }
+        changeObst(event);
     }
 
     function negativeValues(event){
@@ -78,7 +81,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                                   value={obstLength}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeObst(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"length"+obstId}
@@ -94,7 +96,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                                   data-testid={"input-obst-"+type+"-width"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeObst(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"width"+obstId}
@@ -112,7 +113,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                                   data-testid={"input-obst-"+type+"-height"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeObst(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"height"+obstId}

@@ -44,8 +44,10 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
         if(!Number.isNaN(event.key) && event.target.name=="height"){
             if(event.target.value>maxHeight*100.0){
                 event.preventDefault();
+                return;
             }
         }
+        changeDoor(event);
     }
 
     function negativeValues(event){
@@ -84,8 +86,6 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                                   data-testid={"input-obst-" + type + "-width"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeDoor(e)
-
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"width"+obstId}
@@ -103,7 +103,6 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                                   data-testid={"input-obst-" + type + "-height"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeDoor(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"height"+obstId}

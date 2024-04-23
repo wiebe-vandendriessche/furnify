@@ -41,18 +41,28 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
 
 
     function handleInput(event) {
+        console.log("RESULTAAT");
+        console.log(event);
         //prevent use of negative values
-        console.log("HOOGTE")
-        console.log(windowYpos+height+event.key)
-        console.log("RESULTAAT")
-        console.log(event)
-        console.log(event.charCode)
-        if (((event.target.name=="height" || event.target.name=="windowYpos") && !Number.isNaN(event.key) && Number(windowYpos)+Number(height)+Number(event.key)>maxHeight*100)) {
-            console.log("negative value detected or height of obstacle>max possible height");
-            event.preventDefault();
-            return false;
+        if(event.target.name=="height" || event.target.name=="windowYpos"){
+            let sum=Number(event.target.value);
+            if(event.target.name=="height"){
+                sum+=Number(windowYpos);
+            }
+            else{
+                sum+=Number(height);
+            }
+            if(sum>maxHeight*100.0) {
+                event.preventDefault()
+                return;
+            }
         }
-        return true;
+        //TODO: if length of walls are being saved
+        else if(event.target.name=="width" || event.target.name=="windowXpos"){
+
+        }
+        changeWindow(event);
+
     }
     function negativeValues(event){
         //prevent use of negative values
@@ -61,24 +71,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
         }
     }
 
-    /*
-    
-    function handleInput(event) {
-        //prevent use of negative values
-        if(!Number.isNaN(event.key) && event.target.name=="height"){
-            if(event.target.value>maxHeight*100.0){
-                event.preventDefault();
-            }
-        }
-    }
-        function handleInput(event) {
-        //prevent use of negative values
-        if(!Number.isNaN(event.key) && event.target.name=="height"){
-            if(event.target.value>maxHeight*100.0){
-                event.preventDefault();
-            }
-        }
-    }*/
 
     console.log(obstId);
     console.log(windowWall)
@@ -108,11 +100,10 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     controlid={"width" + obstId}
                                     label={t('questionnaire_space.width')+ '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
+                                    <Form.Control type="number" name={"width"} min={0} step={1} value={width}
                                                   data-testid={"input-obst-" + type + "-width"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeWindow(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"width"+obstId}
@@ -126,11 +117,10 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height')+ '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} value={height}
                                                   data-testid={"input-obst-" + type + "-height"}
                                                   onChange={(e) => {
                                                       handleInput(e)
-                                                      changeWindow(e)
                                                   }}
                                                   onKeyPress={negativeValues}
                                                   id={"height"+obstId}
@@ -187,7 +177,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     value={windowXpos}
                                     onChange={(e) => {
                                         handleInput(e)
-                                        changeWindow(e)
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
@@ -208,7 +197,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     min={0} step={1}
                                     onChange={(e) => {
                                         handleInput(e)
-                                        changeWindow(e)
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
