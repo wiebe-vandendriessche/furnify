@@ -73,6 +73,7 @@ i18n
                             storage_space:"Storage space",
                         },
                         bed: {
+                            q_size: "What is the width you would prefer?",
                             q_bed: "Which mattress do you prefer?",
                             soft: "Extra soft",
                             medium: "Medium",
@@ -161,6 +162,7 @@ i18n
                             storage_space:"Opbergruimte",
                         },
                         bed:{
+                            q_size: "Welke breedte verkiest u?",
                             q_bed:"Welke matras verkiest u?",
                             soft:"Extra zacht",
                             medium:"Medium",
@@ -248,6 +250,7 @@ i18n
                             storage_space:"Espace de stockage",
                         },
                         bed: {
+                            q_size: "Quelle est la largeur que vous préférez ?",
                             q_bed: "Quel matelas préférez-vous?",
                             soft: "Extra doux",
                             medium: "Moyen",
@@ -335,6 +338,7 @@ i18n
                             storage_space: "Stauraum",
                         },
                         bed: {
+                            q_size: "Welche Breite würden Sie bevorzugen? ",
                             q_bed: "Welche Matratze bevorzugen Sie?",
                             soft: "Extra weich",
                             medium: "Mittel",
@@ -422,6 +426,7 @@ i18n
                             storage_space: "Espacio de almacenamiento",
                         },
                         bed: {
+                            q_size: "¿Cuál es la anchura que prefiere?",
                             q_bed: "¿Qué colchón prefieres?",
                             soft: "Extra suave",
                             medium: "Medio",
@@ -509,6 +514,7 @@ i18n
                             storage_space: "Spazio di archiviazione",
                         },
                         bed: {
+                            q_size: "Qual è la larghezza che preferite?",
                             q_bed: "Quale materasso preferisci?",
                             soft: "Extra morbido",
                             medium: "Medio",

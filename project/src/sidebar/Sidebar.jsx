@@ -133,9 +133,7 @@ export function Sidebar() {
     return (
         <>
             <IconContext.Provider value={{ color: "undefined" }}>
-
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-
                     <div className="overflow-y">
                         <a id="a" href={"https://www.furnifyhome.eu/"}>
                             <picture>
@@ -146,18 +144,15 @@ export function Sidebar() {
                         <Form onSubmit={onSubmit}>
                             {showNextPart()}
                         </Form>
-
                         <div className="bottom_btn">
                             <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft /></button>
                             <button data-testid="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}><FaAnglesRight /></button>
                         </div>
-
                     </div>
                 </nav>
                 <div onClick={showSidebar} className="menu-bars">
                     {sidebar ? <AiOutlineClose size={40} /> : <AiOutlineMenu size={40} />}
                 </div>
-
             </IconContext.Provider>
         </>
     )

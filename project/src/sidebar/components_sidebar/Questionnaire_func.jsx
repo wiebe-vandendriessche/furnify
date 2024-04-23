@@ -49,7 +49,11 @@ export function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
+                                    
                                     <div className="mb-3" data-testid={"div-func-options-mattress"}>
+                                    
+                                        <h8 data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</h8>
+                                    
                                         <ButtonGroup defaultValue={varia.mattress ?? "none"}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
@@ -71,6 +75,34 @@ export function Questionnaire_functional() {
                                                           data-testid={"btn-func-bed-apply"} onChange={changeVaria}
                                                           checked={"none" == varia.mattress}>
                                                 {t('questionnaire_func.bed.apply')}
+                                            </ToggleButton>
+                                        </ButtonGroup>
+                                    </div>
+                                </Collapse>
+                            </div>
+                            <div className={"m-1"}>
+                                <Collapse in={functionalities.bed}>
+                                    
+                                    <div className="mb-3" data-testid={"div-func-options-size"}>
+                                    
+                                        <h8 data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</h8>
+                                    
+                                        <ButtonGroup defaultValue={varia.size ?? "140"}>
+
+                                            <ToggleButton variant={"danger"} type="radio" id="140" name="size"
+                                                          data-testid={"btn-func-bed-140"} onChange={changeVaria}
+                                                          checked={"140" == varia.size}>
+                                                140 cm
+                                            </ToggleButton>
+                                            <ToggleButton variant={"danger"} type="radio" id="160" name="size"
+                                                          data-testid={"btn-func-bed-160"} onChange={changeVaria}
+                                                          checked={"160" == varia.size}>
+                                                160 cm
+                                            </ToggleButton>
+                                            <ToggleButton variant={"danger"} type="radio" id="180" name="size"
+                                                          data-testid={"btn-func-bed-180"} onChange={changeVaria}
+                                                          checked={"180" == varia.size}>
+                                                180 cm 
                                             </ToggleButton>
                                         </ButtonGroup>
                                     </div>

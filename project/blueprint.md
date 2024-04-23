@@ -1,4 +1,4 @@
-# {{ pkg.name }}
+# }
 
 Welkom op {{ pkg.name }}. Dit is versie {{ pkg.version }}!
 
@@ -15,7 +15,7 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
     - **/src/2D/components/:** Bevat alle basiscomponenten waaruit het vloerplan bestaat.
     - **/src/2D/hooks/:** Bevat hulpfuncties voor de logica van het vloerplan.
     - **/src/2D/FloorplanEditor.tsx:** Bevat de logica voor de werking van het vloerplan.
-    - **/src/2D/FloorplanScene.jsx:** Bevat de compositie van de 3D scene die wordt getoond 
+    - **/src/2D/FloorplanScene.jsx:** Bevat de compositie van de 3D scene die wordt getoond
   - **/src/3D/:** Bevat alle 3D componenten.
     - **/src/3D/Draggables/:** Bevat alle versleepbare 3D componenten.
     - **/src/3D/models/:** Bevat alle meshes van de models uit /public/models.
@@ -41,10 +41,10 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 - **/package.json** Packages.
 - **/vite.config.js** Vite configuratie.
 
-
 ## Developer server opstarten
 
 **start dev server:**
+
 ```bash
 npm run dev
 ```
@@ -52,22 +52,31 @@ npm run dev
 ## Tests Uitvoeren
 
 #### Zonder beeld
+
 **start dev test server (niet om te deployen):**
+
 ```bash
 npm run dev
 ```
+
 **voer de tests uit:**
+
 ```bash
 npm run testViewless
 ```
+
 #### Met beeld
+
 ```bash
 npm run dev
 ```
+
 **voer de tests uit:**
+
 ```bash
 npm run test
 ```
+
 ## Productie-omgeving deployen
 
 ### Applicatie bereiken:
@@ -77,21 +86,29 @@ Productie is gedeployed op: http://157.193.171.41
 ### Applicatie deployen op de server
 
 #### Op de server:
+
 **installeer node packages**:
+
 ```bash
 npm install
 ```
+
 **build for production**:
+
 ```bash
 npm run build
 ```
+
 In de root van de server voer deze commando's uit:
+
 ```bash
 sudo rm -rf /var/www/html/*
 
 sudo cp -r furnify2/project/dist/* /var/www/html
 ```
+
 **locally preview production build**:
+
 ```bash
 npm run preview
 ```

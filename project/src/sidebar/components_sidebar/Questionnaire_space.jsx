@@ -25,7 +25,6 @@ export function Questionnaire_space() {
     //Changes values of dimensions in context
     const changeDim = (event) => {
         setDimensions({...dimensions, [event.target.name]: event.target.value});
-        console.log(event.target.name);
     }
 
     const {varia, setVaria} = useVariaContext();
@@ -53,7 +52,6 @@ export function Questionnaire_space() {
     function handleKeyPress(event) {
         //prevent use of negative values
         if (event.charCode == 45) {
-            console.log("negative value detected");
             event.preventDefault();
             return false;
         }

@@ -71,14 +71,17 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
     //  camera.lookAt(new THREE.Vector3(0, height / 2, 0));
   });
 
-
+  // added small sizedifference so the meshes dont directly overlap and create a visual glitch when showing different colors
+  const newWidth = parseFloat(width) + 0.001;
+  const newHeight = parseFloat(height) + 0.001;
+  const newWallThickness = parseFloat(wallThickness) + 0.001;
 
   return (
     <group ref={roomRef}>
       <WallWithWindow
-        width={width}
-        height={height}
-        depth={wallThickness}
+        width={newWidth}
+        height={newHeight}
+        depth={newWallThickness}
         position={[0, height / 2, -depth / 2 + wallThickness / 2]}
         visible={backWallVisible}
         windows={windows.filter(window => window.windowWall === "back")}
@@ -87,9 +90,9 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         wall={"back"}
       />
       <WallWithWindow
-        width={width}
-        height={height}
-        depth={wallThickness}
+        width={newWidth}
+        height={newHeight}
+        depth={newWallThickness}
         position={[0, height / 2, depth / 2 - wallThickness / 2]}
         visible={frontWallVisible}
         windows={windows.filter(window => window.windowWall === "front")}

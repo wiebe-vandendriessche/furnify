@@ -35,7 +35,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
         setTimeout(() => {
             setSelectedWall(null);
             setIsButtonDisabled(false);
-            console.log("back to zero");
         }, 1500); // 1000 milliseconds = 1 second
     }
 
