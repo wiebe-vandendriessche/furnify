@@ -9,7 +9,7 @@ export const check = (val: any, varia: any, get2D: any) => {
 
     console.log("ALGORITHM: ")
     console.log(val.functionalities)
-
+    
     //make sure to fill the modules
     if (modules.length == 0) {
         get_modules();
@@ -61,7 +61,7 @@ export const check = (val: any, varia: any, get2D: any) => {
             console.log("ALGORITHM: " + "Room is not big enough for the combination")
         }
         result = result_size
-        console.log("ALGORITHM: ")
+        
     }
     else {
         let sides2D = get2D.lines;
@@ -86,15 +86,23 @@ export const check = (val: any, varia: any, get2D: any) => {
         }
 
     }
+    console.log("ALGORITHM: the possible results:")
+    console.log(result)
+    return result;
 
 }
 
-const get_modules = () => {
-    try {
-        const parsedData = parseCsvData();
-        parsedData.then(e => e.forEach(ev => modules.push(new Module(ev))))
-    } catch (error) {
-        console.log("ALGORITHM: ")
-        console.error('Error parsing CSV:', error);
+export const get_modules = () => {
+    if(modules.length == 0){
+        try {
+            const parsedData = parseCsvData();
+            parsedData.then(e => e.forEach(ev => modules.push(new Module(ev))))
+            console.log("ALGORITHM: read in csv file")
+        } catch (error) {
+            console.log("ALGORITHM: ")
+            console.error('Error parsing CSV:', error);
+        }
+
     }
+    
 }
