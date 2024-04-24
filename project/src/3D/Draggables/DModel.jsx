@@ -12,43 +12,69 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
 
+    const width = 1.7
+    const depth = 1
+
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 
     const onDrag = useCallback(({ x, z }) => {
         // Calculate the distance to each wall
-        const distanceToRightWall = maxX2 - x;
-        const distanceToLeftWall = maxX2 + x;
-        const distanceToTopWall = maxZ2 - z;
-        const distanceToBottomWall = maxZ2 + z;
+        const distanceToRightWall = maxX2 - 0.3 - x - width;
+        const distanceToLeftWall = maxX2 - 0.3 + x;
+        const distanceToFrontWall = maxZ2 - 0.3 - z - depth;
+        const distanceToBackWall = maxZ2 - 0.3 + z;
 
         // Find the nearest wall
-        const nearestWallDistance = Math.min(distanceToRightWall, distanceToLeftWall, distanceToTopWall, distanceToBottomWall);
+        const nearestWallDistance = Math.min(distanceToRightWall, distanceToLeftWall, distanceToFrontWall, distanceToBackWall);
 
-        // Calculate the new position based on the nearest wall
         let newX = x;
         let newZ = z;
 
+        // base new coordinates on the coordinate of the closest wall
         if (nearestWallDistance === distanceToRightWall) {
-            newX = maxX2 - 2;
+            newX = maxX2 - 0.3 - width;
         } else if (nearestWallDistance === distanceToLeftWall) {
             newX = -maxX2 + 0.3;
-        } else if (nearestWallDistance === distanceToTopWall) {
-            newZ = maxZ2 - 1.3;
-        } else if (nearestWallDistance === distanceToBottomWall) {
+        } else if (nearestWallDistance === distanceToFrontWall) {
+            newZ = maxZ2 - depth - 0.3;
+        } else if (nearestWallDistance === distanceToBackWall) {
             newZ = -maxZ2 + 0.3;
         }
 
+        // Ensure that the new position stays within bounds when dragging
+        newX = clamp(newX, -maxX2 + 0.3, maxX2 - 0.3 - width);
+        newZ = clamp(newZ, -maxZ2 + 0.3, maxZ2 - 0.3 - depth);
+
+        //update position
         pos.current = [newX, position[1], newZ];
-    }, [maxX2, maxZ2, position]);
 
+    }, [maxX2, maxZ2, position, clamp, width, depth]);
 
+    // makes sure when enlarging the room the model sticks to the wall in x 
     useEffect(() => {
         const [x, y, z] = pos.current;
-        const newX = clamp(x, -maxX + 0.3, maxX - 2);
-        const newZ = clamp(z, -maxZ + 0.3, maxZ - 1.3);
-        pos.current = [newX, y, newZ];
-    }, [maxX, maxZ, clamp]);
+        let newX;
+        if (x < 0) {
+            newX = -maxX2 + 0.3;
+        } else {
+            newX = maxX2 - 0.3 - width
+        }
+        pos.current = [newX, y, z];
+    }, [maxX2, width, depth]);
+
+    // makes sure when enlarging the room the model sticks to the wall in z
+    useEffect(() => {
+        const [x, y, z] = pos.current;
+        let newZ;
+        if (z < 0) {
+            newZ = -maxZ2 + 0.3;
+        } else {
+            newZ = maxZ2 - 0.3 - depth;
+        }
+        pos.current = [x, y, newZ];
+    }, [maxZ2, width, depth]);
+
 
     const [events, active, hovered] = useDrag(onDrag);
 
