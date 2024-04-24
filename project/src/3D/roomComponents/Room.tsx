@@ -28,6 +28,10 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const windows = getWindows();
   const doors = getDoors();
 
+  //wallthickness
+  width = parseFloat(width) + 0.6
+  depth = parseFloat(depth) + 0.6
+
   useEffect(() => {
     if (selectedWall != null) {
       setEnnableFrame(false)

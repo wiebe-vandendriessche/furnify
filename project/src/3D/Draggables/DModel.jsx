@@ -20,10 +20,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     const onDrag = useCallback(({ x, z }) => {
         // Calculate the distance to each wall
-        const distanceToRightWall = maxX2 - 0.3 - x - width;
-        const distanceToLeftWall = maxX2 - 0.3 + x;
-        const distanceToFrontWall = maxZ2 - 0.3 - z - depth;
-        const distanceToBackWall = maxZ2 - 0.3 + z;
+        const distanceToRightWall = maxX2 - x - width;
+        const distanceToLeftWall = maxX2 + x;
+        const distanceToFrontWall = maxZ2 - z - depth;
+        const distanceToBackWall = maxZ2 + z;
 
         // Find the nearest wall
         const nearestWallDistance = Math.min(distanceToRightWall, distanceToLeftWall, distanceToFrontWall, distanceToBackWall);
@@ -33,18 +33,18 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
         // base new coordinates on the coordinate of the closest wall
         if (nearestWallDistance === distanceToRightWall) {
-            newX = maxX2 - 0.3 - width;
+            newX = maxX2 - width;
         } else if (nearestWallDistance === distanceToLeftWall) {
-            newX = -maxX2 + 0.3;
+            newX = -maxX2;
         } else if (nearestWallDistance === distanceToFrontWall) {
-            newZ = maxZ2 - depth - 0.3;
+            newZ = maxZ2 - depth;
         } else if (nearestWallDistance === distanceToBackWall) {
-            newZ = -maxZ2 + 0.3;
+            newZ = -maxZ2
         }
 
         // Ensure that the new position stays within bounds when dragging
-        newX = clamp(newX, -maxX2 + 0.3, maxX2 - 0.3 - width);
-        newZ = clamp(newZ, -maxZ2 + 0.3, maxZ2 - 0.3 - depth);
+        newX = clamp(newX, -maxX2, maxX2 - width);
+        newZ = clamp(newZ, -maxZ2, maxZ2 - depth);
 
         //update position
         pos.current = [newX, position[1], newZ];
@@ -56,9 +56,9 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         const [x, y, z] = pos.current;
         let newX;
         if (x < 0) {
-            newX = -maxX2 + 0.3;
+            newX = -maxX2;
         } else {
-            newX = maxX2 - 0.3 - width
+            newX = maxX2 - width
         }
         pos.current = [newX, y, z];
     }, [maxX2, width, depth]);
@@ -68,9 +68,9 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         const [x, y, z] = pos.current;
         let newZ;
         if (z < 0) {
-            newZ = -maxZ2 + 0.3;
+            newZ = -maxZ2;
         } else {
-            newZ = maxZ2 - 0.3 - depth;
+            newZ = maxZ2 - depth;
         }
         pos.current = [x, y, newZ];
     }, [maxZ2, width, depth]);
