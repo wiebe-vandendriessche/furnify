@@ -22,7 +22,8 @@ export const DrawingProvider = ({ children }) => {
   const tempLineRef = useRef<DrawableLine | null>(null);
   const latestPointRef = useRef<DrawablePoint | null>(null); // store the latest point
 
-  const [snappingMode, setSnappingMode] = useState(false);
+  const [snappingMode, setSnappingMode] = useState(true);
+  const [showGrid, setShowGrid] = useState(true);
 
   // Toggle drawing state
   const toggleDrawing = () =>
@@ -66,7 +67,9 @@ export const DrawingProvider = ({ children }) => {
     gridSize,
     setGridSize,
     snappingMode, 
-    setSnappingMode
+    setSnappingMode,
+    showGrid,
+    setShowGrid
   };
 
   return (
