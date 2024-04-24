@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 
 // eslint-disable-next-line react/prop-types
-function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, openingDoor, doorXpos, doorWall }) {
+function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, openingDoor, doorXpos, doorWall, maxHeight }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -39,13 +39,22 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
 
 
 
-    function handleKeyPress(event) {
+    function handleInput(event) {
         //prevent use of negative values
-        if (event.charCode == 45) {
-            event.preventDefault();
-            return false;
+        if(!Number.isNaN(event.key) && event.target.name=="height"){
+            if(event.target.value>maxHeight*100.0){
+                event.preventDefault();
+                return;
+            }
         }
-        return true;
+        changeDoor(event);
+    }
+
+    function negativeValues(event){
+        //prevent use of negative values
+        if (event.key=="-") {
+            event.preventDefault();
+        }
     }
 
     console.log(obstId);
@@ -75,8 +84,10 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
                                                   data-testid={"input-obst-" + type + "-width"}
-                                                  onChange={(e) => changeDoor(e)}
-                                                  onKeyPress={handleKeyPress}
+                                                  onChange={(e) => {
+                                                      handleInput(e)
+                                                  }}
+                                                  onKeyPress={negativeValues}
                                                   id={"width"+obstId}
                                     />
 
@@ -88,10 +99,12 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     controlid={"height" + obstId}
                                     label={t('questionnaire_space.height') + '(cm)'}
                                 >
-                                    <Form.Control type="number" name={"height"} min={0} step={1} defaultValue={height}
+                                    <Form.Control type="number" name={"height"} min={0} step={1} value={height}
                                                   data-testid={"input-obst-" + type + "-height"}
-                                                  onChange={(e) => changeDoor(e)}
-                                                  onKeyPress={handleKeyPress}
+                                                  onChange={(e) => {
+                                                      handleInput(e)
+                                                  }}
+                                                  onKeyPress={negativeValues}
                                                   id={"height"+obstId}
                                     />
                                 </FloatingLabel>
@@ -159,8 +172,11 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     name={"doorXpos"}
                                     min={0} step={1}
                                     value={doorXpos}
-                                    onKeyPress={handleKeyPress}
-                                    onChange={changeDoor}
+                                    onChange={(e)=>{
+                                        handleInput(e)
+                                        changeDoor(e)
+                                    }}
+                                    onKeyPress={negativeValues}
                                     placeholder="Enter X Position (m)"
                                     id={"xpos"+obstId}
                                 />

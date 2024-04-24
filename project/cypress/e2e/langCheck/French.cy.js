@@ -1,4 +1,4 @@
-import {checkContact, checkFunc, checkSpace, checkSpecs} from "./Languagecheck.js";
+import {checkContact, checkFunc, checkSpace, checkSpecs, checkObstacles} from "./Languagecheck.js";
 
 describe("Checking text in French is correctly rendered", ()=>{
     beforeEach('visit application in Dutch', ()=>{
@@ -15,7 +15,26 @@ describe("Checking text in French is correctly rendered", ()=>{
 
     it("Sidebar space", ()=>{
         let space={ q_dimensions: "Quelles sont les dimensions de l'espace de vie?", rectangular: "Rectangulaire", dimLength: "Longueur", dimWidth: "Largeur",
-                dimHeight: "Hauteur", other: "Autres", q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+                dimHeight: "Hauteur", other: "Autres",
+            q_space:"Quel espace de vie souhaitez-vous optimiser?",
+            space:{
+                guest_room:"Chambre d'amis",
+                living_room:"Le salon",
+                bedroom:"Chambre à coucher",
+            },
+            q_preferences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
+            preferences:{
+                wall:"Mur",
+                partition_wall:"Cloison",
+                in_the_middle_of_space:"Au milieu de l'espace",
+            }};
+
+        checkSpace(space);
+    });
+
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
             obstructions: { window:"Fenêtre", door:"Porte", radiator:"Radiateur", walloutlet:"Prise murale", switch:"Interrupteur", sloping_Wall:"Mur en pente", other:"Autre",
                 q_door:{
                     opening_door:"Comment s'ouvre la porte ?",
@@ -27,20 +46,12 @@ describe("Checking text in French is correctly rendered", ()=>{
                     opening_window:"La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
                     yes:"oui",
                     no:"non"
-                }}};
-
-        checkSpace(space);
-    });
-
-
+                }}
+        }
+        checkObstacles(obst);
+    } )
     it("Sidebar functional", ()=>{
         let functional={
-            q_space:"Quel espace de vie souhaitez-vous optimiser?",
-                space:{
-                guest_room:"Chambre d'amis",
-                    living_room:"Le salon",
-                    bedroom:"Chambre à coucher",
-            },
             q_function:"Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
                 functions:{
                 bed:"Lit",
@@ -61,12 +72,6 @@ describe("Checking text in French is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_preferences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
-                preferences:{
-                wall:"Mur",
-                    partition_wall:"Cloison",
-                    in_the_middle_of_space:"Au milieu de l'espace",
-            },
             q_materials: "Quels matériaux préférez-vous pour finir votre mobilier modulable?",
                 materials:{
                 white:"Blanc",

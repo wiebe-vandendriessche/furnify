@@ -1,4 +1,4 @@
-import {checkContact, checkFunc, checkSpace, checkSpecs} from "./Languagecheck.js";
+import {checkContact, checkFunc, checkSpace, checkSpecs, checkObstacles} from "./Languagecheck.js";
 
 describe("Checking text in English is correctly rendered", ()=>{
     beforeEach('visit application in Dutch', ()=>{
@@ -21,7 +21,26 @@ describe("Checking text in English is correctly rendered", ()=>{
                 dimWidth: "Width",
                 dimHeight: "Height",
                 other: "Other",
-                q_aspects:"Add which aspects we should take into account in your living space.",
+            q_space:"Which living space do you want to optimize?",
+            space:{
+                guest_room:"Guest room",
+                living_room:"Living room",
+                bedroom:"Bedroom",
+            },
+            q_preferences: "Do you have specific preferences for the layout of your living space?",
+            preferences:{
+                wall:"Wall",
+                partition_wall:"Partition wall",
+                in_the_middle_of_space:"In the middle of space",
+            }
+};
+
+        checkSpace(space);
+    });
+
+    it("Sidebar Q1 (obstacles)",()=>{
+        let obst={
+            q_aspects:"Add which aspects we should take into account in your living space.",
             obstructions: {
                 window:"Window",
                 door:"Door",
@@ -41,19 +60,13 @@ describe("Checking text in English is correctly rendered", ()=>{
                     yes:"yes",
                     no:"no"
                 }
-            }};
-
-        checkSpace(space);
-    });
+            }
+        }
+        checkObstacles(obst);
+    } );
 
     it("Sidebar functional", ()=>{
         let functional={
-            q_space:"Which living space do you want to optimize?",
-            space:{
-                guest_room:"Guest room",
-                living_room:"Living room",
-                bedroom:"Bedroom",
-            },
             q_function:"What are the most important features you need to make the most of your living space?",
             functions:{
                 bed:"Bed",
@@ -74,12 +87,6 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_preferences: "Do you have specific preferences for the layout of your living space?",
-            preferences:{
-                wall:"Wall",
-                partition_wall:"Partition wall",
-                in_the_middle_of_space:"In the middle of space",
-            },
             q_materials: "Which materials do you prefer to finish your modular furniture?",
             materials:{
                 color: "Color",

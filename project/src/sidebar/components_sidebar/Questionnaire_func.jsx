@@ -25,43 +25,12 @@ export function Questionnaire_functional() {
         setVaria({...varia, [event.target.name]: [event.target.id]})
     }
 
-    const space = [
-        {name: t('questionnaire_func.space.guest_room'), id: "guestroom"},
-        {name: t('questionnaire_func.space.living_room'), id: "living_room"},
-        {name: t('questionnaire_func.space.bedroom'), id: "bedroom"},
-    ];
 
 
     return (
 
         <div className="m-2">
             <Form>
-                <div className="mb-4">
-                    <Form.Group>
-                        <div className={"mb-3"}>
-                            <h5 data-testid={"question-func-space"}>{t('questionnaire_func.q_space')}</h5>
-                        </div>
-                        <div className={"m-1"}>
-                            <ButtonGroup>
-                                {space.map((space) => (
-                                    <ToggleButton
-                                        data-testid={"btn-func-room-"+space.id}
-                                        key={space.id}
-                                        id={space.id}
-                                        name={"room"}
-                                        type="radio"
-                                        variant="danger"
-                                        value={space.name}
-                                        onChange={changeVaria}
-                                        checked={varia.room == space.id}>
-                                        {space.name}
-                                    </ToggleButton>
-                                ))}
-                            </ButtonGroup>
-                        </div>
-                    </Form.Group>
-                </div>
-
                 <div className={"mb-3"}>
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -83,8 +52,8 @@ export function Questionnaire_functional() {
                                     
                                     <div className="mb-3" data-testid={"div-func-options-mattress"}>
                                     
-                                        <h8 data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</h8>
-                                    
+                                        <span data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</span>
+
                                         <ButtonGroup defaultValue={varia.mattress ?? "none"}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="soft" name="mattress"
@@ -113,10 +82,10 @@ export function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
-                                    
+
                                     <div className="mb-3" data-testid={"div-func-options-size"}>
-                                    
-                                        <h8 data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</h8>
+
+                                        <span data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</span>
                                     
                                         <ButtonGroup defaultValue={varia.size ?? "140"}>
 
@@ -141,6 +110,9 @@ export function Questionnaire_functional() {
                             </div>
                         </div>
                     </Form.Group>
+                </div>
+                <div className={"aspect"}>
+
                 </div>
             </Form>
         </div>
