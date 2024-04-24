@@ -25,6 +25,8 @@ export const DrawingProvider = ({ children }) => {
   const [snappingMode, setSnappingMode] = useState(true);
   const [showGrid, setShowGrid] = useState(true);
 
+  const [isClosed, setIsClosed] = useState<boolean>(false);
+
   // Toggle drawing state
   const toggleDrawing = () =>
     setIsDrawing((prev) => {
@@ -46,6 +48,7 @@ export const DrawingProvider = ({ children }) => {
     if (confirmation) {
       setPoints([]);
       setLines([]);
+      setIsClosed(false);
     }
   };
 
@@ -66,10 +69,12 @@ export const DrawingProvider = ({ children }) => {
     setIsHoveringCanvas,
     gridSize,
     setGridSize,
-    snappingMode, 
+    snappingMode,
     setSnappingMode,
     showGrid,
-    setShowGrid
+    setShowGrid,
+    isClosed, 
+    setIsClosed
   };
 
   return (
