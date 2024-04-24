@@ -15,6 +15,7 @@ import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
 import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
+import { use2d } from "../contexts/2dContext.tsx";
 
 
 
@@ -23,6 +24,7 @@ export function Sidebar() {
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
     const value = useConfiguratorContext();
+    const get2D = use2d();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -54,7 +56,7 @@ export function Sidebar() {
             case 2:
                 return <Questionnaire_specs />
             case 3:
-                check(value, varia)
+                check(value, varia, get2D)
                 return <Contact/>
             case 4:
                 return <p>Nothing to see here</p>

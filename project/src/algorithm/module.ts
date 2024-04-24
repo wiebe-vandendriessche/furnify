@@ -107,7 +107,7 @@ export class Module {
     }
 
     /**
-    * Sees if the module would fit in the room
+    * Sees if the module would fit in the room if room is rectangle
     * @param {number} height in meters
     * @param {number} length in meters
     * @param {number} width in meters
@@ -116,4 +116,15 @@ export class Module {
     public correct_size(height: number, length: number, width: number) {
         return ((this._height < height) && (this._width < width) && (this._open < length)) || ((this._height < height) && (this._width < length) && (this._open < width))
     }
+
+    /**
+    * Sees if the module would fit in the room if room is other
+    * @param {number} side meters
+    * @return {boolean} possible fit
+    */
+    public correct_side(side: number) {
+        return ((this._open < side)||(this._width < side))
+    }
+
+
 }
