@@ -70,37 +70,40 @@ export function Sidebar() {
 
     const onSubmit = e => {
         e.preventDefault();
-        let obs = "_";
+        let obs = "";
         Object.entries(obstacles).forEach(([type, items]) => {
             items.forEach((item) => {
-                obs += item.id + ". " + item.type;
+                obs += item.id + ".";
                 switch (item.type) {
                     case 'window':
+                        obs+="W";
                         if (item.inside_window === 'yes') {
-                            obs += " open on the inside";
+                            obs += " in";
                         } else {
-                            obs += " open on the outside";
+                            obs += " out";
                         }
-                        obs += " width:" + item.width + " height:" + item.height;
+                        obs += " w:" + item.width + "h:" + item.height;
                         break;
                     case 'door':
-                        obs += " open " + item.opening_door;
-                        obs += " width:" + item.width + " height:" + item.height;
+                        obs+="D";
+                        obs += " " + item.opening_door;
+                        obs += " w:" + item.width + "h:" + item.height;
                         break;
                     default:
-                        obs += " width:" + item.width + " length:" + item.obstLength + " height:" + item.height;
+                        obs+="O";
+                        obs += " w:" + item.width + "l:" + item.obstLength + "h:" + item.height;
                         break;
                 }
-                if (item.obstacleWall) {
-                    obs += " obstacle wall:" + item.obstacleWall;
+                if (item.obstacleWall || item.windowWall) {
+                    obs += " wall:" + item.obstacleWall;
                 }
                 if (item.windowWall) {
-                    obs += " window wall:" + item.windowWall;
+                    obs += " wall:" + item.windowWall;
                 }
                 if (item.windowXpos && item.windowYpos) {
                     obs += " position:" + item.windowXpos + "," + item.windowYpos;
                 }
-                obs += "\n";
+                obs += "/\n";
             });
         });
 
