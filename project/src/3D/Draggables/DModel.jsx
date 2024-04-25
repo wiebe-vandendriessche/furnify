@@ -1,29 +1,85 @@
 import { MathUtils, Color } from 'three'
-import { useCallback, useRef, useEffect } from 'react'
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
+import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
     const ref = useRef()
     const pos = useRef(position)
 
+    const [width, setModelWidth] = useState(1.7);
+    const [depth, setModelDepth] = useState(1);
+
+
+    const { modelRotation } = useConfiguratorContext();
+
+
     const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
 
-    const width = 1.7
-    const depth = 1
+
+    // swapping depth and width depending on rotation
+    useEffect(() => {
+        if (modelRotation === 0) {
+            setModelWidth(1.7);
+            setModelDepth(1);
+        } else if (modelRotation === Math.PI / 2) {
+            setModelWidth(1);
+            setModelDepth(1.7);
+        } else if (modelRotation === Math.PI) {
+            setModelWidth(1.7);
+            setModelDepth(1);
+        } else if (modelRotation === -Math.PI / 2) {
+            setModelWidth(1);
+            setModelDepth(1.7);
+        }
+    }, [modelRotation]);
+
+
+    console.log("rotatie")
+    console.log(modelRotation)
+
+
 
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 
     const onDrag = useCallback(({ x, z }) => {
-        // Calculate the distance to each wall
-        const distanceToRightWall = maxX2 - x - width;
-        const distanceToLeftWall = maxX2 + x;
-        const distanceToFrontWall = maxZ2 - z - depth;
-        const distanceToBackWall = maxZ2 + z;
+
+        let distanceToRightWall;
+        let distanceToLeftWall;
+        let distanceToFrontWall;
+        let distanceToBackWall;
+
+        //calculate distance to wall depending on its rotation the calcultation is different
+        if (modelRotation === 0) {
+            // Calculate the distance to each wall
+            distanceToRightWall = maxX2 - x - width;
+            distanceToLeftWall = maxX2 + x;
+            distanceToFrontWall = maxZ2 - z - depth;
+            distanceToBackWall = maxZ2 + z;
+        } else if (modelRotation === Math.PI / 2) {
+            // Calculate the distance to each wall
+            distanceToRightWall = maxX2 - x - width;
+            distanceToLeftWall = maxX2 + x;
+            distanceToFrontWall = maxZ2 - z;
+            distanceToBackWall = maxZ2 + z - depth;
+        } else if (modelRotation === Math.PI) {
+            // Calculate the distance to each wall
+            distanceToRightWall = maxX2 - x;
+            distanceToLeftWall = maxX2 + x - width;
+            distanceToFrontWall = maxZ2 - z;
+            distanceToBackWall = maxZ2 + z - depth;
+        } else if (modelRotation === -Math.PI / 2) {
+            // Calculate the distance to each wall
+            distanceToRightWall = maxX2 - x;
+            distanceToLeftWall = maxX2 + x - width;
+            distanceToFrontWall = maxZ2 - z - depth;
+            distanceToBackWall = maxZ2 + z;
+        }
 
         // Find the nearest wall
         const nearestWallDistance = Math.min(distanceToRightWall, distanceToLeftWall, distanceToFrontWall, distanceToBackWall);
@@ -31,49 +87,105 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         let newX = x;
         let newZ = z;
 
-        // base new coordinates on the coordinate of the closest wall
-        if (nearestWallDistance === distanceToRightWall) {
-            newX = maxX2 - width;
-        } else if (nearestWallDistance === distanceToLeftWall) {
-            newX = -maxX2;
-        } else if (nearestWallDistance === distanceToFrontWall) {
-            newZ = maxZ2 - depth;
-        } else if (nearestWallDistance === distanceToBackWall) {
-            newZ = -maxZ2
-        }
+        //new coordinates calculation for each rotation different
+        if (modelRotation === 0) {
+            if (nearestWallDistance === distanceToRightWall) {
+                newX = maxX2 - width;
+            } else if (nearestWallDistance === distanceToLeftWall) {
+                newX = -maxX2;
+            } else if (nearestWallDistance === distanceToFrontWall) {
+                newZ = maxZ2 - depth;
+            } else if (nearestWallDistance === distanceToBackWall) {
+                newZ = -maxZ2
+            }
 
-        // Ensure that the new position stays within bounds when dragging
-        newX = clamp(newX, -maxX2, maxX2 - width);
-        newZ = clamp(newZ, -maxZ2, maxZ2 - depth);
+            newX = clamp(newX, -maxX2, maxX2 - width);
+            newZ = clamp(newZ, -maxZ2, maxZ2 - depth);
+
+        } else if (modelRotation === Math.PI / 2) {
+            if (nearestWallDistance === distanceToRightWall) {
+                newX = maxX2 - width;
+            } else if (nearestWallDistance === distanceToLeftWall) {
+                newX = -maxX2;
+            } else if (nearestWallDistance === distanceToFrontWall) {
+                newZ = maxZ2;
+            } else if (nearestWallDistance === distanceToBackWall) {
+                newZ = -maxZ2 + depth;
+            }
+
+            newX = clamp(newX, -maxX2, maxX2 - width);
+            newZ = clamp(newZ, -maxZ2 + depth, maxZ2);
+
+        } else if (modelRotation === Math.PI) {
+            if (nearestWallDistance === distanceToRightWall) {
+                newX = maxX2;
+            } else if (nearestWallDistance === distanceToLeftWall) {
+                newX = -maxX2 + width;
+            } else if (nearestWallDistance === distanceToFrontWall) {
+                newZ = maxZ2;
+            } else if (nearestWallDistance === distanceToBackWall) {
+                newZ = -maxZ2 + depth;
+            }
+
+            newX = clamp(newX, -maxX2 + width, maxX2);
+            newZ = clamp(newZ, -maxZ2 + depth, maxZ2);
+
+        } else if (modelRotation === -Math.PI / 2) {
+            if (nearestWallDistance === distanceToRightWall) {
+                newX = maxX2;
+            } else if (nearestWallDistance === distanceToLeftWall) {
+                newX = -maxX2 + width;
+            } else if (nearestWallDistance === distanceToFrontWall) {
+                newZ = maxZ2 - depth;
+            } else if (nearestWallDistance === distanceToBackWall) {
+                newZ = -maxZ2
+            }
+
+            newX = clamp(newX, -maxX2 + width, maxX2);
+            newZ = clamp(newZ, -maxZ2, maxZ2 - depth);
+        }
 
         //update position
         pos.current = [newX, position[1], newZ];
 
-    }, [maxX2, maxZ2, position, clamp, width, depth]);
+    }, [maxX2, maxZ2, position, clamp, width, depth, modelRotation]);
 
-    // makes sure when enlarging the room the model sticks to the wall in x 
+    // makes sure when enlarging the room or rotating the model sticks to the wall in x 
     useEffect(() => {
         const [x, y, z] = pos.current;
-        let newX;
-        if (x < 0) {
-            newX = -maxX2;
-        } else {
-            newX = maxX2 - width
+        let newX = x
+
+        // different calculation for different rotations
+        if (modelRotation === 0) {
+            newX = x < 0 ? -maxX2 : maxX2 - width;
+        } else if (modelRotation === Math.PI / 2) {
+            newX = x < 0 ? -maxX2 : maxX2 - width;
+        } else if (modelRotation === Math.PI) {
+            newX = x < 0 ? -maxX2 + width : maxX2;
+        } else if (modelRotation === -Math.PI / 2) {
+            newX = x < 0 ? -maxX2 + width : maxX2;
         }
         pos.current = [newX, y, z];
-    }, [maxX2, width, depth]);
+    }, [maxX2, width, modelRotation]);
 
-    // makes sure when enlarging the room the model sticks to the wall in z
+    // makes sure when enlarging the room or rotating the model sticks to the wall in z
     useEffect(() => {
         const [x, y, z] = pos.current;
-        let newZ;
-        if (z < 0) {
-            newZ = -maxZ2;
-        } else {
-            newZ = maxZ2 - depth;
+        let newZ = z
+
+        // different calculation for different rotations
+        if (modelRotation === 0) {
+            newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+        } else if (modelRotation === Math.PI / 2) {
+            newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+        } else if (modelRotation === Math.PI) {
+            newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+        } else if (modelRotation === -Math.PI / 2) {
+            newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
         }
+
         pos.current = [x, y, newZ];
-    }, [maxZ2, width, depth]);
+    }, [maxZ2, depth, modelRotation]);
 
 
     const [events, active, hovered] = useDrag(onDrag);
@@ -85,9 +197,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta);
     });
 
+
     return (
         <>
-            <mesh ref={ref} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.material} castShadow receiveShadow {...events} {...props}>
+            <mesh ref={ref} rotation={[0, modelRotation, 0]} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.material} castShadow receiveShadow {...events} {...props}>
                 <meshStandardMaterial />
             </mesh>
         </>

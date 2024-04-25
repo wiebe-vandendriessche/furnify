@@ -12,6 +12,15 @@ export const ConfiguratorProvider = ({ children }) => {
     const [obstacles, setObstacles] = useState({door: [], window: [], other: []});
     const [rectangular, setRectangular] = useState(true);
 
+    const [rotationIndex, setRotationIndex] = useState(0);
+    const rotations = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
+
+
+
+    const rotate = () => {
+        setRotationIndex((prevIndex) => (prevIndex + 1) % rotations.length);
+    };
+
     // Function to return doors
     const getDoors = () => {
         return obstacles.door;
@@ -40,7 +49,9 @@ export const ConfiguratorProvider = ({ children }) => {
         setObstacles,
         getDoors,
         getWindows,
-        getOtherObstacles
+        getOtherObstacles,
+        modelRotation: rotations[rotationIndex],
+        rotate
     }
 
 
