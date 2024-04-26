@@ -4,14 +4,19 @@ import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
+//import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
+    //const {specs, setSpecs} = useConfiguratorContext();
 
     const ref = useRef()
     const pos = useRef(position)
 
-    const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
-
+    let { nodes, materials } = useGLTF('/models/tv_wand_white.gltf')
+    console.log("MATERIALS");
+    console.log(materials);
+    console.log("NODES");
+    console.log(nodes)
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 
@@ -43,12 +48,12 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     useFrame((state, delta) => {
         easing.damp3(ref.current.position, pos.current, 0.1, delta)
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta)
+        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'white', 0.1, delta)
     })
 
     return (
         <>
-            <mesh ref={ref} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.material} castShadow receiveShadow {...events} {...props}>
+            <mesh ref={ref} geometry={nodes.tv_wand001.geometry} material={materials["Material.001"]} castShadow receiveShadow {...events} {...props}>
                 <meshStandardMaterial />
             </mesh>
         </>

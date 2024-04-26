@@ -64,9 +64,9 @@ export function Questionnaire_spec() {
                                                       onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
                                             {t('questionnaire_specs.materials.white')}
                                         </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
+                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#565656"
                                                       data-testid={"btn-specs-color-black"}
-                                                      onChange={changeSpecs} checked={specs.color === "#000000"}>
+                                                      onChange={changeSpecs} checked={specs.color === "#565656"}>
                                             {t('questionnaire_specs.materials.black')}
                                         </ToggleButton>
                                     </ButtonGroup>
