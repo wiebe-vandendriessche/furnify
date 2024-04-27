@@ -30,14 +30,14 @@ export function Questionnaire_functional() {
     }
 
     const { rotate } = useConfiguratorContext();
-    console.log(rotate)
+    
     const get2D = use2d();
     const value = useConfiguratorContext();
 
 
     const { errors, setErrors } = useModuleContext();
-    console.log(errors)
-    const modules = (event) => {
+    const { modules, setModules} = useModuleContext();
+    const module = (event) => {
         let result = check(value, varia, get2D);
         setErrors({
             softer: result.errors.softer,
@@ -45,7 +45,7 @@ export function Questionnaire_functional() {
             roomSize: result.errors.roomSize,
             points2D: result.errors.points2D
         });
-        console.log(errors)
+        setModules(result.possible)
     }
 
 
@@ -136,7 +136,7 @@ export function Questionnaire_functional() {
                     </Form.Group>
                 </div>
                 <div>
-                    <Button onClick={modules} variant="danger"
+                    <Button onClick={module} variant="danger"
                     >
                         Find Modules
                     </Button>
