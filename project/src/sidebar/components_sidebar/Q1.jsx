@@ -135,6 +135,25 @@ export function Q1({ stateId, setStateId }) {
             } : obstacle)
         })
     }
+    const changeWalloutlet = (event) => {
+        setObstacles({
+            ...obstacles,
+            walloutlet: obstacles["walloutlet"].map((obstacle) => obstacle.id == event.target.id.split("walloutlet")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } : obstacle)
+        })
+    }
+    const changeSwitch = (event) => {
+        console.log("change")
+        setObstacles({
+            ...obstacles,
+            switch: obstacles["switch"].map((obstacle) => obstacle.id == event.target.id.split("switch")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } : obstacle)
+        })
+    }
     //___________________________________________________________________________________
 
 
@@ -158,6 +177,31 @@ export function Q1({ stateId, setStateId }) {
         setObstacles({
             ...obstacles,
             window: obstacles["window"].map((obstacle) => obstacle.id == param[2].split("window")[1] ? {
+                ...obstacle,
+                [param[1]]: param[0]
+            } : obstacle)
+        })
+
+    }
+    const changeOpeningWalloutlet = (event) => {
+        let param = event.target.getAttribute("controlid").split("-");
+        setObstacles({
+            ...obstacles,
+            walloutlet: obstacles["walloutlet"].map((obstacle) => obstacle.id == param[2].split("walloutlet")[1] ? {
+                ...obstacle,
+                [param[1]]: param[0]
+            } : obstacle)
+        })
+
+    }
+    const changeOpeningSwitch = (event) => {
+        console.log("change opening")
+        let param = event.target.getAttribute("controlid").split("-");
+        console.log(param)
+        console.log("PARAM")
+        setObstacles({
+            ...obstacles,
+            switch: obstacles["switch"].map((obstacle) => obstacle.id == param[2].split("switch")[1] ? {
                 ...obstacle,
                 [param[1]]: param[0]
             } : obstacle)
@@ -200,6 +244,25 @@ export function Q1({ stateId, setStateId }) {
             light: prevObstacles.light.filter((obstacle) => obstacle.id != obstacleIndex)
         }));
     };
+
+    const deleteWalloutletObstacle = (event) => {
+        event.preventDefault();
+        let obstacleIndex = event.currentTarget.id.split("walloutlet")[1];
+        setObstacles((prevObstacles) => ({
+            ...prevObstacles,
+            walloutlet: prevObstacles.walloutlet.filter((obstacle) => obstacle.id != obstacleIndex)
+        }));
+    };
+    const deleteSwitchObstacle = (event) => {
+        event.preventDefault();
+        let obstacleIndex = event.currentTarget.id.split("switch")[1];
+        setObstacles((prevObstacles) => ({
+            ...prevObstacles,
+            switch: prevObstacles.switch.filter((obstacle) => obstacle.id != obstacleIndex)
+        }));
+    };
+
+
     //___________________________________________________________________________________
 
     const addObstacles = (event) => {
@@ -292,8 +355,8 @@ export function Q1({ stateId, setStateId }) {
                                         type={item.type}
                                         width={item.width}
                                         height={item.height}
-
-                                        key={"obst" + item.id}
+                                        depth={item.depth}
+                                        key={"walloutlet" + item.id}
 
                                         walloutletYpos={item.walloutletYpos}
                                         walloutletXpos={item.walloutletXpos}
@@ -302,12 +365,12 @@ export function Q1({ stateId, setStateId }) {
                                         changeOpening={changeOpeningWalloutlet}
                                         deleteObst={deleteWalloutletObstacle}
 
-                                        walloutletWall={item.obstacleWall}
+                                        walloutletWall={item.walloutletWall}
                                         maxHeight={dimensions.height}
                                     />;
                                 } else if (item.type === "switch") {
                                     return <Switch
-                                        obstId={"door" + item.id}
+                                        obstId={"switch" + item.id}
                                         type={item.type}
                                         width={item.width}
                                         height={item.height}
@@ -321,12 +384,12 @@ export function Q1({ stateId, setStateId }) {
                                         changeOpening={changeOpeningSwitch}
                                         deleteObst={deleteSwitchObstacle}
 
-                                        switchWall={item.obstacleWall}
+                                        switchWall={item.switchWall}
                                         maxHeight={dimensions.height}
                                     />;
                                 } else if (item.type === "light") {
                                     return <Light
-                                        obstId={"door" + item.id}
+                                        obstId={"light" + item.id}
                                         key={"obst" + item.id}
                                         type={item.type}
 

@@ -53,10 +53,10 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                 return;
             }
         }
-        //TODO: if length of walls are being saved
+        /*TODO: if length of walls are being saved
         else if(event.target.name=="width" || event.target.name=="switchXpos"){
 
-        }
+        }*/
         changeSwitch(event);
 
     }
@@ -148,7 +148,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     type="number"
                                     name={"switchXpos"}
                                     min={0} step={1}
-                                    value={walloutletXpos}
+                                    value={switchXpos}
                                     onChange={(e) => {
                                         handleInput(e)
                                     }}
@@ -192,7 +192,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     className="mb-4"
                                     type="radio"
                                     variant="danger"
-                                    name={`switchWall${obstId}`}
+                                    name={`obstacleWall${obstId}`}
                                     controlid={`${x}-switchWall-${obstId}`}
                                     data-testid={`btn-obstacle-switch-position-${x}`}
                                     onClick={(e) => {

@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight}) {
     //i18n
     const { t, i18n } = useTranslation();
-
+    console.log(obstId)
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
@@ -29,7 +29,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
                 return;
             }
         }
-        changeObst(event);
+        changeLight(event);
     }
 
     function negativeValues(event){

@@ -31,7 +31,8 @@ i18n
                         other: "Other",
                         q_aspects:"Add which aspects we should take into account in your living space.",
                         aspect:"Aspect",
-                        add_aspect: "Add aspect"
+                        add_aspect: "Add aspect",
+                        depth: "depth"
                     },
                     obstructions: {
                         window:"Window",
@@ -53,6 +54,20 @@ i18n
                             yes:"yes",
                             no:"no",
                             window_wall:"Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right"
+                        },
+                        q_walloutlet:{
+                            walloutlet_wall:"Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right"
+                        },
+                        q_switch:{
+                            switch_wall:"Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
