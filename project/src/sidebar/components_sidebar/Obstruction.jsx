@@ -39,8 +39,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
         }
     }
 
-    console.log(type)
-
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
@@ -65,7 +63,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                         <option value={"walloutlet"}>{t('obstructions.walloutlet')}</option>
                         <option value={"switch"}>{t('obstructions.switch')}</option>
                         <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
-
+                        <option value={"light"}>{t('obstructions.light')}</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>

@@ -17,8 +17,6 @@ import { DObstruction } from './Draggables/DObstruction.jsx';
 const Scene = () => {
     const { dimensions } = useConfiguratorContext();
 
-    console.log(dimensions)
-
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
@@ -44,6 +42,8 @@ const Scene = () => {
                         dimensions={[obstacle.width /100, obstacle.height/100, obstacle.obstLength/100]}
                         maxX={width} 
                         maxZ={depth}
+                        maxY={height}
+                        otype={obstacle.type}
                     // Pass any other necessary props to DObstruction
                     />
                 ))}

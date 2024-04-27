@@ -31,7 +31,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
     const changeSelectedWall = (wall) => {
         setIsButtonDisabled(true);
         setSelectedWall(wall);
-        console.log("test changeSelectedWall: " + wall);
         setTimeout(() => {
             setSelectedWall(null);
             setIsButtonDisabled(false);
@@ -40,8 +39,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
 
 
     function handleInput(event) {
-        console.log("RESULTAAT");
-        console.log(event);
         //prevent use of negative values
         if(event.target.name=="height" || event.target.name=="windowYpos"){
             let sum=Number(event.target.value);
@@ -69,13 +66,6 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
             event.preventDefault();
         }
     }
-
-
-    console.log(obstId);
-    console.log(windowWall)
-    console.log(windowXpos);
-    console.log(windowYpos);
-    console.log(type)
 
     return (
         <div className="obstruction-bg mb-2 flex">

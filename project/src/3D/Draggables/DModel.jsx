@@ -39,11 +39,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     }, [modelRotation]);
 
 
-    console.log("rotatie")
-    console.log(modelRotation)
-
-
-
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 

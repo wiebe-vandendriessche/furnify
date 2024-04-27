@@ -64,10 +64,6 @@ const WindowMesh = ({ width, height, depth, position, windows, doors, wallTextur
   
   const wallGeometry = new THREE.BoxGeometry(width, height, depth);
   const wallMesh = new THREE.Mesh(wallGeometry);
-  console.log("DE WINDOWS doorgegeven: " + wall)
-  console.log(windows)
-  console.log("DE DOORS doorgegeven: " + wall)
-  console.log(doors)
 
   const doorCSGs = doors.map(door => {
     const y = 0;
