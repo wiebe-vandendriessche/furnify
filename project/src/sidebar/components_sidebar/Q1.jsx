@@ -145,7 +145,6 @@ export function Q1({ stateId, setStateId }) {
         })
     }
     const changeSwitch = (event) => {
-        console.log("change")
         setObstacles({
             ...obstacles,
             switch: obstacles["switch"].map((obstacle) => obstacle.id == event.target.id.split("switch")[1] ? {
@@ -195,10 +194,7 @@ export function Q1({ stateId, setStateId }) {
 
     }
     const changeOpeningSwitch = (event) => {
-        console.log("change opening")
         let param = event.target.getAttribute("controlid").split("-");
-        console.log(param)
-        console.log("PARAM")
         setObstacles({
             ...obstacles,
             switch: obstacles["switch"].map((obstacle) => obstacle.id == param[2].split("switch")[1] ? {
