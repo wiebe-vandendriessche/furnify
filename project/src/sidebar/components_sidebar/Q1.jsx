@@ -1,26 +1,29 @@
 import "../../App.css"
-import {useEffect} from "react";
+import { useEffect } from "react";
 import "./Questionnaire.css"
-import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
+import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import Obstruction from "./Obstruction.jsx";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {useTranslation} from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import Window from "./Window.jsx";
+import Walloutlet from "./Walloutlet.jsx";
+import Switch from "./Switch.jsx";
 import Door from "./Door.jsx";
+import Light from "./Light.jsx";
 
 
-export function Q1({stateId, setStateId}) {
+export function Q1({ stateId, setStateId }) {
     //i18n
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
 
-    const sortObstacles = (list1, list2, list3) => {
+    const sortObstacles = (list1, list2, list3, list4, list5, list6) => {
         //merge the lists
-        const allObsts = [...list1, ...list2, ...list3];
+        const allObsts = [...list1, ...list2, ...list3, ...list4, ...list5, ...list6];
         // sort the list according to id
         allObsts.sort((a, b) => a.id - b.id);
         return allObsts;
@@ -49,6 +52,36 @@ export function Q1({stateId, setStateId}) {
                     windowXpos: 0,
                     windowYpos: 0
                 };
+            case "walloutlet":
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    depth: 0,
+                    id: stateId,
+                    walloutletWall: "front",
+                    walloutletXpos: 0,
+                    walloutletYpos: 0
+                };
+            case "switch":
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    depth: 0,
+                    id: stateId,
+                    switchWall: "front",
+                    switchXpos: 0,
+                    switchYpos: 0
+                };
+            case "light":
+                return {
+                    type: valueType,
+                    width: 0,
+                    height: 0,
+                    obstLength: 0,
+                    id: stateId,
+                };
             default:
                 return {
                     type: valueType,
@@ -61,22 +94,20 @@ export function Q1({stateId, setStateId}) {
     }
 
     //Uses reactcontext
-    const {dimensions, obstacles, setObstacles} = useConfiguratorContext();
+    const { dimensions, obstacles, setObstacles } = useConfiguratorContext();
 
     //Changes values of dimensions in context
-
+    //___________________________________________________________________________________
     const changeObstacle = (event) => {
         setObstacles({
             ...obstacles,
             other: obstacles["other"].map((obstacle) => obstacle.id == event.target.id.split("obst")[1] ? {
-                    ...obstacle,
-                    [event.target.name]: event.target.value
-                } :
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } :
                 obstacle)
         })
     }
-
-
     const changeDoor = (event) => {
         setObstacles({
             ...obstacles,
@@ -95,9 +126,22 @@ export function Q1({stateId, setStateId}) {
             } : obstacle)
         })
     }
+    const changeLight = (event) => {
+        setObstacles({
+            ...obstacles,
+            light: obstacles["light"].map((obstacle) => obstacle.id == event.target.id.split("light")[1] ? {
+                ...obstacle,
+                [event.target.name]: event.target.value
+            } : obstacle)
+        })
+    }
+    //___________________________________________________________________________________
+
+
 
 
     //Opening door done separate, because it doesn't work otherwise
+    //___________________________________________________________________________________
     const changeOpeningDoor = (event) => {
         let param = event.target.getAttribute("controlid").split("-");
         setObstacles({
@@ -120,7 +164,10 @@ export function Q1({stateId, setStateId}) {
         })
 
     }
+    //___________________________________________________________________________________
 
+
+    //_____DELETE______________________________________________________________________
     const deleteObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("obst")[1];
@@ -129,7 +176,6 @@ export function Q1({stateId, setStateId}) {
             other: prevObstacles.other.filter((obstacle) => obstacle.id != obstacleIndex)
         }));
     };
-
     const deleteDoorObstacle = (event) => {
         event.preventDefault();
         let obstacleIndex = event.currentTarget.id.split("door")[1];
@@ -146,6 +192,15 @@ export function Q1({stateId, setStateId}) {
             window: prevObstacles.window.filter((obstacle) => obstacle.id != obstacleIndex)
         }));
     };
+    const deleteLightObstacle = (event) => {
+        event.preventDefault();
+        let obstacleIndex = event.currentTarget.id.split("light")[1];
+        setObstacles((prevObstacles) => ({
+            ...prevObstacles,
+            light: prevObstacles.light.filter((obstacle) => obstacle.id != obstacleIndex)
+        }));
+    };
+    //___________________________________________________________________________________
 
     const addObstacles = (event) => {
         setStateId(stateId + 1)
@@ -174,19 +229,31 @@ export function Q1({stateId, setStateId}) {
                     </div>
                     <div className={"m-1"}>
                         <Button data-testid={"btn-space-aspect-window"} onClick={addObstacles} variant="danger"
-                                value={"window"}>
+                            value={"window"}>
                             {t('obstructions.window')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-door"} onClick={addObstacles} variant="danger"
-                                value={"door"}>
+                            value={"door"}>
                             {t('obstructions.door')}
                         </Button>
+                        <Button data-testid={"btn-space-aspect-walloutlet"} onClick={addObstacles} variant="danger"
+                            value={"walloutlet"}>
+                            {t('obstructions.walloutlet')}
+                        </Button>
+                        <Button data-testid={"btn-space-aspect-switch"} onClick={addObstacles} variant="danger"
+                            value={"switch"}>
+                            {t('obstructions.switch')}
+                        </Button>
+                        <Button data-testid={"btn-space-aspect-light"} onClick={addObstacles} variant="danger"
+                            value={"light"}>
+                            {t('obstructions.light')}
+                        </Button>
                         <Button data-testid={"btn-space-aspect-other"} onClick={addObstacles} variant="danger"
-                                value={"other"}>
+                            value={"other"}>
                             {t('obstructions.other')}
                         </Button>
                         <div className={"aspect"}>
-                            {sortObstacles(obstacles["window"], obstacles["door"], obstacles["other"]).map(item => {
+                            {sortObstacles(obstacles["window"], obstacles["door"], obstacles["walloutlet"], obstacles["switch"], obstacles["light"], obstacles["other"]).map(item => {
                                 if (item.type === "window") {
                                     return <Window
                                         obstId={"window" + item.id}
@@ -218,17 +285,73 @@ export function Q1({stateId, setStateId}) {
                                         doorWall={item.obstacleWall}
                                         maxHeight={dimensions.height}
                                     />;
+                                } else if (item.type === "walloutlet") {
+                                    return <Walloutlet
+                                        obstId={"walloutlet" + item.id}
+
+                                        type={item.type}
+                                        width={item.width}
+                                        height={item.height}
+
+                                        key={"obst" + item.id}
+
+                                        walloutletYpos={item.walloutletYpos}
+                                        walloutletXpos={item.walloutletXpos}
+
+                                        changeWalloutlet={changeWalloutlet}
+                                        changeOpening={changeOpeningWalloutlet}
+                                        deleteObst={deleteWalloutletObstacle}
+
+                                        walloutletWall={item.obstacleWall}
+                                        maxHeight={dimensions.height}
+                                    />;
+                                } else if (item.type === "switch") {
+                                    return <Switch
+                                        obstId={"door" + item.id}
+                                        type={item.type}
+                                        width={item.width}
+                                        height={item.height}
+                                        depth={item.depth}
+                                        key={"obst" + item.id}
+
+                                        switchYpos={item.switchYpos}
+                                        switchXpos={item.switchXpos}
+
+                                        changeSwitch={changeSwitch}
+                                        changeOpening={changeOpeningSwitch}
+                                        deleteObst={deleteSwitchObstacle}
+
+                                        switchWall={item.obstacleWall}
+                                        maxHeight={dimensions.height}
+                                    />;
+                                } else if (item.type === "light") {
+                                    return <Light
+                                        obstId={"door" + item.id}
+                                        key={"obst" + item.id}
+                                        type={item.type}
+
+                                        width={item.width}
+                                        height={item.height}
+                                        obstLength={item.obstLength}
+
+                                        changeLight={changeLight}
+                                        deleteObst={deleteLightObstacle}
+
+                                        maxHeight={dimensions.height}
+                                    />;
                                 } else {
                                     return <Obstruction
                                         obstId={"obst" + item.id}
+                                        key={"obst" + item.id}
                                         type={item.type}
-                                        length={item.obstLength}
+
                                         width={item.width}
                                         height={item.height}
-                                        key={"obst" + item.id}
+                                        obstLength={item.obstLength}
+
                                         changeObst={changeObstacle}
                                         deleteObst={deleteObstacle}
-                                        obstLength={item.obstLength}
+
                                         maxHeight={dimensions.height}
                                     />;
                                 }
@@ -240,7 +363,7 @@ export function Q1({stateId, setStateId}) {
                 </div>
             </Form.Group>
         </div>
-)
+    )
 }
 
 export default Q1;

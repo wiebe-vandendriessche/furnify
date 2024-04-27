@@ -9,7 +9,7 @@ export const ConfiguratorProvider = ({ children }) => {
 
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, office_space: false, storage_space: false })
     const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birch", layout:""})
-    const [obstacles, setObstacles] = useState({door: [], window: [], other: []});
+    const [obstacles, setObstacles] = useState({door: [], window: [], walloutlet: [], switch: [], light: [], other: []});
     const [rectangular, setRectangular] = useState(true);
 
     const [rotationIndex, setRotationIndex] = useState(0);
@@ -31,6 +31,21 @@ export const ConfiguratorProvider = ({ children }) => {
         return obstacles.window;
     }
 
+    // Function to return walloutlets
+    const getWalloutlets = () => {
+        return obstacles.walloutlet;
+    }
+
+    // Function to return switches
+    const getSwitches = () => {
+        return obstacles.switch;
+    }
+
+    // Function to return lights
+    const getLights = () => {
+        return obstacles.light;
+    }
+
     // Function to return other obstacles
     const getOtherObstacles = () => {
         return obstacles.other;
@@ -49,6 +64,9 @@ export const ConfiguratorProvider = ({ children }) => {
         setObstacles,
         getDoors,
         getWindows,
+        getWalloutlets,
+        getSwitches,
+        getLights,
         getOtherObstacles,
         modelRotation: rotations[rotationIndex],
         rotate
