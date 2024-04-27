@@ -40,6 +40,7 @@ i18n
                         walloutlet:"Wall outlet",
                         switch:"Switch",
                         sloping_Wall:"Sloping wall",
+                        light:"Light",
                         other:"Other",
                         q_door:{
                             opening_door:"How does the door open?",
