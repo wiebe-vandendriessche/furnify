@@ -60,10 +60,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                  }}>
                         <option value={"other"}>{t('obstructions.other')}</option>
                         <option value={"radiator"}>{t('obstructions.radiator')}</option>
-                        <option value={"walloutlet"}>{t('obstructions.walloutlet')}</option>
-                        <option value={"switch"}>{t('obstructions.switch')}</option>
                         <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
-                        <option value={"light"}>{t('obstructions.light')}</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
@@ -98,8 +95,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                                   onKeyPress={negativeValues}
                                                   id={"width"+obstId}
                                     />
-
-
                                 </FloatingLabel>
                             </Col>
                             <Col>

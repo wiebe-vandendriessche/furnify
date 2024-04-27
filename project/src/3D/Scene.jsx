@@ -12,6 +12,7 @@ import { DCube } from './Draggables/DCube.jsx';
 import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
+import { DLight } from './Draggables/DLight.jsx';
 
 
 const Scene = () => {
@@ -22,7 +23,10 @@ const Scene = () => {
     let height = dimensions.height;
 
     const { getOtherObstacles } = useConfiguratorContext();
+    const { getLights } = useConfiguratorContext();
+
     const obstacles = getOtherObstacles();
+    const lights = getLights();
 
     return (
         <Canvas className="canvas" camera={{ position: [10, 6, 8] }} style={{ backgroundColor: 'lightblue' }}>
@@ -47,6 +51,19 @@ const Scene = () => {
                     // Pass any other necessary props to DObstruction
                     />
                 ))}
+                {lights.map((light) => (
+                    <DLight
+                        key={light.id}
+                        position={[0,0,0]}
+                        dimensions={[light.width /100, light.height/100, light.obstLength/100]}
+                        maxX={width} 
+                        maxZ={depth}
+                        maxY={height}
+                        otype={light.type}
+                    // Pass any other necessary props to DObstruction
+                    />
+                ))}
+
                 {/* 
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
