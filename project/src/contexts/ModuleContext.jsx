@@ -5,15 +5,15 @@ export const ModuleContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const ModuleProvider = ({ children }) => {
     const [errors, setErrors]= useState({softer: false, demands: false, roomSize: false, points2D: false})
-    const [modules, setModules] = useState([])
+    const [possible_modules, setPossileModules] = useState([])
 
     return (
         <ModuleContext.Provider
             value={{
                 errors,
                 setErrors,
-                modules,
-                setModules
+                possible_modules,
+                setPossileModules
             }}>
             {children}
         </ModuleContext.Provider>

@@ -36,7 +36,7 @@ export function Questionnaire_functional() {
 
 
     const { errors, setErrors } = useModuleContext();
-    const { modules, setModules} = useModuleContext();
+    const { possible_modules, setPossileModules} = useModuleContext();
     const module = (event) => {
         let result = check(value, varia, get2D);
         setErrors({
@@ -45,7 +45,7 @@ export function Questionnaire_functional() {
             roomSize: result.errors.roomSize,
             points2D: result.errors.points2D
         });
-        setModules(result.possible)
+        setPossileModules(result.possible)
     }
 
 
@@ -136,8 +136,7 @@ export function Questionnaire_functional() {
                     </Form.Group>
                 </div>
                 <div>
-                    <Button onClick={module} variant="danger"
-                    >
+                    <Button onClick={module} variant="danger">
                         Find Modules
                     </Button>
 
