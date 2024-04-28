@@ -23,10 +23,13 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
   const [leftWallVisible, setLeftWallVisible] = useState(true);
   const [rightWallVisible, setRightWallVisible] = useState(false);
 
-  const { getWindows, getDoors } = useConfiguratorContext()
+  const { getWindows, getDoors, getWalloutlets, getSwitches } = useConfiguratorContext()
+
 
   const windows = getWindows();
   const doors = getDoors();
+  const walloutlets = getWalloutlets();
+  const switches = getSwitches();
 
   //wallthickness
   width = parseFloat(width) + 0.6
@@ -90,6 +93,8 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         visible={backWallVisible}
         windows={windows.filter(window => window.windowWall === "back")}
         doors={doors.filter(door => door.obstacleWall === "back")}
+        walloutlets={walloutlets.filter(walloutlet => walloutlet.walloutletWall == "back")}
+        switches={switches.filter(oswitch => oswitch.switchWall == "back")}
         giveColor={selectedWall === "back" ? true : false} // Change color based on selectedWall
         wall={"back"}
       />
@@ -101,6 +106,9 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         visible={frontWallVisible}
         windows={windows.filter(window => window.windowWall === "front")}
         doors={doors.filter(door => door.obstacleWall === "front")}
+        walloutlets={walloutlets.filter(walloutlet => walloutlet.walloutletWall == "front")}
+        switches={switches.filter(oswitch => oswitch.switchWall == "front")}
+
         giveColor={selectedWall === "front" ? true : false} // Change color based on selectedWall
         wall={"front"}
       />
@@ -112,6 +120,8 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         visible={leftWallVisible}
         windows={windows.filter(window => window.windowWall === "left")}
         doors={doors.filter(door => door.obstacleWall === "left")}
+        walloutlets={walloutlets.filter(walloutlet => walloutlet.walloutletWall == "left")}
+        switches={switches.filter(oswitch => oswitch.switchWall == "left")}
         giveColor={selectedWall === "left" ? true : false} // Change color based on selectedWall
         wall={"left"}
       />
@@ -123,6 +133,8 @@ export const Room = ({ width, depth, height, wallThickness, floorThickness }) =>
         visible={rightWallVisible}
         windows={windows.filter(window => window.windowWall === "right")}
         doors={doors.filter(door => door.obstacleWall === "right")}
+        walloutlets={walloutlets.filter(walloutlet => walloutlet.walloutletWall == "right")}
+        switches={switches.filter(oswitch => oswitch.switchWall == "right")}
         giveColor={selectedWall === "right" ? true : false} // Change color based on selectedWall
         wall={"right"}
       />

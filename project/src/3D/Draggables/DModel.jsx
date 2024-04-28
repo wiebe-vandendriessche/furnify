@@ -195,9 +195,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     return (
         <>
-            <mesh ref={ref} rotation={[0, modelRotation, 0]} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.material} castShadow receiveShadow {...events} {...props}>
+            <mesh ref={ref} rotation={[0, modelRotation, 0]} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.materials} castShadow receiveShadow {...events} {...props}>
                 <meshStandardMaterial />
             </mesh>
+
         </>
     )
 };

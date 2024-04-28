@@ -6,10 +6,10 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight}) {
+function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight}) {
     //i18n
     const { t, i18n } = useTranslation();
-
+    console.log(obstId)
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
@@ -29,7 +29,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                 return;
             }
         }
-        changeObst(event);
+        changeLight(event);
     }
 
     function negativeValues(event){
@@ -52,17 +52,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                 x
             </Button>
             <div className="m-1" hidden={showButton2}>
-                <Form.Group className="mb-3">
-                    <Form.Select name="type" id={"type" + obstId}
-                                 defaultValue={type}
-                                 onChange={(e) => {
-                                     changeObst(e)
-                                 }}>
-                        <option value={"other"}>{t('obstructions.other')}</option>
-                        <option value={"radiator"}>{t('obstructions.radiator')}</option>
-                        <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
-                    </Form.Select>
-                </Form.Group>
                 <Form.Group>
                     <div className="m-1">
                         <Row>
@@ -95,6 +84,8 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                                   onKeyPress={negativeValues}
                                                   id={"width"+obstId}
                                     />
+
+
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -123,4 +114,4 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
     )
 }
 
-export default Obstruction;
+export default Light;
