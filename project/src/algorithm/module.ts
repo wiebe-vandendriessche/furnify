@@ -46,8 +46,6 @@ export class Module {
 
         if (typeof mod == 'object' && mod != null) {
             Object.entries(mod).forEach(([key, value]) => {
-                console.log(key)
-                console.log( typeof value)
                 if (value == 'true') {
                     this._components.push(key);
                 }
@@ -75,6 +73,10 @@ export class Module {
     }
     public get width(): number {
         return this._width
+    }
+
+    public get components(): string[] {
+        return this._components
     }
 
     /**

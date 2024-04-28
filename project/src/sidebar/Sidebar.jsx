@@ -17,6 +17,7 @@ import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
 import { use2d } from "../contexts/2dContext.tsx";
+import Questionnaire_module from "./components_sidebar/Questionnaire_module.jsx";
 
 
 
@@ -24,8 +25,6 @@ export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
-    const value = useConfiguratorContext();
-    const get2D = use2d();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -39,7 +38,7 @@ export function Sidebar() {
         return part == 0;
     }
     const showNext = () => {
-        return part == 4;
+        return part == 5;
     }
     const { contact } = useContactContext();
 
@@ -56,11 +55,13 @@ export function Sidebar() {
                 return <Q1 stateId={stateId} setStateId={setStateId}/>
             case 2:
                 return <Questionnaire_func />
-            case 3:
-                return <Questionnaire_specs />
+            case 3: 
+                return <Questionnaire_module/>
             case 4:
-                return <Contact/>
+                return <Questionnaire_specs />
             case 5:
+                return <Contact/>
+            case 6:
                 return <p>Nothing to see here</p>
             default:
                 return <p>This is some default text</p>

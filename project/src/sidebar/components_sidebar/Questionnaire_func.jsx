@@ -3,11 +3,9 @@ import "./Questionnaire.css"
 import { useVariaContext } from "../../contexts/VariaContext.jsx";
 import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-import { ToggleButton, Collapse, ButtonGroup, Form, FloatingLabel, Button } from "react-bootstrap";
-import { check } from "../../algorithm/module_choice.ts";
-import { use2d } from "../../contexts/2dContext.tsx"
-import { useModuleContext } from "../../contexts/ModuleContext.jsx"
+import { useEffect} from 'react'
+import { ToggleButton, Collapse, ButtonGroup, Form } from "react-bootstrap";
+
 
 
 export function Questionnaire_functional() {
@@ -28,27 +26,6 @@ export function Questionnaire_functional() {
     const changeVaria = (event) => {
         setVaria({ ...varia, [event.target.name]: [event.target.id] })
     }
-
-    const { rotate } = useConfiguratorContext();
-    
-    const get2D = use2d();
-    const value = useConfiguratorContext();
-
-
-    const { errors, setErrors } = useModuleContext();
-    const { possible_modules, setPossileModules} = useModuleContext();
-    const module = (event) => {
-        let result = check(value, varia, get2D);
-        setErrors({
-            softer: result.errors.softer,
-            demands: result.errors.demands,
-            roomSize: result.errors.roomSize,
-            points2D: result.errors.points2D
-        });
-        setPossileModules(result.possible)
-    }
-
-
 
     return (
 
@@ -135,21 +112,7 @@ export function Questionnaire_functional() {
                         </div>
                     </Form.Group>
                 </div>
-                <div>
-                    <Button onClick={module} variant="danger">
-                        Find Modules
-                    </Button>
-
-                </div>
-                <div className={"aspect"}>
-                    {Object.entries(errors).map(([key, value]) => (
-                        <Collapse in={value}>
-                        <h6>{"Error: " + key}</h6>
-                    </Collapse>   
-                    ))}
                 
-                    <ToggleButton onClick={rotate}>Rotate 90</ToggleButton>
-                </div>
             </Form >
         </div >
 
