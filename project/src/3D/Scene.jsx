@@ -13,7 +13,6 @@ import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
 import { DLight } from './Draggables/DLight.jsx';
-import { DWalloutlet } from './Draggables/DWalloutlet.jsx';
 
 
 const Scene = () => {
