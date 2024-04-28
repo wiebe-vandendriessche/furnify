@@ -53,7 +53,7 @@ export const WallWithWindow = ({ width, height, depth, position, visible, window
           doors={doors}
           walloutlets={walloutlets}
           switches={switches}
-          wallTexture={wallTexture}
+          wallTexture={null}
           giveColor={giveColor}
           wall={wall}
         />

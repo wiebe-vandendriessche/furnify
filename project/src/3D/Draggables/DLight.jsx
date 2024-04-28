@@ -38,8 +38,9 @@ export const DLight = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 
     });
 
     return (
-        <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} castShadow receiveShadow {...events} {...props}>
+        <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} receiveShadow {...events} {...props}>
             <boxGeometry />
+            <pointLight power={100} decay={2} castShadow></pointLight>
             <meshStandardMaterial />
         </mesh>
     );
