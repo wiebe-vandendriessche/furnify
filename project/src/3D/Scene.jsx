@@ -72,7 +72,10 @@ const Scene = () => {
     const obstacles = getOtherObstacles();
     const lights = getLights();
 
-    const [skyboxPath, setSkyboxPath] = useState("day");
+    const [skyboxPath, setSkyboxPath] = useState(() => {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+        return prefersDarkMode.matches ? "night" : "day";
+    });
 
     useEffect(() => {
         const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
