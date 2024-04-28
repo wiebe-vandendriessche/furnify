@@ -9,28 +9,22 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, m
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 
-    const [type, setType] = useState(otype);
-
-    useEffect(() => {
-        setType(otype);
-    }, [otype]);
-
     const ceilingHeight = maxY - dimensions[1] / 2;
 
     const onDrag = useCallback(({ x, z }) => {
-        const newY = type === "light" ? ceilingHeight : dimensions[1] / 2;
+        const newY = dimensions[1] / 2;
         const newX = clamp(x, -maxX2 + (dimensions[0] / 2), maxX2 - (dimensions[0] / 2));
         const newZ = clamp(z, -maxZ2 + (dimensions[2] / 2), maxZ2 - (dimensions[2] / 2));
         pos.current = [newX, newY, newZ];
-    }, [dimensions, maxX2, maxZ2, maxY, type, ceilingHeight, clamp]);
+    }, [dimensions, maxX2, maxZ2, maxY, ceilingHeight, clamp]);
 
     useEffect(() => {
         const [x, y, z] = pos.current;
-        const newY = type === "light" ? ceilingHeight : dimensions[1] / 2;
+        const newY = dimensions[1] / 2;
         const newX = clamp(x, -maxX2 + (dimensions[0] / 2), maxX2 - (dimensions[0] / 2));
         const newZ = clamp(z, -maxZ2 + (dimensions[2] / 2), maxZ2 - (dimensions[2] / 2));
         pos.current = [newX, newY, newZ];
-    }, [dimensions, maxX2, maxZ2, maxY, type, ceilingHeight, clamp]);
+    }, [dimensions, maxX2, maxZ2, maxY, ceilingHeight, clamp]);
 
     const [events, active, hovered] = useDrag(onDrag);
 

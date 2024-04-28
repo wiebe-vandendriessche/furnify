@@ -13,6 +13,7 @@ import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
 import { DLight } from './Draggables/DLight.jsx';
+import { DWalloutlet } from './Draggables/DWalloutlet.jsx';
 
 
 const Scene = () => {
@@ -24,6 +25,7 @@ const Scene = () => {
 
     const { getOtherObstacles } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
+    const { getWalloutlets } = useConfiguratorContext();
 
     const obstacles = getOtherObstacles();
     const lights = getLights();
@@ -63,7 +65,6 @@ const Scene = () => {
                     // Pass any other necessary props to DObstruction
                     />
                 ))}
-
                 {/* 
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
