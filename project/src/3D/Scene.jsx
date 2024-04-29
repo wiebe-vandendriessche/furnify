@@ -14,6 +14,7 @@ import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
 import { DLight } from './Draggables/DLight.jsx';
 import { CubeTextureLoader } from 'three';
+import { Loader } from '@react-three/drei';
 
 
 const Skybox = ({ path }) => {
@@ -95,53 +96,58 @@ const Scene = () => {
         };
     }, []);
 
+
     return (
-        <Canvas shadows className="canvas" camera={{ position: [10, 6, 8] }}>
-            <Suspense fallback={null}>
-                <ambientLight intensity={0.7} />
-                <directionalLight castShadow position={[30, 50, 30]} />
+        <>
+            <Canvas shadows className="canvas" camera={{ position: [10, 6, 8] }}>
+                <Suspense fallback={null}>
 
-                <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
+                    <ambientLight intensity={0.7} />
+                    <directionalLight castShadow position={[30, 50, 30]} />
+
+                    <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
 
 
-                <Surface surfX={width} surfZ={depth}>
-                    {/* Render DObstruction for each obstacle */}
-                    {obstacles.map((obstacle) => (
-                        <DObstruction
-                            key={obstacle.id}
-                            position={[0, 0, 0]}
-                            dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
-                            maxX={width}
-                            maxZ={depth}
-                            maxY={height}
-                            otype={obstacle.type}
-                        // Pass any other necessary props to DObstruction
-                        />
-                    ))}
-                    {lights.map((light) => (
-                        <DLight
-                            key={light.id}
-                            position={[0, 0, 0]}
-                            dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
-                            maxX={width}
-                            maxZ={depth}
-                            maxY={height}
-                            otype={light.type}
-                        // Pass any other necessary props to DObstruction
-                        />
-                    ))}
-                    {/* 
+                    <Surface surfX={width} surfZ={depth}>
+                        {/* Render DObstruction for each obstacle */}
+                        {obstacles.map((obstacle) => (
+                            <DObstruction
+                                key={obstacle.id}
+                                position={[0, 0, 0]}
+                                dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
+                                maxX={width}
+                                maxZ={depth}
+                                maxY={height}
+                                otype={obstacle.type}
+                            // Pass any other necessary props to DObstruction
+                            />
+                        ))}
+                        {lights.map((light) => (
+                            <DLight
+                                key={light.id}
+                                position={[0, 0, 0]}
+                                dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
+                                maxX={width}
+                                maxZ={depth}
+                                maxY={height}
+                                otype={light.type}
+                            // Pass any other necessary props to DObstruction
+                            />
+                        ))}
+                        {/* 
                 <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
                 */}
-                    <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
-                </Surface>
+                        <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
+                    </Surface>
 
-                <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
+                    <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
+                    <Skybox path={skyboxPath} />
 
-            </Suspense>
-            <Skybox path={skyboxPath} />
-        </Canvas>
+                </Suspense>
+            </Canvas>
+            <Loader />
+        </>
     )
 }
 

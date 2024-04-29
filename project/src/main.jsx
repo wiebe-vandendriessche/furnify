@@ -9,7 +9,6 @@ import { DrawingProvider } from "./contexts/2dContext.tsx";
 import "./i18n.ts";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <VariaProvider>
       <ContactProvider>
         <ConfiguratorProvider>
@@ -21,5 +20,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ConfiguratorProvider>
       </ContactProvider>
     </VariaProvider>
-  </React.StrictMode>
 );
