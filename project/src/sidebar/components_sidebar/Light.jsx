@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
+import { IoCloseSharp } from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight}) {
@@ -49,7 +50,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                     variant={"danger"} id={"delete" + obstId}
                     onClick={(e) => deleteObst(e)}>
-                x
+           <IoCloseSharp />
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>

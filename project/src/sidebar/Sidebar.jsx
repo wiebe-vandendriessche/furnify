@@ -11,10 +11,10 @@ import Questionnaire_specs from "./components_sidebar/Questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
-import {useContactContext} from "../contexts/ContactContext.jsx"
-import {useVariaContext} from "../contexts/VariaContext.jsx"
+import { useContactContext } from "../contexts/ContactContext.jsx"
+import { useVariaContext } from "../contexts/VariaContext.jsx"
 import jsonp from "jsonp";
-import {Form} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
 import { use2d } from "../contexts/2dContext.tsx";
 
@@ -43,9 +43,9 @@ export function Sidebar() {
     }
     const { contact } = useContactContext();
 
-    const { dimensions,functionalities,specs,obstacles} = useConfiguratorContext();
+    const { dimensions, functionalities, specs, obstacles } = useConfiguratorContext();
 
-    const {varia} = useVariaContext();
+    const { varia } = useVariaContext();
 
 
     const showNextPart = () => {
@@ -53,14 +53,14 @@ export function Sidebar() {
             case 0:
                 return <Questionnaire_space />
             case 1:
-                return <Q1 stateId={stateId} setStateId={setStateId}/>
+                return <Q1 stateId={stateId} setStateId={setStateId} />
             case 2:
                 return <Questionnaire_func />
             case 3:
                 return <Questionnaire_specs />
             case 4:
                 check(value, varia, get2D)
-                return <Contact/>
+                return <Contact />
             case 5:
                 return <p>Nothing to see here</p>
             default:
@@ -106,15 +106,15 @@ export function Sidebar() {
             });
         });
 
-        let dim=""
+        let dim = ""
         Object.entries(dimensions).map(([key, value]) => (
-            dim+=key+":"+value+" "
+            dim += key + ":" + value + " "
         ));
 
         let func = "";
         Object.entries(functionalities).forEach(([key, value]) => {
             if (value) {
-                func += key+" ";
+                func += key + " ";
             }
         });
 
@@ -125,7 +125,7 @@ export function Sidebar() {
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
             const { msg, result } = data
-            console.log(result,msg)
+            console.log(result, msg)
             alert(msg);
         });
     };
@@ -147,8 +147,16 @@ export function Sidebar() {
                             {showNextPart()}
                         </Form>
                         <div className="bottom_btn">
-                            <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}><FaAnglesLeft /></button>
-                            <button data-testid="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}><FaAnglesRight /></button>
+                            <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}>
+                                <div className="bottom_btn_content">
+                                    <FaAnglesLeft />
+                                </div>
+                            </button>
+                            <button data-testid="btn-nav-sidebar-next" onClick={nextPart} hidden={showNext()}>
+                                <div className="bottom_btn_content">
+                                    <FaAnglesRight />
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </nav>
@@ -158,6 +166,6 @@ export function Sidebar() {
             </IconContext.Provider>
         </>
     )
-    }
+}
 
-    export default Sidebar;
+export default Sidebar;

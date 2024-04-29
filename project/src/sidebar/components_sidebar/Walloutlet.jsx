@@ -5,6 +5,7 @@ import { ButtonGroup, Col, FloatingLabel, Row, ToggleButton } from "react-bootst
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
+import { IoCloseSharp } from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutlet, type, obstId, width, height, depth, walloutletXpos, walloutletYpos, maxHeight }) {
@@ -40,29 +41,29 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
 
     function handleInput(event) {
         //prevent use of negative values
-        if(event.target.name=="height" || event.target.name=="walloutletYpos"){
-            let sum=Number(event.target.value);
-            if(event.target.name=="height"){
-                sum+=Number(walloutletYpos);
+        if (event.target.name == "height" || event.target.name == "walloutletYpos") {
+            let sum = Number(event.target.value);
+            if (event.target.name == "height") {
+                sum += Number(walloutletYpos);
             }
-            else{
-                sum+=Number(height);
+            else {
+                sum += Number(height);
             }
-            if(sum>maxHeight*100.0) {
+            if (sum > maxHeight * 100.0) {
                 event.preventDefault()
                 return;
             }
         }
         //TODO: if length of walls are being saved
-        else if(event.target.name=="width" || event.target.name=="walloutletXpos"){
+        else if (event.target.name == "width" || event.target.name == "walloutletXpos") {
 
         }
         changeWalloutlet(event);
 
     }
-    function negativeValues(event){
+    function negativeValues(event) {
         //prevent use of negative values
-        if (event.key=="-") {
+        if (event.key == "-") {
             event.preventDefault();
         }
     }
@@ -70,15 +71,16 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                    data-testid={"btn-obstacle-expand-" + type}
-                    variant={"danger"} value={type ?? t("obstructions." + type)}
-                    onClick={
-                        showButton
-                    }>{t("obstructions." + type)}</Button>
+                data-testid={"btn-obstacle-expand-" + type}
+                variant={"danger"} value={type ?? t("obstructions." + type)}
+                onClick={
+                    showButton
+                }>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                    variant={"danger"} id={"delete" + obstId}
-                    onClick={(e) => deleteObst(e)}>
-                x
+                variant={"danger"} id={"delete" + obstId}
+                onClick={(e) => deleteObst(e)}>
+                <IoCloseSharp />
+
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
@@ -87,15 +89,15 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width')+ '(cm)'}
+                                    label={t('questionnaire_space.width') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={1} value={width}
-                                                  data-testid={"input-obst-" + type + "-width"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"width"+obstId}
+                                        data-testid={"input-obst-" + type + "-width"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"width" + obstId}
                                     />
 
 
@@ -104,30 +106,30 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                             <Col>
                                 <FloatingLabel
                                     controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height')+ '(cm)'}
+                                    label={t('questionnaire_space.height') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={1} value={height}
-                                                  data-testid={"input-obst-" + type + "-height"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"height"+obstId}
+                                        data-testid={"input-obst-" + type + "-height"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"height" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
                             <Col>
                                 <FloatingLabel
                                     controlid={"depth" + obstId}
-                                    label={t('questionnaire_space.depth')+ '(cm)'}
+                                    label={t('questionnaire_space.depth') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"depth"} min={0} step={1} value={depth}
-                                                  data-testid={"input-obst-" + type + "-depth"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"depth"+obstId}
+                                        data-testid={"input-obst-" + type + "-depth"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"depth" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -140,7 +142,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                     <Row>
                         <Col>
                             <FloatingLabel
-                                style={{fontSize: '0.8rem'}}
+                                style={{ fontSize: '0.8rem' }}
                                 controlid={"walloutletXpos" + obstId}
                                 label="Walloutlet X Position (cm)"
                             >
@@ -154,7 +156,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
-                                    id={"xpos"+obstId}
+                                    id={"xpos" + obstId}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -162,7 +164,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                             <FloatingLabel
                                 controlid={"walloutletYpos" + obstId}
                                 label="Walloutlet Y Position (cm)"
-                                style={{fontSize: '0.8rem'}}
+                                style={{ fontSize: '0.8rem' }}
                             >
                                 <Form.Control
                                     type="number"
@@ -174,7 +176,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
-                                    id={"ypos"+obstId}
+                                    id={"ypos" + obstId}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -200,7 +202,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         changeOpening(e);
                                     }}
                                     disabled={isButtonDisabled} // Set button disabled state
-                                    checked={x==walloutletWall}
+                                    checked={x == walloutletWall}
                                 >
                                     {t(`obstructions.q_walloutlet.${x}`)}
                                 </ToggleButton>

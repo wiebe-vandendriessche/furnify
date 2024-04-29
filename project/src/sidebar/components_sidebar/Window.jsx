@@ -5,6 +5,7 @@ import { ButtonGroup, Col, FloatingLabel, Row, ToggleButton } from "react-bootst
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
+import { IoCloseSharp } from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWindow, type, obstId, width, height, windowXpos, windowYpos, maxHeight }) {
@@ -40,29 +41,29 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
 
     function handleInput(event) {
         //prevent use of negative values
-        if(event.target.name=="height" || event.target.name=="windowYpos"){
-            let sum=Number(event.target.value);
-            if(event.target.name=="height"){
-                sum+=Number(windowYpos);
+        if (event.target.name == "height" || event.target.name == "windowYpos") {
+            let sum = Number(event.target.value);
+            if (event.target.name == "height") {
+                sum += Number(windowYpos);
             }
-            else{
-                sum+=Number(height);
+            else {
+                sum += Number(height);
             }
-            if(sum>maxHeight*100.0) {
+            if (sum > maxHeight * 100.0) {
                 event.preventDefault()
                 return;
             }
         }
         //TODO: if length of walls are being saved
-        else if(event.target.name=="width" || event.target.name=="windowXpos"){
+        else if (event.target.name == "width" || event.target.name == "windowXpos") {
 
         }
         changeWindow(event);
 
     }
-    function negativeValues(event){
+    function negativeValues(event) {
         //prevent use of negative values
-        if (event.key=="-") {
+        if (event.key == "-") {
             event.preventDefault();
         }
     }
@@ -70,15 +71,16 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                    data-testid={"btn-obstacle-expand-" + type}
-                    variant={"danger"} value={type ?? t("obstructions." + type)}
-                    onClick={
-                        showButton
-                    }>{t("obstructions." + type)}</Button>
+                data-testid={"btn-obstacle-expand-" + type}
+                variant={"danger"} value={type ?? t("obstructions." + type)}
+                onClick={
+                    showButton
+                }>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                    variant={"danger"} id={"delete" + obstId}
-                    onClick={(e) => deleteObst(e)}>
-                x
+                variant={"danger"} id={"delete" + obstId}
+                onClick={(e) => deleteObst(e)}>
+                <IoCloseSharp />
+
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
@@ -87,15 +89,15 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width')+ '(cm)'}
+                                    label={t('questionnaire_space.width') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={1} value={width}
-                                                  data-testid={"input-obst-" + type + "-width"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"width"+obstId}
+                                        data-testid={"input-obst-" + type + "-width"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"width" + obstId}
                                     />
 
 
@@ -104,15 +106,15 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <Col>
                                 <FloatingLabel
                                     controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height')+ '(cm)'}
+                                    label={t('questionnaire_space.height') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={1} value={height}
-                                                  data-testid={"input-obst-" + type + "-height"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"height"+obstId}
+                                        data-testid={"input-obst-" + type + "-height"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"height" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -132,7 +134,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                 name={"yes" + obstId}
                                 controlid={"yes-inside_window-" + obstId}
                                 data-testid={"btn-obstacle-window-inside"}
-                                checked={"yes"==insideWindow}
+                                checked={"yes" == insideWindow}
                                 onClick={(event) => {
                                     changeOpening(event)
                                 }}
@@ -144,7 +146,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                 data-testid={"btn-obstacle-window-outside"}
                                 name={"no" + obstId}
                                 controlid={"no-inside_window-" + obstId}
-                                checked={"no"==insideWindow}
+                                checked={"no" == insideWindow}
                                 onClick={(event) => {
                                     changeOpening(event)
                                 }}
@@ -155,7 +157,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                     <Row>
                         <Col>
                             <FloatingLabel
-                                style={{fontSize: '0.8rem'}}
+                                style={{ fontSize: '0.8rem' }}
                                 controlid={"windowXpos" + obstId}
                                 label="Window X Position (cm)"
                             >
@@ -169,7 +171,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
-                                    id={"xpos"+obstId}
+                                    id={"xpos" + obstId}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -177,7 +179,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                             <FloatingLabel
                                 controlid={"windowYpos" + obstId}
                                 label="Window Y Position (cm)"
-                                style={{fontSize: '0.8rem'}}
+                                style={{ fontSize: '0.8rem' }}
                             >
                                 <Form.Control
                                     type="number"
@@ -189,7 +191,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     }}
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
-                                    id={"ypos"+obstId}
+                                    id={"ypos" + obstId}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -215,7 +217,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                         changeOpening(e);
                                     }}
                                     disabled={isButtonDisabled} // Set button disabled state
-                                    checked={x==windowWall}
+                                    checked={x == windowWall}
                                 >
                                     {t(`obstructions.q_window.${x}`)}
                                 </ToggleButton>
