@@ -3,8 +3,10 @@ import "./Questionnaire.css"
 import { useVariaContext } from "../../contexts/VariaContext.jsx";
 import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
-import { ToggleButton, Collapse, ButtonGroup, Form, FloatingLabel } from "react-bootstrap";
+import { useEffect} from 'react'
+import { ToggleButton, Collapse, ButtonGroup, Form } from "react-bootstrap";
+
+
 
 export function Questionnaire_functional() {
     const { t, i18n } = useTranslation();
@@ -24,9 +26,6 @@ export function Questionnaire_functional() {
     const changeVaria = (event) => {
         setVaria({ ...varia, [event.target.name]: [event.target.id] })
     }
-
-    const { rotate } = useConfiguratorContext();
-
 
     return (
 
@@ -109,14 +108,13 @@ export function Questionnaire_functional() {
                                     </div>
                                 </Collapse>
                             </div>
+
                         </div>
                     </Form.Group>
                 </div>
-                <div className={"aspect"}>
-                    <ToggleButton onClick={rotate}>Rotate 90</ToggleButton>
-                </div>
-            </Form>
-        </div>
+                
+            </Form >
+        </div >
 
 
     )

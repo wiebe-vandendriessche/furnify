@@ -6,7 +6,9 @@ let modules: Module[] = []
 export const check = (val: any, varia: any, get2D: any) => {
     let func = val.functionalities
     let dim = val.dimensions
+    
 
+    let errors = {softer: false, demands: false, roomSize: false, points2D: false}
     console.log("ALGORITHM: ")
     console.log(val.functionalities)
     
@@ -36,6 +38,7 @@ export const check = (val: any, varia: any, get2D: any) => {
     //If we could not find any combination, we will try to find options where 1 is not equal and the others are
     if (result.length == 0) {
         console.log("ALGORITHM: " + "combination is not possible, looking for a softer one")
+        errors.softer = true;
         modules.forEach(mod => {
             if (mod.softer_type(func.bed, func.office_space, func.sofa, func.storage_space)) {
                 result.push(mod)
@@ -43,6 +46,7 @@ export const check = (val: any, varia: any, get2D: any) => {
         })
         //still not possible send message
         if (result.length == 0) {
+            errors.demands = true;
             console.log("ALGORITHM: " + "softer combinations not found, please change the demands")
             return
         }
@@ -58,6 +62,7 @@ export const check = (val: any, varia: any, get2D: any) => {
             }
         })
         if (result_size.length == 0) {
+            errors.roomSize = true;
             console.log("ALGORITHM: " + "Room is not big enough for the combination")
         }
         result = result_size
@@ -77,18 +82,20 @@ export const check = (val: any, varia: any, get2D: any) => {
                 }
             })
             if (result_size.length == 0) {
+                errors.roomSize = true;
                 console.log("ALGORITHM: " + "Room is not big enough for the combination")
             }
             result = result_size
         }
         else{
+            errors.points2D= true;
             console.log("ALGORITHM: " + "No points given")
         }
 
     }
     console.log("ALGORITHM: the possible results:")
     console.log(result)
-    return result;
+    return {possible:result, errors: errors};
 
 }
 

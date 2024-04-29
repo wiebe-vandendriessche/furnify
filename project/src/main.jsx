@@ -7,6 +7,7 @@ import { ContactProvider } from "./contexts/ContactContext.jsx";
 import { RoomWallLightupProvider } from './contexts/RoomWallLightupContext.jsx';
 import { DrawingProvider } from "./contexts/2dContext.tsx";
 import "./i18n.ts";
+import { ModuleProvider } from "./contexts/ModuleContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <VariaProvider>
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ConfiguratorProvider>
           <RoomWallLightupProvider>
             <DrawingProvider>
+              <ModuleProvider>
               <App />
+              </ModuleProvider>
             </DrawingProvider>
           </RoomWallLightupProvider>
         </ConfiguratorProvider>

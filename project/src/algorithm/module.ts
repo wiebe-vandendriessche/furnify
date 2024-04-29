@@ -11,6 +11,7 @@ export class Module {
     private _desk: boolean = false;
     private _storage: boolean = false;
     private _width_options: { key: string, value: number; }[] = [];
+    private _components: string[] = [];
 
 
 
@@ -42,6 +43,14 @@ export class Module {
         this._width = +mod.breedte140 / 1000 // the default is the smallest value
         this._width_options.push({ key: "160", value: +mod.breedte160 / 1000 })
         this._width_options.push({ key: "180", value: +mod.breedte180 / 1000 })
+
+        if (typeof mod == 'object' && mod != null) {
+            Object.entries(mod).forEach(([key, value]) => {
+                if (value == 'true') {
+                    this._components.push(key);
+                }
+            });
+        }
     }
 
     public get name(): string {
@@ -64,6 +73,10 @@ export class Module {
     }
     public get width(): number {
         return this._width
+    }
+
+    public get components(): string[] {
+        return this._components
     }
 
     /**
