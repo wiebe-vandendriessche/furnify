@@ -74,3 +74,4 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 27/04/24,22:05,23:05,Extern, toevoegen van de onderdelen van modules aan klasse, 180,
 28/04/24,11:35,12:25,Extern, verplaatsen modules tonen ,180,
 28/04/24,14:20,16:50,Extern, opties modules tonen + module selecteren met info ,180,
+29/04/24,13:00,13:30,Extern, merge showmodules + fix kleine fout, 180,
