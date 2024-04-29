@@ -140,6 +140,7 @@ describe('First test',()=>{
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
+       cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
 
        //Clicking on preferred options and inserting text
        cy.get('[data-testid="btn-specs-material-oak"]').click();
@@ -166,6 +167,7 @@ describe('First test',()=>{
        let contact={firstname: "Test_Firstname", lastname: "Test_Lastname", email: "firstname.lastname@gmail.com",
            wrongPhoneInput1: "123 45 6ZEVEN7 890123", wrongPhoneInput2: "1234567890123", phoneInput: "123456789"}
 
+       cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
        cy.get('[data-testid="btn-nav-sidebar-next"]').should("be.visible").click();
