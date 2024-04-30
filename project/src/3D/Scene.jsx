@@ -41,12 +41,12 @@ const Skybox = ({ path }) => {
             console.log("Loading nightbox images...");
             const textureLoader = new CubeTextureLoader();
             textureLoader.load([
-                '/other/skyboxes/night/xpos.png',
-                '/other/skyboxes/night/xneg.png',
-                '/other/skyboxes/night/ypos.png',
-                '/other/skyboxes/night/yneg.png',
-                '/other/skyboxes/night/zpos.png',
-                '/other/skyboxes/night/zneg.png',
+                '/other/skyboxes/night/right.png',
+                '/other/skyboxes/night/left.png',
+                '/other/skyboxes/night/top.png',
+                '/other/skyboxes/night/bottom.png',
+                '/other/skyboxes/night/front.png',
+                '/other/skyboxes/night/back.png',
             ], (texture) => {
                 scene.background = texture;
                 console.log("Nightbox texture loaded successfully:", texture);

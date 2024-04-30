@@ -13,7 +13,6 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={null} >
         <div className="App">
           <Sidebar />
           <main>
@@ -23,7 +22,6 @@ function App() {
             </div>
           </main>
         </div>
-      </Suspense>
     </>
   );
 }
