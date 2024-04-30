@@ -32,6 +32,7 @@ export const FloorplanScene = () => {
   const { snappingMode, setSnappingMode } = use2d();
   const { showGrid, setShowGrid } = use2d();
   const { isClosed, setIsClosed } = use2d();
+  const { handleConvertTo3D, sceneObjects } = use2d();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -73,7 +74,8 @@ export const FloorplanScene = () => {
 
   const handle3DButtonClicked = (event) => {
     event.stopPropagation();
-    console.log("3D Button Clicked");
+    console.log("3D Button  Clicked");
+    handleConvertTo3D();
   }
 
   return (
@@ -130,7 +132,7 @@ export const FloorplanScene = () => {
         }
       </div>
 
-      <Canvas
+      {sceneObjects.length === 0 && <Canvas
         ref={drawingCanvasRef}
         className="canvas"
         orthographic
@@ -161,7 +163,24 @@ export const FloorplanScene = () => {
             centerLineColor="lightgrey"
           />
         )}
+      </Canvas>}
+      {sceneObjects.length !== 0 && <Canvas
+        ref={drawingCanvasRef}
+        className="canvas"
+        orthographic
+        camera={{ position: [0, 0, 5], zoom: 100 }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        {sceneObjects.map((object, index) => (
+          <primitive key={index} object={object} />
+        ))}
+        <OrbitControls enableZoom={true} enablePan={true} enableRotate={true} />
+        <axesHelper position={[0, 0, 1]} />
       </Canvas>
+      }
     </>
   );
 };
