@@ -24,7 +24,7 @@ export function Questionnaire_functional() {
         setFunctionalities({ ...functionalities, [event.target.id]: !functionalities[event.target.id] })
     }
     const changeVaria = (event) => {
-        setVaria({ ...varia, [event.target.name]: [event.target.id] })
+        setVaria({ ...varia, [event.target.name]: event.target.id })
     }
 
     return (

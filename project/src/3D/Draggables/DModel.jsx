@@ -8,7 +8,7 @@ import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
-    const ref = useRef()
+    const group= useRef();
     const pos = useRef(position)
 
     const [width, setModelWidth] = useState(1.7);
@@ -18,7 +18,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const { modelRotation } = useConfiguratorContext();
 
 
-    const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
+    const { nodes, materials } = useGLTF('/models/tv_wand_black.gltf')
 
 
     // swapping depth and width depending on rotation
@@ -187,19 +187,42 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered]);
 
+    const [originalColors, setOriginalColors] = useState([]);
+
+// Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
+    useEffect(() => {
+        // Sla de oorspronkelijke kleuren van de materialen op
+        const originalColors = nodes.tv_wand001.children.map(object => object.material.color.clone());
+        setOriginalColors(originalColors);
+    }, []);
+
     useFrame((state, delta) => {
-        easing.damp3(ref.current.position, pos.current, 0.1, delta);
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta);
+        easing.damp3(group.current.position, pos.current, 0.1, delta);
+        group.current.children.forEach((object, i) => {
+            // Gebruik de opgeslagen oorspronkelijke kleuren om de kleur terug te zetten wanneer het hover-effect eindigt
+            const originalColor = originalColors[i];
+            easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
+        });
     });
+    //easing.dampC(groupRef.current.children[0].material.color, active ? 'white' : hovered ? 'lightblue' : 'orange', 0.1, delta);
 
-
+    console.log("NODES")
+    console.log(nodes)
+    console.log("GROUP")
+    console.log(group)
     return (
         <>
-            <mesh ref={ref} rotation={[0, modelRotation, 0]} geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.materials} castShadow receiveShadow {...events} {...props}>
-                <meshStandardMaterial />
-            </mesh>
+            {/*<mesh ref={ref} rotation={[0, modelRotation, 0]} geometry={nodes.tv_wand001.children}
+                   material={nodes.tv_wand001.materials} castShadow receiveShadow {...events} {...props}>
+                <meshStandardMaterial/>
+            </mesh>*/}
+            <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
+                { nodes.tv_wand001.children.map(function(object, i){
+                    // eslint-disable-next-line react/jsx-key
+                    return <mesh geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                })}
+            </group>
 
         </>
     )
 };
-
