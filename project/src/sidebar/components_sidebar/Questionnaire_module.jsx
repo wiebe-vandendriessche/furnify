@@ -20,7 +20,7 @@ export function Questionnaire_module() {
 
 
 
-    const varia = useVariaContext();
+    const {varia} = useVariaContext();
 
 
     const { rotate } = useConfiguratorContext();
@@ -89,11 +89,31 @@ export function Questionnaire_module() {
                             <div className={"aspect"}>
                                 <div id="name_module">
                                     <span key="name_module" >Naam: </span>
-                                    <span key="name_module_name">{chosen_module.name}</span> 
+                                    <span key="name_module_value">{chosen_module.name}</span> 
+                                    
                                 </div>
                                 <div id="saved_space">
-                                    <span key="saved_module">Bespaarde vierkantemeters: </span>
-                                    <span key="saved_space_module">{chosen_module.saved}</span> 
+                                    <span key="saved_module">Bespaarde: </span>
+                                    <span key="saved_module_value">{chosen_module.saved}</span> 
+                                    <span key="saved_module_unit" >m²</span>
+                                </div>
+                                <div id="height_module">
+                                    <span key="height_module">height: </span>
+                                    <span key="height_module_value">{chosen_module.height *100 }</span>
+                                    <span key="height_module_unit" >cm</span> 
+                                </div>
+                                
+
+                                <div id="width_module">
+                                    <span key="width_module">width: </span>
+                                    <span key="width_module_value">{chosen_module.width *100}</span> 
+                                    <span key="width_module_unit" >cm</span>
+                                </div>
+
+                                <div id="open_module">
+                                    <span key="open_module">open: </span>
+                                    <span key="open_module_value">{chosen_module.open *100}</span>
+                                    <span key="open_module_unit" >cm</span> 
                                 </div>
                                 <div id="components">
                                     <span key="components_module">Componenten: </span>
@@ -103,7 +123,7 @@ export function Questionnaire_module() {
                                 </div>
 
 
-                                <ToggleButton onClick={rotate}>Rotate 90</ToggleButton>
+                                <ToggleButton onClick={rotate} variant={"danger"} >Rotate 90</ToggleButton>
                             </div>
                         </div>
                     </FormGroup>
