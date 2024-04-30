@@ -2,7 +2,7 @@ import React, { createContext, useState, useRef, useContext } from "react";
 import { DrawablePoint } from "../2D/components/Point";
 import { DrawableLine } from "../2D/components/Line";
 import * as THREE from "three";
-import { BoxGeometry, Mesh, MeshStandardMaterial, Object3D, Shape, ShapeGeometry, Vector2, Vector3 } from 'three';
+import { BoxGeometry, ExtrudeGeometry, Mesh, MeshStandardMaterial, Object3D, Shape, ShapeGeometry, Vector2, Vector3 } from 'three';
 import { useThree } from "@react-three/fiber";
 
 const DrawingContext = createContext<any>(null);
@@ -40,13 +40,13 @@ export const DrawingProvider = ({ children }) => {
 
   // convert to 3D
   const handleConvertTo3D = () => {
-    const walls: THREE.InstancedMesh = createWalls(points); 
+    const walls: THREE.InstancedMesh = createWalls(points);
     const floor: Mesh<any, any> = createFloor(points); // Assumes points are in order and form a closed loop
     setSceneObjects([walls, floor]);
     // console.log(walls, floor);
   };
 
-  function createWall(line: DrawableLine) { 
+  function createWall(line: DrawableLine) {
     const length = line.start.distanceTo(line.end);
     const geometry = new BoxGeometry(length, 2, 0.3);  // Length, height, and thickness
     const material = new MeshStandardMaterial({ color: 'gray' });
@@ -78,34 +78,49 @@ export const DrawingProvider = ({ children }) => {
     const walls = new THREE.InstancedMesh(geometry, material, points.length);
 
     points.forEach((point, i) => {
-        const nextPoint = points[(i + 1) % points.length];
-        const length = point.distanceTo(nextPoint);
-        const midpoint = new Vector3().addVectors(point, nextPoint).multiplyScalar(0.5);
-        const angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
+      const nextPoint = points[(i + 1) % points.length];
+      const length = point.distanceTo(nextPoint);
+      const midpoint = new Vector3().addVectors(point, nextPoint).multiplyScalar(0.5);
+      const angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
 
-        const matrix = new THREE.Matrix4();
-        matrix.makeTranslation(midpoint.x, midpoint.y, wallHeight / 2);
-        matrix.makeRotationY(angle);
+      const matrix = new THREE.Matrix4();
+      matrix.makeTranslation(midpoint.x, midpoint.y, wallHeight);
+      matrix.makeRotationY(angle);
 
-        walls.setMatrixAt(i, matrix);
+      walls.setMatrixAt(i, matrix);
     });
 
     return walls;
-}
+  }
 
 
   function createFloor(points) {
     // Create a Shape from the points, assuming they are ordered and form a closed loop
     const shape = new Shape(points.map(p => new Vector2(p.x, p.y)));
-    const geometry = new ShapeGeometry(shape);
+
+    // Define extrusion settings
+    const extrudeSettings = {
+      steps: 1,
+      depth: 0.3, // Thickness of the floor
+      bevelEnabled: false, // No bevel   for simplicity
+    };
+
+    // Create geometry by extruding the shape
+    const geometry = new ExtrudeGeometry(shape, extrudeSettings);
+
+    // Material for the extruded shape
     const material = new MeshStandardMaterial({ color: 'lightblue', side: THREE.DoubleSide });
+
+    // Create the mesh
     const mesh = new Mesh(geometry, material);
 
-    // Position the floor at the correct height if needed (e.g., at z=0 if X and Y are your ground plane)
-    mesh.position.z = 0;  // Adjust as necessary
+    // Adjust the mesh position to center the extrusion
+    mesh.position.z = -extrudeSettings.depth / 2; // Adjust position to align with the ground level if necessary
 
     return mesh;
   }
+
+
 
 
   // Toggle drawing state
