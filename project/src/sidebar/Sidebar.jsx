@@ -16,6 +16,7 @@ import {useVariaContext} from "../contexts/VariaContext.jsx"
 import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
+import Button from "react-bootstrap/Button";
 
 
 

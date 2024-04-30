@@ -48,7 +48,7 @@ export function Questionnaire_functional() {
                                 ))}
                             </div>
                             <div className={"m-1"}>
-                                <Collapse in={functionalities.bed}>
+                                <Collapse  in={functionalities.bed}>
                                     
                                     <div className="mb-3" data-testid={"div-func-options-mattress"}>
                                     

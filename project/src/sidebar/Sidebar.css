@@ -83,6 +83,14 @@
     }
 }
 
+.privacy{
+    position: absolute;
+    flex-wrap: wrap;
+    bottom: 50px;
+    left: 10px;
+    z-index: 990;
+}
+
 /*specific color changes in sidebar for darkmode*/
 @media (prefers-color-scheme: dark) {
     .nav-menu{
