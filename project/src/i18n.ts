@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+
 i18n
     // detect user language
     // learn more: https://github.com/i18next/i18next-browser-languageDetector
@@ -29,45 +30,45 @@ i18n
                         width: "Width",
                         height: "Height",
                         other: "Other",
-                        q_aspects:"Add which aspects we should take into account in your living space.",
-                        aspect:"Aspect",
+                        q_aspects: "Add which aspects we should take into account in your living space.",
+                        aspect: "Aspect",
                         add_aspect: "Add aspect",
                         depth: "depth"
                     },
                     obstructions: {
-                        window:"Window",
-                        door:"Door",
-                        radiator:"Radiator",
-                        walloutlet:"Wall outlet",
-                        switch:"Switch",
-                        sloping_Wall:"Sloping wall",
-                        light:"Light",
-                        other:"Other",
-                        q_door:{
-                            opening_door:"How does the door open?",
-                            inside_left:"Inside the room, to the left",
-                            inside_right:"Inside the room, to the right",
-                            outside:"Outside the room"
+                        window: "Window",
+                        door: "Door",
+                        radiator: "Radiator",
+                        walloutlet: "Wall outlet",
+                        switch: "Switch",
+                        sloping_Wall: "Sloping wall",
+                        light: "Light",
+                        other: "Other",
+                        q_door: {
+                            opening_door: "How does the door open?",
+                            inside_left: "Inside the room, to the left",
+                            inside_right: "Inside the room, to the right",
+                            outside: "Outside the room"
                         },
-                        q_window:{
-                            opening_window:"Can the window open to the inside?",
-                            yes:"yes",
-                            no:"no",
-                            window_wall:"Select the correct wall",
+                        q_window: {
+                            opening_window: "Can the window open to the inside?",
+                            yes: "yes",
+                            no: "no",
+                            window_wall: "Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
                             right: "right"
                         },
-                        q_walloutlet:{
-                            walloutlet_wall:"Select the correct wall",
+                        q_walloutlet: {
+                            walloutlet_wall: "Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
                             right: "right"
                         },
-                        q_switch:{
-                            switch_wall:"Select the correct wall",
+                        q_switch: {
+                            switch_wall: "Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
@@ -75,18 +76,18 @@ i18n
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Which living space do you want to optimize?",
-                        space:{
-                            guest_room:"Guest room",
-                            living_room:"Living room",
-                            bedroom:"Bedroom",
+                        q_space: "Which living space do you want to optimize?",
+                        space: {
+                            guest_room: "Guest room",
+                            living_room: "Living room",
+                            bedroom: "Bedroom",
                         },
-                        q_function:"What are the most important features you need to make the most of your living space?",
-                        functions:{
-                            bed:"Bed",
-                            office_space:"Office space",
-                            sofa:"Sofa",
-                            storage_space:"Storage space",
+                        q_function: "What are the most important features you need to make the most of your living space?",
+                        functions: {
+                            bed: "Bed",
+                            office_space: "Office space",
+                            sofa: "Sofa",
+                            storage_space: "Storage space",
                         },
                         bed: {
                             q_size: "What is the width you would prefer?",
@@ -99,30 +100,65 @@ i18n
                     },
                     questionnaire_specs: {
                         q_preferences: "Do you have specific preferences for the layout of your living space?",
-                        preferences:{
-                            wall:"Wall",
-                            partition_wall:"Partition wall",
-                            in_the_middle_of_space:"In the middle of space",
+                        preferences: {
+                            wall: "Wall",
+                            partition_wall: "Partition wall",
+                            in_the_middle_of_space: "In the middle of space",
                         },
                         q_materials: "Which materials do you prefer to finish your modular furniture?",
-                        materials:{
+                        materials: {
                             color: "Color",
                             material: "Material",
-                            white:"White",
-                            black:"Black",
-                            birch:"Birch",
-                            oak:"Oak",
-                            walnut:"Walnut"
+                            white: "White",
+                            black: "Black",
+                            birch: "Birch",
+                            oak: "Oak",
+                            walnut: "Walnut"
                         },
-                        q_other:"Other specific wishes or requirements to take into account?"
+                        q_other: "Other specific wishes or requirements to take into account?"
+                    },
+                    questionnaire_module: {
+                        question: "Please press the button to discover which modules would fit you",
+                        warning: "After changing any of the specifications, please press the button again",
+                        button: "Find Modules",
+                        error: {
+                            softer: "Unable to find a module fitting the exact combination given, looking again with softer restrictions",
+                            demands: "Unable to fulfill the demands, please give others",
+                            roomSize: "The dimensions of the room are to small with the given demands",
+                            points2D: "When choosing 'other', please draw the points on the 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Bed",
+                            opklapbed_zetel: "Bed Sofa",
+                            bureau: "Desk",
+                            kast_zij: "Closet Side Shelfs ",
+                            kast: "Closet",
+                            bureau_bedm: "Desk Bed",
+                            kast_bedm: "Closet Bed",
+                            kast_kastm: "Double Closet",
+                            bureau_kastm: "Desk Closet",
+                            bureaum_bedm_kast: "Desk Bed Closet",
+                            bureaum_kastm_kast: "Desk Double Closet",
+                            bureaum_bedm_kastm_kast: "Desk Bed Double Closet",
+                            kastm_bedm_kastm_kast: "Bed Triple Closet"
+                        },
+                        module_info: {
+                            rotate: "Rotate 90°",
+                            name: "Name: ",
+                            width: "Width: ",
+                            height: "Height: ",
+
+                        },
+
                     },
                     contact: {
-                        q_contact:"Leave your contact details so we can reach you",
-                        firstname:"First name",
-                        lastname:"Last name",
-                        phone_number:"Phone number",
-                        email:"E-mail",
-                        address:"Address"
+                        q_contact: "Leave your contact details so we can reach you",
+                        firstname: "First name",
+                        lastname: "Last name",
+                        phone_number: "Phone number",
+                        email: "E-mail",
+                        address: "Address"
                     }
                 }
             },
@@ -138,80 +174,80 @@ i18n
                         width: "Breedte",
                         height: "Hoogte",
                         other: "Anders",
-                        q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
-                        aspect:"Aspect",
+                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+                        aspect: "Aspect",
                         add_aspect: "Voeg een aspect toe"
                     },
                     obstructions: {
 
-                        window:"Raam",
-                        door:"Deur",
-                        radiator:"Radiator",
-                        walloutlet:"Stopcontact",
-                        switch:"Schakelaar",
-                        sloping_Wall:"Schuine wand",
-                        other:"Andere",
-                        q_door:{
-                            opening_door:"Hoe opent de deur?",
-                            inside_left:"Binnen in de ruimte, naar links",
-                            inside_right:"Binnen in de ruimte, naar rechts",
-                            outside:"Buiten de ruimte"
+                        window: "Raam",
+                        door: "Deur",
+                        radiator: "Radiator",
+                        walloutlet: "Stopcontact",
+                        switch: "Schakelaar",
+                        sloping_Wall: "Schuine wand",
+                        other: "Andere",
+                        q_door: {
+                            opening_door: "Hoe opent de deur?",
+                            inside_left: "Binnen in de ruimte, naar links",
+                            inside_right: "Binnen in de ruimte, naar rechts",
+                            outside: "Buiten de ruimte"
                         },
-                        q_window:{
-                            opening_window:"Kan het raam naar binnen openen?",
+                        q_window: {
+                            opening_window: "Kan het raam naar binnen openen?",
                             yes: "ja",
                             no: "nee"
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Welke woonruimte wenst u te optimaliseren?",
-                        space:{
-                            guest_room:"Logeerkamer",
-                            living_room:"Woonkamer",
-                            bedroom:"Slaapkamer",
+                        q_space: "Welke woonruimte wenst u te optimaliseren?",
+                        space: {
+                            guest_room: "Logeerkamer",
+                            living_room: "Woonkamer",
+                            bedroom: "Slaapkamer",
                         },
-                        q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
-                        functions:{
-                            bed:"Bed",
-                            office_space:"Bureauruimte",
-                            sofa:"Sofa",
-                            storage_space:"Opbergruimte",
+                        q_function: "Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+                        functions: {
+                            bed: "Bed",
+                            office_space: "Bureauruimte",
+                            sofa: "Sofa",
+                            storage_space: "Opbergruimte",
                         },
-                        bed:{
+                        bed: {
                             q_size: "Welke breedte verkiest u?",
-                            q_bed:"Welke matras verkiest u?",
-                            soft:"Extra zacht",
-                            medium:"Medium",
-                            sturdy:"Extra stevig",
+                            q_bed: "Welke matras verkiest u?",
+                            soft: "Extra zacht",
+                            medium: "Medium",
+                            sturdy: "Extra stevig",
                             apply: "Niet van toepassing"
                         }
                     },
                     questionnaire_specs: {
                         q_preferences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
-                        preferences:{
-                            wall:"Muur",
-                            partition_wall:"Scheidingswand",
-                            in_the_middle_of_space:"Te midden van ruimte",
+                        preferences: {
+                            wall: "Muur",
+                            partition_wall: "Scheidingswand",
+                            in_the_middle_of_space: "Te midden van ruimte",
                         },
                         q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
-                        materials:{
-                            color:"kleur",
-                            material:"materiaal",
-                            white:"Wit",
-                            black:"Zwart",
-                            birch:"Berk",
-                            oak:"Eik",
-                            walnut:"Notelaar"
+                        materials: {
+                            color: "kleur",
+                            material: "materiaal",
+                            white: "Wit",
+                            black: "Zwart",
+                            birch: "Berk",
+                            oak: "Eik",
+                            walnut: "Notelaar"
                         },
-                        q_other:"Andere specifieke wensen of vereisten waarmee rekening te houden?"
+                        q_other: "Andere specifieke wensen of vereisten waarmee rekening te houden?"
                     },
                     contact: {
-                        q_contact:"Laat uw contactgegevens achter zodat we u kunnen bereiken",
-                        firstname:"Voornaam",
-                        lastname:"Achternaam",
-                        phone_number:"Telefoonnummer",
-                        email:"E-mail",
-                        address:"Adres"
+                        q_contact: "Laat uw contactgegevens achter zodat we u kunnen bereiken",
+                        firstname: "Voornaam",
+                        lastname: "Achternaam",
+                        phone_number: "Telefoonnummer",
+                        email: "E-mail",
+                        address: "Adres"
                     }
                 }
             },
@@ -227,43 +263,43 @@ i18n
                         width: "Largeur",
                         height: "Hauteur",
                         other: "Autres",
-                        q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
-                        aspect:"Aspect",
+                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+                        aspect: "Aspect",
                         add_aspect: "Ajouter un aspect"
                     },
                     obstructions: {
-                        window:"Fenêtre",
-                        door:"Porte",
-                        radiator:"Radiateur",
-                        walloutlet:"Prise murale",
-                        switch:"Interrupteur",
-                        sloping_Wall:"Mur en pente",
-                        other:"Autre",
-                        q_door:{
-                            opening_door:"Comment s'ouvre la porte ?",
-                            inside_left:"A l'intérieur de la salle, à gauche",
-                            inside_right:"A l'intérieur de la salle, à droite",
-                            outside:"Espace extérieur"
+                        window: "Fenêtre",
+                        door: "Porte",
+                        radiator: "Radiateur",
+                        walloutlet: "Prise murale",
+                        switch: "Interrupteur",
+                        sloping_Wall: "Mur en pente",
+                        other: "Autre",
+                        q_door: {
+                            opening_door: "Comment s'ouvre la porte ?",
+                            inside_left: "A l'intérieur de la salle, à gauche",
+                            inside_right: "A l'intérieur de la salle, à droite",
+                            outside: "Espace extérieur"
                         },
-                        q_window:{
-                            opening_window:"La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
-                            yes:"oui",
-                            no:"non"
+                        q_window: {
+                            opening_window: "La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
+                            yes: "oui",
+                            no: "non"
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Quel espace de vie souhaitez-vous optimiser?",
-                        space:{
-                            guest_room:"Chambre d'amis",
-                            living_room:"Le salon",
-                            bedroom:"Chambre à coucher",
+                        q_space: "Quel espace de vie souhaitez-vous optimiser?",
+                        space: {
+                            guest_room: "Chambre d'amis",
+                            living_room: "Le salon",
+                            bedroom: "Chambre à coucher",
                         },
-                        q_function:"Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
-                        functions:{
-                            bed:"Lit",
-                            office_space:"Bureau",
-                            sofa:"Canapé",
-                            storage_space:"Espace de stockage",
+                        q_function: "Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
+                        functions: {
+                            bed: "Lit",
+                            office_space: "Bureau",
+                            sofa: "Canapé",
+                            storage_space: "Espace de stockage",
                         },
                         bed: {
                             q_size: "Quelle est la largeur que vous préférez ?",
@@ -276,30 +312,30 @@ i18n
                     },
                     questionnaire_specs: {
                         q_preferences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
-                        preferences:{
-                            wall:"Mur",
-                            partition_wall:"Cloison",
-                            in_the_middle_of_space:"Au milieu de l'espace",
+                        preferences: {
+                            wall: "Mur",
+                            partition_wall: "Cloison",
+                            in_the_middle_of_space: "Au milieu de l'espace",
                         },
                         q_materials: "Quels matériaux préférez-vous pour finir votre mobilier modulable?",
-                        materials:{
-                            white:"Blanc",
-                            black:"Noir",
-                            birch:"Bouleau",
-                            oak:"Chêne",
-                            walnut:"Noyer",
+                        materials: {
+                            white: "Blanc",
+                            black: "Noir",
+                            birch: "Bouleau",
+                            oak: "Chêne",
+                            walnut: "Noyer",
                             color: "Couleur",
                             material: "Matériau"
                         },
-                        q_other:"D'autres souhaits ou exigences spécifiques à prendre en compte?"
+                        q_other: "D'autres souhaits ou exigences spécifiques à prendre en compte?"
                     },
                     contact: {
-                        q_contact:"Laissez vos coordonnées afin que nous puissions vous joindre",
-                        firstname:"Prénom",
-                        lastname:"Nom de famille",
-                        phone_number:"Numéro de téléphone",
-                        email:"E-mail",
-                        address:"Adresse"
+                        q_contact: "Laissez vos coordonnées afin que nous puissions vous joindre",
+                        firstname: "Prénom",
+                        lastname: "Nom de famille",
+                        phone_number: "Numéro de téléphone",
+                        email: "E-mail",
+                        address: "Adresse"
                     }
                 }
             },
@@ -327,16 +363,16 @@ i18n
                         switch: "Schalter",
                         sloping_Wall: "Schräge Wand",
                         other: "Andere",
-                        q_door:{
-                            opening_door:"Wie wird die Tür geöffnet?",
-                            inside_left:"Im Inneren des Raums, links",
-                            inside_right:"Im Inneren des Raums, rechts",
-                            outside:"außerhalb des Raumes"
+                        q_door: {
+                            opening_door: "Wie wird die Tür geöffnet?",
+                            inside_left: "Im Inneren des Raums, links",
+                            inside_right: "Im Inneren des Raums, rechts",
+                            outside: "außerhalb des Raumes"
                         },
-                        q_window:{
-                            opening_window:"Kann man das Fenster nach innen öffnen?",
-                            yes:"ja",
-                            no:"nein"
+                        q_window: {
+                            opening_window: "Kann man das Fenster nach innen öffnen?",
+                            yes: "ja",
+                            no: "nein"
                         }
                     },
                     questionnaire_func: {
@@ -415,16 +451,16 @@ i18n
                         switch: "Interruptor",
                         sloping_Wall: "Pared inclinada",
                         other: "Otro",
-                        q_door:{
-                            opening_door:"cómo abrir la puerta",
-                            inside_left:"dentro de la habitación, a la izquierda",
-                            inside_right:"dentro de la habitación, a la derecha",
-                            outside:"espacio exterior"
+                        q_door: {
+                            opening_door: "cómo abrir la puerta",
+                            inside_left: "dentro de la habitación, a la izquierda",
+                            inside_right: "dentro de la habitación, a la derecha",
+                            outside: "espacio exterior"
                         },
-                        q_window:{
-                            opening_window:"¿Puede abrirse la ventana hacia el interior?",
-                            yes:"si",
-                            no:"no"
+                        q_window: {
+                            opening_window: "¿Puede abrirse la ventana hacia el interior?",
+                            yes: "si",
+                            no: "no"
                         }
                     },
                     questionnaire_func: {
@@ -503,16 +539,16 @@ i18n
                         switch: "Interruttore",
                         sloping_Wall: "Muro inclinato",
                         other: "Altro",
-                        q_door:{
-                            opening_door:"Come funziona l'impianto?",
-                            inside_left:"All'interno della stanza, a sinistra",
-                            inside_right:"All'interno della stanza, a destra",
-                            outside:"fuori dalla stanza"
+                        q_door: {
+                            opening_door: "Come funziona l'impianto?",
+                            inside_left: "All'interno della stanza, a sinistra",
+                            inside_right: "All'interno della stanza, a destra",
+                            outside: "fuori dalla stanza"
                         },
-                        q_window:{
-                            opening_window:"La finestra può aprirsi all'interno?",
-                            yes:"si",
-                            no:"no"
+                        q_window: {
+                            opening_window: "La finestra può aprirsi all'interno?",
+                            yes: "si",
+                            no: "no"
                         }
                     },
                     questionnaire_func: {
