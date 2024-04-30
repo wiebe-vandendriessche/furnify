@@ -3,9 +3,19 @@
     right: 0;
     top: 0;
     margin: 10px;
-    color: #000000;
+    color: white;
     cursor: pointer;
     z-index: 999;
+    background-color: #dc3545;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease;
+    border-radius: 5px;
+}
+
+.menu-bars:hover {
+    transform: scale(1.2);
+    background-color: #bb2d3b ;
 }
 
 .menu-bars-closed {
@@ -46,9 +56,16 @@
 #logo {
     width: 60%;
     height: auto;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease;
 }
 
-.bottom_btn{
+#logo:hover {
+    transform: scale(1.05);
+}
+
+.bottom_btn {
     position: absolute;
     bottom: 0px;
     display: flex;
@@ -59,8 +76,24 @@
     pointer-events: none;
 }
 
-.bottom_btn > button{
+.bottom_btn>button {
     pointer-events: auto;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease;
+    color: white;
+    background-color: #dc3545;
+    padding-top: 6px;
+}
+
+.bottom_btn_content {
+    font-size: 140%;
+}
+
+
+.bottom_btn>button:hover {
+    transform: scale(1.1);
+    background-color: #bb2d3b ;
 }
 
 /*render for mobile*/
@@ -85,13 +118,13 @@
 
 /*specific color changes in sidebar for darkmode*/
 @media (prefers-color-scheme: dark) {
-    .nav-menu{
+    .nav-menu {
         background-color: #242424;
         color: white;
 
     }
 
-    .menu-bars{
+    .menu-bars {
         color: white;
     }
 
