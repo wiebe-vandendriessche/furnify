@@ -40,55 +40,39 @@ export const DrawingProvider = ({ children }) => {
 
   // convert to 3D
   const handleConvertTo3D = () => {
-    const walls: THREE.InstancedMesh = createWalls(points);
+    const walls: Mesh[] = createWalls(points);
     const floor: Mesh<any, any> = createFloor(points); // Assumes points are in order and form a closed loop
-    setSceneObjects([walls, floor]);
+    setSceneObjects([...walls, floor]);
     // console.log(walls, floor);
   };
 
-  function createWall(line: DrawableLine) {
-    const length = line.start.distanceTo(line.end);
-    const geometry = new BoxGeometry(length, 2, 0.3);  // Length, height, and thickness
-    const material = new MeshStandardMaterial({ color: 'gray' });
-    const mesh = new Mesh(geometry, material);
+  function createWalls(points: Vector3[]): Mesh[] {
+    const walls: Mesh[] = [];
+    const wallHeight = 2; // Set the height of the walls
+    const wallThickness = 0.3; // Set the thickness of the walls
 
-    // Calculate the midpoint for positioning
-    const midpoint = new Vector3().addVectors(line.start, line.end).multiplyScalar(0.5);
+    for (let i = 0; i < points.length; i++) {
+      const startPoint = points[i];
+      const endPoint = points[(i + 1) % points.length]; // Wrap around to connect the last point to the first
 
-    // Calculate the rotation angle
-    const angle = Math.atan2(line.end.y - line.start.y, line.end.x - line.start.x);
+      const length = startPoint.distanceTo(endPoint);
+      const geometry = new BoxGeometry(length, wallThickness, wallHeight);
+      const material = new MeshStandardMaterial({ color: 'gray' });
+      const wall = new Mesh(geometry, material);
 
-    // Position the mesh at the midpoint
-    mesh.position.set(midpoint.x, 0, midpoint.y);  // Adjusted for Y up in Three.js (if necessary)
+      // Calculate the midpoint for wall positioning
+      const midpoint = new Vector3().addVectors(startPoint, endPoint).multiplyScalar(0.5);
 
-    // Set rotation about the vertical axis (Y in Three.js is up)
-    mesh.rotation.y = angle;
+      // Calculate the rotation angle to align the wall with the line between startPoint and endPoint
+      const angle = Math.atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x);
 
-    // The wall's vertical orientation is by default correct if Y is up in your scene
-    return mesh;
-  }
+      // Set the wall's position and rotation
+      wall.position.set(midpoint.x, midpoint.y, wallHeight / 2);
+      wall.rotation.z = angle; 
+      wall.rotation.x = 0;
 
-  function createWalls(points: Vector3[]): THREE.InstancedMesh {
-    const wallHeight = 2;
-    const wallThickness = 0.3;
-    const wallLength = points[0].distanceTo(points[1]); // Assuming uniform wall length for simplicity
-
-    const geometry = new THREE.BoxGeometry(wallLength, wallHeight, wallThickness);
-    const material = new THREE.MeshStandardMaterial({ color: 'gray' });
-    const walls = new THREE.InstancedMesh(geometry, material, points.length);
-
-    points.forEach((point, i) => {
-      const nextPoint = points[(i + 1) % points.length];
-      const length = point.distanceTo(nextPoint);
-      const midpoint = new Vector3().addVectors(point, nextPoint).multiplyScalar(0.5);
-      const angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x);
-
-      const matrix = new THREE.Matrix4();
-      matrix.makeTranslation(midpoint.x, midpoint.y, wallHeight);
-      matrix.makeRotationY(angle);
-
-      walls.setMatrixAt(i, matrix);
-    });
+      walls.push(wall);
+    }
 
     return walls;
   }
@@ -115,7 +99,7 @@ export const DrawingProvider = ({ children }) => {
     const mesh = new Mesh(geometry, material);
 
     // Adjust the mesh position to center the extrusion
-    mesh.position.z = -extrudeSettings.depth / 2; // Adjust position to align with the ground level if necessary
+    // mesh.position.z = -extrudeSettings.depth / 2; // Adjust position to align with the ground level if necessary
 
     return mesh;
   }
