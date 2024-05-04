@@ -20,7 +20,7 @@ export function Questionnaire_module() {
 
 
 
-    const {varia} = useVariaContext();
+    const { varia } = useVariaContext();
 
 
     const { rotate } = useConfiguratorContext();
@@ -42,8 +42,10 @@ export function Questionnaire_module() {
         });
         setPossileModules(result.possible)
         if (result.possible.length == 0) {
-            setChosenModule({name: "", height: 0, width:0, depth:0, open: 0, closed:0,saved:0,bed:false,
-            sofa:false,desk:false, storage:false, width_options:[],components:[]})
+            setChosenModule({
+                name: "", height: 0, width: 0, depth: 0, open: 0, closed: 0, saved: 0, bed: false,
+                sofa: false, desk: false, storage: false, width_options: [], components: []
+            })
         }
         else {
             setChosenModule(result.possible[0]);
@@ -67,7 +69,7 @@ export function Questionnaire_module() {
                             <h5>{t('questionnaire_module.question')}</h5>
                             <p>{t('questionnaire_module.warning')}</p>
                             <Button onClick={module} variant="danger">
-                            {t('questionnaire_module.button')}
+                                {t('questionnaire_module.button')}
                             </Button>
                         </div>
                         <div>
@@ -90,39 +92,39 @@ export function Questionnaire_module() {
                             <div className={"aspect"}>
                                 <div id="name_module">
                                     <span key="name_module" >{t('questionnaire_module.module_info.name')} </span>
-                                    <span key="name_module_value">{t('questionnaire_module.module_type.' + chosen_module.name)}</span>    
+                                    <span key="name_module_value">{t('questionnaire_module.module_type.' + chosen_module.name)}</span>
                                 </div>
                                 <div id="height_module">
                                     <span key="height_module">{t('questionnaire_module.module_info.height')} </span>
-                                    <span key="height_module_value">{(chosen_module.height *100).toFixed(1) }</span>
-                                    <span key="height_module_unit" > cm</span> 
+                                    <span key="height_module_value">{(chosen_module.height * 100).toFixed(1)}</span>
+                                    <span key="height_module_unit" > cm</span>
                                 </div>
                                 <div id="width_module">
                                     <span key="width_module">{t('questionnaire_module.module_info.width')} </span>
-                                    <span key="width_module_value">{(chosen_module.width *100).toFixed(1)}</span> 
+                                    <span key="width_module_value">{(chosen_module.width * 100).toFixed(1)}</span>
                                     <span key="width_module_unit" > cm</span>
                                 </div>
 
                                 <div id="closed_module">
-                                    <span key="closed_module">closed: </span>
-                                    <span key="closed_module_value">{(chosen_module.closed *100).toFixed(1)}</span>
-                                    <span key="closed_module_unit" > cm</span> 
+                                    <span key="closed_module">{t('questionnaire_module.module_info.closed')} </span>
+                                    <span key="closed_module_value">{(chosen_module.closed * 100).toFixed(1)}</span>
+                                    <span key="closed_module_unit" > cm</span>
                                 </div>
 
                                 <div id="open_module">
-                                    <span key="open_module">open: </span>
-                                    <span key="open_module_value">{(chosen_module.open *100).toFixed(1)}</span>
-                                    <span key="open_module_unit" > cm</span> 
+                                    <span key="open_module">{t('questionnaire_module.module_info.open')}</span>
+                                    <span key="open_module_value">{(chosen_module.open * 100).toFixed(1)}</span>
+                                    <span key="open_module_unit" > cm</span>
                                 </div>
                                 <div id="components">
-                                    <span key="components_module">Componenten: </span>
+                                    <span key="components_module">{t('questionnaire_module.module_info.components')}</span>
                                     {Object.entries(chosen_module.components).map(([key, value]) => (
-                                    <span key={"components_module" + key}>{value} </span> 
+                                        <span key={"components_module" + key}>{t('questionnaire_module.components.' + value)}{key != chosen_module.components.length -1 && <span>, </span>}</span>
                                     ))}
                                 </div>
                                 <div id="saved_space">
-                                    <span key="saved_module">Bespaarde: </span>
-                                    <span key="saved_module_value">{chosen_module.saved}</span> 
+                                    <span key="saved_module">{t('questionnaire_module.module_info.saved')}</span>
+                                    <span key="saved_module_value">{chosen_module.saved}</span>
                                     <span key="saved_module_unit" > m²</span>
                                 </div>
 
