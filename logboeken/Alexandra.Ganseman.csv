@@ -76,4 +76,4 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 28/04/24,14:20,16:50,Extern, opties modules tonen + module selecteren met info ,180,
 29/04/24,13:00,13:30,Extern, merge showmodules + fix kleine fout, 180,
 30/04/24,13:30,16:35,Contacturen, informatie modules showen + i18n toevoegen,181,
-04/25/24,17:50,19:40,Extern, added i18n to questionnaire module,181,
+04/05/24,17:50,19:40,Extern, added i18n to questionnaire module,181,
