@@ -42,7 +42,10 @@ export const DrawingProvider = ({ children }) => {
 
   const [show3D, setShow3D] = useState<boolean>(false);
 
-  const [wallProperties, setWallProperties] = useState<{ height: number, thickness: number}>({ height: 2, thickness: 0.3})
+  const [wallProperties, setWallProperties] = useState<{
+    height: number;
+    thickness: number;
+  }>({ height: 2, thickness: 0.3 });
 
   type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
@@ -55,10 +58,22 @@ export const DrawingProvider = ({ children }) => {
     // console.log(walls, floor);
   };
 
+  function determineOrientation(points) {
+    let sum = 0;
+    for (let i = 0; i < points.length; i++) {
+        const current = points[i];
+        const next = points[(i + 1) % points.length]; // Wrap around
+        sum += (next.x - current.x) * (next.y + current.y);
+    }
+    return sum > 0 ? 'counterclockwise' : 'clockwise';
+}
+
   function createWalls(points: Vector3[], offset): Mesh[] {
     const walls: Mesh[] = [];
     const wallHeight = wallProperties.height;
     const wallThickness = wallProperties.thickness;
+
+    let orientation = determineOrientation(points);
 
     for (let i = 0; i < points.length; i++) {
       const startPoint = points[i];
@@ -81,7 +96,9 @@ export const DrawingProvider = ({ children }) => {
         endPoint.x - startPoint.x
       );
 
-      const normal = new Vector3(-direction.y, direction.x, 0).normalize().multiplyScalar(-(wallThickness / 2));
+      const normal = new Vector3(-direction.y, direction.x, 0)
+        .normalize()
+        .multiplyScalar((orientation === 'counterclockwise' ? 1 : -1) * wallThickness / 2);
       midpoint.add(offset);
       midpoint.add(normal);
 
@@ -90,9 +107,12 @@ export const DrawingProvider = ({ children }) => {
       wall.rotation.z = angle;
       wall.rotation.x = 0;
 
-
       walls.push(wall);
     }
+
+    walls.forEach((wall, index) => {
+      console.log(`Wall ${index}:`, wall);
+    });
 
     return walls;
   }
@@ -123,10 +143,12 @@ export const DrawingProvider = ({ children }) => {
     // Calculate bounding box to find center
     geometry.computeBoundingBox();
     const bbox = geometry.boundingBox;
-    const offset = bbox ? new Vector3()
-      .addVectors(bbox.min, bbox.max)
-      .multiplyScalar(0.5)
-      .negate() : new Vector3();
+    const offset = bbox
+      ? new Vector3()
+          .addVectors(bbox.min, bbox.max)
+          .multiplyScalar(0.5)
+          .negate()
+      : new Vector3();
 
     mesh.geometry.translate(offset.x, offset.y, 0);
 
