@@ -29,27 +29,24 @@ export const DrawingProvider = ({ children }) => {
 
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
-  const [walls, setWalls] = useState();
-  const [floor, setFloor] = useState();
+  const [show3D, setShow3D] = useState(false);
 
-
-  // Define the state type as an array of Meshes
-  type SceneObject = Mesh<any, any>;  // Use more specific types instead of 'any' if known
+  type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
 
 
   // convert to 3D
   const handleConvertTo3D = () => {
     const walls: Mesh[] = createWalls(points);
-    const floor: Mesh<any, any> = createFloor(points); // Assumes points are in order and form a closed loop
+    const floor: Mesh<any, any> = createFloor(points);
     setSceneObjects([...walls, floor]);
     // console.log(walls, floor);
   };
 
   function createWalls(points: Vector3[]): Mesh[] {
     const walls: Mesh[] = [];
-    const wallHeight = 2; // Set the height of the walls
-    const wallThickness = 0.3; // Set the thickness of the walls
+    const wallHeight = 2; 
+    const wallThickness = 0.3; 
 
     for (let i = 0; i < points.length; i++) {
       const startPoint = points[i];
@@ -128,6 +125,7 @@ export const DrawingProvider = ({ children }) => {
     if (confirmation) {
       setPoints([]);
       setLines([]);
+      setSceneObjects([]);
       setIsClosed(false);
     }
   };
@@ -156,7 +154,7 @@ export const DrawingProvider = ({ children }) => {
     isClosed,
     setIsClosed,
     handleConvertTo3D,
-    sceneObjects
+    sceneObjects, show3D, setShow3D
   };
 
   return (
