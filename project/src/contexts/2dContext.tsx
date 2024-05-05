@@ -40,7 +40,9 @@ export const DrawingProvider = ({ children }) => {
 
   const [isClosed, setIsClosed] = useState<boolean>(false);
 
-  const [show3D, setShow3D] = useState(false);
+  const [show3D, setShow3D] = useState<boolean>(false);
+
+  const [wallProperties, setWallProperties] = useState<{ height: number, thickness: number}>({ height: 2, thickness: 0.3})
 
   type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
@@ -55,13 +57,14 @@ export const DrawingProvider = ({ children }) => {
 
   function createWalls(points: Vector3[], offset): Mesh[] {
     const walls: Mesh[] = [];
-    const wallHeight = 2;
-    const wallThickness = 0.3;
+    const wallHeight = wallProperties.height;
+    const wallThickness = wallProperties.thickness;
 
     for (let i = 0; i < points.length; i++) {
       const startPoint = points[i];
       const endPoint = points[(i + 1) % points.length]; // Wrap around to connect the last point to the first
 
+      const direction = new Vector3().subVectors(endPoint, startPoint);
       const length = startPoint.distanceTo(endPoint);
       const geometry = new BoxGeometry(length, wallThickness, wallHeight);
       const material = new MeshStandardMaterial({ color: "gray" });
@@ -78,7 +81,9 @@ export const DrawingProvider = ({ children }) => {
         endPoint.x - startPoint.x
       );
 
-      midpoint.add(offset); // Use the add() method instead of translate()
+      const normal = new Vector3(-direction.y, direction.x, 0).normalize().multiplyScalar(-(wallThickness / 2));
+      midpoint.add(offset);
+      midpoint.add(normal);
 
       // Set the wall's position and rotation
       wall.position.set(midpoint.x, midpoint.y, wallHeight / 2);
