@@ -72,48 +72,43 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
-                    <div className="m-1">
-                        <Row>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width') + '(cm)'}
-                                >
-                                    <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
-                                        data-testid={"input-obst-" + type + "-width"}
-                                        onChange={(e) => {
-                                            handleInput(e)
-                                        }}
-                                        onKeyPress={negativeValues}
-                                        id={"width" + obstId}
-                                    />
+                    <Row>
+                        <Form.Label>{t('obstructions.q_all.dimensions')}</Form.Label>
+                        <Col>
+                            <FloatingLabel
+                                controlid={"width" + obstId}
+                                label={t('questionnaire_space.width') + '(cm)'}
+                            >
+                                <Form.Control type="number" name={"width"} min={0} step={1} defaultValue={width}
+                                    data-testid={"input-obst-" + type + "-width"}
+                                    onChange={(e) => {
+                                        handleInput(e)
+                                    }}
+                                    onKeyPress={negativeValues}
+                                    id={"width" + obstId}
+                                />
 
 
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height') + '(cm)'}
-                                >
-                                    <Form.Control type="number" name={"height"} min={0} step={1} value={height}
-                                        data-testid={"input-obst-" + type + "-height"}
-                                        onChange={(e) => {
-                                            handleInput(e)
-                                        }}
-                                        onKeyPress={negativeValues}
-                                        id={"height" + obstId}
-                                    />
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-
-                    </div>
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label data-testid={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
-                    <div>
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel
+                                controlid={"height" + obstId}
+                                label={t('questionnaire_space.height') + '(cm)'}
+                            >
+                                <Form.Control type="number" name={"height"} min={0} step={1} value={height}
+                                    data-testid={"input-obst-" + type + "-height"}
+                                    onChange={(e) => {
+                                        handleInput(e)
+                                    }}
+                                    onKeyPress={negativeValues}
+                                    id={"height" + obstId}
+                                />
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Form.Label data-testid={"question-obstacle-door-opening"}> {t('obstructions.q_door.opening_door')}</Form.Label>
                         <ButtonGroup>
                             <ToggleButton
                                 controlid={"left-opening_door-" + obstId}
@@ -157,12 +152,13 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 {t('obstructions.q_door.outside')}
                             </ToggleButton>
                         </ButtonGroup>
-                    </div>
+                    </Row>
                     <Row>
+                        <Form.Label>{t('obstructions.q_all.position')}</Form.Label>
                         <Col>
                             <FloatingLabel
                                 controlid={"doorXpos" + obstId}
-                                label="Obstacle X Position (m)"
+                                label={t('obstructions.q_all.side') + " (cm)"}
                             >
                                 <Form.Control
                                     type="number"
@@ -179,13 +175,9 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 />
                             </FloatingLabel>
                         </Col>
-
                     </Row>
-
-                    <Form.Label data-testid={"question-obstacle-obstacle-wall"}>
-                        {t("obstructions.q_window.window_wall")}
-                    </Form.Label>
-                    <div>
+                    <Row>
+                        <Form.Label data-testid={"question-obstacle-obstacle-wall"}>{t("obstructions.q_all.wall")}</Form.Label>
                         <ButtonGroup>
                             {/* Add radio buttons for obstacle positions */}
                             {["front", "back", "left", "right"].map((x) => (
@@ -204,13 +196,12 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     disabled={isButtonDisabled} // Set button disabled state
                                     checked={x == doorWall}
                                 >
-                                    {t(`obstructions.q_window.${x}`)}
+                                    {t(`obstructions.q_all.${x}`)}
                                 </ToggleButton>
                             ))}
                         </ButtonGroup>
-                    </div>
+                    </Row>
                 </Form.Group>
-
             </div>
         </div>
     )

@@ -44,6 +44,17 @@ i18n
                         sloping_Wall: "Sloping wall",
                         light: "Light",
                         other: "Other",
+                        q_all:{
+                            dimensions:"Dimensions: ",
+                            position: "Position in the room: ",
+                            wall: "Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right",
+                            up:"from the ground up",
+                            side:"from the left side"
+                        },
                         q_door: {
                             opening_door: "How does the door open?",
                             inside_left: "Inside the room, to the left",
@@ -54,26 +65,9 @@ i18n
                             opening_window: "Can the window open to the inside?",
                             yes: "yes",
                             no: "no",
-                            window_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
                         },
-                        q_walloutlet: {
-                            walloutlet_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
-                        },
-                        q_switch: {
-                            switch_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
-                        }
+                      
+                        
                     },
                     questionnaire_func: {
                         q_space: "Which living space do you want to optimize?",
@@ -173,7 +167,8 @@ i18n
                         lastname: "Last name",
                         phone_number: "Phone number",
                         email: "E-mail",
-                        address: "Address"
+                        address: "Address",
+                        submit: "Submit"
                     }
                 }
             },
@@ -201,7 +196,19 @@ i18n
                         walloutlet: "Stopcontact",
                         switch: "Schakelaar",
                         sloping_Wall: "Schuine wand",
+                        light: "Licht",
                         other: "Andere",
+                        q_all:{
+                            dimensions:"Afmetingen: ",
+                            position: "Positie in de kamer: ",
+                            wall: "Selecteer de juiste muur",
+                            front: "voor",
+                            back: "achter",
+                            left: "links",
+                            right: "rechts",
+                            up:"vanaf de grond",
+                            side:"vanaf de linkerkant"
+                        },
                         q_door: {
                             opening_door: "Hoe opent de deur?",
                             inside_left: "Binnen in de ruimte, naar links",
@@ -312,7 +319,8 @@ i18n
                         lastname: "Achternaam",
                         phone_number: "Telefoonnummer",
                         email: "E-mail",
-                        address: "Adres"
+                        address: "Adres",
+                        submit: "Verzend"
                     }
                 }
             },
@@ -339,7 +347,19 @@ i18n
                         walloutlet: "Prise murale",
                         switch: "Interrupteur",
                         sloping_Wall: "Mur en pente",
+                        light: "Lumière",
                         other: "Autre",
+                        q_all:{
+                            dimensions:"Dimensions: ",
+                            position: "Position dans la pièce: ",
+                            wall: "Choisir le mur correct",
+                            front: "avant",
+                            back: "arrière",
+                            left: "gauche",
+                            right: "droite",
+                            up:"du sol vers le haut",
+                            side:"du côté gauche"
+                        },
                         q_door: {
                             opening_door: "Comment s'ouvre la porte ?",
                             inside_left: "A l'intérieur de la salle, à gauche",
@@ -394,7 +414,6 @@ i18n
                         },
                         q_other: "D'autres souhaits ou exigences spécifiques à prendre en compte?"
                     },
-                    
                     questionnaire_module: {
                         question: "Cliquez sur le bouton pour découvrir les modules qui vous conviennent.",
                         warning: "Après avoir modifié l'une des spécifications, veuillez appuyer à nouveau sur le bouton.",
@@ -451,7 +470,8 @@ i18n
                         lastname: "Nom de famille",
                         phone_number: "Numéro de téléphone",
                         email: "E-mail",
-                        address: "Adresse"
+                        address: "Adresse",
+                        submit: "Soumettre"
                     }
                 }
             },
@@ -478,7 +498,19 @@ i18n
                         walloutlet: "Steckdose",
                         switch: "Schalter",
                         sloping_Wall: "Schräge Wand",
+                        light: "Licht",
                         other: "Andere",
+                        q_all:{
+                            dimensions:"Abmessungen: ",
+                            position: "Position im Raum: ",
+                            wall: "Wählen Sie die richtige Wand",
+                            front: "Vorderseite",
+                            back: "hinten",
+                            left: "links",
+                            right: "rechts",
+                            up:"von unten nach oben",
+                            side:"von der linken Seite"
+                        },
                         q_door: {
                             opening_door: "Wie wird die Tür geöffnet?",
                             inside_left: "Im Inneren des Raums, links",
@@ -589,7 +621,8 @@ i18n
                         lastname: "Nachname",
                         phone_number: "Telefonnummer",
                         email: "E-Mail",
-                        address: "Adresse"
+                        address: "Adresse",
+                        submit: "Einreichen"
                     }
                 }
             },
@@ -616,7 +649,19 @@ i18n
                         walloutlet: "Enchufe de pared",
                         switch: "Interruptor",
                         sloping_Wall: "Pared inclinada",
+                        light: "Luz",
                         other: "Otro",
+                        q_all:{
+                            dimensions:"Dimensiones: ",
+                            position: "Posición en la habitación: ",
+                            wall: "Seleccione la pared correcta",
+                            front: "delante",
+                            back: "trasera",
+                            left: "izquierda",
+                            right: "derecha",
+                            up:"desde el suelo hacia arriba",
+                            side:"desde el lado izquierdo"
+                        },
                         q_door: {
                             opening_door: "cómo abrir la puerta",
                             inside_left: "dentro de la habitación, a la izquierda",
@@ -727,7 +772,8 @@ i18n
                         lastname: "Apellido",
                         phone_number: "Número de teléfono",
                         email: "Correo electrónico",
-                        address: "Dirección"
+                        address: "Dirección",
+                        submit: "Enviar"
                     }
                 }
             },
@@ -754,7 +800,19 @@ i18n
                         walloutlet: "Presa di corrente a parete",
                         switch: "Interruttore",
                         sloping_Wall: "Muro inclinato",
+                        light: "Luce",
                         other: "Altro",
+                        q_all:{
+                            dimensions:"Dimensioni: ",
+                            position: "Posizione nella stanza: ",
+                            wall: "Selezionare la parete corretta",
+                            front: "anteriore",
+                            back: "posteriore",
+                            left: "sinistra",
+                            right: "destra",
+                            up:"dal basso verso l'alto",
+                            side:"dal lato sinistro"
+                        },
                         q_door: {
                             opening_door: "Come funziona l'impianto?",
                             inside_left: "All'interno della stanza, a sinistra",
@@ -865,7 +923,8 @@ i18n
                         lastname: "Cognome",
                         phone_number: "Numero di telefono",
                         email: "E-mail",
-                        address: "Indirizzo"
+                        address: "Indirizzo",
+                        submit: "Invia"
                     }
                 }
             }
