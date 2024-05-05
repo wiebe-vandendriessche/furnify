@@ -2,8 +2,19 @@ import React, { createContext, useState, useRef, useContext } from "react";
 import { DrawablePoint } from "../2D/components/Point";
 import { DrawableLine } from "../2D/components/Line";
 import * as THREE from "three";
-import { BoxGeometry, ExtrudeGeometry, Mesh, MeshStandardMaterial, Object3D, Shape, ShapeGeometry, Vector2, Vector3 } from 'three';
+import {
+  BoxGeometry,
+  ExtrudeGeometry,
+  Mesh,
+  MeshStandardMaterial,
+  Object3D,
+  Shape,
+  ShapeGeometry,
+  Vector2,
+  Vector3,
+} from "three";
 import { useThree } from "@react-three/fiber";
+import { off } from "process";
 
 const DrawingContext = createContext<any>(null);
 
@@ -34,19 +45,18 @@ export const DrawingProvider = ({ children }) => {
   type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
 
-
   // convert to 3D
   const handleConvertTo3D = () => {
-    const walls: Mesh[] = createWalls(points);
-    const floor: Mesh<any, any> = createFloor(points);
+    const { mesh: floor, offset } = createFloor(points);
+    const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
     // console.log(walls, floor);
   };
 
-  function createWalls(points: Vector3[]): Mesh[] {
+  function createWalls(points: Vector3[], offset): Mesh[] {
     const walls: Mesh[] = [];
-    const wallHeight = 2; 
-    const wallThickness = 0.3; 
+    const wallHeight = 2;
+    const wallThickness = 0.3;
 
     for (let i = 0; i < points.length; i++) {
       const startPoint = points[i];
@@ -54,19 +64,27 @@ export const DrawingProvider = ({ children }) => {
 
       const length = startPoint.distanceTo(endPoint);
       const geometry = new BoxGeometry(length, wallThickness, wallHeight);
-      const material = new MeshStandardMaterial({ color: 'gray' });
+      const material = new MeshStandardMaterial({ color: "gray" });
       const wall = new Mesh(geometry, material);
 
       // Calculate the midpoint for wall positioning
-      const midpoint = new Vector3().addVectors(startPoint, endPoint).multiplyScalar(0.5);
+      const midpoint = new Vector3()
+        .addVectors(startPoint, endPoint)
+        .multiplyScalar(0.5);
 
       // Calculate the rotation angle to align the wall with the line between startPoint and endPoint
-      const angle = Math.atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x);
+      const angle = Math.atan2(
+        endPoint.y - startPoint.y,
+        endPoint.x - startPoint.x
+      );
+
+      midpoint.add(offset); // Use the add() method instead of translate()
 
       // Set the wall's position and rotation
       wall.position.set(midpoint.x, midpoint.y, wallHeight / 2);
-      wall.rotation.z = angle; 
+      wall.rotation.z = angle;
       wall.rotation.x = 0;
+
 
       walls.push(wall);
     }
@@ -74,10 +92,9 @@ export const DrawingProvider = ({ children }) => {
     return walls;
   }
 
-
   function createFloor(points) {
     // Create a Shape from the points, assuming they are ordered and form a closed loop
-    const shape = new Shape(points.map(p => new Vector2(p.x, p.y)));
+    const shape = new Shape(points.map((p) => new Vector2(p.x, p.y)));
 
     // Define extrusion settings
     const extrudeSettings = {
@@ -90,19 +107,26 @@ export const DrawingProvider = ({ children }) => {
     const geometry = new ExtrudeGeometry(shape, extrudeSettings);
 
     // Material for the extruded shape
-    const material = new MeshStandardMaterial({ color: 'lightblue', side: THREE.DoubleSide });
+    const material = new MeshStandardMaterial({
+      color: "lightblue",
+      side: THREE.DoubleSide,
+    });
 
     // Create the mesh
     const mesh = new Mesh(geometry, material);
 
-    // Adjust the mesh position to center the extrusion
-    // mesh.position.z = -extrudeSettings.depth / 2; // Adjust position to align with the ground level if necessary
+    // Calculate bounding box to find center
+    geometry.computeBoundingBox();
+    const bbox = geometry.boundingBox;
+    const offset = bbox ? new Vector3()
+      .addVectors(bbox.min, bbox.max)
+      .multiplyScalar(0.5)
+      .negate() : new Vector3();
 
-    return mesh;
+    mesh.geometry.translate(offset.x, offset.y, 0);
+
+    return { mesh, offset };
   }
-
-
-
 
   // Toggle drawing state
   const toggleDrawing = () =>
@@ -112,10 +136,11 @@ export const DrawingProvider = ({ children }) => {
     });
 
   // Toggle orthogonal mode
-  const toggleOrthogonalMode = () => setOrthogonalMode((prev) => {
-    console.log("Orthogonal mode is now: " + !prev);
-    return !prev;
-  })
+  const toggleOrthogonalMode = () =>
+    setOrthogonalMode((prev) => {
+      console.log("Orthogonal mode is now: " + !prev);
+      return !prev;
+    });
 
   // Remove all elements from the canvas
   const removeAll = () => {
@@ -154,7 +179,9 @@ export const DrawingProvider = ({ children }) => {
     isClosed,
     setIsClosed,
     handleConvertTo3D,
-    sceneObjects, show3D, setShow3D
+    sceneObjects,
+    show3D,
+    setShow3D,
   };
 
   return (
