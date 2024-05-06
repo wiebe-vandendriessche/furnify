@@ -53,3 +53,6 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 17/04/24,13:00,16:00,Contacturen, presentatie klant + start sprint 3, , 
 23/04/24,13:30,16:30,Contacturen, helpen algoritme meubelplaatsing uitdenken + extra functionaliteit 2D uitwerken,,
 24/04/24,13:00,16:00,Contacturen, fix mobile issues 2D en omzetting 2D to 3D, , 
+30/04/24,13:30,16:30,Contacturen, trying to convert 2D drawing to 3D, 115, vloer klopt al muren niet 
+3/05/2024,22:00,0:15,Extern, converting 2d to 3d works very basic + installatiehandleiding herschrijven, 115, muren moeten nog iets meer naar buiten eigenlijk + mooier maken
+5/05/2024, 11:00, 12:30, Extern, Converting 2d naar 3d drastisch verbeterd, 115, en mijn android bug fix proberen te testen maar dan gerealiseerd dak geen android heb om mee te testen

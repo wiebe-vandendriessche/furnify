@@ -60,6 +60,7 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 28/04/24,10:00,12:00,Extern,afwerken schakelaar walloutlet,154,
 28/04/24,13:00,17:00,Extern,fixen skybox en betere rendering met werkende lichten en schaduwen,183,
 29/04/24,9:00,11:00,Extern,Css details en loading screen met suspense,185 en 186,
+30/04/24,13:30,16:30,Contacturen,Veranderen skybox en kijken voor collisiondetection voor valideerknop,188 en 190,
 
 
 
