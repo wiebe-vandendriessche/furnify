@@ -10,7 +10,6 @@ import { IoCloseSharp } from "react-icons/io5";
 function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight}) {
     //i18n
     const { t, i18n } = useTranslation();
-    console.log(obstId)
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);

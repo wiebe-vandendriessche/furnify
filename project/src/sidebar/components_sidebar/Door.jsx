@@ -28,11 +28,9 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
     const changeSelectedWall = (wall) => {
         setIsButtonDisabled(true);
         setSelectedWall(wall);
-        console.log("test changeSelectedWall: " + wall);
         setTimeout(() => {
             setSelectedWall(null);
             setIsButtonDisabled(false);
-            console.log("back to zero");
         }, 1500); // 1000 milliseconds = 1 second
     }
 

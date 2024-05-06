@@ -1,14 +1,10 @@
-import React, { Suspense } from 'react';
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { useState, useRef, useEffect } from 'react'
-import { OrbitControls, Sky, Stars } from '@react-three/drei'
+import { Suspense } from 'react';
+import { Canvas, useThree } from '@react-three/fiber';
+import { useState, useEffect } from 'react'
+import { OrbitControls } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
 import { Ground } from './other/Ground.jsx'
 import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
-import { Tv_wand } from './models/Tv_wand.jsx';
-import { Bed } from './models/Bed.jsx';
-import { Bed_assembly } from './models/Bed_assembly.jsx';
-import { DCube } from './Draggables/DCube.jsx';
 import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';

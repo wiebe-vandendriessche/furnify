@@ -1,5 +1,5 @@
-import { MathUtils, Color } from 'three'
-import { useCallback, useRef, useEffect, useState } from 'react'
+import { MathUtils } from 'three'
+import { useCallback, useRef, useEffect} from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'

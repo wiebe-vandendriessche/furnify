@@ -125,7 +125,6 @@ export function Sidebar() {
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
             const { msg, result } = data
-            console.log(result, msg)
             alert(msg);
         });
     };

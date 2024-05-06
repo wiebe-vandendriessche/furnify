@@ -42,6 +42,12 @@
 			"doubleSided":true,
 			"name":"Material.002",
 			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.09305834025144577,
+					0.09305903315544128,
+					0.0930589959025383,
+					1
+				],
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -60,7 +66,7 @@
 	],
 	"meshes":[
 		{
-			"name":"tv wand.001",
+			"name":"tv wand.002",
 			"primitives":[
 				{
 					"attributes":{
@@ -101,15 +107,15 @@
 	"images":[
 		{
 			"mimeType":"image/jpeg",
-			"name":"oak",
-			"uri":"oak.jpg"
+			"name":"walnut",
+			"uri":"walnut.jpg"
 		}
 	],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":1837,
+			"count":1855,
 			"max":[
 				1667,
 				1912,
@@ -125,13 +131,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":1837,
+			"count":1855,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":1837,
+			"count":1855,
 			"type":"VEC2"
 		},
 		{
@@ -212,74 +218,74 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":22044,
+			"byteLength":22260,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":22044,
-			"byteOffset":22044,
+			"byteLength":22260,
+			"byteOffset":22260,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":14696,
-			"byteOffset":44088,
+			"byteLength":14840,
+			"byteOffset":44520,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":10674,
-			"byteOffset":58784,
+			"byteOffset":59360,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":7404,
-			"byteOffset":69460,
+			"byteOffset":70036,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":7404,
-			"byteOffset":76864,
+			"byteOffset":77440,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":4936,
-			"byteOffset":84268,
+			"byteOffset":84844,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":2784,
-			"byteOffset":89204,
+			"byteOffset":89780,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":11736,
-			"byteOffset":91988,
+			"byteOffset":92564,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":11736,
-			"byteOffset":103724,
+			"byteOffset":104300,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":7824,
-			"byteOffset":115460,
+			"byteOffset":116036,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":4434,
-			"byteOffset":123284,
+			"byteOffset":123860,
 			"target":34963
 		}
 	],
@@ -291,8 +297,8 @@
 	],
 	"buffers":[
 		{
-			"byteLength":127720,
-			"uri":"tv_wand_white.bin"
+			"byteLength":128296,
+			"uri":"tv_wand_black_walnut.bin"
 		}
 	]
 }

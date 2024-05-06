@@ -28,7 +28,6 @@ export const DrawingProvider = ({ children }) => {
   // Toggle drawing state
   const toggleDrawing = () =>
     setIsDrawing((prev) => {
-      console.log("Drawing is now: " + !prev);
       return !prev;
     });
 

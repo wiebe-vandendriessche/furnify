@@ -13,12 +13,8 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     const [width, setModelWidth] = useState(1.7);
     const [depth, setModelDepth] = useState(1);
-
-
     const { specs,modelRotation } = useConfiguratorContext();
-
-
-    const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'.gltf')
+    const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
 
 
     // swapping depth and width depending on rotation
@@ -149,7 +145,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     useEffect(() => {
         const [x, y, z] = pos.current;
         let newX = x
-
         // different calculation for different rotations
         if (modelRotation === 0) {
             newX = x < 0 ? -maxX2 : maxX2 - width;
@@ -167,7 +162,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     useEffect(() => {
         const [x, y, z] = pos.current;
         let newZ = z
-
         // different calculation for different rotations
         if (modelRotation === 0) {
             newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
@@ -178,7 +172,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         } else if (modelRotation === -Math.PI / 2) {
             newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
         }
-
         pos.current = [x, y, newZ];
     }, [maxZ2, depth, modelRotation]);
 
@@ -205,17 +198,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         });
     });
 
-    console.log("NODES")
-    console.log(nodes)
-    console.log("GROUP")
-    console.log(group)
-    console.log("COLOR")
-    console.log(specs.color)
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
                 { nodes.tv_wand001.children.map(function(object, i){
-                    // eslint-disable-next-line react/jsx-key
                     return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>

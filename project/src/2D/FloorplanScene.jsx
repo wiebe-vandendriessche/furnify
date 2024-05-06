@@ -1,23 +1,16 @@
-import React, { useEffect, useRef, useMemo } from "react";
-import { Canvas, useThree, extend } from "@react-three/fiber";
-import { useState } from "react";
-import { Line, OrbitControls } from "@react-three/drei";
+import { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
 import {
-  Grid,
   Grid3x3,
   House,
   PencilSquare,
   Rulers,
   Trash,
 } from "react-bootstrap-icons";
-import {
-  LineBasicMaterial,
-  BufferGeometry,
-  LineSegments,
-  Vector3,
-} from "three";
+
 import * as THREE from "three";
 import { GridComponent } from "./components/GridComponent";
 import "./Floorplan.css";
