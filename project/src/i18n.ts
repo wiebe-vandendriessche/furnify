@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+
 i18n
     // detect user language
     // learn more: https://github.com/i18next/i18next-browser-languageDetector
@@ -29,29 +30,45 @@ i18n
                         width: "Width",
                         height: "Height",
                         other: "Other",
-                        q_aspects:"Add which aspects we should take into account in your living space.",
-                        aspect:"Aspect",
-                        add_aspect: "Add aspect"
+                        q_aspects: "Add which aspects we should take into account in your living space.",
+                        aspect: "Aspect",
+                        add_aspect: "Add aspect",
+                        depth: "depth"
                     },
                     obstructions: {
-                        window:"Window",
-                        door:"Door",
-                        radiator:"Radiator",
-                        walloutlet:"Wall outlet",
-                        switch:"Switch",
-                        sloping_Wall:"Sloping wall",
-                        other:"Other",
-                        q_door:{
-                            opening_door:"How does the door open?",
-                            inside_left:"Inside the room, to the left",
-                            inside_right:"Inside the room, to the right",
-                            outside:"Outside the room"
+                        window: "Window",
+                        door: "Door",
+                        radiator: "Radiator",
+                        walloutlet: "Wall outlet",
+                        switch: "Switch",
+                        sloping_Wall: "Sloping wall",
+                        light: "Light",
+                        other: "Other",
+                        q_door: {
+                            opening_door: "How does the door open?",
+                            inside_left: "Inside the room, to the left",
+                            inside_right: "Inside the room, to the right",
+                            outside: "Outside the room"
                         },
-                        q_window:{
-                            opening_window:"Can the window open to the inside?",
-                            yes:"yes",
-                            no:"no",
-                            window_wall:"Select the correct wall",
+                        q_window: {
+                            opening_window: "Can the window open to the inside?",
+                            yes: "yes",
+                            no: "no",
+                            window_wall: "Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right"
+                        },
+                        q_walloutlet: {
+                            walloutlet_wall: "Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right"
+                        },
+                        q_switch: {
+                            switch_wall: "Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
@@ -59,18 +76,18 @@ i18n
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Which living space do you want to optimize?",
-                        space:{
-                            guest_room:"Guest room",
-                            living_room:"Living room",
-                            bedroom:"Bedroom",
+                        q_space: "Which living space do you want to optimize?",
+                        space: {
+                            guest_room: "Guest room",
+                            living_room: "Living room",
+                            bedroom: "Bedroom",
                         },
-                        q_function:"What are the most important features you need to make the most of your living space?",
-                        functions:{
-                            bed:"Bed",
-                            office_space:"Office space",
-                            sofa:"Sofa",
-                            storage_space:"Storage space",
+                        q_function: "What are the most important features you need to make the most of your living space?",
+                        functions: {
+                            bed: "Bed",
+                            office_space: "Office space",
+                            sofa: "Sofa",
+                            storage_space: "Storage space",
                         },
                         bed: {
                             q_size: "What is the width you would prefer?",
@@ -83,30 +100,80 @@ i18n
                     },
                     questionnaire_specs: {
                         q_preferences: "Do you have specific preferences for the layout of your living space?",
-                        preferences:{
-                            wall:"Wall",
-                            partition_wall:"Partition wall",
-                            in_the_middle_of_space:"In the middle of space",
+                        preferences: {
+                            wall: "Wall",
+                            partition_wall: "Partition wall",
+                            in_the_middle_of_space: "In the middle of space",
                         },
                         q_materials: "Which materials do you prefer to finish your modular furniture?",
-                        materials:{
+                        materials: {
                             color: "Color",
                             material: "Material",
-                            white:"White",
-                            black:"Black",
-                            birch:"Birch",
-                            oak:"Oak",
-                            walnut:"Walnut"
+                            white: "White",
+                            black: "Black",
+                            birch: "Birch",
+                            oak: "Oak",
+                            walnut: "Walnut"
                         },
-                        q_other:"Other specific wishes or requirements to take into account?"
+                        q_other: "Other specific wishes or requirements to take into account?"
+                    },
+                    questionnaire_module: {
+                        question: "Please press the button to discover which modules would fit you",
+                        warning: "After changing any of the specifications, please press the button again",
+                        button: "Find Modules",
+                        error: {
+                            softer: "Unable to find a module fitting the exact combination given, looking again with softer restrictions",
+                            demands: "Unable to fulfill the demands, please give others",
+                            roomSize: "The dimensions of the room are to small with the given demands",
+                            points2D: "When choosing 'other', please draw the points on the 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Bed",
+                            opklapbed_zetel: "Bed Sofa",
+                            bureau: "Desk",
+                            kast_zij: "Closet Side Shelfs ",
+                            kast: "Closet",
+                            bureau_bedm: "Desk Bed",
+                            kast_bedm: "Closet Bed",
+                            kast_kastm: "Double Closet",
+                            bureau_kastm: "Desk Closet",
+                            bureaum_bedm_kast: "Desk Bed Closet",
+                            bureaum_kastm_kast: "Desk Double Closet",
+                            bureaum_bedm_kastm_kast: "Desk Bed Double Closet",
+                            kastm_bedm_kastm_kast: "Bed Triple Closet"
+                        },
+                        module_info: {
+                            rotate: "Rotate 90°",
+                            name: "Name: ",
+                            width: "Width: ",
+                            height: "Height: ",
+                            closed: "Closed: ",
+                            open: "Open: ",
+                            components: "Components: ",
+                            saved: "Saved space: "
+
+                        },
+                        components:{
+                            opkladbed: "stationary foldable bed",
+                            zetel:"stationary sofa",
+                            bureau: "stationary desk",
+                            kast_met_zijschappen:"stationary closet with side spaces",
+                            kast:"stationary closet",
+                            bed_bewegend:"movable bed",
+                            kast_bewegend:"movable closet",
+                            bureau_bewegend:"movable desk",
+                            tweede_kast_bewegend:"second movable closet"
+                        }
+
                     },
                     contact: {
-                        q_contact:"Leave your contact details so we can reach you",
-                        firstname:"First name",
-                        lastname:"Last name",
-                        phone_number:"Phone number",
-                        email:"E-mail",
-                        address:"Address"
+                        q_contact: "Leave your contact details so we can reach you",
+                        firstname: "First name",
+                        lastname: "Last name",
+                        phone_number: "Phone number",
+                        email: "E-mail",
+                        address: "Address"
                     }
                 }
             },
@@ -122,80 +189,130 @@ i18n
                         width: "Breedte",
                         height: "Hoogte",
                         other: "Anders",
-                        q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
-                        aspect:"Aspect",
+                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+                        aspect: "Aspect",
                         add_aspect: "Voeg een aspect toe"
                     },
                     obstructions: {
 
-                        window:"Raam",
-                        door:"Deur",
-                        radiator:"Radiator",
-                        walloutlet:"Stopcontact",
-                        switch:"Schakelaar",
-                        sloping_Wall:"Schuine wand",
-                        other:"Andere",
-                        q_door:{
-                            opening_door:"Hoe opent de deur?",
-                            inside_left:"Binnen in de ruimte, naar links",
-                            inside_right:"Binnen in de ruimte, naar rechts",
-                            outside:"Buiten de ruimte"
+                        window: "Raam",
+                        door: "Deur",
+                        radiator: "Radiator",
+                        walloutlet: "Stopcontact",
+                        switch: "Schakelaar",
+                        sloping_Wall: "Schuine wand",
+                        other: "Andere",
+                        q_door: {
+                            opening_door: "Hoe opent de deur?",
+                            inside_left: "Binnen in de ruimte, naar links",
+                            inside_right: "Binnen in de ruimte, naar rechts",
+                            outside: "Buiten de ruimte"
                         },
-                        q_window:{
-                            opening_window:"Kan het raam naar binnen openen?",
+                        q_window: {
+                            opening_window: "Kan het raam naar binnen openen?",
                             yes: "ja",
                             no: "nee"
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Welke woonruimte wenst u te optimaliseren?",
-                        space:{
-                            guest_room:"Logeerkamer",
-                            living_room:"Woonkamer",
-                            bedroom:"Slaapkamer",
+                        q_space: "Welke woonruimte wenst u te optimaliseren?",
+                        space: {
+                            guest_room: "Logeerkamer",
+                            living_room: "Woonkamer",
+                            bedroom: "Slaapkamer",
                         },
-                        q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
-                        functions:{
-                            bed:"Bed",
-                            office_space:"Bureauruimte",
-                            sofa:"Sofa",
-                            storage_space:"Opbergruimte",
+                        q_function: "Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+                        functions: {
+                            bed: "Bed",
+                            office_space: "Bureauruimte",
+                            sofa: "Sofa",
+                            storage_space: "Opbergruimte",
                         },
-                        bed:{
+                        bed: {
                             q_size: "Welke breedte verkiest u?",
-                            q_bed:"Welke matras verkiest u?",
-                            soft:"Extra zacht",
-                            medium:"Medium",
-                            sturdy:"Extra stevig",
+                            q_bed: "Welke matras verkiest u?",
+                            soft: "Extra zacht",
+                            medium: "Medium",
+                            sturdy: "Extra stevig",
                             apply: "Niet van toepassing"
                         }
                     },
                     questionnaire_specs: {
                         q_preferences: "Heeft u specifieke voorkeuren voor de indeling van uw woonruimte?",
-                        preferences:{
-                            wall:"Muur",
-                            partition_wall:"Scheidingswand",
-                            in_the_middle_of_space:"Te midden van ruimte",
+                        preferences: {
+                            wall: "Muur",
+                            partition_wall: "Scheidingswand",
+                            in_the_middle_of_space: "Te midden van ruimte",
                         },
                         q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
-                        materials:{
-                            color:"kleur",
-                            material:"materiaal",
-                            white:"Wit",
-                            black:"Zwart",
-                            birch:"Berk",
-                            oak:"Eik",
-                            walnut:"Notelaar"
+                        materials: {
+                            color: "kleur",
+                            material: "materiaal",
+                            white: "Wit",
+                            black: "Zwart",
+                            birch: "Berk",
+                            oak: "Eik",
+                            walnut: "Notelaar"
                         },
-                        q_other:"Andere specifieke wensen of vereisten waarmee rekening te houden?"
+                        q_other: "Andere specifieke wensen of vereisten waarmee rekening te houden?"
+                    },
+                    questionnaire_module: {
+                        question: "Druk op de knop om te ontdekken welke modules bij u passen",
+                        warning: "Nadat u een van de specificaties hebt gewijzigd, drukt u nogmaals op de knop",
+                        button: "Modules zoeken",
+                        error: {
+                            softer: "Kan geen module vinden die precies past bij de opgegeven combinatie, zoek opnieuw met zachtere beperkingen",
+                            demands: "Niet in staat om aan de eisen te voldoen, geef andere op",
+                            roomSize: "De afmetingen van de kamer zijn te klein voor de opgegeven eisen",
+                            points2D: "Als u 'andere' kiest, teken dan de punten op de 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Bed",
+                            opklapbed_zetel: "Bed Zetel",
+                            bureau: "Bureau",
+                            kast_zij: "Kast Zijplanken",
+                            kast: "Kast",
+                            bureau_bedm: "Bureau Bed",
+                            kast_bedm: "Kast Bed",
+                            kast_kastm: "Dubbele kast",
+                            bureau_kastm: "Bureau Kast",
+                            bureaum_bedm_kast: "Bureau Bed Kast",
+                            bureaum_kastm_kast: "Bureau dubbele kast",
+                            bureaum_bedm_kastm_kast: "Bureau Bed Dubbele Kast",
+                            kastm_bedm_kastm_kast: "Bed Drievoudig Kast"
+                        },
+                        module_info: {
+                            rotate: "Draai 90°",
+                            name: "Naam: ",
+                            width: "Breedte: ",
+                            height: "Hoogte: ",
+                            closed: "Gesloten: ",
+                            open: "Open: ",
+                            components: "Onderdelen: ",
+                            saved: "Bespaarde ruimte: "
+
+                        },
+                        components:{
+                            opkladbed: "stationair opklapbed",
+                            zetel:"stationaire zetel",
+                            bureau: "vaste bureau",
+                            kast_met_zijschappen:"vaste kast met zijschappen",
+                            kast:"vaste kast",    
+                            bed_bewegend:"bewegend bed",
+                            kast_bewegend:"bewegend kast",
+                            bureau_bewegend:"bewegend bureau",
+                            tweede_kast_bewegend:"tweede bewegend kast"
+                        }
+
                     },
                     contact: {
-                        q_contact:"Laat uw contactgegevens achter zodat we u kunnen bereiken",
-                        firstname:"Voornaam",
-                        lastname:"Achternaam",
-                        phone_number:"Telefoonnummer",
-                        email:"E-mail",
-                        address:"Adres"
+                        q_contact: "Laat uw contactgegevens achter zodat we u kunnen bereiken",
+                        firstname: "Voornaam",
+                        lastname: "Achternaam",
+                        phone_number: "Telefoonnummer",
+                        email: "E-mail",
+                        address: "Adres"
                     }
                 }
             },
@@ -211,43 +328,43 @@ i18n
                         width: "Largeur",
                         height: "Hauteur",
                         other: "Autres",
-                        q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
-                        aspect:"Aspect",
+                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+                        aspect: "Aspect",
                         add_aspect: "Ajouter un aspect"
                     },
                     obstructions: {
-                        window:"Fenêtre",
-                        door:"Porte",
-                        radiator:"Radiateur",
-                        walloutlet:"Prise murale",
-                        switch:"Interrupteur",
-                        sloping_Wall:"Mur en pente",
-                        other:"Autre",
-                        q_door:{
-                            opening_door:"Comment s'ouvre la porte ?",
-                            inside_left:"A l'intérieur de la salle, à gauche",
-                            inside_right:"A l'intérieur de la salle, à droite",
-                            outside:"Espace extérieur"
+                        window: "Fenêtre",
+                        door: "Porte",
+                        radiator: "Radiateur",
+                        walloutlet: "Prise murale",
+                        switch: "Interrupteur",
+                        sloping_Wall: "Mur en pente",
+                        other: "Autre",
+                        q_door: {
+                            opening_door: "Comment s'ouvre la porte ?",
+                            inside_left: "A l'intérieur de la salle, à gauche",
+                            inside_right: "A l'intérieur de la salle, à droite",
+                            outside: "Espace extérieur"
                         },
-                        q_window:{
-                            opening_window:"La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
-                            yes:"oui",
-                            no:"non"
+                        q_window: {
+                            opening_window: "La fenêtre peut-elle s'ouvrir vers l'intérieur ?",
+                            yes: "oui",
+                            no: "non"
                         }
                     },
                     questionnaire_func: {
-                        q_space:"Quel espace de vie souhaitez-vous optimiser?",
-                        space:{
-                            guest_room:"Chambre d'amis",
-                            living_room:"Le salon",
-                            bedroom:"Chambre à coucher",
+                        q_space: "Quel espace de vie souhaitez-vous optimiser?",
+                        space: {
+                            guest_room: "Chambre d'amis",
+                            living_room: "Le salon",
+                            bedroom: "Chambre à coucher",
                         },
-                        q_function:"Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
-                        functions:{
-                            bed:"Lit",
-                            office_space:"Bureau",
-                            sofa:"Canapé",
-                            storage_space:"Espace de stockage",
+                        q_function: "Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
+                        functions: {
+                            bed: "Lit",
+                            office_space: "Bureau",
+                            sofa: "Canapé",
+                            storage_space: "Espace de stockage",
                         },
                         bed: {
                             q_size: "Quelle est la largeur que vous préférez ?",
@@ -260,30 +377,81 @@ i18n
                     },
                     questionnaire_specs: {
                         q_preferences: "Vous avez des préférences particulières pour l'aménagement de votre espace de vie?",
-                        preferences:{
-                            wall:"Mur",
-                            partition_wall:"Cloison",
-                            in_the_middle_of_space:"Au milieu de l'espace",
+                        preferences: {
+                            wall: "Mur",
+                            partition_wall: "Cloison",
+                            in_the_middle_of_space: "Au milieu de l'espace",
                         },
                         q_materials: "Quels matériaux préférez-vous pour finir votre mobilier modulable?",
-                        materials:{
-                            white:"Blanc",
-                            black:"Noir",
-                            birch:"Bouleau",
-                            oak:"Chêne",
-                            walnut:"Noyer",
+                        materials: {
+                            white: "Blanc",
+                            black: "Noir",
+                            birch: "Bouleau",
+                            oak: "Chêne",
+                            walnut: "Noyer",
                             color: "Couleur",
                             material: "Matériau"
                         },
-                        q_other:"D'autres souhaits ou exigences spécifiques à prendre en compte?"
+                        q_other: "D'autres souhaits ou exigences spécifiques à prendre en compte?"
+                    },
+                    
+                    questionnaire_module: {
+                        question: "Cliquez sur le bouton pour découvrir les modules qui vous conviennent.",
+                        warning: "Après avoir modifié l'une des spécifications, veuillez appuyer à nouveau sur le bouton.",
+                        button: "Trouver des modules",
+                        error: {
+                            softer: "Impossible de trouver un module correspondant à la combinaison exacte donnée, cherchez à nouveau avec des restrictions plus souples",
+                            demands: "Impossible de répondre aux demandes, veuillez en donner d'autres",
+                            roomSize: "Les dimensions de la pièce sont trop petites pour les exigences données.",
+                            points2D: "Lorsque vous choisissez 'autre', veuillez dessiner les points sur le 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Lit",
+                            opklapbed_zetel: "Lit Canapé",
+                            bureau: "Bureau",
+                            kast_zij: "Placard Étagères latérales",
+                            kast: "Placard",
+                            bureau_bedm: "Bureau Lit",
+                            kast_bedm: "Placard Lit",
+                            kast_kastm: "Double Placard",
+                            bureau_kastm: "Bureau Placard",
+                            bureaum_bedm_kast: "Bureau Lit Placard",
+                            bureaum_kastm_kast: "Bureau Double Placard",
+                            bureaum_bedm_kastm_kast: "Bureau Lit Double Placard",
+                            kastm_bedm_kastm_kast: "Lit Triple Placard"
+                        },
+                        module_info: {
+                            rotate: "Rotation de 90°",
+                            name: "Nom: ",
+                            width: "Largeur: ",
+                            height: "Hauteur: ",
+                            closed: "Fermé: ",
+                            open: "Ouvert: ",
+                            components: "Composants: ",
+                            saved: "Espace économisé : "
+
+                        },
+                        components:{
+                            opkladbed: "lit fixe pliable",
+                            zetel:"canapé fixe",
+                            bureau: "bureau fixe",
+                            kast_met_zijschappen:"armoire fixe avec espaces latéraux",
+                            kast:"armoire fixe",    
+                            bed_bewegend:"lit mobile",
+                            kast_bewegend:"armoire mobile",
+                            bureau_bewegend:"bureau mobile",
+                            tweede_kast_bewegend:"deuxième placard mobile"
+                        }
+
                     },
                     contact: {
-                        q_contact:"Laissez vos coordonnées afin que nous puissions vous joindre",
-                        firstname:"Prénom",
-                        lastname:"Nom de famille",
-                        phone_number:"Numéro de téléphone",
-                        email:"E-mail",
-                        address:"Adresse"
+                        q_contact: "Laissez vos coordonnées afin que nous puissions vous joindre",
+                        firstname: "Prénom",
+                        lastname: "Nom de famille",
+                        phone_number: "Numéro de téléphone",
+                        email: "E-mail",
+                        address: "Adresse"
                     }
                 }
             },
@@ -311,16 +479,16 @@ i18n
                         switch: "Schalter",
                         sloping_Wall: "Schräge Wand",
                         other: "Andere",
-                        q_door:{
-                            opening_door:"Wie wird die Tür geöffnet?",
-                            inside_left:"Im Inneren des Raums, links",
-                            inside_right:"Im Inneren des Raums, rechts",
-                            outside:"außerhalb des Raumes"
+                        q_door: {
+                            opening_door: "Wie wird die Tür geöffnet?",
+                            inside_left: "Im Inneren des Raums, links",
+                            inside_right: "Im Inneren des Raums, rechts",
+                            outside: "außerhalb des Raumes"
                         },
-                        q_window:{
-                            opening_window:"Kann man das Fenster nach innen öffnen?",
-                            yes:"ja",
-                            no:"nein"
+                        q_window: {
+                            opening_window: "Kann man das Fenster nach innen öffnen?",
+                            yes: "ja",
+                            no: "nein"
                         }
                     },
                     questionnaire_func: {
@@ -365,6 +533,56 @@ i18n
                         },
                         q_other: "Andere spezifische Wünsche oder Anforderungen, die berücksichtigt werden sollen?"
                     },
+                    questionnaire_module: {
+                        question: "Bitte drücken Sie den Knopf, um herauszufinden, welche Module für Sie geeignet sind.",
+                        warning: "Wenn Sie eine der Spezifikationen geändert haben, drücken Sie bitte erneut auf die Schaltfläche",
+                        button: "Module finden",
+                        error: {
+                            softer: "Sie können kein Modul finden, das genau auf die angegebene Kombination passt, suchen Sie noch einmal mit geringeren Einschränkungen",
+                            demands: "Sie können die Anforderungen nicht erfüllen, bitte geben Sie andere an",
+                            roomSize: "Die Abmessungen des Raumes sind zu klein für die angegebenen Anforderungen",
+                            points2D: "Wenn Sie 'andere' wählen, zeichnen Sie bitte die Punkte auf dem 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Bett",
+                            opklapbed_zetel: "Bett Sofa",
+                            bureau: "Schreibtisch",
+                            kast_zij: "Kleiderschrank Seitenregale",
+                            kast: "Schrank",
+                            bureau_bedm: "Schreibtisch Bett",
+                            kast_bedm: "Schrank Bett",
+                            kast_kastm: "Doppelter Kleiderschrank",
+                            bureau_kastm: "Schreibtisch-Schrank",
+                            bureaum_bedm_kast: "Schreibtisch-Bett-Schrank",
+                            bureaum_kastm_kast: "Schreibtisch Double Closet",
+                            bureaum_bedm_kastm_kast: "Schreibtisch Bett Double Closet",
+                            kastm_bedm_kastm_kast: "Bett Triple Closet"
+                        },
+                        module_info: {
+                            rotate: "90° drehen",
+                            name: "Name: ",
+                            width: "Breite: ",
+                            height: "Höhe: ",
+                            closed: "Geschlossen: ",
+                            open: "Offen: ",
+                            components: "Bestandteile: ",
+                            saved: "Platzsparend: "
+
+                        },
+                        components:{
+                            opkladbed: "stationäres klappbares Bett",
+                            zetel:"stationäres Sofa",
+                            bureau: "stationärer Schreibtisch",
+                            kast_met_zijschappen:"stationärer Kleiderschrank mit Seitenräumen",
+                            kast:"stationärer Schrank",    
+                            bed_bewegend:"bewegliches Bett",
+                            kast_bewegend:"beweglicher Schrank",
+                            bureau_bewegend:"beweglicher Schreibtisch",
+                            tweede_kast_bewegend:"zweiter beweglicher Schrank"
+                        }
+
+                    },
                     contact: {
                         q_contact: "Hinterlassen Sie Ihre Kontaktdaten, damit wir Sie erreichen können",
                         firstname: "Vorname",
@@ -399,16 +617,16 @@ i18n
                         switch: "Interruptor",
                         sloping_Wall: "Pared inclinada",
                         other: "Otro",
-                        q_door:{
-                            opening_door:"cómo abrir la puerta",
-                            inside_left:"dentro de la habitación, a la izquierda",
-                            inside_right:"dentro de la habitación, a la derecha",
-                            outside:"espacio exterior"
+                        q_door: {
+                            opening_door: "cómo abrir la puerta",
+                            inside_left: "dentro de la habitación, a la izquierda",
+                            inside_right: "dentro de la habitación, a la derecha",
+                            outside: "espacio exterior"
                         },
-                        q_window:{
-                            opening_window:"¿Puede abrirse la ventana hacia el interior?",
-                            yes:"si",
-                            no:"no"
+                        q_window: {
+                            opening_window: "¿Puede abrirse la ventana hacia el interior?",
+                            yes: "si",
+                            no: "no"
                         }
                     },
                     questionnaire_func: {
@@ -453,6 +671,56 @@ i18n
                         },
                         q_other: "¿Otras peticiones o requisitos específicos a tener en cuenta?"
                     },
+                    questionnaire_module: {
+                        question: "Pulse el botón para descubrir qué módulos le convienen.",
+                        warning: "Si desea cambiar alguna de las especificaciones, vuelva a pulsar el botón",
+                        button: "Encontrar módulos",
+                        error: {
+                            softer: "Al no poder encontrar un módulo que se ajuste a la combinación exacta dada, busque de nuevo con restricciones más suaves",
+                            demands: "No se puede cumplir con las demandas, por favor, dar otros",
+                            roomSize: "Las dimensiones de la habitación son demasiado pequeñas para los requisitos indicados.",
+                            points2D: "Cuando elija 'otros', por favor dibuje los puntos en el 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Cama",
+                            opklapbed_zetel: "Cama Sofá",
+                            bureau: "Escritorio",
+                            kast_zij: "Armario Estantes laterales",
+                            kast: "Armario",
+                            bureau_bedm: "Escritorio Cama",
+                            kast_bedm: "Armario Cama",
+                            kast_kastm: "Armario Doble",
+                            bureau_kastm: "Armario Escritorio",
+                            bureaum_bedm_kast: "Escritorio Cama Armario",
+                            bureaum_kastm_kast: "Escritorio Armario Doble",
+                            bureaum_bedm_kastm_kast: "Escritorio Cama Doble Armario",
+                            kastm_bedm_kastm_kast: "Cama Triple Armario"
+                        },
+                        module_info: {
+                            rotate: "Girar 90",
+                            name: "Nombre: ",
+                            width: "Anchura: ",
+                            height: "Alto: ",
+                            closed: "Cerrado: ",
+                            open: "Abierto: ",
+                            components: "Componentes: ",
+                            saved: "Espacio libre: "
+
+                        },
+                        components:{
+                            opkladbed: "cama plegable estacionaria",
+                            zetel:"sofá fijo",
+                            bureau: "escritorio fijo",
+                            kast_met_zijschappen:"armario fijo con espacios laterales",
+                            kast:"armario fijo",    
+                            bed_bewegend:"cama móvil",
+                            kast_bewegend:"armario móvil",
+                            bureau_bewegend:"escritorio móvil",
+                            tweede_kast_bewegend:"segundo armario móvil"
+                        }
+
+                    },
                     contact: {
                         q_contact: "Deja tus datos de contacto para que podamos comunicarnos contigo",
                         firstname: "Nombre",
@@ -487,16 +755,16 @@ i18n
                         switch: "Interruttore",
                         sloping_Wall: "Muro inclinato",
                         other: "Altro",
-                        q_door:{
-                            opening_door:"Come funziona l'impianto?",
-                            inside_left:"All'interno della stanza, a sinistra",
-                            inside_right:"All'interno della stanza, a destra",
-                            outside:"fuori dalla stanza"
+                        q_door: {
+                            opening_door: "Come funziona l'impianto?",
+                            inside_left: "All'interno della stanza, a sinistra",
+                            inside_right: "All'interno della stanza, a destra",
+                            outside: "fuori dalla stanza"
                         },
-                        q_window:{
-                            opening_window:"La finestra può aprirsi all'interno?",
-                            yes:"si",
-                            no:"no"
+                        q_window: {
+                            opening_window: "La finestra può aprirsi all'interno?",
+                            yes: "si",
+                            no: "no"
                         }
                     },
                     questionnaire_func: {
@@ -540,6 +808,56 @@ i18n
                             material: "Materiale"
                         },
                         q_other: "Altre richieste o requisiti specifici da considerare?"
+                    },
+                    questionnaire_module: {
+                        question: "Premere il pulsante per scoprire quali moduli sono adatti a voi.",
+                        warning: "Dopo aver modificato una qualsiasi delle specifiche, premere nuovamente il pulsante",
+                        button: "Trova moduli",
+                        error: {
+                            softer: "Non riuscendo a trovare un modulo che corrisponda esattamente alla combinazione indicata, cercare di nuovo con restrizioni più morbide",
+                            demands: "Impossibile soddisfare le richieste, indicarne altre",
+                            roomSize: "Le dimensioni della stanza sono troppo ridotte per le richieste fornite.",
+                            points2D: "Quando si sceglie “altro”, si prega di disegnare i punti sul 2D"
+                        },
+                        module_type: {
+                            //names kept dutch to use name given in csv
+                            opklapbed: "Letto",
+                            opklapbed_zetel: "Letto Divano",
+                            bureau: "Scrivania",
+                            kast_zij: "Armadio Ripiani laterali",
+                            kast: "Armadio",
+                            bureau_bedm: "Scrivania Letto",
+                            kast_bedm: "Armadio Letto",
+                            kast_kastm: "Armadio doppio",
+                            bureau_kastm: "Armadio scrivania",
+                            bureaum_bedm_kast: "Scrivania Armadio Letto",
+                            bureaum_kastm_kast: "Scrivania Armadio doppio",
+                            bureaum_bedm_kastm_kast: "Scrivania Letto Armadio Doppio",
+                            kastm_bedm_kastm_kast: "Letto Armadio triplo"
+                        },
+                        module_info: {
+                            rotate: "Ruota di 90°",
+                            name: "Nome: ",
+                            width: "Larghezza: ",
+                            height: "Altezza: ",
+                            closed: "Chiuso: ",
+                            open: "Aperto: ",
+                            components: "Componenti: ",
+                            saved: "Spazio risparmiato: "
+
+                        },
+                        components:{
+                            opkladbed: "letto fisso pieghevole",
+                            zetel:"divano fisso",
+                            bureau: "scrivania fissa",
+                            kast_met_zijschappen:"armadio fisso con spazi laterali",
+                            kast:"armadio fisso",    
+                            bed_bewegend:"letto mobile",
+                            kast_bewegend:"armadio mobile",
+                            bureau_bewegend:"scrivania mobile",
+                            tweede_kast_bewegend:"secondo armadio mobile"
+                        }
+
                     },
                     contact: {
                         q_contact: "Lascia i tuoi dati di contatto in modo che possiamo raggiungerti",

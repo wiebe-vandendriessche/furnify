@@ -32,6 +32,7 @@ export const Floor = ({ width, height, depth, position }) => {
 
 
 
+
     // Apply texture repetition to all textures
     useEffect(() => {
         const repeatTextures = [

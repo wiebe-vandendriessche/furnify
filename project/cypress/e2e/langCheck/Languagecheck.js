@@ -51,6 +51,7 @@ export function checkSpecs(specs){
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="question-specs-materials"]').should('include.text', specs.q_materials);
     cy.get('[data-testid="btn-specs-material-birch"]').should('include.text', specs.materials.birch);
     cy.get('[data-testid="btn-specs-material-oak"]').should('include.text', specs.materials.oak);
@@ -61,6 +62,7 @@ export function checkSpecs(specs){
 }
 
 export function checkContact(contact){
+    cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();
     cy.get('[data-testid="btn-nav-sidebar-next"]').click();

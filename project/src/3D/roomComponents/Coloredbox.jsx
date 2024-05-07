@@ -6,14 +6,14 @@ import { MeshBasicMaterial, Mesh, MeshDepthMaterial, LinearEncoding } from 'thre
 export const ColoredBox = ({ width, height, depth, position, color, visible, textures, addColorToTexture }) => {
     if (textures && addColorToTexture) {
         return (
-            <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible}>
+            <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible} castShadow receiveShadow >
                 <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding} color={color} />
             </Box>
         );
 
     } else if (textures) {
         return (
-            <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible}>
+            <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible} castShadow receiveShadow >
                 <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding} />
             </Box>
         );
@@ -21,7 +21,7 @@ export const ColoredBox = ({ width, height, depth, position, color, visible, tex
 
     else {
         return (
-            <Box args={[width, height, depth]} position={position} visible={visible}>
+            <Box args={[width, height, depth]} position={position} visible={visible} castShadow receiveShadow >
                 <meshStandardMaterial attach="material" color={color} />
             </Box>
         );

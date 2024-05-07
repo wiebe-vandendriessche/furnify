@@ -39,20 +39,38 @@ const useMousePosition = (camera) => {
     const planeZ = new Plane(new Vector3(0, 0, 1), 0);
     const mousePosition = new Vector2();
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = (event.target as HTMLElement).getBoundingClientRect();
-      mousePosition.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mousePosition.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
+    const updatePosition = (x, y, rect) => {
+      mousePosition.x = ((x - rect.left) / rect.width) * 2 - 1;
+      mousePosition.y = -((y - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(mousePosition, camera);
       const intersection = new Vector3();
       raycaster.ray.intersectPlane(planeZ, intersection);
+      if (intersection) {
+        setCurrentMousePosition(intersection);
+      }
+    };
 
-      if (intersection) setCurrentMousePosition(intersection);
+    const handleMouseMove = (event) => {
+      const rect = event.target.getBoundingClientRect();
+      updatePosition(event.clientX, event.clientY, rect);
+    };
+
+    const handleTouchMove = (event) => {
+      if (event.touches.length > 0) {
+        console.log("touch move");
+        const touch = event.touches[0];
+        const rect = touch.target.getBoundingClientRect();
+        updatePosition(touch.clientX, touch.clientY, rect);
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchstart", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+    };
   }, [camera]);
 
   return currentMousePosition;

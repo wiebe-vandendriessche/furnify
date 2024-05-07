@@ -3,7 +3,7 @@ import { useCallback, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
-export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
+export const DLight = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
     const ref = useRef();
     const pos = useRef(position);
     const maxX2 = maxX / 2;
@@ -12,7 +12,7 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, m
     const ceilingHeight = maxY - dimensions[1] / 2;
 
     const onDrag = useCallback(({ x, z }) => {
-        const newY = dimensions[1] / 2;
+        const newY = ceilingHeight;
         const newX = clamp(x, -maxX2 + (dimensions[0] / 2), maxX2 - (dimensions[0] / 2));
         const newZ = clamp(z, -maxZ2 + (dimensions[2] / 2), maxZ2 - (dimensions[2] / 2));
         pos.current = [newX, newY, newZ];
@@ -20,7 +20,7 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, m
 
     useEffect(() => {
         const [x, y, z] = pos.current;
-        const newY = dimensions[1] / 2;
+        const newY = ceilingHeight;
         const newX = clamp(x, -maxX2 + (dimensions[0] / 2), maxX2 - (dimensions[0] / 2));
         const newZ = clamp(z, -maxZ2 + (dimensions[2] / 2), maxZ2 - (dimensions[2] / 2));
         pos.current = [newX, newY, newZ];
@@ -38,8 +38,9 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, m
     });
 
     return (
-        <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} castShadow receiveShadow {...events} {...props}>
+        <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} receiveShadow {...events} {...props}>
             <boxGeometry />
+            <pointLight power={100} decay={2} castShadow></pointLight>
             <meshStandardMaterial />
         </mesh>
     );
