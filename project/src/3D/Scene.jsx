@@ -70,7 +70,6 @@ const Scene = () => {
                 */}
                     <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
                     </Surface>
-                    <axesHelper></axesHelper>
 
                     <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
                     <Skybox path={skyboxPath} />
