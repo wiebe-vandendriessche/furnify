@@ -74,14 +74,14 @@ export const FloorplanScene = () => {
 
   const handle3DButtonClicked = (event) => {
     event.stopPropagation();
-    console.log("3D Button  Clicked");
+    // console.log("3D Button  Clicked");
     handleConvertTo3D();
     setShow3D(true);
   };
 
   const handle2DButtonClicked = (event) => {
     event.stopPropagation();
-    console.log("2D Button  Clicked");
+    // console.log("2D Button  Clicked");
     window.confirm(
       "Goin back to 2D will remove all 3D objects. Do you want to continue?"
     );

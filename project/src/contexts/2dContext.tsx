@@ -110,9 +110,9 @@ export const DrawingProvider = ({ children }) => {
       walls.push(wall);
     }
 
-    walls.forEach((wall, index) => {
-      console.log(`Wall ${index}:`, wall);
-    });
+    // walls.forEach((wall, index) => {
+    //   console.log(`Wall ${index}:`, wall);
+    // });
 
     return walls;
   }
@@ -158,14 +158,14 @@ export const DrawingProvider = ({ children }) => {
   // Toggle drawing state
   const toggleDrawing = () =>
     setIsDrawing((prev) => {
-      console.log("Drawing is now: " + !prev);
+      // console.log("Drawing is now: " + !prev);
       return !prev;
     });
 
   // Toggle orthogonal mode
   const toggleOrthogonalMode = () =>
     setOrthogonalMode((prev) => {
-      console.log("Orthogonal mode is now: " + !prev);
+      // console.log("Orthogonal mode is now: " + !prev);
       return !prev;
     });
 
