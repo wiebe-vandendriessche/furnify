@@ -118,14 +118,13 @@ export function Sidebar() {
             }
         });
 
-        let color = specs.color === "#FFFFFF" ? "black" : "white";
+        let color = specs.color;
 
         const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
             const { msg, result } = data
-            console.log(result, msg)
             alert(msg);
         });
     };

@@ -59,14 +59,14 @@ export function Questionnaire_spec() {
                                 </Col>
                                 <Col>
                                     <ButtonGroup>
-                                        <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
+                                        <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="white"
                                                       data-testid={"btn-specs-color-white"}
-                                                      onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
+                                                      onChange={changeSpecs} checked={specs.color == "white"}>
                                             {t('questionnaire_specs.materials.white')}
                                         </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
+                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="black"
                                                       data-testid={"btn-specs-color-black"}
-                                                      onChange={changeSpecs} checked={specs.color === "#000000"}>
+                                                      onChange={changeSpecs} checked={specs.color == "black"}>
                                             {t('questionnaire_specs.materials.black')}
                                         </ToggleButton>
                                     </ButtonGroup>
