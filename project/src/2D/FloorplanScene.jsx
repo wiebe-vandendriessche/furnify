@@ -86,10 +86,12 @@ export const FloorplanScene = () => {
   const handle2DButtonClicked = (event) => {
     event.stopPropagation();
     // console.log("2D Button  Clicked");
-    window.confirm(
+    let goback = window.confirm(
       "Goin back to 2D will remove all 3D objects. Do you want to continue?"
     );
-    setShow3D(false);
+    if (goback) {
+      setShow3D(false);
+    }
   };
 
   return (
@@ -231,11 +233,6 @@ export const FloorplanScene = () => {
           {sceneObjects.map((object, index) => (
             <primitive key={index} object={object} />
           ))}
-          {/* <OrbitControls
-            enableZoom={true}
-            enablePan={true}
-            enableRotate={true}
-          /> */}
           <OrbitControls makeDefault enablePan={true} minDistance={5} maxDistance={50} />
           <Skybox path={skyboxPath} />
 
