@@ -5,8 +5,8 @@ import { Line } from 'three';
 import { useThree } from '@react-three/fiber';
 
 export class DrawableLine {
-  private geometry: THREE.BufferGeometry;
-  private material: THREE.LineBasicMaterial;
+  public geometry: THREE.BufferGeometry;
+  public material: THREE.LineBasicMaterial;
   public line: THREE.Line;
   public start: DrawablePoint;
   public end: DrawablePoint;

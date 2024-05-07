@@ -88,16 +88,43 @@ export const FloorplanEditor: React.FC = () => {
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
+  const { isClosed, setIsClosed } = use2d();
   const { snappingMode, setSnappingMode } = use2d();
   const { gridSize, setGridSize } = use2d();
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
 
   /**
+   * Check if the shape is closed
+   */
+  // useEffect(() => {
+  //   if (points.length > 2) {
+  //     const start = points[0];
+  //     const end = points[points.length - 1];
+  //     const distance = start.distanceTo(end);
+  //     setIsClosed(distance < snapThreshold);
+  //     console.log("isClosed: " + isClosed);
+  //   }
+  // }, [points]);
+
+  const checkShapeClosed = (): boolean => {
+    // if (points.length > 2) {
+    //   const start = points[0];
+    //   const end = points[points.length - 1];
+    //   const distance = start.distanceTo(end);
+    //   return distance < snapThreshold;
+    // }
+    // return false;
+
+    if (points.length > 2 && points[points.length - 1] == points[0]) return true;
+    else return false;
+  };
+
+  /**
    * Clear the scene of all points and lines
    */
   const clearScene = () => {
-    lines.forEach((line) => {
+    lines.forEach((line: DrawableLine) => {
       if (line.line) scene.remove(line.line);
       if (line.geometry) line.geometry.dispose();
       if (line.material) line.material.dispose();
@@ -222,15 +249,18 @@ export const FloorplanEditor: React.FC = () => {
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
         }
+        if (updatedPoints.length > 2 && updatedPoints[updatedPoints.length - 1] == updatedPoints[0]) { setIsClosed(true); }
+        else setIsClosed(false);
         return updatedPoints;
       });
+
     },
     [scene, isDrawing, points, orthogonalMode, snappingMode, gridSize]
   );
 
   /**
    * Handle left and right clicks
-   */
+  */
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
