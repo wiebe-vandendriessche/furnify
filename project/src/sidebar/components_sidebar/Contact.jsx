@@ -57,7 +57,7 @@ function Contact() {
                     )))
                 }
             </Form>
-            <Button variant={"danger"} type={"submit"}>submit</Button>
+            <Button variant={"danger"} type={"submit"}>{t('contact.submit')}</Button>
         </div>
     )
 }

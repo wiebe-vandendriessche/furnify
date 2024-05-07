@@ -84,8 +84,9 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
-                    <div className="m-1">
+                    
                         <Row>
+                        <Form.Label>{t('obstructions.q_all.dimensions')}</Form.Label>
                             <Col>
                                 <FloatingLabel
                                     controlid={"width" + obstId}
@@ -99,8 +100,6 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         onKeyPress={negativeValues}
                                         id={"width" + obstId}
                                     />
-
-
                                 </FloatingLabel>
                             </Col>
                             <Col>
@@ -134,17 +133,13 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                 </FloatingLabel>
                             </Col>
                         </Row>
-
-                    </div>
-                </Form.Group>
-
-                <Form.Group >
                     <Row>
+                    <Form.Label>{t('obstructions.q_all.position')}</Form.Label>
                         <Col>
                             <FloatingLabel
                                 style={{ fontSize: '0.8rem' }}
                                 controlid={"walloutletXpos" + obstId}
-                                label="Walloutlet X Position (cm)"
+                                label={t('obstructions.q_all.side') +" (cm)"} 
                             >
                                 <Form.Control
                                     type="number"
@@ -163,7 +158,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                         <Col>
                             <FloatingLabel
                                 controlid={"walloutletYpos" + obstId}
-                                label="Walloutlet Y Position (cm)"
+                                label={t('obstructions.q_all.up') +" (cm)"} 
                                 style={{ fontSize: '0.8rem' }}
                             >
                                 <Form.Control
@@ -181,11 +176,10 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                             </FloatingLabel>
                         </Col>
                     </Row>
-
+                    <Row>
                     <Form.Label data-testid={"question-obstacle-walloutlet-wall"}>
-                        {t("obstructions.q_walloutlet.walloutlet_wall")}
+                        {t("obstructions.q_all.wall")}
                     </Form.Label>
-                    <div>
                         <ButtonGroup>
                             {/* Add radio buttons for walloutlet positions */}
                             {["front", "back", "left", "right"].map((x) => (
@@ -204,13 +198,12 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                     disabled={isButtonDisabled} // Set button disabled state
                                     checked={x == walloutletWall}
                                 >
-                                    {t(`obstructions.q_walloutlet.${x}`)}
+                                    {t(`obstructions.q_all.${x}`)}
                                 </ToggleButton>
                             ))}
                         </ButtonGroup>
-                    </div>
+                    </Row>
                 </Form.Group>
-
             </div>
         </div>
     )
