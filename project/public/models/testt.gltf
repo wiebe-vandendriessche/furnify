@@ -17,8 +17,18 @@
 			"mesh":0,
 			"name":"bureaum_kastm_kast_oak_white",
 			"rotation":[
-				0,
 				1,
+				0,
+				0,
+				0
+			],
+			"scale":[
+				-1,
+				-1,
+				-1
+			],
+			"translation":[
+				-3370,
 				0,
 				0
 			]
@@ -607,7 +617,7 @@
 	"buffers":[
 		{
 			"byteLength":153968,
-			"uri":"bureaum_kastm_kast_oak_white.bin"
+			"uri":"testt.bin"
 		}
 	]
 }

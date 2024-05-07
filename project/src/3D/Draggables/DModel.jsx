@@ -15,7 +15,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const [depth, setModelDepth] = useState(3.150);
     const { specs,modelRotation } = useConfiguratorContext();
     //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
-    const { nodes, materials } = useGLTF('/models/bureaum_kastm_kast_oak_white.gltf')
+    const { nodes, materials } = useGLTF('/models/final.gltf')
 
 
     // swapping depth and width depending on rotation
