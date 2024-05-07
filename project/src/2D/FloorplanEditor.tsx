@@ -39,20 +39,38 @@ const useMousePosition = (camera) => {
     const planeZ = new Plane(new Vector3(0, 0, 1), 0);
     const mousePosition = new Vector2();
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = (event.target as HTMLElement).getBoundingClientRect();
-      mousePosition.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      mousePosition.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
+    const updatePosition = (x, y, rect) => {
+      mousePosition.x = ((x - rect.left) / rect.width) * 2 - 1;
+      mousePosition.y = -((y - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(mousePosition, camera);
       const intersection = new Vector3();
       raycaster.ray.intersectPlane(planeZ, intersection);
+      if (intersection) {
+        setCurrentMousePosition(intersection);
+      }
+    };
 
-      if (intersection) setCurrentMousePosition(intersection);
+    const handleMouseMove = (event) => {
+      const rect = event.target.getBoundingClientRect();
+      updatePosition(event.clientX, event.clientY, rect);
+    };
+
+    const handleTouchMove = (event) => {
+      if (event.touches.length > 0) {
+        // console.log("touch move");
+        const touch = event.touches[0];
+        const rect = touch.target.getBoundingClientRect();
+        updatePosition(touch.clientX, touch.clientY, rect);
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchstart", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+    };
   }, [camera]);
 
   return currentMousePosition;
@@ -70,16 +88,43 @@ export const FloorplanEditor: React.FC = () => {
   const { isHoveringCanvas, setIsHoveringCanvas } = use2d();
   const { orthogonalMode, toggleOrthogonalMode } = use2d();
   const [isNearStart, setIsNearStart] = useState<boolean>(false);
+  const { isClosed, setIsClosed } = use2d();
   const { snappingMode, setSnappingMode } = use2d();
   const { gridSize, setGridSize } = use2d();
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
 
   /**
+   * Check if the shape is closed
+   */
+  // useEffect(() => {
+  //   if (points.length > 2) {
+  //     const start = points[0];
+  //     const end = points[points.length - 1];
+  //     const distance = start.distanceTo(end);
+  //     setIsClosed(distance < snapThreshold);
+  //     console.log("isClosed: " + isClosed);
+  //   }
+  // }, [points]);
+
+  const checkShapeClosed = (): boolean => {
+    // if (points.length > 2) {
+    //   const start = points[0];
+    //   const end = points[points.length - 1];
+    //   const distance = start.distanceTo(end);
+    //   return distance < snapThreshold;
+    // }
+    // return false;
+
+    if (points.length > 2 && points[points.length - 1] == points[0]) return true;
+    else return false;
+  };
+
+  /**
    * Clear the scene of all points and lines
    */
   const clearScene = () => {
-    lines.forEach((line) => {
+    lines.forEach((line: DrawableLine) => {
       if (line.line) scene.remove(line.line);
       if (line.geometry) line.geometry.dispose();
       if (line.material) line.material.dispose();
@@ -204,15 +249,18 @@ export const FloorplanEditor: React.FC = () => {
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
         }
+        if (updatedPoints.length > 2 && updatedPoints[updatedPoints.length - 1] == updatedPoints[0]) { setIsClosed(true); }
+        else setIsClosed(false);
         return updatedPoints;
       });
+
     },
     [scene, isDrawing, points, orthogonalMode, snappingMode, gridSize]
   );
 
   /**
    * Handle left and right clicks
-   */
+  */
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
