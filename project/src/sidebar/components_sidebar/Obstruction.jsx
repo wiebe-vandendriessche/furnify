@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import "./Questionnaire.css"
 import Form from "react-bootstrap/Form";
-import { Col, FloatingLabel, Row} from "react-bootstrap";
+import { Col, FloatingLabel, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io"
 import { IoCloseSharp } from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
-function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight}) {
+function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight }) {
     //i18n
     const { t, i18n } = useTranslation();
 
@@ -24,8 +24,8 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
 
     function handleInput(event) {
         //Only check on height
-        if(!Number.isNaN(event.nativeEvent.data) && event.target.name=="height"){
-            if(event.target.value>maxHeight*100.0){
+        if (!Number.isNaN(event.nativeEvent.data) && event.target.name == "height") {
+            if (event.target.value > maxHeight * 100.0) {
                 alert("prevented")
                 event.preventDefault();
                 return;
@@ -34,9 +34,9 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
         changeObst(event);
     }
 
-    function negativeValues(event){
+    function negativeValues(event) {
         //prevent use of negative values
-        if (event.key=="-") {
+        if (event.key == "-") {
             event.preventDefault();
         }
     }
@@ -44,22 +44,22 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
     return (
         <div className="obstruction-bg mb-2 flex">
             <Button id={"button" + obstId}
-                    data-testid={"btn-obstacle-expand-" + type}
-                    variant={"danger"} value={type ?? t("obstructions." + type)}
-                    onClick={showButton
-                    }>{t("obstructions." + type)}</Button>
+                data-testid={"btn-obstacle-expand-" + type}
+                variant={"danger"} value={type ?? t("obstructions." + type)}
+                onClick={showButton
+                }>{t("obstructions." + type)}</Button>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                    variant={"danger"} id={"delete" + obstId}
-                    onClick={(e) => deleteObst(e)}>
+                variant={"danger"} id={"delete" + obstId}
+                onClick={(e) => deleteObst(e)}>
                 <IoCloseSharp />
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group className="mb-3">
                     <Form.Select name="type" id={"type" + obstId}
-                                 defaultValue={type}
-                                 onChange={(e) => {
-                                     changeObst(e)
-                                 }}>
+                        defaultValue={type}
+                        onChange={(e) => {
+                            changeObst(e)
+                        }}>
                         <option value={"other"}>{t('obstructions.other')}</option>
                         <option value={"radiator"}>{t('obstructions.radiator')}</option>
                         <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
@@ -68,19 +68,20 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                 <Form.Group>
                     <div className="m-1">
                         <Row>
+                        <Form.Label>{t('obstructions.q_all.dimensions')}</Form.Label>
                             <Col>
                                 <FloatingLabel
                                     controlid={"obstLength" + obstId}
                                     label={t('questionnaire_space.length') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"obstLength"} min={0} step={1}
-                                                  data-testid={"input-obst-"+type+"-length"}
-                                                  value={obstLength}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"length"+obstId}
+                                        data-testid={"input-obst-" + type + "-length"}
+                                        value={obstLength}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"length" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -90,12 +91,12 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     label={t('questionnaire_space.width') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"width"} min={0} step={1} value={width}
-                                                  data-testid={"input-obst-"+type+"-width"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"width"+obstId}
+                                        data-testid={"input-obst-" + type + "-width"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"width" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -105,12 +106,12 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                     label={t('questionnaire_space.height') + '(cm)'}
                                 >
                                     <Form.Control type="number" name={"height"} min={0} step={1} value={height}
-                                                  data-testid={"input-obst-"+type+"-height"}
-                                                  onChange={(e) => {
-                                                      handleInput(e)
-                                                  }}
-                                                  onKeyPress={negativeValues}
-                                                  id={"height"+obstId}
+                                        data-testid={"input-obst-" + type + "-height"}
+                                        onChange={(e) => {
+                                            handleInput(e)
+                                        }}
+                                        onKeyPress={negativeValues}
+                                        id={"height" + obstId}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -118,8 +119,6 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
 
                     </div>
                 </Form.Group>
-
-
             </div>
         </div>
     )
