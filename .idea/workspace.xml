@@ -4,18 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ed7990-f255-4f2c-8786-c29b99cc86ca" name="Changes" comment="send data to client done">
+    <list default="true" id="31ed7990-f255-4f2c-8786-c29b99cc86ca" name="Changes" comment="send data to Mongodb">
+      <change afterPath="$PROJECT_DIR$/project/src/MongoDB.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/src/config.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/src/model/ContactModel.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24-04-24_13_06_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/project/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/project/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_func.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Questionnaire_func.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -28,12 +37,15 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/project/src/sidebar/Sidebar.css" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2fY22V4p58fJqyV4D761KozvJS1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -51,6 +63,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
+    "ts.external.directory.path": "D:\\Informatica\\jaar3\\VOP\\furnify2\\project\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -87,6 +100,8 @@
       <option name="presentableId" value="Default" />
       <updated>1713963490809</updated>
       <workItem from="1713963500192" duration="4047000" />
+      <workItem from="1714485130644" duration="7929000" />
+      <workItem from="1714958257676" duration="21012000" />
     </task>
     <servers />
   </component>
@@ -95,6 +110,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="send data to client done" />
-    <option name="LAST_COMMIT_MESSAGE" value="send data to client done" />
+    <MESSAGE value="privacy policy" />
+    <MESSAGE value="send data to Mongodb" />
+    <option name="LAST_COMMIT_MESSAGE" value="send data to Mongodb" />
   </component>
 </project>

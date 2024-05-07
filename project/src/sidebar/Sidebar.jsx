@@ -17,6 +17,7 @@ import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 
 
@@ -67,17 +68,18 @@ export function Sidebar() {
         }
     }
 
+    const [error, setError] = useState(null);
 
-
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
+
         let obs = "";
         Object.entries(obstacles).forEach(([type, items]) => {
             items.forEach((item) => {
                 obs += item.id + ".";
                 switch (item.type) {
                     case 'window':
-                        obs+="W";
+                        obs += "W";
                         if (item.inside_window === 'yes') {
                             obs += " in";
                         } else {
@@ -86,12 +88,12 @@ export function Sidebar() {
                         obs += " w:" + item.width + "h:" + item.height;
                         break;
                     case 'door':
-                        obs+="D";
+                        obs += "D";
                         obs += " " + item.opening_door;
                         obs += " w:" + item.width + "h:" + item.height;
                         break;
                     default:
-                        obs+="O";
+                        obs += "O";
                         obs += " w:" + item.width + "l:" + item.obstLength + "h:" + item.height;
                         break;
                 }
@@ -108,15 +110,15 @@ export function Sidebar() {
             });
         });
 
-        let dim=""
+        let dim = ""
         Object.entries(dimensions).map(([key, value]) => (
-            dim+=key+":"+value+" "
+            dim += key + ":" + value + " "
         ));
 
         let func = "";
         Object.entries(functionalities).forEach(([key, value]) => {
             if (value) {
-                func += key+" ";
+                func += key + " ";
             }
         });
 
@@ -125,11 +127,12 @@ export function Sidebar() {
         const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
-            const { msg, result } = data
-            console.log(result,msg)
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, {param: 'c'}, (_, data) => {
+            const {msg, result} = data
+            console.log(result, msg)
             alert(msg);
         });
+        await axios.post('http://localhost:3000/api/contact', contact);
     };
 
 
