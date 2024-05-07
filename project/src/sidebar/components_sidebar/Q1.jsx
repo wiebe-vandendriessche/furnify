@@ -34,8 +34,8 @@ export function Q1({ stateId, setStateId }) {
             case "door":
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
+                    width: 85,
+                    height: 200,
                     id: stateId,
                     opening_door: "right",
                     obstacleWall: "front",
@@ -44,50 +44,50 @@ export function Q1({ stateId, setStateId }) {
             case "window":
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
+                    width: 70,
+                    height: 100,
                     id: stateId,
                     windowWall: "front",
                     inside_window: "no",
                     windowXpos: 0,
-                    windowYpos: 0
+                    windowYpos: 70
                 };
             case "walloutlet":
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
-                    depth: 0,
+                    width: 8.5,
+                    height: 8.5,
+                    depth: 2.5,
                     id: stateId,
                     walloutletWall: "front",
                     walloutletXpos: 0,
-                    walloutletYpos: 0
+                    walloutletYpos: 110
                 };
             case "switch":
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
-                    depth: 0,
+                    width: 8.5,
+                    height: 8.5,
+                    depth: 2.5,
                     id: stateId,
                     switchWall: "front",
                     switchXpos: 0,
-                    switchYpos: 0
+                    switchYpos: 125
                 };
             case "light":
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
-                    obstLength: 0,
+                    width: 15,
+                    height: 12,
+                    obstLength: 25,
                     id: stateId,
                 };
             default:
                 return {
                     type: valueType,
-                    width: 0,
-                    height: 0,
-                    obstLength: 0,
+                    width: 50,
+                    height: 50,
+                    obstLength: 50,
                     id: stateId,
                 };
         }

@@ -12,24 +12,25 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const pos = useRef(position)
 
     const [width, setModelWidth] = useState(1.7);
-    const [depth, setModelDepth] = useState(1);
+    const [depth, setModelDepth] = useState(3.150);
     const { specs,modelRotation } = useConfiguratorContext();
-    const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
+    //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
+    const { nodes, materials } = useGLTF('/models/bureaum_kastm_kast_oak_white.gltf')
 
 
     // swapping depth and width depending on rotation
     useEffect(() => {
         if (modelRotation === 0) {
             setModelWidth(1.7);
-            setModelDepth(1);
+            setModelDepth(3.150);
         } else if (modelRotation === Math.PI / 2) {
-            setModelWidth(1);
+            setModelWidth(3.150);
             setModelDepth(1.7);
         } else if (modelRotation === Math.PI) {
             setModelWidth(1.7);
-            setModelDepth(1);
+            setModelDepth(3.150);
         } else if (modelRotation === -Math.PI / 2) {
-            setModelWidth(1);
+            setModelWidth(3.150);
             setModelDepth(1.7);
         }
     }, [modelRotation]);
@@ -141,7 +142,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     }, [maxX2, maxZ2, position, clamp, width, depth, modelRotation]);
 
-    // makes sure when enlarging the room or rotating the model sticks to the wall in x 
+    // makes sure when enlarging the room or rotating the model sticks to the wall in x
     useEffect(() => {
         const [x, y, z] = pos.current;
         let newX = x
@@ -185,7 +186,8 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 // Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
-        const originalColors = nodes.tv_wand001.children.map(object => object.material.color.clone());
+        const originalColors = nodes.bureaum_kastm_kast_oak_white.children.map(object => object.material.color.clone());
+        console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
 
@@ -197,11 +199,13 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
+    console.log(nodes);
 
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
-                { nodes.tv_wand001.children.map(function(object, i){
+                { nodes.bureaum_kastm_kast_oak_white.children.map(function(object, i){
+                    console.log(object.material);
                     return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
