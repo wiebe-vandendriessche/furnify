@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Line, OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
 import { use2d } from "../contexts/2dContext";
+import { useConfiguratorContext } from "../contexts/ConfiguratorContext";
 import {
   Grid,
   Grid3x3,
@@ -22,6 +23,7 @@ import * as THREE from "three";
 import { GridComponent } from "./components/GridComponent";
 import "./Floorplan.css";
 import { SliderComponent } from "./components/Slider";
+import { Skybox } from "../3D/Skybox";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
@@ -33,6 +35,8 @@ export const FloorplanScene = () => {
   const { showGrid, setShowGrid } = use2d();
   const { isClosed, setIsClosed } = use2d();
   const { handleConvertTo3D, sceneObjects, show3D, setShow3D } = use2d();
+
+  const { skyboxPath, setSkyboxPath } = useConfiguratorContext();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -94,9 +98,8 @@ export const FloorplanScene = () => {
         {!show3D && (
           <>
             <button
-              className={`btn-circle btn-lg ${
-                isDrawing ? "clicked" : "unclicked"
-              }`}
+              className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"
+                }`}
               onClick={handleDrawingButtonClick}
             >
               <PencilSquare />
@@ -110,9 +113,8 @@ export const FloorplanScene = () => {
             </button>
 
             <button
-              className={`btn-circle btn-lg ${
-                orthogonalMode ? "clicked" : "unclicked"
-              }`}
+              className={`btn-circle btn-lg ${orthogonalMode ? "clicked" : "unclicked"
+                }`}
               onClick={handleOrthogonalButtonClick}
             >
               <Rulers />
@@ -126,9 +128,8 @@ export const FloorplanScene = () => {
             </button>
 
             <button
-              className={`btn-circle btn-lg ${
-                showGrid ? "clicked" : "unclicked"
-              }`}
+              className={`btn-circle btn-lg ${showGrid ? "clicked" : "unclicked"
+                }`}
               onClick={handleGridButtonCLicked}
             >
               <Grid3x3 />
@@ -216,26 +217,29 @@ export const FloorplanScene = () => {
           )}
         </Canvas>
       )}
+
       {show3D && (
-        <Canvas
+        <Canvas shadows
           ref={drawingCanvasRef}
           className="canvas"
-          orthographic
-          camera={{ position: [0, 0, 5], zoom: 100 }}
+          camera={{ position: [10, 6, 8] }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
+          <ambientLight intensity={0.7} />
+          <directionalLight castShadow position={[30, 50, 30]} />
           {sceneObjects.map((object, index) => (
             <primitive key={index} object={object} />
           ))}
-          <OrbitControls
+          {/* <OrbitControls
             enableZoom={true}
             enablePan={true}
             enableRotate={true}
-          />
-          <axesHelper position={[0, 0, 1]} />
+          /> */}
+          <OrbitControls makeDefault enablePan={true} minDistance={5} maxDistance={50} />
+          <Skybox path={skyboxPath} />
+
+          <axesHelper position={[0, 0, 0]} />
         </Canvas>
       )}
     </>
