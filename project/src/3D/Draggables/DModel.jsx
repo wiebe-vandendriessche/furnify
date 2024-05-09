@@ -1,6 +1,6 @@
-import { MathUtils, Color } from 'three'
+import {MathUtils, Color, TextureLoader} from 'three'
 import { useCallback, useRef, useEffect, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import {useFrame, useLoader} from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
@@ -10,12 +10,12 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     const group= useRef();
     const pos = useRef(position)
-
     const [width, setModelWidth] = useState(1.7);
     const [depth, setModelDepth] = useState(3.150);
     const { specs,modelRotation } = useConfiguratorContext();
-    //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
-    const { nodes, materials } = useGLTF('/models/final_try.gltf')
+    const { nodes, materials } = useGLTF('/models/bureaum_kastm_kast_oak.gltf')
+    const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
+
 
 
     // swapping depth and width depending on rotation
@@ -195,18 +195,27 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         easing.damp3(group.current.position, pos.current, 0.1, delta);
         group.current.children.forEach((object, i) => {
             // Gebruik de opgeslagen oorspronkelijke kleuren om de kleur terug te zetten wanneer het hover-effect eindigt
-            const originalColor = originalColors[i];
+            let originalColor = originalColors[i];
+            // Making it possible to switch colors on an object
+            if(object.material.name.includes("Color")){
+                originalColor=specs.color;
+            }
+            console.log("MATERIAL");
+            console.log(object.material);
+            console.log(object)
+            if(object.material.map!=null){
+                object.material.map=texture;
+            }
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
-    console.log("MODELROTATION")
-    console.log(modelRotation);
-    console.log(nodes)
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
                 { nodes.bureaum_kastm_kast.children.map(function(object, i){
+                    console.log("OBJECT");
                     console.log(object.material);
+                    console.log(object);
                     return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
