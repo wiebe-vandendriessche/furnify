@@ -1,30 +1,30 @@
 import "../../App.css"
 import "./Questionnaire.css"
-import { useContactContext } from "../../contexts/ContactContext.jsx";
+import {useContactContext} from "../../contexts/ContactContext.jsx";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/high-res.css'
-import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
-import { FloatingLabel } from "react-bootstrap";
+import {useTranslation} from 'react-i18next'
+import {useEffect} from 'react'
+import {FloatingLabel} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 function Contact() {
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
 
     useEffect(() => {
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
 
-    const { contact, setContact } = useContactContext();
+    const {contact, setContact} = useContactContext();
     //saving changes
     const changeContact = (event) => {
-        setContact({ ...contact, [event.target.name]: event.target.value });
+        setContact({...contact, [event.target.name]: event.target.value});
     }
 
     const changePhoneNumber = (num, country) => {
-        setContact({ ...contact, phone_number: { number: num, country: country } });
+        setContact({...contact, phone_number: {number: num, country: country}});
     }
 
     return (
@@ -36,7 +36,6 @@ function Contact() {
                     {t('contact.q_contact')}
                 </h5>
             </div>
-            <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
                         data-testid={"label-contact-" + key}
@@ -56,7 +55,6 @@ function Contact() {
                             value={contact.phone_number.number} onChange={(value, country) => changePhoneNumber(value, country.countryCode)} />
                     )))
                 }
-            </Form>
             <Button variant={"danger"} type={"submit"}>{t('contact.submit')}</Button>
         </div>
     )
