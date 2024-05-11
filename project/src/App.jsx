@@ -4,7 +4,7 @@ import Scene from './3D/Scene'
 import {useConfiguratorContext} from './contexts/ConfiguratorContext'
 import {FloorplanScene} from './2D/FloorplanScene'
 import Modal from 'react-bootstrap/Modal';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 
 function PrivacyPolicy(props) {
@@ -41,11 +41,13 @@ function PrivacyPolicy(props) {
     );
 }
 
+
 function App() {
     const [modalShow, setModalShow] = React.useState(false);
     const {rectangular, setRectangular} = useConfiguratorContext();
 
     return (
+
         <div className="App">
             <Sidebar/>
             <main>
@@ -53,6 +55,7 @@ function App() {
                     {rectangular && <Scene/>}
                     {!rectangular && <FloorplanScene/>}
                 </div>
+
                 <Button className={"privacy"} variant="danger" onClick={() => setModalShow(true)}>
                     privacy
                 </Button>

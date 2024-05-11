@@ -28,7 +28,6 @@ export function Questionnaire_spec() {
     }
     return (
         <div className="m-2">
-            <Form>
                 <div className={"d-inline-flex mb-4"}>
                     <FormGroup>
                         <div className={"mb-3"}><h5 data-testid={"question-specs-materials"}>{t('questionnaire_specs.q_materials')}</h5></div>
@@ -84,7 +83,6 @@ export function Questionnaire_spec() {
                     <Form.Control as={"textarea"} data-testid={"area-specs-requirements"} rows="3" cols="40" value={varia.requirements}
                                   name="requirements" onChange={changeVaria}></Form.Control>
                 </div>
-            </Form>
         </div>
     )
 }

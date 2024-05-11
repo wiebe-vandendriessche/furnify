@@ -30,7 +30,6 @@ export function Questionnaire_functional() {
     return (
 
         <div className="m-2">
-            <Form>
                 <div className={"mb-3"}>
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -114,7 +113,6 @@ export function Questionnaire_functional() {
                 <div className={"aspect"}>
 
                 </div>
-            </Form>
         </div>
 
 

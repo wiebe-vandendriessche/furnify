@@ -36,7 +36,6 @@ function Contact() {
                     {t('contact.q_contact')}
                 </h5>
             </div>
-            <Form>
                 {Object.entries(contact).map(([key, value]) => (
                     key !== 'phone_number' ? (<FloatingLabel key={key}
                                                              data-testid={"label-contact-"+key}
@@ -56,7 +55,6 @@ function Contact() {
                                     value={contact.phone_number.number} onChange={(value, country)=>changePhoneNumber(value, country.countryCode)}/>
                     )))
                 }
-            </Form>
             <Button variant={"danger"} type={"submit"}>submit</Button>
         </div>
     )

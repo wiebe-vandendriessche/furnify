@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import { useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import { IconContext } from "react-icons"
 import { FaAnglesRight, FaAnglesLeft } from "react-icons/fa6"
 import Questionnaire_func from "./components_sidebar/Questionnaire_func.jsx";
@@ -13,11 +13,12 @@ import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
+import{useRoomWallLightupContext} from "../contexts/RoomWallLightupContext.jsx"
 import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 
 
@@ -41,11 +42,117 @@ export function Sidebar() {
     const showNext = () => {
         return part == 4;
     }
-    const { contact } = useContactContext();
 
-    const { dimensions,functionalities,specs,obstacles} = useConfiguratorContext();
+    const { contact,setContact } = useContactContext();
 
-    const {varia} = useVariaContext();
+    const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles} = useConfiguratorContext();
+
+    const {varia,setVaria} = useVariaContext();
+
+    const {selectedWall,setSelectedWall} = useRoomWallLightupContext();
+
+    const  superContext = {
+        contact: useContactContext().contact,
+        setContact: useContactContext().setContact,
+        dimensions: useConfiguratorContext().dimensions,
+        functionalities: useConfiguratorContext().functionalities,
+        specs: useConfiguratorContext().specs,
+        obstacles: useConfiguratorContext().obstacles,
+        varia: useVariaContext().varia,
+        selectedWall: useRoomWallLightupContext().selectedWall
+    };
+
+    const updateContactFromResponse = (response) => {
+
+        const { firstname, lastname, email, phone_number, address } = response.contact;
+
+
+        setContact(prevContact => ({
+            ...prevContact,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            phone_number: {
+                ...prevContact.phone_number,
+                number: phone_number.number,
+                country: phone_number.country
+            },
+            address: address
+        }));
+    };
+    const updateSelectedWallFromResponse = (response) => {
+        const selectedWallValue = response.selectedWall;
+
+        setSelectedWall(selectedWallValue);
+    };
+    const updateVariaFromResponse = (response) => {
+
+        const { requirements, mattress, room, size } = response.varia;
+
+
+        setVaria(prevVaria => ({
+            ...prevVaria,
+            requirements: requirements,
+            mattress: mattress,
+            room: room,
+            size: size
+        }));
+    };
+    const updateConfiguratorFromResponse = (response) =>{
+        const { length, width, height } = response.dimensions;
+
+        setDimensions({
+            length: length,
+            width: width,
+            height: height
+        });
+
+        const { bed, sofa, office_space, storage_space } = response.functionalities;
+
+        setFunctionalities({
+            bed: bed,
+            sofa: sofa,
+            office_space: office_space,
+            storage_space: storage_space
+        });
+
+        const { color, material, layout } = response.specs;
+
+        setSpecs({
+            color: color,
+            material: material,
+            layout: layout
+        });
+
+        const { door, window, other } = response.obstacles;
+
+        setObstacles({
+            door: door,
+            window: window,
+            other: other
+        });
+
+    }
+
+
+    const {email} = useParams();
+    const [items, setItems] = useState([]);
+
+    if(email !== undefined){
+        useEffect(() => {
+            axios.get(`http://localhost:3000/${email}`)
+                .then(response => {
+                    updateContactFromResponse(response.data);
+                    updateSelectedWallFromResponse(response.data);
+                    updateVariaFromResponse(response.data);
+                    updateConfiguratorFromResponse(response.data);
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error fetching data:', error);
+                });
+        }, [email]);}
 
 
     const showNextPart = () => {
@@ -67,8 +174,6 @@ export function Sidebar() {
                 return <p>This is some default text</p>
         }
     }
-
-    const [error, setError] = useState(null);
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -123,16 +228,19 @@ export function Sidebar() {
         });
 
         let color = specs.color === "#FFFFFF" ? "black" : "white";
-
+        let message;
         const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
-            console.log(result, msg)
+            console.log(result, msg);
+            message = msg;
             alert(msg);
         });
-        await axios.post('http://localhost:3000/api/contact', contact);
+
+        await axios.post('http://localhost:3000/api/contact', superContext);
+
     };
 
 
