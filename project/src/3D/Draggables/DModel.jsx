@@ -8,12 +8,12 @@ import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
-    const group= useRef();
+    const group = useRef();
     const pos = useRef(position)
 
     const [width, setModelWidth] = useState(1.7);
     const [depth, setModelDepth] = useState(3.150);
-    const { specs,modelRotation } = useConfiguratorContext();
+    const { specs, modelRotation } = useConfiguratorContext();
     //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
     const { nodes, materials } = useGLTF('/models/final_try.gltf')
 
@@ -179,35 +179,63 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
     const [events, active, hovered] = useDrag(onDrag);
 
+
     useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered]);
 
     const [originalColors, setOriginalColors] = useState([]);
 
-// Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
+    // Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
         const originalColors = nodes.bureaum_kastm_kast.children.map(object => object.material.color.clone());
-        console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
 
+    const [delayedActive, setDelayedActive] = useState(false);
+    let timeoutId = null;
+
+    useEffect(() => {
+        if (active) {
+            // If active is true, set delayedActive to true immediately
+            setDelayedActive(true);
+            // Clear any existing timeout
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+        } else {
+            // If active is false, set delayedActive to false after a 2-second delay
+            timeoutId = setTimeout(() => {
+                setDelayedActive(false);
+            }, 500);
+        }
+
+        // Clean up on unmount
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [active]);
+
     useFrame((state, delta) => {
-        easing.damp3(group.current.position, pos.current, 0.1, delta);
+        if (delayedActive) {
+            easing.damp3(group.current.position, pos.current, 0.1, delta);
+        } else {
+            easing.damp3(group.current.position, pos.current, 0, delta);
+        }
+
         group.current.children.forEach((object, i) => {
-            // Gebruik de opgeslagen oorspronkelijke kleuren om de kleur terug te zetten wanneer het hover-effect eindigt
             const originalColor = originalColors[i];
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
-    console.log("MODELROTATION")
-    console.log(modelRotation);
-    console.log(nodes)
+
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
-                { nodes.bureaum_kastm_kast.children.map(function(object, i){
-                    console.log(object.material);
-                    return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                {nodes.bureaum_kastm_kast.children.map(function (object, i) {
+                    return <mesh key={"texture" + i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
 

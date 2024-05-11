@@ -1,5 +1,5 @@
 import { MathUtils } from 'three'
-import { useCallback, useRef, useEffect} from 'react'
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
@@ -28,12 +28,44 @@ export const DLight = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 
 
     const [events, active, hovered] = useDrag(onDrag);
 
+    const [delayedActive, setDelayedActive] = useState(false);
+    let timeoutId = null;
+
+    useEffect(() => {
+        if (active) {
+            // If active is true, set delayedActive to true immediately
+            setDelayedActive(true);
+            // Clear any existing timeout
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+        } else {
+            // If active is false, set delayedActive to false after a 2-second delay
+            timeoutId = setTimeout(() => {
+                setDelayedActive(false);
+            }, 500);
+        }
+
+        // Clean up on unmount
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [active]);
+
+
     useEffect(() => {
         document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto';
     }, [active, hovered]);
 
     useFrame((state, delta) => {
-        easing.damp3(ref.current.position, pos.current, 0.1, delta);
+        if (delayedActive) {
+            easing.damp3(ref.current.position, pos.current, 0.1, delta);
+        } else {
+            easing.damp3(ref.current.position, pos.current, 0, delta);
+        }
         easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
     });
 
