@@ -24,7 +24,7 @@ i18n
                         hello: "Hello World!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "What are the dimensions of the living space?",
+                        q_dimensions: "Select the shape of the room and enter the dimensions",
                         rectangular: "Rectangular",
                         length: "Length",
                         width: "Width",
@@ -76,7 +76,7 @@ i18n
                             living_room: "Living room",
                             bedroom: "Bedroom",
                         },
-                        q_function: "What are the most important features you need to make the most of your living space?",
+                        q_function: "Select the functions needed to make the most of your living space",
                         functions: {
                             bed: "Bed",
                             office_space: "Office space",
@@ -99,7 +99,7 @@ i18n
                             partition_wall: "Partition wall",
                             in_the_middle_of_space: "In the middle of space",
                         },
-                        q_materials: "Which materials do you prefer to finish your modular furniture?",
+                        q_materials: "Select which finishes you prefer",
                         materials: {
                             color: "Color",
                             material: "Material",
@@ -109,7 +109,7 @@ i18n
                             oak: "Oak",
                             walnut: "Walnut"
                         },
-                        q_other: "Other specific wishes or requirements to take into account?"
+                        q_other: "If there are any other requirements we need to consider, please fill them in below"
                     },
                     questionnaire_module: {
                         question: "Please press the button to discover which modules would fit you",
@@ -178,7 +178,7 @@ i18n
                         hello: "Hallo Wereld!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Wat zijn de afmetingen van de woonruimte?",
+                        q_dimensions: "Selecteer de vorm van de ruimte en geef de afmetingen in",
                         rectangular: "Rechthoekig",
                         length: "Lengte",
                         width: "Breedte",
@@ -228,7 +228,7 @@ i18n
                             living_room: "Woonkamer",
                             bedroom: "Slaapkamer",
                         },
-                        q_function: "Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+                        q_function: "Selecteer de functies die nodig zijn om uw woonruimte optimaal te benutten",
                         functions: {
                             bed: "Bed",
                             office_space: "Bureauruimte",
@@ -251,7 +251,7 @@ i18n
                             partition_wall: "Scheidingswand",
                             in_the_middle_of_space: "Te midden van ruimte",
                         },
-                        q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
+                        q_materials: "Selecteer welke afwerkingen u verkiest",
                         materials: {
                             color: "kleur",
                             material: "materiaal",
@@ -261,7 +261,7 @@ i18n
                             oak: "Eik",
                             walnut: "Notelaar"
                         },
-                        q_other: "Andere specifieke wensen of vereisten waarmee rekening te houden?"
+                        q_other: "Indien er nog andere vereisten zijn waarmee we rekening moeten houden, vul deze hieronder in"
                     },
                     questionnaire_module: {
                         question: "Druk op de knop om te ontdekken welke modules bij u passen",
@@ -330,7 +330,7 @@ i18n
                         hello: "Bonjour le monde!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Quelles sont les dimensions de l'espace de vie?",
+                        q_dimensions: "Sélectionnez la forme de la pièce et entrez les dimensions",
                         rectangular: "Rectangulaire",
                         length: "Longueur",
                         width: "Largeur",
@@ -379,7 +379,7 @@ i18n
                             living_room: "Le salon",
                             bedroom: "Chambre à coucher",
                         },
-                        q_function: "Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
+                        q_function: "Sélectionnez les fonctions nécessaires pour tirer le meilleur parti de votre espace de vie",
                         functions: {
                             bed: "Lit",
                             office_space: "Bureau",
@@ -402,7 +402,7 @@ i18n
                             partition_wall: "Cloison",
                             in_the_middle_of_space: "Au milieu de l'espace",
                         },
-                        q_materials: "Quels matériaux préférez-vous pour finir votre mobilier modulable?",
+                        q_materials: "Sélectionnez les finitions que vous préférez",
                         materials: {
                             white: "Blanc",
                             black: "Noir",
@@ -412,7 +412,7 @@ i18n
                             color: "Couleur",
                             material: "Matériau"
                         },
-                        q_other: "D'autres souhaits ou exigences spécifiques à prendre en compte?"
+                        q_other: "Si vous avez d'autres exigences à prendre en compte, veuillez les indiquer ci-dessous"
                     },
                     questionnaire_module: {
                         question: "Cliquez sur le bouton pour découvrir les modules qui vous conviennent.",
@@ -481,7 +481,7 @@ i18n
                         hello: "Hallo Welt!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Was sind die Abmessungen des Wohnraums?",
+                        q_dimensions: "Wählen Sie die Form des Raumes und geben Sie die Maße ein",
                         rectangular: "Rechteckig",
                         length: "Länge",
                         width: "Breite",
@@ -530,7 +530,7 @@ i18n
                             living_room: "Wohnzimmer",
                             bedroom: "Schlafzimmer",
                         },
-                        q_function: "Welche sind die wichtigsten Funktionen, die Sie benötigen, um das Beste aus Ihrem Wohnraum zu machen?",
+                        q_function: "Wählen Sie die Funktionen, die Sie benötigen, um Ihren Lebensraum optimal zu nutzen",
                         functions: {
                             bed: "Bett",
                             office_space: "Bürofläche",
@@ -553,7 +553,7 @@ i18n
                             partition_wall: "Trennwand",
                             in_the_middle_of_space: "In der Mitte des Raums",
                         },
-                        q_materials: "Welche Materialien bevorzugen Sie zur Fertigstellung Ihrer modularen Möbel?",
+                        q_materials: "Wählen Sie aus, welche Oberflächen Sie bevorzugen",
                         materials: {
                             white: "Weiß",
                             black: "Schwarz",
@@ -563,7 +563,7 @@ i18n
                             color: "Farbe",
                             material: "Material"
                         },
-                        q_other: "Andere spezifische Wünsche oder Anforderungen, die berücksichtigt werden sollen?"
+                        q_other: "Wenn es weitere Anforderungen gibt, die wir berücksichtigen müssen, tragen Sie diese bitte unten ein"
                     },
                     questionnaire_module: {
                         question: "Bitte drücken Sie den Knopf, um herauszufinden, welche Module für Sie geeignet sind.",
@@ -632,7 +632,7 @@ i18n
                         hello: "¡Hola Mundo!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "¿Cuáles son las dimensiones del espacio habitable?",
+                        q_dimensions: "Seleccione la forma de la habitación e introduzca las dimensiones",
                         rectangular: "Rectangular",
                         length: "Longitud",
                         width: "Ancho",
@@ -681,7 +681,7 @@ i18n
                             living_room: "Sala de estar",
                             bedroom: "Dormitorio",
                         },
-                        q_function: "¿Cuáles son las características más importantes que necesitas para aprovechar al máximo tu espacio habitable?",
+                        q_function: "Seleccione las funciones necesarias para aprovechar al máximo su espacio vital",
                         functions: {
                             bed: "Cama",
                             office_space: "Espacio de oficina",
@@ -704,7 +704,7 @@ i18n
                             partition_wall: "Pared divisoria",
                             in_the_middle_of_space: "En el medio del espacio",
                         },
-                        q_materials: "¿Qué materiales prefieres para terminar tus muebles modulares?",
+                        q_materials: "Seleccione los acabados que prefiera",
                         materials: {
                             white: "Blanco",
                             black: "Negro",
@@ -714,7 +714,7 @@ i18n
                             color: "Color",
                             material: "Material"
                         },
-                        q_other: "¿Otras peticiones o requisitos específicos a tener en cuenta?"
+                        q_other: "Si hay algún otro requisito que debamos tener en cuenta, indíquelo a continuación"
                     },
                     questionnaire_module: {
                         question: "Pulse el botón para descubrir qué módulos le convienen.",
@@ -783,7 +783,7 @@ i18n
                         hello: "Ciao Mondo!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Quali sono le dimensioni dello spazio abitativo?",
+                        q_dimensions: "Selezionate la forma della stanza e inserite le dimensioni",
                         rectangular: "Rettangolare",
                         length: "Lunghezza",
                         width: "Larghezza",
@@ -832,7 +832,7 @@ i18n
                             living_room: "Soggiorno",
                             bedroom: "Camera da letto",
                         },
-                        q_function: "Quali sono le caratteristiche più importanti di cui hai bisogno per sfruttare al meglio il tuo spazio abitativo?",
+                        q_function: "Selezionate le funzioni necessarie per sfruttare al meglio il vostro spazio abitativo",
                         functions: {
                             bed: "Letto",
                             office_space: "Spazio ufficio",
@@ -855,7 +855,7 @@ i18n
                             partition_wall: "Muro divisorio",
                             in_the_middle_of_space: "In mezzo allo spazio",
                         },
-                        q_materials: "Quali materiali preferisci per la finitura dei tuoi mobili modulari?",
+                        q_materials: "Scegliete le finiture che preferite",
                         materials: {
                             white: "Bianco",
                             black: "Nero",
@@ -865,7 +865,7 @@ i18n
                             color: "Colore",
                             material: "Materiale"
                         },
-                        q_other: "Altre richieste o requisiti specifici da considerare?"
+                        q_other: "Se ci sono altri requisiti da tenere in considerazione, vi preghiamo di inserirli qui sotto"
                     },
                     questionnaire_module: {
                         question: "Premere il pulsante per scoprire quali moduli sono adatti a voi.",
