@@ -56,7 +56,7 @@ function Surface({ children, surfX, surfZ, ...props }) {
 
   return (
     <group {...props}>
-      <group scale={[surfX,1,surfZ]} position={[0,0.02,0]}>
+      <group scale={[surfX,1,surfZ]} position={[0,0.1,0]}>
         <mesh receiveShadow ref={plane} rotation-x={-Math.PI / 2}>
           <planeGeometry />
           <meshStandardMaterial transparent color="lightblue" polygonOffset polygonOffsetUnits={1} polygonOffsetFactor={1} />

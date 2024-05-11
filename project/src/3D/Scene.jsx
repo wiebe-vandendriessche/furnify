@@ -34,7 +34,9 @@ const Scene = () => {
                 <Suspense fallback={null}>
 
                     <ambientLight intensity={1} />
-                    <directionalLight castShadow position={[30, 50, 30]} />
+                    <directionalLight castShadow position={[60, 90, 60]} shadow-mapSize={[1024, 1024]}>
+                        <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+                    </directionalLight>
 
                     <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
 
