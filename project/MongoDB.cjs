@@ -1,5 +1,4 @@
 // backend/src/server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express()
@@ -7,7 +6,8 @@ const cors = require('cors');
 const Super = require('./src/model/SuperModel.cjs');
 app.use(express.json())
 app.use(cors());
-
+require('dotenv').config({path: './config.env'});
+console.log(process.env);
 app.get('/:email', async (req, res) => {
     try {
         const {email} = req.params;
@@ -54,7 +54,7 @@ app.put('/api/contact/:email', async (req, res) => {
     }
 })
 
-mongoose.connect("mongodb+srv://nathan5c:LMfnKY9AGivMGBy4@cluster0.r84ekpt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.ATLAS_URI)
     .then(() => {
         console.log("Connected to database!");
         app.listen(3000, () => {
