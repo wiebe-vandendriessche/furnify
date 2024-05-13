@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema({
-    firstname:{
+    firstname: {
         type: String,
-        required:false,
+        required: false,
     },
     lastname: {
         type: String,
-        required:false,
+        required: false,
     },
     email: {
         type: String,
         unique: true,
-        required:false,
+        required: false,
     },
     phone_number: {
         number: {
@@ -26,7 +26,7 @@ const contactSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required:false,
+        required: false,
     }
 });
 
@@ -92,14 +92,25 @@ const obstacleItemSchema = new mongoose.Schema({
     obstLength: {
         type: Number,
         default: 0
-    }
+    },
+
+    switchWall: {type: String, default: "front"},
+    switchXpos: {type: Number, default: 0},
+    switchYpos: {type: Number, default: 125},
+
+    walloutletWall: {type: String, default: "front"},
+    walloutletXpos: {type: Number, default: 0},
+    walloutletYpos: {type: Number, default: 110},
 });
 
 // Define Obstacles schema
 const obstaclesSchema = new mongoose.Schema({
     door: [obstacleItemSchema],
     window: [obstacleItemSchema],
-    other: [obstacleItemSchema]
+    other: [obstacleItemSchema],
+    walloutlet: [obstacleItemSchema],
+    switch: [obstacleItemSchema],
+    light: [obstacleItemSchema]
 });
 
 // Define Specs schema
@@ -113,9 +124,35 @@ const specsSchema = new mongoose.Schema({
 const variaSchema = new mongoose.Schema({
     requirements: String,
     mattress: String,
-    room: String,
+    room: [String],
     size: String
 });
+
+const chosen_moduleSchema = new mongoose.Schema({
+    name: String,
+    height: Number,
+    width: Number,
+    depth: Number,
+    open: Number,
+    closed: Number,
+    saved: Number,
+    bed: Boolean,
+    sofa: Boolean,
+    desk: Boolean,
+    storage: Boolean,
+    width_options: [Number],
+    components: [String]
+});
+
+const errorsSchema = new mongoose.Schema({
+    softer: Boolean,
+    demands: Boolean,
+    roomSize: Boolean,
+    points2D: Boolean
+});
+
+
+
 
 // Combine all schemas into one main schema
 const superSchema = new mongoose.Schema({
@@ -123,13 +160,17 @@ const superSchema = new mongoose.Schema({
     dimensions: dimensionsSchema,
     functionalities: functionalitiesSchema,
     obstacles: obstaclesSchema,
-    selectedWall: String, // Assuming it's a string or null
     specs: specsSchema,
-    varia: variaSchema
+    varia: variaSchema,
+    rectangular: Boolean,
+    skyboxPath: String,
+    chosen_module: chosen_moduleSchema,
+    rotationIndex: Number,
+    errors: errorsSchema,
+    selectedWall: String
 });
 
 const SuperModel = mongoose.model('SuperModel', superSchema);
-
 
 
 module.exports = SuperModel;

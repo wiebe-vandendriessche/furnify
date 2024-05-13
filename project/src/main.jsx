@@ -9,6 +9,7 @@ import {DrawingProvider} from "./contexts/2dContext.tsx";
 import "./i18n.ts";
 import {BrowserRouter} from "react-router-dom";
 import Routing from "./Routing.jsx";
+import {ModuleProvider} from "./contexts/ModuleContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                     <ConfiguratorProvider>
                         <RoomWallLightupProvider>
                             <DrawingProvider>
-                                <Routing/>
+                                <ModuleProvider>
+                                    <Routing/>
+                                </ModuleProvider>
                             </DrawingProvider>
                         </RoomWallLightupProvider>
                     </ConfiguratorProvider>

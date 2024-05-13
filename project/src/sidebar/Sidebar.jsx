@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { IconContext } from "react-icons"
 import { FaAnglesRight, FaAnglesLeft } from "react-icons/fa6"
 import Questionnaire_func from "./components_sidebar/Questionnaire_func.jsx";
@@ -14,11 +14,13 @@ import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
 import{useRoomWallLightupContext} from "../contexts/RoomWallLightupContext.jsx"
+import {useModuleContext} from "../contexts/ModuleContext.jsx"
 import jsonp from "jsonp";
 import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import Questionnaire_module from "./components_sidebar/Questionnaire_module.jsx";
 
 
 
@@ -43,23 +45,31 @@ export function Sidebar() {
         return part == 5;
     }
 
+
     const { contact,setContact } = useContactContext();
 
-    const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles} = useConfiguratorContext();
+    const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
+        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath} = useConfiguratorContext();
 
     const {varia,setVaria} = useVariaContext();
 
     const {selectedWall,setSelectedWall} = useRoomWallLightupContext();
 
+    const {errors, setErrors, possible_modules, setPossileModules, chosen_module, setChosenModule} = useModuleContext();
+
     const  superContext = {
         contact: useContactContext().contact,
-        setContact: useContactContext().setContact,
         dimensions: useConfiguratorContext().dimensions,
         functionalities: useConfiguratorContext().functionalities,
         specs: useConfiguratorContext().specs,
         obstacles: useConfiguratorContext().obstacles,
+        rectangular: useConfiguratorContext().rectangular,
+        skyboxPath: useConfiguratorContext().skyboxPath,
         varia: useVariaContext().varia,
-        selectedWall: useRoomWallLightupContext().selectedWall
+        selectedWall: useRoomWallLightupContext().selectedWall,
+        errors: useModuleContext().errors,
+        possible_modules:useModuleContext().possible_modules,
+        chosen_module: useModuleContext().chosen_module
     };
 
     const updateContactFromResponse = (response) => {
@@ -124,29 +134,67 @@ export function Sidebar() {
             layout: layout
         });
 
-        const { door, window, other } = response.obstacles;
+        const { door, window, other, walloutlet, switch: switchData, light} = response.obstacles;
 
         setObstacles({
             door: door,
             window: window,
-            other: other
+            walloutlet: walloutlet,
+            switch: switchData,
+            other: other,
+            light: light
         });
 
+        setSkyboxPath(response.skyboxPath);
+
+        setRectangular(response.rectangular);
+
+    }
+
+    const updateModuleFromResponse = (response) =>{
+        const { softer, demands, roomSize, points2D } = response.errors;
+
+        setErrors({
+            softer: softer,
+            demands: demands,
+            roomSize: roomSize,
+            points2D: points2D
+        });
+
+        setPossileModules(response.possible_modules);
+
+        const { name, height, width, depth, open, closed, saved, bed, sofa, desk, storage, width_options, components } = response.chosen_module;
+        setChosenModule({
+            name: name,
+            height: height,
+            width: width,
+            depth: depth,
+            open: open,
+            closed: closed,
+            saved: saved,
+            bed: bed,
+            sofa: sofa,
+            desk: desk,
+            storage: storage,
+            width_options: width_options,
+            components: components
+        });
     }
 
 
     const {email} = useParams();
-    const [items, setItems] = useState([]);
 
     if(email !== undefined){
         useEffect(() => {
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
+                    console.log(response.data);
                     updateContactFromResponse(response.data);
                     updateSelectedWallFromResponse(response.data);
                     updateVariaFromResponse(response.data);
                     updateConfiguratorFromResponse(response.data);
-                    console.log(response.data);
+                    updateModuleFromResponse(response.data);
+
                 })
                 .catch(error => {
                     // Handle error
@@ -235,7 +283,7 @@ export function Sidebar() {
             message = msg;
             alert(msg);
         });
-
+        console.log(superContext);
         await axios.post('http://localhost:3000/api/contact', superContext);
 
     };
