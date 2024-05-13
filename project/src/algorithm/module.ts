@@ -12,10 +12,12 @@ export class Module {
     private _storage: boolean = false;
     private _width_options: { key: string, value: number; }[] = [];
     private _components: string[] = [];
+    private _marge:number;
 
 
 
-    constructor(mod: any) {
+    constructor(mod: any, marge:number = 0.03) {
+        this._marge = marge;
         this._name = mod.naam;
         this._height = +mod.hoogte / 1000;
         this._depth = +mod.diepte / 1000;
@@ -127,7 +129,9 @@ export class Module {
     * @return {boolean} possible fit
     */
     public correct_size(height: number, length: number, width: number) {
-        return ((this._height < height) && (this._width < width) && (this._open < length)) || ((this._height < height) && (this._width < length) && (this._open < width))
+        if(this._components.length >= 2)
+            return ((this._height < height) && (this._width < width) && ((this._open + this._marge)< length)) || ((this._height < height) && (this._width < length) && ((this._open + this._marge) < width))
+        return ((this._height < height) && ((this._width + this._marge)< width) && (this._open < length)) || ((this._height < height) && ((this._width + this._marge) < length) && (this._open < width));
     }
 
     /**
@@ -136,7 +140,9 @@ export class Module {
     * @return {boolean} possible fit
     */
     public correct_side(side: number) {
-        return ((this._open < side)||(this._width < side))
+        if(this._components.length >= 2)
+            return (((this._open + this._marge) < side)||(this._width < side))
+        return ((this._open < side)||((this._width + this._marge) < side))
     }
 
 
