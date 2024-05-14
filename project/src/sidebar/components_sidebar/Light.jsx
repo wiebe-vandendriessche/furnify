@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp, IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight }) {
@@ -41,16 +41,24 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
 
     return (
         <div className="obstruction-bg mb-2 flex">
-            <Button id={"button" + obstId}
-                data-testid={"btn-obstacle-expand-" + type}
-                variant={"danger"} value={type ?? t("obstructions." + type)}
-                onClick={showButton
-                }>{t("obstructions." + type)}</Button>
-            <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
-                variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
-                <IoCloseSharp />
-            </Button>
+                <Button onClick={showButton}
+                        variant={"danger"} id={"expand" + obstId}
+                >
+                    {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
+                </Button>
+                <Button id={"button" + obstId}
+                        data-testid={"btn-obstacle-expand-" + type}
+                        variant={"danger"} value={type ?? t("obstructions." + type)}
+                        onClick={showButton
+                        }>{t("obstructions." + type)}</Button>
+                <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
+                        variant={"danger"} id={"delete" + obstId}
+                        onClick={(e) => deleteObst(e)}>
+                    <IoCloseSharp />
+                </Button>
+
+
+
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
                     <div className="m-1">

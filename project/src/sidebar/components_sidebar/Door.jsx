@@ -5,7 +5,7 @@ import { ButtonGroup, Col, FloatingLabel, Row, ToggleButton } from "react-bootst
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
-import { IoCloseSharp } from "react-icons/io5";
+import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, openingDoor, doorXpos, doorWall, maxHeight }) {
@@ -59,6 +59,11 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
 
     return (
         <div className="obstruction-bg mb-2 flex">
+            <Button onClick={showButton}
+                    variant={"danger"} id={"expand" + obstId}
+            >
+                {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
+            </Button>
             <Button id={"button" + obstId}
                 data-testid={"btn-obstacle-expand-" + type}
                 variant={"danger"} value={type ?? t("obstructions." + type)}

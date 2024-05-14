@@ -4,8 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
-import { IoMdClose } from "react-icons/io"
-import { IoCloseSharp } from "react-icons/io5";
+import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
 
 // eslint-disable-next-line react/prop-types
 function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight }) {
@@ -43,6 +42,11 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
 
     return (
         <div className="obstruction-bg mb-2 flex">
+            <Button onClick={showButton}
+                    variant={"danger"} id={"expand" + obstId}
+            >
+                {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
+            </Button>
             <Button id={"button" + obstId}
                 data-testid={"btn-obstacle-expand-" + type}
                 variant={"danger"} value={type ?? t("obstructions." + type)}
