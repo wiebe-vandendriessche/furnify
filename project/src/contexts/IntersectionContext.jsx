@@ -23,8 +23,6 @@ export const IntersectionProvider = ({ children }) => {
         if (mesh && !dObstructions.current[obstructionKey]) {
             dObstructions.current[obstructionKey] = mesh; // Storing mesh with its ID as the key
         }
-        console.log('dObstructions:');
-        console.log(dObstructions.current);
     };
 
     // Remove a component from the list of dObstructions when it unmounts/removed from contextprovider list
@@ -72,10 +70,16 @@ export const IntersectionProvider = ({ children }) => {
                 if (boundingBoxes[i].intersectsBox(boundingBoxes[j])) {
                     intersectionsDetected = true;
                     // Handle intersection
-                    if (!(tempErrorBoxes.includes(boundingBoxes[i]) || tempErrorBoxes.includes(boundingBoxes[j]))) {
+                    if (!tempErrorBoxes.includes(boundingBoxes[i])) {
+
                         tempErrorBoxes.push(boundingBoxes[i]);
-                        tempErrorBoxes.push(boundingBoxes[j]);
+
                     }
+                    if (!tempErrorBoxes.includes(boundingBoxes[j])) {
+
+                        tempErrorBoxes.push(boundingBoxes[j]);
+
+                    } 
                 }
             }
         }
