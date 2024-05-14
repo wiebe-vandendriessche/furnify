@@ -43,7 +43,7 @@ export const Wall = ({ width, height, depth, position, visible }) => {
         height={height}
         depth={depth}
         position={position}
-        color="lightgrey"
+        color="b5b5b5"
         visible={visible}
         textures={wallTexture}
         addColorToTexture={true}
