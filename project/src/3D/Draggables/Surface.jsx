@@ -1,7 +1,8 @@
 import { Vector3, Plane } from 'three'
-import { createContext, useRef, useContext, useCallback, useState } from 'react'
+import { createContext, useRef, useContext, useCallback, useState, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { easing } from 'maath'
+import { useIntersectionContext } from '../../contexts/IntersectionContext'
 
 const vector = new Vector3()
 const plane = new Plane(new Vector3(0, 1, 0), 0)
@@ -50,13 +51,14 @@ function Surface({ children, surfX, surfZ, ...props }) {
   const plane = useRef()
   const [active, activate] = useState(false)
 
+
   useFrame((state, delta) => {
     easing.damp(plane.current.material, 'opacity', active ? 0.25 : 0, 0.1, delta)
   })
 
   return (
     <group {...props}>
-      <group scale={[surfX,1,surfZ]} position={[0,0.02,0]}>
+      <group scale={[surfX, 1, surfZ]} position={[0, 0.1, 0]}>
         <mesh receiveShadow ref={plane} rotation-x={-Math.PI / 2}>
           <planeGeometry />
           <meshStandardMaterial transparent color="lightblue" polygonOffset polygonOffsetUnits={1} polygonOffsetFactor={1} />

@@ -1,13 +1,18 @@
-import { MathUtils} from 'three'
-import { useCallback, useRef, useEffect} from 'react'
+import { MathUtils, Box3 } from 'three';
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
-export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
+import { useIntersectionContext } from '../../contexts/IntersectionContext'
+import { v4 as uuidv4 } from 'uuid';
+
+
+export const DObstruction = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
     const ref = useRef();
     const pos = useRef(position);
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
+    const id = obstructionKey;
 
     const ceilingHeight = maxY - dimensions[1] / 2;
 
@@ -28,19 +33,67 @@ export const DObstruction = ({ position = [0.5, 0.5, -0.5], dimensions, otype, m
 
     const [events, active, hovered] = useDrag(onDrag);
 
+    const [delayedActive, setDelayedActive] = useState(false);
+    let timeoutId = null;
+
+    useEffect(() => {
+        if (active) {
+            // If active is true, set delayedActive to true immediately
+            setDelayedActive(true);
+            // Clear any existing timeout
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+        } else {
+            // If active is false, set delayedActive to false after a 2-second delay
+            timeoutId = setTimeout(() => {
+                setDelayedActive(false);
+            }, 500);
+        }
+
+        // Clean up on unmount
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [active]);
+
     useEffect(() => {
         document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto';
     }, [active, hovered]);
 
+
     useFrame((state, delta) => {
-        easing.damp3(ref.current.position, pos.current, 0.1, delta);
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
+        if (delayedActive) {
+            easing.damp3(ref.current.position, pos.current, 0.1, delta);
+        } else {
+            easing.damp3(ref.current.position, pos.current, 0, delta);
+        }
+        easing.dampC(ref.current.material.color, active ? 'grey' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
     });
 
+
+
+    const { addDObstruction, removeDObstruction } = useIntersectionContext();
+
+ 
+
+    //sending mesh data to IntersectionContext when component mounts
+    useEffect(() => {
+        addDObstruction(ref.current, id);
+    }, [addDObstruction, removeDObstruction, active, dimensions,]);
+
+
     return (
-        <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} castShadow receiveShadow {...events} {...props}>
-            <boxGeometry />
-            <meshStandardMaterial />
-        </mesh>
+        <group>
+            <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} castShadow receiveShadow {...events} {...props}>
+                <boxGeometry />
+                <meshStandardMaterial />
+            </mesh>
+
+        </group>
     );
 };
+
