@@ -5,33 +5,31 @@ import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
 import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
+import {useModuleContext} from "../../contexts/ModuleContext.jsx";
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
-
+    const {chosen_module}=useModuleContext();
+    const { specs,modelRotation } = useConfiguratorContext();
+    const { nodes, materials } = useGLTF('/models/'+chosen_module.name+'.gltf')
+    const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
     const group= useRef();
     const pos = useRef(position)
-    const [width, setModelWidth] = useState(1.7);
-    const [depth, setModelDepth] = useState(3.150);
-    const { specs,modelRotation } = useConfiguratorContext();
-    const { nodes, materials } = useGLTF('/models/bureaum_kastm_kast_oak.gltf')
-    const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
-
-
-
+    const [width, setModelWidth] = useState(chosen_module.width);
+    const [depth, setModelDepth] = useState(chosen_module.open);
     // swapping depth and width depending on rotation
     useEffect(() => {
         if (modelRotation === 0) {
-            setModelWidth(1.7);
-            setModelDepth(3.150);
+            setModelWidth(chosen_module.width);
+            setModelDepth(chosen_module.open);
         } else if (modelRotation === Math.PI / 2) {
-            setModelWidth(3.150);
-            setModelDepth(1.7);
+            setModelWidth(chosen_module.open);
+            setModelDepth(chosen_module.width);
         } else if (modelRotation === Math.PI) {
-            setModelWidth(1.7);
-            setModelDepth(3.150);
+            setModelWidth(chosen_module.width);
+            setModelDepth(chosen_module.open);
         } else if (modelRotation === -Math.PI / 2) {
-            setModelWidth(3.150);
-            setModelDepth(1.7);
+            setModelWidth(chosen_module.open);
+            setModelDepth(chosen_module.width);
         }
     }, [modelRotation]);
 
@@ -186,10 +184,15 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 // Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
-        const originalColors = nodes.bureaum_kastm_kast.children.map(object => object.material.color.clone());
+        const originalColors = nodes[chosen_module.name].children.map(object => object.material.color.clone());
         console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
+
+    useEffect(()=>{
+        setModelWidth(chosen_module.width);
+        setModelDepth(chosen_module.open);
+    }, [chosen_module])
 
     useFrame((state, delta) => {
         easing.damp3(group.current.position, pos.current, 0.1, delta);
@@ -200,10 +203,8 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             if(object.material.name.includes("Color")){
                 originalColor=specs.color;
             }
-            console.log("MATERIAL");
-            console.log(object.material);
-            console.log(object)
-            if(object.material.map!=null){
+
+            if(object.material.name.includes("Wood") & object.material.map!=null){
                 object.material.map=texture;
             }
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
@@ -212,10 +213,8 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
-                { nodes.bureaum_kastm_kast.children.map(function(object, i){
-                    console.log("OBJECT");
-                    console.log(object.material);
-                    console.log(object);
+                { nodes[chosen_module.name].children.map(function(object, i){
+
                     return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>

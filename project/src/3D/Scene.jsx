@@ -12,21 +12,20 @@ import { DLight } from './Draggables/DLight.jsx';
 import { CubeTextureLoader } from 'three';
 import { Loader } from '@react-three/drei';
 import { Skybox } from './Skybox.jsx';
+import {useModuleContext} from "../contexts/ModuleContext.jsx";
 
 const Scene = () => {
     const { dimensions } = useConfiguratorContext();
     const { skyboxPath, setSkyboxPath } = useConfiguratorContext();
-
+    const {chosen_module}=useModuleContext();
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
-
     const { getOtherObstacles } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
 
     const obstacles = getOtherObstacles();
     const lights = getLights();
-
 
     return (
         <>
@@ -64,14 +63,12 @@ const Scene = () => {
                             // Pass any other necessary props to DObstruction
                             />
                         ))}
-                        {/* 
-                <DCube position={[0.5, 1, -0.5]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
-                <DCube position={[2, 1, -1]} scale={[1, 2, 1]} maxX={width} maxZ={depth} />
-                */}
-                    <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
+                        {
+                            chosen_module.name!= "" ? (
+                                <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
+                            ) : null
+                        }
                     </Surface>
-                    <axesHelper></axesHelper>
-
                     <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
                     <Skybox path={skyboxPath} />
 
