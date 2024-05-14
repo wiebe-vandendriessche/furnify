@@ -34,7 +34,7 @@ describe("Checking text in French is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+            q_aspects:"Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie",
             obstructions: { window:"Fenêtre", door:"Porte", radiator:"Radiateur", walloutlet:"Prise murale", switch:"Interrupteur", sloping_Wall:"Mur en pente", other:"Autre",
                 q_door:{
                     opening_door:"Comment s'ouvre la porte ?",

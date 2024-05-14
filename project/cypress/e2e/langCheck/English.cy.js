@@ -40,7 +40,7 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects:"Add which aspects we should take into account in your living space.",
+            q_aspects:"Add which aspects we should take into account in your living space",
             obstructions: {
                 window:"Window",
                 door:"Door",

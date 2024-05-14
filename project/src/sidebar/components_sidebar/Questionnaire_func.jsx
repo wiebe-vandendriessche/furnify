@@ -1,12 +1,10 @@
 import "../../App.css"
 import "./Questionnaire.css"
-import { useVariaContext } from "../../contexts/VariaContext.jsx";
-import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
-import { useTranslation } from 'react-i18next'
-import { useEffect} from 'react'
-import { ToggleButton, Collapse, ButtonGroup, Form } from "react-bootstrap";
-
-
+import {useVariaContext} from "../../contexts/VariaContext.jsx";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
+import {useTranslation} from 'react-i18next'
+import {useEffect} from 'react'
+import {ToggleButton, Collapse, ButtonGroup, Form} from "react-bootstrap";
 
 export function Questionnaire_functional() {
     const { t, i18n } = useTranslation();
@@ -27,10 +25,11 @@ export function Questionnaire_functional() {
         setVaria({ ...varia, [event.target.name]: event.target.id })
     }
 
+
+
     return (
 
         <div className="m-2">
-            <Form>
                 <div className={"mb-3"}>
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -49,9 +48,9 @@ export function Questionnaire_functional() {
                             </div>
                             <div className={"m-1"}>
                                 <Collapse in={functionalities.bed}>
-
+                                    
                                     <div className="mb-3" data-testid={"div-func-options-mattress"}>
-
+                                    
                                         <span data-testid={"question-bed"}>{t('questionnaire_func.bed.q_bed')}</span>
 
                                         <ButtonGroup defaultValue={varia.mattress ?? "none"}>
@@ -86,7 +85,7 @@ export function Questionnaire_functional() {
                                     <div className="mb-3" data-testid={"div-func-options-size"}>
 
                                         <span data-testid={"question-size"}>{t('questionnaire_func.bed.q_size')}</span>
-
+                                    
                                         <ButtonGroup defaultValue={varia.size ?? "140"}>
 
                                             <ToggleButton variant={"danger"} type="radio" id="140" name="size"
@@ -108,15 +107,10 @@ export function Questionnaire_functional() {
                                     </div>
                                 </Collapse>
                             </div>
-
                         </div>
                     </Form.Group>
                 </div>
-                
-            </Form >
-        </div >
-
-
+        </div>
     )
 }
 

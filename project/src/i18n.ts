@@ -30,7 +30,7 @@ i18n
                         width: "Width",
                         height: "Height",
                         other: "Other",
-                        q_aspects: "Add which aspects we should take into account in your living space.",
+                        q_aspects: "Add which aspects we should take into account in your living space",
                         aspect: "Aspect",
                         add_aspect: "Add aspect",
                         depth: "depth"
@@ -184,7 +184,7 @@ i18n
                         width: "Breedte",
                         height: "Hoogte",
                         other: "Anders",
-                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte",
                         aspect: "Aspect",
                         add_aspect: "Voeg een aspect toe"
                     },
@@ -336,7 +336,7 @@ i18n
                         width: "Largeur",
                         height: "Hauteur",
                         other: "Autres",
-                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie",
                         aspect: "Aspect",
                         add_aspect: "Ajouter un aspect"
                     },
@@ -487,7 +487,7 @@ i18n
                         width: "Breite",
                         height: "Höhe",
                         other: "Andere",
-                        q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten.",
+                        q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten",
                         aspect: "Aspekt",
                         add_aspect: "Aspekt hinzufügen"
                     },
@@ -638,7 +638,7 @@ i18n
                         width: "Ancho",
                         height: "Altura",
                         other: "Otro",
-                        q_aspects: "Agrega qué aspectos debemos tener en cuenta en tu espacio habitable.",
+                        q_aspects: "Agrega qué aspectos debemos tener en cuenta en tu espacio habitable",
                         aspect: "Aspecto",
                         add_aspect: "Agregar aspecto"
                     },
@@ -789,7 +789,7 @@ i18n
                         width: "Larghezza",
                         height: "Altezza",
                         other: "Altro",
-                        q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo.",
+                        q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo",
                         aspect: "Aspetto",
                         add_aspect: "Aggiungi aspetto"
                     },

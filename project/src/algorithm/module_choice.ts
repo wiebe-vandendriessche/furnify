@@ -48,11 +48,12 @@ export const check = (val: any, varia: any, get2D: any) => {
         if (result.length == 0) {
             errors.demands = true;
             console.log("ALGORITHM: " + "softer combinations not found, please change the demands")
-            return
+            return {possible:[{name: "", height: 0, width:0, depth:0, open: 0, closed:0,saved:0,bed:false,
+            sofa:false,desk:false, storage:false, width_options:[],components:[]}], errors: errors};
         }
     }
 
-
+    //check if room is rectangular
     if (val.rectangular) {
         // check size is correct
         let result_size: Module[] = [];
@@ -68,6 +69,7 @@ export const check = (val: any, varia: any, get2D: any) => {
         result = result_size
         
     }
+    //room has other 
     else {
         let sides2D = get2D.lines;
         console.log(sides2D)
