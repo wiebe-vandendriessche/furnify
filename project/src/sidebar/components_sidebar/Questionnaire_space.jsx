@@ -161,10 +161,10 @@ export function Questionnaire_space() {
                                                     controlid={"rectangular" + key}
                                                     label={t('questionnaire_space.' + key) + ' (m)'}
                                                     className="mb-4"
-                                                    data-testid={"label-space-room-rectangular-" + key}
+                                                    data-testid={"label-space-room-not-rectangular-" + key}
                                                 >
                                                     <Form.Control
-                                                        data-testid={"input-space-room-rectangular-" + key}
+                                                        data-testid={"input-space-room-not-rectangular-" + key}
                                                         type="number" min={0} step={0.1} value={value}
                                                         size="sm"
                                                         name={key} onChange={changeDim2D}
