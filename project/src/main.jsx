@@ -12,7 +12,6 @@ import Routing from "./Routing.jsx";
 import {ModuleProvider} from "./contexts/ModuleContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
         <BrowserRouter>
             <VariaProvider>
                 <ContactProvider>
@@ -29,5 +28,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             </VariaProvider>
         </BrowserRouter>
 
-    </React.StrictMode>
 );

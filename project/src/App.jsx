@@ -6,6 +6,7 @@ import {FloorplanScene} from './2D/FloorplanScene'
 import Modal from 'react-bootstrap/Modal';
 import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
+import { get_modules } from './algorithm/module_choice'
 
 function PrivacyPolicy(props) {
     return (
@@ -45,6 +46,7 @@ function PrivacyPolicy(props) {
 function App() {
     const [modalShow, setModalShow] = React.useState(false);
     const {rectangular, setRectangular} = useConfiguratorContext();
+    get_modules();
 
     return (
 

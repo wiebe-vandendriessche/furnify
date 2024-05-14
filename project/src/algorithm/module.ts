@@ -14,8 +14,6 @@ export class Module {
     private _components: string[] = [];
     private _marge:number;
 
-
-
     constructor(mod: any, marge:number = 0.03) {
         this._marge = marge;
         this._name = mod.naam;

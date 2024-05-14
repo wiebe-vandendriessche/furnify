@@ -52,7 +52,7 @@ export const check = (val: any, varia: any, get2D: any) => {
         }
     }
 
-
+    //check if room is rectangular
     if (val.rectangular) {
         // check size is correct
         let result_size: Module[] = [];
@@ -68,6 +68,7 @@ export const check = (val: any, varia: any, get2D: any) => {
         result = result_size
         
     }
+    //room has other 
     else {
         let sides2D = get2D.lines;
         console.log(sides2D)
