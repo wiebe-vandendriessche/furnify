@@ -82,7 +82,7 @@ export const IntersectionProvider = ({ children }) => {
 
         if (intersectionsDetected) {
             console.log('Intersections detected');
-            window.alert('Intersections detected!\nPlease adjust the configuration to avoid intersections.\nError at boxes:');
+            window.alert('Intersections detected!\nPlease adjust the configuration to avoid intersections.');
         }
 
         if (!intersectionsDetected) {

@@ -228,7 +228,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
 
         group.current.children.forEach((object, i) => {
             const originalColor = originalColors[i];
-            easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
+            easing.dampC(object.material.color, active ? 'grey' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
 

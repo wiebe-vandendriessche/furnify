@@ -71,7 +71,7 @@ export const DObstruction = ({ obstructionKey, position = [0.5, 0.5, -0.5], dime
         } else {
             easing.damp3(ref.current.position, pos.current, 0, delta);
         }
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
+        easing.dampC(ref.current.material.color, active ? 'grey' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
     });
 
 

@@ -3,11 +3,14 @@ import { useCallback, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
-export const DLight = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
+import { useIntersectionContext } from '../../contexts/IntersectionContext'
+
+export const DLight = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
     const ref = useRef();
     const pos = useRef(position);
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
+    const id = obstructionKey;
 
     const ceilingHeight = maxY - dimensions[1] / 2;
 
@@ -66,8 +69,16 @@ export const DLight = ({ position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 
         } else {
             easing.damp3(ref.current.position, pos.current, 0, delta);
         }
-        easing.dampC(ref.current.material.color, active ? 'white' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
+        easing.dampC(ref.current.material.color, active ? 'grey' : hovered ? 'lightblue' : '#ffdc7a', 0.1, delta);
     });
+
+    const { addDObstruction, removeDObstruction } = useIntersectionContext();
+
+
+    //sending mesh data to IntersectionContext when component mounts
+    useEffect(() => {
+        addDObstruction(ref.current, id);
+    }, [addDObstruction, removeDObstruction, active, dimensions,]);
 
     return (
         <mesh ref={ref} scale={[dimensions[0], dimensions[1], dimensions[2]]} receiveShadow {...events} {...props}>
