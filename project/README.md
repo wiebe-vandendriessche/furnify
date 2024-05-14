@@ -52,16 +52,18 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
   - **/src/sidebar/:** Bevat sidebar componenten.
     - **/src/sidebar/components_sidebar/:** Bevat componenten gebruikt in de sidebar.
     - **/src/sidebar/Sidebar.jsx:** Bevat de sidebar compositie.
-  - **/src/App.jsx:** React app.
+  - **/src/model/SuperModel** Bevat alle schema's voor de databank 
+  - **/src/App.jsx:** React app. 
   - **/src/i18.ts:** Internationalisatie configuratie.
   - **/src/main.jsx:** Bevat React app met alle contextproviders.
 - **/index.html** Bevat de html index.
 - **/README.md** Bevat de README, gegenereerd door blueprint.md.
 - **/blueprint.md** Genereerd de README.
+- **/config.env** Bevatten de mailchimp en mongoDB URI's.
 - **/cypress.config.cjs** Configuratie van testen.
+- **/MongoDB.cjs** Start de mongoDB databank.
 - **/package.json** Packages.
 - **/vite.config.js** Vite configuratie.
-
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#developer-server-opstarten)
@@ -96,6 +98,14 @@ npm run dev
 npm run test
 ```
 
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#developer-server-opstarten)
+
+## ➤ Developer server opstarten
+
+**start MongoDB server:**
+```bash
+npm run serve
+```
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#productie-omgeving-deployen)
 
 ## ➤ Productie-omgeving deployen

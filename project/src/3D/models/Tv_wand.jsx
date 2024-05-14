@@ -7,12 +7,12 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function Tv_wand(props) {
-  const { nodes, materials } = useGLTF('/models/tv_wand.gltf')
+  const { nodes, materials } = useGLTF('/models/tv_wand_white.gltf')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.tv_wand.geometry} material={nodes.tv_wand.material} scale={0.001} />
+      <mesh geometry={nodes.tv_wand_white.geometry} material={materials["Material.001"]} scale={0.001} />
     </group>
   )
 }
 
-useGLTF.preload('/tv_wand.gltf')
+useGLTF.preload('/tv_wand_white.gltf')

@@ -57,7 +57,7 @@ const useMousePosition = (camera) => {
 
     const handleTouchMove = (event) => {
       if (event.touches.length > 0) {
-        console.log("touch move");
+        // console.log("touch move");
         const touch = event.touches[0];
         const rect = touch.target.getBoundingClientRect();
         updatePosition(touch.clientX, touch.clientY, rect);

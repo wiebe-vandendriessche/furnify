@@ -13,12 +13,12 @@ extend({ LineSegments: THREE.LineSegments });
 
 export const GridComponent = ({
   size = 100,
-  divisions = 10,
+  divisions = 11,  // Ensuring it's odd
   color = "grey",
   centerLineColor = "white",
 }) => {
   const { scene } = useThree();
-  // This memo will only recompute if size, divisions, color or centerLineColor change
+
   const { geometry, material, centerMaterial } = useMemo(() => {
     const points: Vector3[] = [];
     const step = size / divisions;
@@ -27,11 +27,14 @@ export const GridComponent = ({
     const material = new THREE.LineBasicMaterial({ color });
     const centerMaterial = new THREE.LineBasicMaterial({ color: centerLineColor });
 
-    for (let i = 0; i <= divisions; i++) {
+    // Adjust the loop to start from the negative half to positive half of the grid
+    for (let i = -Math.floor(divisions / 2); i <= Math.floor(divisions / 2); i++) {
+      const offset = i * step;
+
       // Horizontal lines
-      points.push(new Vector3(-halfSize, i * step - halfSize, 0), new THREE.Vector3(halfSize, i * step - halfSize, -0.01));
+      points.push(new THREE.Vector3(-halfSize, offset, 0), new THREE.Vector3(halfSize, offset, -0.01));
       // Vertical lines
-      points.push(new Vector3(i * step - halfSize, -halfSize, 0), new THREE.Vector3(i * step - halfSize, halfSize, -0.01));
+      points.push(new THREE.Vector3(offset, -halfSize, 0), new THREE.Vector3(offset, halfSize, -0.01));
     }
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);

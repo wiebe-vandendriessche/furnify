@@ -15,7 +15,7 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar space", ()=>{
         let space={
-                q_dimensions: "What are the dimensions of the living space?",
+                q_dimensions: "Select the shape of the room and enter the dimensions",
                 rectangular: "Rectangular",
                 dimLength: "Length",
                 dimWidth: "Width",
@@ -40,7 +40,7 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects:"Add which aspects we should take into account in your living space.",
+            q_aspects:"Add which aspects we should take into account in your living space",
             obstructions: {
                 window:"Window",
                 door:"Door",
@@ -67,7 +67,7 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar functional", ()=>{
         let functional={
-            q_function:"What are the most important features you need to make the most of your living space?",
+            q_function:"Select the functions needed to make the most of your living space",
             functions:{
                 bed:"Bed",
                 office_space:"Office space",
@@ -87,7 +87,7 @@ describe("Checking text in English is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_materials: "Which materials do you prefer to finish your modular furniture?",
+            q_materials: "Select which finishes you prefer",
             materials:{
                 color: "Color",
                 material: "Material",
@@ -97,7 +97,7 @@ describe("Checking text in English is correctly rendered", ()=>{
                 oak:"Oak",
                 walnut:"Walnut"
             },
-            q_other:"Other specific wishes or requirements to take into account?"
+            q_other:"If there are any other requirements we need to consider, please fill them in below"
         }
         checkSpecs(specs);
     });

@@ -16,7 +16,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
     it("Sidebar space", ()=>{
 
 
-        let space={ q_dimensions: "Wat zijn de afmetingen van de woonruimte?", rectangular: "Rechthoekig", dimLength: "Lengte", dimWidth: "Breedte",
+        let space={ q_dimensions: "Selecteer de vorm van de ruimte en geef de afmetingen in", rectangular: "Rechthoekig", dimLength: "Lengte", dimWidth: "Breedte",
                 dimHeight: "Hoogte", other: "Anders",
             q_space:"Welke woonruimte wenst u te optimaliseren?",
             space:{
@@ -37,7 +37,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte",
             obstructions: { window:"Raam", door:"Deur", radiator:"Radiator", walloutlet:"Stopcontact",
                 switch:"Schakelaar", sloping_Wall:"Schuine wand", other:"Andere",
                 q_door:{
@@ -57,7 +57,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
     } )
 
     it("Sidebar functional", ()=>{
-        let functional={  q_function:"Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+        let functional={  q_function:"Selecteer de functies die nodig zijn om uw woonruimte optimaal te benutten",
             functions:{
                 bed:"Bed",
                 office_space:"Bureauruimte",
@@ -77,7 +77,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
+            q_materials: "Selecteer welke afwerkingen u verkiest",
             materials:{
                 color:"kleur",
                 material:"materiaal",
@@ -87,7 +87,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
                 oak:"Eik",
                 walnut:"Notelaar"
             },
-            q_other:"Andere specifieke wensen of vereisten waarmee rekening te houden?"
+            q_other:"Indien er nog andere vereisten zijn waarmee we rekening moeten houden, vul deze hieronder in"
         }
         checkSpecs(specs);
     });

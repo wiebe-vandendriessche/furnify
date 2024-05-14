@@ -61,6 +61,14 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 28/04/24,13:00,17:00,Extern,fixen skybox en betere rendering met werkende lichten en schaduwen,183,
 29/04/24,9:00,11:00,Extern,Css details en loading screen met suspense,185 en 186,
 30/04/24,13:30,16:30,Contacturen,Veranderen skybox en kijken voor collisiondetection voor valideerknop,188 en 190,
+06/05/24,18:00,19:00,Contacturen,begin 3d deel presentatie,175,
+07/05/24,13:30,16:30,Contacturen,overleg presentatie + verschillende modules proberen inladen met textures met Thomas,175 en 151,
+07/05/24,18:30,19:30,Extern,overleg presentatie deel 3d slides,175,
+07/05/24,20:30,21:00,Extern,overleg presentatie deel 3d slides,175,
+08/05/24,13:00,16:30,Contacturen,Eindpresentatie,175,
+11/05/24,17:00,19:00,Extern,Fixen van opmerking meneer Sebrechts delay bij verkleinen kamer en roteren,,
+12/05/24,9:30,12:30,Extern,Zoeken oplossing collisiondetection met boundingbox tussen verschillende obstructions,190 en 156,niet werkend gekregen
+12/05/24,15:00,16:00,Extern,Zoeken oplossing collisiondetection met boundingbox tussen verschillende obstructions,190 en 156,niet werkend gekregen
 
 
 

@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
 
 const ConfiguratorContext = createContext();
 
@@ -8,12 +10,35 @@ export const ConfiguratorProvider = ({ children }) => {
     const [dimensions, setDimensions] = useState({ length: 6, width: 8, height: 2.5 });
 
     const [functionalities, setFunctionalities] = useState({ bed: false, sofa: false, office_space: false, storage_space: false })
-    const [specs, setSpecs]=useState({color: "#FFFFFF", material: "birch", layout:""})
+    const [specs, setSpecs]=useState({color: 'white', material: "birch", layout:""})
     const [obstacles, setObstacles] = useState({door: [], window: [], walloutlet: [], switch: [], light: [], other: []});
     const [rectangular, setRectangular] = useState(true);
 
     const [rotationIndex, setRotationIndex] = useState(0);
     const rotations = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
+
+    const [skyboxPath, setSkyboxPath] = useState(() => {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+        return prefersDarkMode.matches ? "night" : "day";
+    });
+
+    useEffect(() => {
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const handleDarkModeChange = (e) => {
+            if (e.matches) {
+                setSkyboxPath("night");
+            } else {
+                setSkyboxPath("day");
+            }
+        };
+
+        prefersDarkMode.addEventListener('change', handleDarkModeChange);
+
+        return () => {
+            prefersDarkMode.removeEventListener('change', handleDarkModeChange);
+        };
+    }, []);
 
 
 
@@ -69,7 +94,9 @@ export const ConfiguratorProvider = ({ children }) => {
         getLights,
         getOtherObstacles,
         modelRotation: rotations[rotationIndex],
-        rotate
+        rotate,
+        skyboxPath,
+        setSkyboxPath,
     }
 
 

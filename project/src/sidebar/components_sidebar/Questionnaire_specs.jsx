@@ -28,7 +28,6 @@ export function Questionnaire_spec() {
     }
     return (
         <div className="m-2">
-            <Form>
                 <div className={"d-inline-flex mb-4"}>
                     <FormGroup>
                         <div className={"mb-3"}><h5 data-testid={"question-specs-materials"}>{t('questionnaire_specs.q_materials')}</h5></div>
@@ -59,14 +58,14 @@ export function Questionnaire_spec() {
                                 </Col>
                                 <Col>
                                     <ButtonGroup>
-                                        <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
+                                        <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="white"
                                                       data-testid={"btn-specs-color-white"}
-                                                      onChange={changeSpecs} checked={specs.color === "#FFFFFF"}>
+                                                      onChange={changeSpecs} checked={specs.color == "white"}>
                                             {t('questionnaire_specs.materials.white')}
                                         </ToggleButton>
-                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#000000"
+                                        <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="black"
                                                       data-testid={"btn-specs-color-black"}
-                                                      onChange={changeSpecs} checked={specs.color === "#000000"}>
+                                                      onChange={changeSpecs} checked={specs.color == "black"}>
                                             {t('questionnaire_specs.materials.black')}
                                         </ToggleButton>
                                     </ButtonGroup>
@@ -84,7 +83,6 @@ export function Questionnaire_spec() {
                     <Form.Control as={"textarea"} data-testid={"area-specs-requirements"} rows="3" cols="40" value={varia.requirements}
                                   name="requirements" onChange={changeVaria}></Form.Control>
                 </div>
-            </Form>
         </div>
     )
 }

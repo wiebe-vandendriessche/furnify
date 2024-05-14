@@ -82,8 +82,10 @@ export const DrawingProvider = ({ children }) => {
       const direction = new Vector3().subVectors(endPoint, startPoint);
       const length = startPoint.distanceTo(endPoint);
       const geometry = new BoxGeometry(length, wallThickness, wallHeight);
-      const material = new MeshStandardMaterial({ color: "gray" });
+      const material = new MeshStandardMaterial({ color: "white" });
       const wall = new Mesh(geometry, material);
+      wall.receiveShadow = true;
+      wall.castShadow = true;
 
       // Calculate the midpoint for wall positioning
       const midpoint = new Vector3()
@@ -110,9 +112,9 @@ export const DrawingProvider = ({ children }) => {
       walls.push(wall);
     }
 
-    walls.forEach((wall, index) => {
-      console.log(`Wall ${index}:`, wall);
-    });
+    // walls.forEach((wall, index) => {
+    //   console.log(`Wall ${index}:`, wall);
+    // });
 
     return walls;
   }
@@ -133,12 +135,14 @@ export const DrawingProvider = ({ children }) => {
 
     // Material for the extruded shape
     const material = new MeshStandardMaterial({
-      color: "lightblue",
+      color: "brown",
       side: THREE.DoubleSide,
     });
 
     // Create the mesh
     const mesh = new Mesh(geometry, material);
+    mesh.receiveShadow = true;
+    mesh.castShadow = true;
 
     // Calculate bounding box to find center
     geometry.computeBoundingBox();
@@ -158,14 +162,14 @@ export const DrawingProvider = ({ children }) => {
   // Toggle drawing state
   const toggleDrawing = () =>
     setIsDrawing((prev) => {
-      console.log("Drawing is now: " + !prev);
+      // console.log("Drawing is now: " + !prev);
       return !prev;
     });
 
   // Toggle orthogonal mode
   const toggleOrthogonalMode = () =>
     setOrthogonalMode((prev) => {
-      console.log("Orthogonal mode is now: " + !prev);
+      // console.log("Orthogonal mode is now: " + !prev);
       return !prev;
     });
 

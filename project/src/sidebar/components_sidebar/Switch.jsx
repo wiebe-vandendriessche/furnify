@@ -84,67 +84,63 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
-                    <div className="m-1">
-                        <Row>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"width" + obstId}
-                                    label={t('questionnaire_space.width') + '(cm)'}
-                                >
-                                    <Form.Control type="number" name={"width"} min={0} step={1} value={width}
-                                        data-testid={"input-obst-" + type + "-width"}
-                                        onChange={(e) => {
-                                            handleInput(e)
-                                        }}
-                                        onKeyPress={negativeValues}
-                                        id={"width" + obstId}
-                                    />
-
-
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"height" + obstId}
-                                    label={t('questionnaire_space.height') + '(cm)'}
-                                >
-                                    <Form.Control type="number" name={"height"} min={0} step={1} value={height}
-                                        data-testid={"input-obst-" + type + "-height"}
-                                        onChange={(e) => {
-                                            handleInput(e)
-                                        }}
-                                        onKeyPress={negativeValues}
-                                        id={"height" + obstId}
-                                    />
-                                </FloatingLabel>
-                            </Col>
-                            <Col>
-                                <FloatingLabel
-                                    controlid={"depth" + obstId}
-                                    label={t('questionnaire_space.depth') + '(cm)'}
-                                >
-                                    <Form.Control type="number" name={"depth"} min={0} step={1} value={depth}
-                                        data-testid={"input-obst-" + type + "-depth"}
-                                        onChange={(e) => {
-                                            handleInput(e)
-                                        }}
-                                        onKeyPress={negativeValues}
-                                        id={"depth" + obstId}
-                                    />
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-
-                    </div>
-                </Form.Group>
-
-                <Form.Group >
                     <Row>
+                        <Form.Label>{t('obstructions.q_all.dimensions')}</Form.Label>
+                        <Col>
+                            <FloatingLabel
+                                controlid={"width" + obstId}
+                                label={t('questionnaire_space.width') + '(cm)'}
+                            >
+                                <Form.Control type="number" name={"width"} min={0} step={1} value={width}
+                                    data-testid={"input-obst-" + type + "-width"}
+                                    onChange={(e) => {
+                                        handleInput(e)
+                                    }}
+                                    onKeyPress={negativeValues}
+                                    id={"width" + obstId}
+                                />
+
+
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel
+                                controlid={"height" + obstId}
+                                label={t('questionnaire_space.height') + '(cm)'}
+                            >
+                                <Form.Control type="number" name={"height"} min={0} step={1} value={height}
+                                    data-testid={"input-obst-" + type + "-height"}
+                                    onChange={(e) => {
+                                        handleInput(e)
+                                    }}
+                                    onKeyPress={negativeValues}
+                                    id={"height" + obstId}
+                                />
+                            </FloatingLabel>
+                        </Col>
+                        <Col>
+                            <FloatingLabel
+                                controlid={"depth" + obstId}
+                                label={t('questionnaire_space.depth') + '(cm)'}
+                            >
+                                <Form.Control type="number" name={"depth"} min={0} step={1} value={depth}
+                                    data-testid={"input-obst-" + type + "-depth"}
+                                    onChange={(e) => {
+                                        handleInput(e)
+                                    }}
+                                    onKeyPress={negativeValues}
+                                    id={"depth" + obstId}
+                                />
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Form.Label>{t('obstructions.q_all.position')}</Form.Label>
                         <Col>
                             <FloatingLabel
                                 style={{ fontSize: '0.8rem' }}
                                 controlid={"switchXpos" + obstId}
-                                label="Switch X Position (cm)"
+                                label={t('obstructions.q_all.side') + " (cm)"}
                             >
                                 <Form.Control
                                     type="number"
@@ -163,7 +159,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                         <Col>
                             <FloatingLabel
                                 controlid={"switchYpos" + obstId}
-                                label="Switch Y Position (cm)"
+                                label={t('obstructions.q_all.up') + " (cm)"}
                                 style={{ fontSize: '0.8rem' }}
                             >
                                 <Form.Control
@@ -181,11 +177,10 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                             </FloatingLabel>
                         </Col>
                     </Row>
-
-                    <Form.Label data-testid={"question-obstacle-switch-wall"}>
-                        {t("obstructions.q_switch.switch_wall")}
-                    </Form.Label>
-                    <div>
+                    <Row>
+                        <Form.Label data-testid={"question-obstacle-switch-wall"}>
+                            {t("obstructions.q_all.wall")}
+                        </Form.Label>
                         <ButtonGroup>
                             {/* Add radio buttons for switch positions */}
                             {["front", "back", "left", "right"].map((x) => (
@@ -204,11 +199,11 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     disabled={isButtonDisabled} // Set button disabled state
                                     checked={x == switchWall}
                                 >
-                                    {t(`obstructions.q_switch.${x}`)}
+                                    {t(`obstructions.q_all.${x}`)}
                                 </ToggleButton>
                             ))}
                         </ButtonGroup>
-                    </div>
+                    </Row>
                 </Form.Group>
 
             </div>

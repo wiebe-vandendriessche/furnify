@@ -15,7 +15,7 @@ describe("Checking text in Italian is correctly rendered", ()=>{
 
     it("Sidebar space", ()=>{
         let space={
-            q_dimensions: "Quali sono le dimensioni dello spazio abitativo?", rectangular: "Rettangolare", dimLength: "Lunghezza",
+            q_dimensions: "Selezionate la forma della stanza e inserite le dimensioni", rectangular: "Rettangolare", dimLength: "Lunghezza",
             dimWidth: "Larghezza", dimHeight: "Altezza", other: "Altro",
             q_space: "Quale spazio abitativo desideri ottimizzare?",
             space: {
@@ -34,7 +34,7 @@ describe("Checking text in Italian is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo.",
+            q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo",
             obstructions: { window: "Finestra", door: "Porta", radiator: "Termosifone", walloutlet: "Presa di corrente a parete", switch: "Interruttore",
                 sloping_Wall: "Muro inclinato", other: "Altro",
                 q_door:{
@@ -54,7 +54,7 @@ describe("Checking text in Italian is correctly rendered", ()=>{
     } )
     it("Sidebar functional", ()=>{
         let functional={
-            q_function: "Quali sono le caratteristiche più importanti di cui hai bisogno per sfruttare al meglio il tuo spazio abitativo?",
+            q_function: "Selezionate le funzioni necessarie per sfruttare al meglio il vostro spazio abitativo",
             functions: {
                 bed: "Letto",
                 office_space: "Spazio ufficio",
@@ -74,7 +74,7 @@ describe("Checking text in Italian is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_materials: "Quali materiali preferisci per la finitura dei tuoi mobili modulari?",
+            q_materials: "Scegliete le finiture che preferite",
             materials: {
                 white: "Bianco",
                 black: "Nero",
@@ -84,7 +84,7 @@ describe("Checking text in Italian is correctly rendered", ()=>{
                 color: "Colore",
                 material: "Materiale"
             },
-            q_other: "Altre richieste o requisiti specifici da considerare?"
+            q_other: "Se ci sono altri requisiti da tenere in considerazione, vi preghiamo di inserirli qui sotto"
         }
         checkSpecs(specs);
     });

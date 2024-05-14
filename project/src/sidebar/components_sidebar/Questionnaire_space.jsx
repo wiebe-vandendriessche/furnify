@@ -65,7 +65,6 @@ export function Questionnaire_space() {
 
     return (
         <div className={"m-2"}>
-            <Form>
                 <div className="mb-4">
                     <Form.Group>
                         <div className={"mb-3"}>
@@ -179,7 +178,6 @@ export function Questionnaire_space() {
                         </div>
                     </FormGroup>
                 </div>
-            </Form>
         </div>
     )
 }

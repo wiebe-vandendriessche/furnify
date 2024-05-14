@@ -24,13 +24,13 @@ i18n
                         hello: "Hello World!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "What are the dimensions of the living space?",
+                        q_dimensions: "Select the shape of the room and enter the dimensions",
                         rectangular: "Rectangular",
                         length: "Length",
                         width: "Width",
                         height: "Height",
                         other: "Other",
-                        q_aspects: "Add which aspects we should take into account in your living space.",
+                        q_aspects: "Add which aspects we should take into account in your living space",
                         aspect: "Aspect",
                         add_aspect: "Add aspect",
                         depth: "depth"
@@ -44,6 +44,17 @@ i18n
                         sloping_Wall: "Sloping wall",
                         light: "Light",
                         other: "Other",
+                        q_all:{
+                            dimensions:"Dimensions: ",
+                            position: "Position in the room: ",
+                            wall: "Select the correct wall",
+                            front: "front",
+                            back: "back",
+                            left: "left",
+                            right: "right",
+                            up:"from the ground up",
+                            side:"from the left side"
+                        },
                         q_door: {
                             opening_door: "How does the door open?",
                             inside_left: "Inside the room, to the left",
@@ -54,26 +65,9 @@ i18n
                             opening_window: "Can the window open to the inside?",
                             yes: "yes",
                             no: "no",
-                            window_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
                         },
-                        q_walloutlet: {
-                            walloutlet_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
-                        },
-                        q_switch: {
-                            switch_wall: "Select the correct wall",
-                            front: "front",
-                            back: "back",
-                            left: "left",
-                            right: "right"
-                        }
+                      
+                        
                     },
                     questionnaire_func: {
                         q_space: "Which living space do you want to optimize?",
@@ -82,7 +76,7 @@ i18n
                             living_room: "Living room",
                             bedroom: "Bedroom",
                         },
-                        q_function: "What are the most important features you need to make the most of your living space?",
+                        q_function: "Select the functions needed to make the most of your living space",
                         functions: {
                             bed: "Bed",
                             office_space: "Office space",
@@ -105,7 +99,7 @@ i18n
                             partition_wall: "Partition wall",
                             in_the_middle_of_space: "In the middle of space",
                         },
-                        q_materials: "Which materials do you prefer to finish your modular furniture?",
+                        q_materials: "Select which finishes you prefer",
                         materials: {
                             color: "Color",
                             material: "Material",
@@ -115,7 +109,7 @@ i18n
                             oak: "Oak",
                             walnut: "Walnut"
                         },
-                        q_other: "Other specific wishes or requirements to take into account?"
+                        q_other: "If there are any other requirements we need to consider, please fill them in below"
                     },
                     questionnaire_module: {
                         question: "Please press the button to discover which modules would fit you",
@@ -173,7 +167,8 @@ i18n
                         lastname: "Last name",
                         phone_number: "Phone number",
                         email: "E-mail",
-                        address: "Address"
+                        address: "Address",
+                        submit: "Submit"
                     }
                 }
             },
@@ -183,13 +178,13 @@ i18n
                         hello: "Hallo Wereld!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Wat zijn de afmetingen van de woonruimte?",
+                        q_dimensions: "Selecteer de vorm van de ruimte en geef de afmetingen in",
                         rectangular: "Rechthoekig",
                         length: "Lengte",
                         width: "Breedte",
                         height: "Hoogte",
                         other: "Anders",
-                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte.",
+                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte",
                         aspect: "Aspect",
                         add_aspect: "Voeg een aspect toe"
                     },
@@ -201,7 +196,19 @@ i18n
                         walloutlet: "Stopcontact",
                         switch: "Schakelaar",
                         sloping_Wall: "Schuine wand",
+                        light: "Licht",
                         other: "Andere",
+                        q_all:{
+                            dimensions:"Afmetingen: ",
+                            position: "Positie in de kamer: ",
+                            wall: "Selecteer de juiste muur",
+                            front: "voor",
+                            back: "achter",
+                            left: "links",
+                            right: "rechts",
+                            up:"vanaf de grond",
+                            side:"vanaf de linkerkant"
+                        },
                         q_door: {
                             opening_door: "Hoe opent de deur?",
                             inside_left: "Binnen in de ruimte, naar links",
@@ -221,7 +228,7 @@ i18n
                             living_room: "Woonkamer",
                             bedroom: "Slaapkamer",
                         },
-                        q_function: "Wat zijn de belangrijkste functies die u nodig heeft om uw woonruimte optimaal te benutten?",
+                        q_function: "Selecteer de functies die nodig zijn om uw woonruimte optimaal te benutten",
                         functions: {
                             bed: "Bed",
                             office_space: "Bureauruimte",
@@ -244,7 +251,7 @@ i18n
                             partition_wall: "Scheidingswand",
                             in_the_middle_of_space: "Te midden van ruimte",
                         },
-                        q_materials: "Welke materialen verkiest u ter afwerking van uw modulaire meubels?",
+                        q_materials: "Selecteer welke afwerkingen u verkiest",
                         materials: {
                             color: "kleur",
                             material: "materiaal",
@@ -254,7 +261,7 @@ i18n
                             oak: "Eik",
                             walnut: "Notelaar"
                         },
-                        q_other: "Andere specifieke wensen of vereisten waarmee rekening te houden?"
+                        q_other: "Indien er nog andere vereisten zijn waarmee we rekening moeten houden, vul deze hieronder in"
                     },
                     questionnaire_module: {
                         question: "Druk op de knop om te ontdekken welke modules bij u passen",
@@ -312,7 +319,8 @@ i18n
                         lastname: "Achternaam",
                         phone_number: "Telefoonnummer",
                         email: "E-mail",
-                        address: "Adres"
+                        address: "Adres",
+                        submit: "Verzend"
                     }
                 }
             },
@@ -322,13 +330,13 @@ i18n
                         hello: "Bonjour le monde!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Quelles sont les dimensions de l'espace de vie?",
+                        q_dimensions: "Sélectionnez la forme de la pièce et entrez les dimensions",
                         rectangular: "Rectangulaire",
                         length: "Longueur",
                         width: "Largeur",
                         height: "Hauteur",
                         other: "Autres",
-                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie.",
+                        q_aspects: "Ajoutez les aspects que nous devons prendre en compte dans votre espace de vie",
                         aspect: "Aspect",
                         add_aspect: "Ajouter un aspect"
                     },
@@ -339,7 +347,19 @@ i18n
                         walloutlet: "Prise murale",
                         switch: "Interrupteur",
                         sloping_Wall: "Mur en pente",
+                        light: "Lumière",
                         other: "Autre",
+                        q_all:{
+                            dimensions:"Dimensions: ",
+                            position: "Position dans la pièce: ",
+                            wall: "Choisir le mur correct",
+                            front: "avant",
+                            back: "arrière",
+                            left: "gauche",
+                            right: "droite",
+                            up:"du sol vers le haut",
+                            side:"du côté gauche"
+                        },
                         q_door: {
                             opening_door: "Comment s'ouvre la porte ?",
                             inside_left: "A l'intérieur de la salle, à gauche",
@@ -359,7 +379,7 @@ i18n
                             living_room: "Le salon",
                             bedroom: "Chambre à coucher",
                         },
-                        q_function: "Quelles sont les caractéristiques les plus importantes dont vous avez besoin pour tirer le meilleur parti de votre espace de vie?",
+                        q_function: "Sélectionnez les fonctions nécessaires pour tirer le meilleur parti de votre espace de vie",
                         functions: {
                             bed: "Lit",
                             office_space: "Bureau",
@@ -382,7 +402,7 @@ i18n
                             partition_wall: "Cloison",
                             in_the_middle_of_space: "Au milieu de l'espace",
                         },
-                        q_materials: "Quels matériaux préférez-vous pour finir votre mobilier modulable?",
+                        q_materials: "Sélectionnez les finitions que vous préférez",
                         materials: {
                             white: "Blanc",
                             black: "Noir",
@@ -392,9 +412,8 @@ i18n
                             color: "Couleur",
                             material: "Matériau"
                         },
-                        q_other: "D'autres souhaits ou exigences spécifiques à prendre en compte?"
+                        q_other: "Si vous avez d'autres exigences à prendre en compte, veuillez les indiquer ci-dessous"
                     },
-                    
                     questionnaire_module: {
                         question: "Cliquez sur le bouton pour découvrir les modules qui vous conviennent.",
                         warning: "Après avoir modifié l'une des spécifications, veuillez appuyer à nouveau sur le bouton.",
@@ -451,7 +470,8 @@ i18n
                         lastname: "Nom de famille",
                         phone_number: "Numéro de téléphone",
                         email: "E-mail",
-                        address: "Adresse"
+                        address: "Adresse",
+                        submit: "Soumettre"
                     }
                 }
             },
@@ -461,13 +481,13 @@ i18n
                         hello: "Hallo Welt!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Was sind die Abmessungen des Wohnraums?",
+                        q_dimensions: "Wählen Sie die Form des Raumes und geben Sie die Maße ein",
                         rectangular: "Rechteckig",
                         length: "Länge",
                         width: "Breite",
                         height: "Höhe",
                         other: "Andere",
-                        q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten.",
+                        q_aspects: "Fügen Sie hinzu, welche Aspekte wir in Ihrem Wohnraum berücksichtigen sollten",
                         aspect: "Aspekt",
                         add_aspect: "Aspekt hinzufügen"
                     },
@@ -478,7 +498,19 @@ i18n
                         walloutlet: "Steckdose",
                         switch: "Schalter",
                         sloping_Wall: "Schräge Wand",
+                        light: "Licht",
                         other: "Andere",
+                        q_all:{
+                            dimensions:"Abmessungen: ",
+                            position: "Position im Raum: ",
+                            wall: "Wählen Sie die richtige Wand",
+                            front: "Vorderseite",
+                            back: "hinten",
+                            left: "links",
+                            right: "rechts",
+                            up:"von unten nach oben",
+                            side:"von der linken Seite"
+                        },
                         q_door: {
                             opening_door: "Wie wird die Tür geöffnet?",
                             inside_left: "Im Inneren des Raums, links",
@@ -498,7 +530,7 @@ i18n
                             living_room: "Wohnzimmer",
                             bedroom: "Schlafzimmer",
                         },
-                        q_function: "Welche sind die wichtigsten Funktionen, die Sie benötigen, um das Beste aus Ihrem Wohnraum zu machen?",
+                        q_function: "Wählen Sie die Funktionen, die Sie benötigen, um Ihren Lebensraum optimal zu nutzen",
                         functions: {
                             bed: "Bett",
                             office_space: "Bürofläche",
@@ -521,7 +553,7 @@ i18n
                             partition_wall: "Trennwand",
                             in_the_middle_of_space: "In der Mitte des Raums",
                         },
-                        q_materials: "Welche Materialien bevorzugen Sie zur Fertigstellung Ihrer modularen Möbel?",
+                        q_materials: "Wählen Sie aus, welche Oberflächen Sie bevorzugen",
                         materials: {
                             white: "Weiß",
                             black: "Schwarz",
@@ -531,7 +563,7 @@ i18n
                             color: "Farbe",
                             material: "Material"
                         },
-                        q_other: "Andere spezifische Wünsche oder Anforderungen, die berücksichtigt werden sollen?"
+                        q_other: "Wenn es weitere Anforderungen gibt, die wir berücksichtigen müssen, tragen Sie diese bitte unten ein"
                     },
                     questionnaire_module: {
                         question: "Bitte drücken Sie den Knopf, um herauszufinden, welche Module für Sie geeignet sind.",
@@ -589,7 +621,8 @@ i18n
                         lastname: "Nachname",
                         phone_number: "Telefonnummer",
                         email: "E-Mail",
-                        address: "Adresse"
+                        address: "Adresse",
+                        submit: "Einreichen"
                     }
                 }
             },
@@ -599,13 +632,13 @@ i18n
                         hello: "¡Hola Mundo!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "¿Cuáles son las dimensiones del espacio habitable?",
+                        q_dimensions: "Seleccione la forma de la habitación e introduzca las dimensiones",
                         rectangular: "Rectangular",
                         length: "Longitud",
                         width: "Ancho",
                         height: "Altura",
                         other: "Otro",
-                        q_aspects: "Agrega qué aspectos debemos tener en cuenta en tu espacio habitable.",
+                        q_aspects: "Agrega qué aspectos debemos tener en cuenta en tu espacio habitable",
                         aspect: "Aspecto",
                         add_aspect: "Agregar aspecto"
                     },
@@ -616,7 +649,19 @@ i18n
                         walloutlet: "Enchufe de pared",
                         switch: "Interruptor",
                         sloping_Wall: "Pared inclinada",
+                        light: "Luz",
                         other: "Otro",
+                        q_all:{
+                            dimensions:"Dimensiones: ",
+                            position: "Posición en la habitación: ",
+                            wall: "Seleccione la pared correcta",
+                            front: "delante",
+                            back: "trasera",
+                            left: "izquierda",
+                            right: "derecha",
+                            up:"desde el suelo hacia arriba",
+                            side:"desde el lado izquierdo"
+                        },
                         q_door: {
                             opening_door: "cómo abrir la puerta",
                             inside_left: "dentro de la habitación, a la izquierda",
@@ -636,7 +681,7 @@ i18n
                             living_room: "Sala de estar",
                             bedroom: "Dormitorio",
                         },
-                        q_function: "¿Cuáles son las características más importantes que necesitas para aprovechar al máximo tu espacio habitable?",
+                        q_function: "Seleccione las funciones necesarias para aprovechar al máximo su espacio vital",
                         functions: {
                             bed: "Cama",
                             office_space: "Espacio de oficina",
@@ -659,7 +704,7 @@ i18n
                             partition_wall: "Pared divisoria",
                             in_the_middle_of_space: "En el medio del espacio",
                         },
-                        q_materials: "¿Qué materiales prefieres para terminar tus muebles modulares?",
+                        q_materials: "Seleccione los acabados que prefiera",
                         materials: {
                             white: "Blanco",
                             black: "Negro",
@@ -669,7 +714,7 @@ i18n
                             color: "Color",
                             material: "Material"
                         },
-                        q_other: "¿Otras peticiones o requisitos específicos a tener en cuenta?"
+                        q_other: "Si hay algún otro requisito que debamos tener en cuenta, indíquelo a continuación"
                     },
                     questionnaire_module: {
                         question: "Pulse el botón para descubrir qué módulos le convienen.",
@@ -727,7 +772,8 @@ i18n
                         lastname: "Apellido",
                         phone_number: "Número de teléfono",
                         email: "Correo electrónico",
-                        address: "Dirección"
+                        address: "Dirección",
+                        submit: "Enviar"
                     }
                 }
             },
@@ -737,13 +783,13 @@ i18n
                         hello: "Ciao Mondo!"
                     },
                     questionnaire_space: {
-                        q_dimensions: "Quali sono le dimensioni dello spazio abitativo?",
+                        q_dimensions: "Selezionate la forma della stanza e inserite le dimensioni",
                         rectangular: "Rettangolare",
                         length: "Lunghezza",
                         width: "Larghezza",
                         height: "Altezza",
                         other: "Altro",
-                        q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo.",
+                        q_aspects: "Aggiungi quali aspetti dovremmo considerare nel tuo spazio abitativo",
                         aspect: "Aspetto",
                         add_aspect: "Aggiungi aspetto"
                     },
@@ -754,7 +800,19 @@ i18n
                         walloutlet: "Presa di corrente a parete",
                         switch: "Interruttore",
                         sloping_Wall: "Muro inclinato",
+                        light: "Luce",
                         other: "Altro",
+                        q_all:{
+                            dimensions:"Dimensioni: ",
+                            position: "Posizione nella stanza: ",
+                            wall: "Selezionare la parete corretta",
+                            front: "anteriore",
+                            back: "posteriore",
+                            left: "sinistra",
+                            right: "destra",
+                            up:"dal basso verso l'alto",
+                            side:"dal lato sinistro"
+                        },
                         q_door: {
                             opening_door: "Come funziona l'impianto?",
                             inside_left: "All'interno della stanza, a sinistra",
@@ -774,7 +832,7 @@ i18n
                             living_room: "Soggiorno",
                             bedroom: "Camera da letto",
                         },
-                        q_function: "Quali sono le caratteristiche più importanti di cui hai bisogno per sfruttare al meglio il tuo spazio abitativo?",
+                        q_function: "Selezionate le funzioni necessarie per sfruttare al meglio il vostro spazio abitativo",
                         functions: {
                             bed: "Letto",
                             office_space: "Spazio ufficio",
@@ -797,7 +855,7 @@ i18n
                             partition_wall: "Muro divisorio",
                             in_the_middle_of_space: "In mezzo allo spazio",
                         },
-                        q_materials: "Quali materiali preferisci per la finitura dei tuoi mobili modulari?",
+                        q_materials: "Scegliete le finiture che preferite",
                         materials: {
                             white: "Bianco",
                             black: "Nero",
@@ -807,7 +865,7 @@ i18n
                             color: "Colore",
                             material: "Materiale"
                         },
-                        q_other: "Altre richieste o requisiti specifici da considerare?"
+                        q_other: "Se ci sono altri requisiti da tenere in considerazione, vi preghiamo di inserirli qui sotto"
                     },
                     questionnaire_module: {
                         question: "Premere il pulsante per scoprire quali moduli sono adatti a voi.",
@@ -865,7 +923,8 @@ i18n
                         lastname: "Cognome",
                         phone_number: "Numero di telefono",
                         email: "E-mail",
-                        address: "Indirizzo"
+                        address: "Indirizzo",
+                        submit: "Invia"
                     }
                 }
             }
