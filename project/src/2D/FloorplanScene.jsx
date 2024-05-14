@@ -183,7 +183,8 @@ export const FloorplanScene = () => {
           ref={drawingCanvasRef}
           className="canvas"
           orthographic
-          camera={{ position: [0, 0, 5], zoom: 100 }}
+          // camera={{ position: [0, 0, 5], zoom: 100 }}
+          camera={{ position: [0, 5, 0], zoom: 100, up: [0, 0, -1]}}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -193,7 +194,7 @@ export const FloorplanScene = () => {
           <axesHelper position={[0, 0, 1]} />
           <OrbitControls
             ref={controlsRef}
-            enableZoom={true}
+            enableZoom={true} 
             enablePan={true}
             enableRotate={false}
             mouseButtons={{
@@ -229,7 +230,7 @@ export const FloorplanScene = () => {
           <OrbitControls makeDefault enablePan={true} minDistance={5} maxDistance={50} />
           <Skybox path={skyboxPath} />
 
-          <axesHelper position={[0, 0, 0]} />
+          <axesHelper position={[0, 0, 0]} args={[5]} />
         </Canvas>
       )}
     </>
