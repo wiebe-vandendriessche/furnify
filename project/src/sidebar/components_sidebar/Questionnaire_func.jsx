@@ -110,12 +110,7 @@ export function Questionnaire_functional() {
                         </div>
                     </Form.Group>
                 </div>
-                <div className={"aspect"}>
-
-                </div>
         </div>
-
-
     )
 }
 
