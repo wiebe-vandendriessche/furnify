@@ -34,6 +34,7 @@ export function Questionnaire_module() {
     const { chosen_module, setChosenModule } = useModuleContext();
     const module = (event) => {
         let result = check(value, varia, get2D);
+        console.log(result);
         setErrors({
             softer: result.errors.softer,
             demands: result.errors.demands,
