@@ -69,7 +69,6 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 11/05/24,17:00,19:00,Extern,Fixen van opmerking meneer Sebrechts delay bij verkleinen kamer en roteren,,
 12/05/24,9:30,12:30,Extern,Zoeken oplossing collisiondetection met boundingbox tussen verschillende obstructions,190 en 156,niet werkend gekregen
 12/05/24,15:00,16:00,Extern,Zoeken oplossing collisiondetection met boundingbox tussen verschillende obstructions,190 en 156,niet werkend gekregen
-12/05/24,15:00,16:00,Extern,Zoeken oplossing collisiondetection met boundingbox tussen verschillende obstructions,190 en 156,niet werkend gekregen
 14/05/24,13:30,16:30,Contacturen,Fixen collisiondetection met button,190 en 156,
 14/05/24,18:00,19:30,Extern,Afwerken collisiondetection en kleine bugs fixen,190 en 156,
 14/05/24,20:00,21:00,Extern,Afwerken collisiondetection en kleine bugs fixen,190 en 156,
