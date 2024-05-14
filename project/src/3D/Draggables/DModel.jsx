@@ -5,6 +5,7 @@ import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
 import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
+import { useIntersectionContext } from '../../contexts/IntersectionContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
@@ -230,6 +231,15 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
+
+    
+    const { addDObstruction, removeDObstruction } = useIntersectionContext();
+
+    //sending mesh data to IntersectionContext when component mounts
+    const id = 'model';
+    useEffect(() => {
+        addDObstruction(group.current, id);
+    }, [addDObstruction, removeDObstruction, active]);
 
     return (
         <>

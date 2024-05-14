@@ -23,6 +23,8 @@ export const IntersectionProvider = ({ children }) => {
         if (mesh && !dObstructions.current[obstructionKey]) {
             dObstructions.current[obstructionKey] = mesh; // Storing mesh with its ID as the key
         }
+        console.log('dObstructions:');
+        console.log(dObstructions.current);
     };
 
     // Remove a component from the list of dObstructions when it unmounts/removed from contextprovider list
@@ -51,8 +53,14 @@ export const IntersectionProvider = ({ children }) => {
 
         // Create bounding boxes for the meshes
         const boundingBoxes = meshes.map(mesh => {
-            mesh.geometry.computeBoundingBox();
-            return mesh.geometry.boundingBox.clone().applyMatrix4(mesh.matrixWorld);
+            const box = new THREE.Box3();
+            if (mesh instanceof THREE.Group) {
+                mesh.children.forEach(child => box.expandByObject(child));
+            } else {
+                mesh.geometry.computeBoundingBox();
+                box.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);
+            }
+            return box;
         });
 
         // Check for intersections between each pair of bounding boxes
