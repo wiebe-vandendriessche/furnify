@@ -69,6 +69,7 @@ const Scene = () => {
                             ) : null
                         }
                     </Surface>
+
                     <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
                     <Skybox path={skyboxPath} />
 

@@ -2,7 +2,7 @@
 opklapbed;2211;400;1541;1741;1941;400;2190;4;true;false;false;false;false;false;false;false;false
 opklapbed_zetel;2211;400;1541;1741;1941;1225;2190;10;true;true;false;false;false;false;false;false;false
 bureau;2211;400;1685;1885;2085;400;1000;2;false;false;true;false;false;false;false;false;false
-kast_zij;2211;400;1685;1885;2085;400;400;2;false;false;false;  ;false;false;false;false;false
+kast_zij;2211;400;1685;1885;2085;400;400;2;false;false;false;true;false;false;false;false;false
 kast;2211;400;1685;1885;2085;400;400;2;false;false;false;false;true;false;false;false;false
 bureau_bedm;2211;800;1685;1885;2085;800;2750;6;false;false;true;false;false;true;false;false;false
 kast_bedm;2211;800;1685;1885;2085;800;2750;5,5;false;false;false;false;true;true;false;false;false

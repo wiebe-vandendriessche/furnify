@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { IconContext } from "react-icons"
 import { FaAnglesRight, FaAnglesLeft } from "react-icons/fa6"
 import Questionnaire_func from "./components_sidebar/Questionnaire_func.jsx";
@@ -11,12 +11,15 @@ import Questionnaire_specs from "./components_sidebar/Questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
-import { useContactContext } from "../contexts/ContactContext.jsx"
-import { useVariaContext } from "../contexts/VariaContext.jsx"
+import {useContactContext} from "../contexts/ContactContext.jsx"
+import {useVariaContext} from "../contexts/VariaContext.jsx"
+import{useRoomWallLightupContext} from "../contexts/RoomWallLightupContext.jsx"
+import {useModuleContext} from "../contexts/ModuleContext.jsx"
 import jsonp from "jsonp";
-import { Form } from "react-bootstrap";
+import {Form} from "react-bootstrap";
 import Q1 from "./components_sidebar/Q1.jsx";
-import { use2d } from "../contexts/2dContext.tsx";
+import axios from "axios";
+import {useParams} from "react-router-dom";
 import Questionnaire_module from "./components_sidebar/Questionnaire_module.jsx";
 
 
@@ -25,6 +28,7 @@ export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
+    const value = useConfiguratorContext();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -40,11 +44,163 @@ export function Sidebar() {
     const showNext = () => {
         return part == 5;
     }
-    const { contact } = useContactContext();
 
-    const { dimensions, functionalities, specs, obstacles } = useConfiguratorContext();
 
-    const { varia } = useVariaContext();
+    const { contact,setContact } = useContactContext();
+
+    const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
+        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath} = useConfiguratorContext();
+
+    const {varia,setVaria} = useVariaContext();
+
+    const {selectedWall,setSelectedWall} = useRoomWallLightupContext();
+
+    const {errors, setErrors, possible_modules, setPossileModules, chosen_module, setChosenModule} = useModuleContext();
+
+    const  superContext = {
+        contact: useContactContext().contact,
+        dimensions: useConfiguratorContext().dimensions,
+        functionalities: useConfiguratorContext().functionalities,
+        specs: useConfiguratorContext().specs,
+        obstacles: useConfiguratorContext().obstacles,
+        rectangular: useConfiguratorContext().rectangular,
+        skyboxPath: useConfiguratorContext().skyboxPath,
+        varia: useVariaContext().varia,
+        selectedWall: useRoomWallLightupContext().selectedWall,
+        errors: useModuleContext().errors,
+        possible_modules:useModuleContext().possible_modules,
+        chosen_module: useModuleContext().chosen_module
+    };
+
+    const updateContactFromResponse = (response) => {
+
+        const { firstname, lastname, email, phone_number, address } = response.contact;
+
+
+        setContact(prevContact => ({
+            ...prevContact,
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            phone_number: {
+                ...prevContact.phone_number,
+                number: phone_number.number,
+                country: phone_number.country
+            },
+            address: address
+        }));
+    };
+    const updateSelectedWallFromResponse = (response) => {
+        const selectedWallValue = response.selectedWall;
+
+        setSelectedWall(selectedWallValue);
+    };
+    const updateVariaFromResponse = (response) => {
+
+        const { requirements, mattress, room, size } = response.varia;
+
+
+        setVaria(prevVaria => ({
+            ...prevVaria,
+            requirements: requirements,
+            mattress: mattress,
+            room: room,
+            size: size
+        }));
+    };
+    const updateConfiguratorFromResponse = (response) =>{
+        const { length, width, height } = response.dimensions;
+
+        setDimensions({
+            length: length,
+            width: width,
+            height: height
+        });
+
+        const { bed, sofa, office_space, storage_space } = response.functionalities;
+
+        setFunctionalities({
+            bed: bed,
+            sofa: sofa,
+            office_space: office_space,
+            storage_space: storage_space
+        });
+
+        const { color, material, layout } = response.specs;
+
+        setSpecs({
+            color: color,
+            material: material,
+            layout: layout
+        });
+
+        const { door, window, other, walloutlet, switch: switchData, light} = response.obstacles;
+
+        setObstacles({
+            door: door,
+            window: window,
+            walloutlet: walloutlet,
+            switch: switchData,
+            other: other,
+            light: light
+        });
+
+        setSkyboxPath(response.skyboxPath);
+
+        setRectangular(response.rectangular);
+
+    }
+
+    const updateModuleFromResponse = (response) =>{
+        const { softer, demands, roomSize, points2D } = response.errors;
+
+        setErrors({
+            softer: softer,
+            demands: demands,
+            roomSize: roomSize,
+            points2D: points2D
+        });
+
+        setPossileModules(response.possible_modules);
+
+        const { name, height, width, depth, open, closed, saved, bed, sofa, desk, storage, width_options, components } = response.chosen_module;
+        setChosenModule({
+            name: name,
+            height: height,
+            width: width,
+            depth: depth,
+            open: open,
+            closed: closed,
+            saved: saved,
+            bed: bed,
+            sofa: sofa,
+            desk: desk,
+            storage: storage,
+            width_options: width_options,
+            components: components
+        });
+    }
+
+
+    const {email} = useParams();
+
+    if(email !== undefined){
+        useEffect(() => {
+            axios.get(`http://localhost:3000/${email}`)
+                .then(response => {
+                    console.log(response.data);
+                    updateContactFromResponse(response.data);
+                    updateSelectedWallFromResponse(response.data);
+                    updateVariaFromResponse(response.data);
+                    updateConfiguratorFromResponse(response.data);
+                    updateModuleFromResponse(response.data);
+
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error fetching data:', error);
+                });
+        }, [email]);}
 
 
     const showNextPart = () => {
@@ -55,7 +211,7 @@ export function Sidebar() {
                 return <Q1 stateId={stateId} setStateId={setStateId} />
             case 2:
                 return <Questionnaire_func />
-            case 3: 
+            case 3:
                 return <Questionnaire_module/>
             case 4:
                 return <Questionnaire_specs />
@@ -68,9 +224,7 @@ export function Sidebar() {
         }
     }
 
-
-
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         let obs = "_";
         Object.entries(obstacles).forEach(([type, items]) => {
@@ -106,25 +260,32 @@ export function Sidebar() {
             });
         });
 
-        let dim = ""
+        let dim=""
         Object.entries(dimensions).map(([key, value]) => (
-            dim += key + ":" + value + " "
+            dim+=key+":"+value+" "
         ));
 
         let func = "";
         Object.entries(functionalities).forEach(([key, value]) => {
             if (value) {
-                func += key + " ";
+                func += key+" ";
             }
         });
-        let color = specs.color=='#FFFFFF'?"white": "black";
-        const url = 'https://hotmail.us18.list-manage.com/subscribe/post-json?u=dbf86de75caa0bdaee7da1262&amp;id=18a2dee28f&amp;f_id=00ed11e1f0';
+
+        let color = specs.color;
+        let message;
+        const url = process.env.MC_URI;
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, { param: 'c' }, (_, data) => {
-            const { msg, result } = data
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, {param: 'c'}, (_, data) => {
+            const {msg, result} = data
+            console.log(result, msg);
+            message = msg;
             alert(msg);
         });
+        console.log(superContext);
+        await axios.post('http://localhost:3000/api/contact', superContext);
+
     };
 
 

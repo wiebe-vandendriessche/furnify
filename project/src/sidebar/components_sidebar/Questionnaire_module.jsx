@@ -40,7 +40,8 @@ export function Questionnaire_module() {
             roomSize: result.errors.roomSize,
             points2D: result.errors.points2D
         });
-        setPossileModules(result.possible)
+        setPossileModules(result.possible);
+        console.log(result.possible);
         if (result.possible.length == 0) {
             setChosenModule({
                 name: "", height: 0, width: 0, depth: 0, open: 0, closed: 0, saved: 0, bed: false,
@@ -62,7 +63,6 @@ export function Questionnaire_module() {
     return (
 
         <div className="m-2">
-            <Form>
                 <div className={"mb-3"}>
                     <FormGroup>
                         <div className={"mb-3"}>
@@ -133,7 +133,6 @@ export function Questionnaire_module() {
                         </div>
                     </FormGroup>
                 </div>
-            </Form >
         </div >
 
 

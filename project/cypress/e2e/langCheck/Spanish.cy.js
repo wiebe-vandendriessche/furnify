@@ -14,7 +14,7 @@ describe("Checking text in Spanish is correctly rendered", ()=>{
         });  });
 
     it("Sidebar space", ()=>{
-        let space={ q_dimensions: "¿Cuáles son las dimensiones del espacio habitable?",
+        let space={ q_dimensions: "Seleccione la forma de la habitación e introduzca las dimensiones",
                 rectangular: "Rectangular",
                 dimLength: "Longitud",
                 dimWidth: "Ancho",
@@ -64,7 +64,7 @@ describe("Checking text in Spanish is correctly rendered", ()=>{
 
     it("Sidebar functional", ()=>{
         let functional={
-            q_function: "¿Cuáles son las características más importantes que necesitas para aprovechar al máximo tu espacio habitable?",
+            q_function: "Seleccione las funciones necesarias para aprovechar al máximo su espacio vital",
             functions: {
                 bed: "Cama",
                 office_space: "Espacio de oficina",
@@ -83,7 +83,7 @@ describe("Checking text in Spanish is correctly rendered", ()=>{
 
     it("Sidebar specs", ()=>{
         let specs={
-            q_materials: "¿Qué materiales prefieres para terminar tus muebles modulares?",
+            q_materials: "Seleccione los acabados que prefiera",
             materials: {
                 white: "Blanco",
                 black: "Negro",
@@ -93,7 +93,7 @@ describe("Checking text in Spanish is correctly rendered", ()=>{
                 color: "Color",
                 material: "Material"
             },
-            q_other: "¿Otras peticiones o requisitos específicos a tener en cuenta?"
+            q_other: "Si hay algún otro requisito que debamos tener en cuenta, indíquelo a continuación"
         }
         checkSpecs(specs);
     });
