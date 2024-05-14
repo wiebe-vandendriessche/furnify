@@ -12,6 +12,9 @@ import { DLight } from './Draggables/DLight.jsx';
 import { CubeTextureLoader } from 'three';
 import { Loader } from '@react-three/drei';
 import { Skybox } from './Skybox.jsx';
+import { useIntersectionContext } from '../contexts/IntersectionContext.jsx';
+import { ErrorBox } from './other/ErrorBox.jsx';
+import * as THREE from 'three';
 
 const Scene = () => {
     const { dimensions } = useConfiguratorContext();
@@ -23,14 +26,16 @@ const Scene = () => {
 
     const { getOtherObstacles } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
+    const { getErrorBoxes } = useIntersectionContext();
 
     const obstacles = getOtherObstacles();
     const lights = getLights();
+    const errorBoxes = getErrorBoxes();
 
 
     return (
         <>
-            <Canvas shadows className="canvas" camera={{ position: [10, 6, 8] }}>
+            <Canvas linear={false} shadows className="canvas" camera={{ position: [10, 6, 8] }}>
                 <Suspense fallback={null}>
 
                     <ambientLight intensity={1} />
@@ -44,7 +49,7 @@ const Scene = () => {
                         {/* Render DObstruction for each obstacle */}
                         {obstacles.map((obstacle) => (
                             <DObstruction
-                                key={obstacle.id}
+                                obstructionKey={obstacle.id}
                                 position={[0, 0, 0]}
                                 dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
                                 maxX={width}
@@ -56,7 +61,7 @@ const Scene = () => {
                         ))}
                         {lights.map((light) => (
                             <DLight
-                                key={light.id}
+                                obstructionKey={light.id}
                                 position={[0, 0, 0]}
                                 dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
                                 maxX={width}
@@ -66,8 +71,12 @@ const Scene = () => {
                             // Pass any other necessary props to DObstruction
                             />
                         ))}
+                        {/* Render ErrorBox for each Box3 object */}
+                        {errorBoxes.map((box) => (
+                            <ErrorBox box={box} />
+                        ))}
                         <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
-                    
+
                     </Surface>
 
                     <OrbitControls makeDefault enablePan={false} minDistance={5} maxDistance={50} minPolarAngle={0} maxPolarAngle={Math.PI - Math.PI / 2} />
