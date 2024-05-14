@@ -8,6 +8,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import {useTranslation} from 'react-i18next'
 import {Col, FloatingLabel, FormGroup, Row, ToggleButton} from "react-bootstrap";
 import {useVariaContext} from "../../contexts/VariaContext.jsx";
+import { use2d } from "../../contexts/2dContext.tsx";
 
 
 export function Questionnaire_space() {
@@ -25,6 +26,11 @@ export function Questionnaire_space() {
     //Changes values of dimensions in context
     const changeDim = (event) => {
         setDimensions({...dimensions, [event.target.name]: event.target.value});
+    }
+
+    const changeDim2D = (event) => {
+        console.log("changing height: " + event.target.value);
+        setWallProperties({height: event.target.value, thickness: wallProperties.thickness});
     }
 
     const {varia, setVaria} = useVariaContext();
@@ -46,8 +52,6 @@ export function Questionnaire_space() {
         setSpecs({...specs, [event.target.name]: event.target.value})
     }
 
-
-
     //prevent user from typing negative values
     function handleKeyPress(event) {
         //prevent use of negative values
@@ -62,6 +66,7 @@ export function Questionnaire_space() {
         setRectangular(bool);
     }
 
+    const { wallProperties, setWallProperties } = use2d();
 
     return (
         <div className={"m-2"}>
@@ -142,6 +147,30 @@ export function Questionnaire_space() {
                                                         onKeyPress={handleKeyPress}/>
                                                 </FloatingLabel>
                                             </Col>
+                                        )
+                                    )}
+
+                                </Row>
+                            </Collapse>
+                            <Collapse in={!rectangular}>
+                                <Row>
+                                    {Object.entries(wallProperties).map(([key, value]) => (
+                                        key === 'height' ? (
+                                            <Col key={key}>
+                                                <FloatingLabel
+                                                    controlid={"rectangular" + key}
+                                                    label={t('questionnaire_space.' + key) + ' (m)'}
+                                                    className="mb-4"
+                                                    data-testid={"label-space-room-rectangular-" + key}
+                                                >
+                                                    <Form.Control
+                                                        data-testid={"input-space-room-rectangular-" + key}
+                                                        type="number" min={0} step={0.1} value={value}
+                                                        size="sm"
+                                                        name={key} onChange={changeDim2D}
+                                                        onKeyPress={handleKeyPress}/>
+                                                </FloatingLabel>
+                                            </Col>) : (<></>)
                                         )
                                     )}
 

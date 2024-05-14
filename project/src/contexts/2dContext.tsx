@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef, useContext } from "react";
+import React, { createContext, useState, useRef, useContext, useEffect } from "react";
 import { DrawablePoint } from "../2D/components/Point";
 import { DrawableLine } from "../2D/components/Line";
 import * as THREE from "three";
@@ -14,7 +14,6 @@ import {
   Vector3,
 } from "three";
 import { useThree } from "@react-three/fiber";
-import { off } from "process";
 
 const DrawingContext = createContext<any>(null);
 
@@ -57,7 +56,7 @@ export const DrawingProvider = ({ children }) => {
     setSceneObjects([...walls, floor]);
     // console.log(walls, floor);
   };
-
+  
   function determineOrientation(points) {
     let sum = 0;
     for (let i = 0; i < points.length; i++) {
@@ -67,6 +66,15 @@ export const DrawingProvider = ({ children }) => {
     }
     return sum > 0 ? 'counterclockwise' : 'clockwise';
   }
+  
+  // when height is changed redraw walls
+  useEffect(() => {
+    if (sceneObjects.length > 0) {
+      const { mesh: floor, offset } = createFloor(points);
+      const walls: Mesh[] = createWalls(points, offset);
+      setSceneObjects([...walls, floor]);
+    }
+  }, [wallProperties.height]);
 
   function createWalls(points: Vector3[], offset): Mesh[] {
     const walls: Mesh[] = [];
@@ -110,10 +118,6 @@ export const DrawingProvider = ({ children }) => {
 
       walls.push(wall);
     }
-
-    // walls.forEach((wall, index) => {
-    //   console.log(`Wall ${index}:`, wall);
-    // });
 
     return walls;
   }
@@ -218,6 +222,8 @@ export const DrawingProvider = ({ children }) => {
     sceneObjects,
     show3D,
     setShow3D,
+    wallProperties, 
+    setWallProperties
   };
 
   return (
