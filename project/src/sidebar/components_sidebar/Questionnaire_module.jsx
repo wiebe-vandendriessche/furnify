@@ -132,7 +132,7 @@ export function Questionnaire_module() {
                                 </div>
 
                                 <Button onClick={rotate} variant={"danger"} >{t('questionnaire_module.module_info.rotate')}</Button>
-                                <Button onClick={checkIntersections} variant={"danger"} >Check intersections</Button>
+                                <Button onClick={checkIntersections} variant={"danger"} >{t('questionnaire_module.module_info.intersection')}</Button>
                             </div>
                         </div>
                     </FormGroup>

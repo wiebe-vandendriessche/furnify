@@ -44,16 +44,16 @@ i18n
                         sloping_Wall: "Sloping wall",
                         light: "Light",
                         other: "Other",
-                        q_all:{
-                            dimensions:"Dimensions: ",
+                        q_all: {
+                            dimensions: "Dimensions: ",
                             position: "Position in the room: ",
                             wall: "Select the correct wall",
                             front: "front",
                             back: "back",
                             left: "left",
                             right: "right",
-                            up:"from the ground up",
-                            side:"from the left side"
+                            up: "from the ground up",
+                            side: "from the left side"
                         },
                         q_door: {
                             opening_door: "How does the door open?",
@@ -66,8 +66,8 @@ i18n
                             yes: "yes",
                             no: "no",
                         },
-                      
-                        
+
+
                     },
                     questionnaire_func: {
                         q_space: "Which living space do you want to optimize?",
@@ -145,19 +145,20 @@ i18n
                             closed: "Closed: ",
                             open: "Open: ",
                             components: "Components: ",
-                            saved: "Saved space: "
+                            saved: "Saved space: ",
+                            intersection: "Check overlap"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "stationary foldable bed",
-                            zetel:"stationary sofa",
+                            zetel: "stationary sofa",
                             bureau: "stationary desk",
-                            kast_met_zijschappen:"stationary closet with side spaces",
-                            kast:"stationary closet",
-                            bed_bewegend:"movable bed",
-                            kast_bewegend:"movable closet",
-                            bureau_bewegend:"movable desk",
-                            tweede_kast_bewegend:"second movable closet"
+                            kast_met_zijschappen: "stationary closet with side spaces",
+                            kast: "stationary closet",
+                            bed_bewegend: "movable bed",
+                            kast_bewegend: "movable closet",
+                            bureau_bewegend: "movable desk",
+                            tweede_kast_bewegend: "second movable closet"
                         }
 
                     },
@@ -169,6 +170,13 @@ i18n
                         email: "E-mail",
                         address: "Address",
                         submit: "Submit"
+                    },
+                    alert: {
+                        no: "No overlap detected",
+                        yes: "Overlap detected",
+                        adjust: "Please adjust the configuration to avoid overlap.",
+                        proceed: "You can proceed with the configuration",
+                        again: "Please check again when you make changes to the previous configuration."
                     }
                 }
             },
@@ -198,16 +206,16 @@ i18n
                         sloping_Wall: "Schuine wand",
                         light: "Licht",
                         other: "Andere",
-                        q_all:{
-                            dimensions:"Afmetingen: ",
+                        q_all: {
+                            dimensions: "Afmetingen: ",
                             position: "Positie in de kamer: ",
                             wall: "Selecteer de juiste muur",
                             front: "voor",
                             back: "achter",
                             left: "links",
                             right: "rechts",
-                            up:"vanaf de grond",
-                            side:"vanaf de linkerkant"
+                            up: "vanaf de grond",
+                            side: "vanaf de linkerkant"
                         },
                         q_door: {
                             opening_door: "Hoe opent de deur?",
@@ -297,19 +305,20 @@ i18n
                             closed: "Gesloten: ",
                             open: "Open: ",
                             components: "Onderdelen: ",
-                            saved: "Bespaarde ruimte: "
+                            saved: "Bespaarde ruimte: ",
+                            intersection: "Controleer overlap"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "stationair opklapbed",
-                            zetel:"stationaire zetel",
+                            zetel: "stationaire zetel",
                             bureau: "vaste bureau",
-                            kast_met_zijschappen:"vaste kast met zijschappen",
-                            kast:"vaste kast",    
-                            bed_bewegend:"bewegend bed",
-                            kast_bewegend:"bewegend kast",
-                            bureau_bewegend:"bewegend bureau",
-                            tweede_kast_bewegend:"tweede bewegend kast"
+                            kast_met_zijschappen: "vaste kast met zijschappen",
+                            kast: "vaste kast",
+                            bed_bewegend: "bewegend bed",
+                            kast_bewegend: "bewegend kast",
+                            bureau_bewegend: "bewegend bureau",
+                            tweede_kast_bewegend: "tweede bewegend kast"
                         }
 
                     },
@@ -321,6 +330,13 @@ i18n
                         email: "E-mail",
                         address: "Adres",
                         submit: "Verzend"
+                    },
+                    alert: {
+                        no: "Geen overlap gedetecteerd",
+                        yes: "Overlap gedetecteerd",
+                        adjust: "Pas de configuratie aan om overlap te voorkomen.",
+                        proceed: "U kunt doorgaan met de configuratie",
+                        again: "Controleer dit opnieuw wanneer u wijzigingen aanbrengt in de vorige configuratie."
                     }
                 }
             },
@@ -349,16 +365,16 @@ i18n
                         sloping_Wall: "Mur en pente",
                         light: "Lumière",
                         other: "Autre",
-                        q_all:{
-                            dimensions:"Dimensions: ",
+                        q_all: {
+                            dimensions: "Dimensions: ",
                             position: "Position dans la pièce: ",
                             wall: "Choisir le mur correct",
                             front: "avant",
                             back: "arrière",
                             left: "gauche",
                             right: "droite",
-                            up:"du sol vers le haut",
-                            side:"du côté gauche"
+                            up: "du sol vers le haut",
+                            side: "du côté gauche"
                         },
                         q_door: {
                             opening_door: "Comment s'ouvre la porte ?",
@@ -448,19 +464,20 @@ i18n
                             closed: "Fermé: ",
                             open: "Ouvert: ",
                             components: "Composants: ",
-                            saved: "Espace économisé : "
+                            saved: "Espace économisé : ",
+                            intersection: "Vérifier le chevauchement"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "lit fixe pliable",
-                            zetel:"canapé fixe",
+                            zetel: "canapé fixe",
                             bureau: "bureau fixe",
-                            kast_met_zijschappen:"armoire fixe avec espaces latéraux",
-                            kast:"armoire fixe",    
-                            bed_bewegend:"lit mobile",
-                            kast_bewegend:"armoire mobile",
-                            bureau_bewegend:"bureau mobile",
-                            tweede_kast_bewegend:"deuxième placard mobile"
+                            kast_met_zijschappen: "armoire fixe avec espaces latéraux",
+                            kast: "armoire fixe",
+                            bed_bewegend: "lit mobile",
+                            kast_bewegend: "armoire mobile",
+                            bureau_bewegend: "bureau mobile",
+                            tweede_kast_bewegend: "deuxième placard mobile"
                         }
 
                     },
@@ -472,6 +489,13 @@ i18n
                         email: "E-mail",
                         address: "Adresse",
                         submit: "Soumettre"
+                    },
+                    alert: {
+                        no: "Aucun chevauchement détecté",
+                        yes: "Chevauchement détecté",
+                        adjust: "Veuillez ajuster la configuration pour éviter les chevauchements.",
+                        proceed: "Vous pouvez procéder à la configuration",
+                        again: "Veuillez vérifier à nouveau si vous apportez des modifications à la configuration précédente."
                     }
                 }
             },
@@ -500,16 +524,16 @@ i18n
                         sloping_Wall: "Schräge Wand",
                         light: "Licht",
                         other: "Andere",
-                        q_all:{
-                            dimensions:"Abmessungen: ",
+                        q_all: {
+                            dimensions: "Abmessungen: ",
                             position: "Position im Raum: ",
                             wall: "Wählen Sie die richtige Wand",
                             front: "Vorderseite",
                             back: "hinten",
                             left: "links",
                             right: "rechts",
-                            up:"von unten nach oben",
-                            side:"von der linken Seite"
+                            up: "von unten nach oben",
+                            side: "von der linken Seite"
                         },
                         q_door: {
                             opening_door: "Wie wird die Tür geöffnet?",
@@ -599,19 +623,20 @@ i18n
                             closed: "Geschlossen: ",
                             open: "Offen: ",
                             components: "Bestandteile: ",
-                            saved: "Platzsparend: "
+                            saved: "Platzsparend: ",
+                            intersection: "Überlappung prüfen"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "stationäres klappbares Bett",
-                            zetel:"stationäres Sofa",
+                            zetel: "stationäres Sofa",
                             bureau: "stationärer Schreibtisch",
-                            kast_met_zijschappen:"stationärer Kleiderschrank mit Seitenräumen",
-                            kast:"stationärer Schrank",    
-                            bed_bewegend:"bewegliches Bett",
-                            kast_bewegend:"beweglicher Schrank",
-                            bureau_bewegend:"beweglicher Schreibtisch",
-                            tweede_kast_bewegend:"zweiter beweglicher Schrank"
+                            kast_met_zijschappen: "stationärer Kleiderschrank mit Seitenräumen",
+                            kast: "stationärer Schrank",
+                            bed_bewegend: "bewegliches Bett",
+                            kast_bewegend: "beweglicher Schrank",
+                            bureau_bewegend: "beweglicher Schreibtisch",
+                            tweede_kast_bewegend: "zweiter beweglicher Schrank"
                         }
 
                     },
@@ -623,6 +648,13 @@ i18n
                         email: "E-Mail",
                         address: "Adresse",
                         submit: "Einreichen"
+                    },
+                    alert: {
+                        no: "Keine Überschneidung festgestellt",
+                        yes: "Überschneidung erkannt",
+                        adjust: "Bitte passen Sie die Konfiguration an, um Überschneidungen zu vermeiden.",
+                        proceed: "Sie können mit der Konfiguration fortfahren",
+                        again: "Bitte überprüfen Sie dies erneut, wenn Sie Änderungen an der vorherigen Konfiguration vornehmen."
                     }
                 }
             },
@@ -651,16 +683,16 @@ i18n
                         sloping_Wall: "Pared inclinada",
                         light: "Luz",
                         other: "Otro",
-                        q_all:{
-                            dimensions:"Dimensiones: ",
+                        q_all: {
+                            dimensions: "Dimensiones: ",
                             position: "Posición en la habitación: ",
                             wall: "Seleccione la pared correcta",
                             front: "delante",
                             back: "trasera",
                             left: "izquierda",
                             right: "derecha",
-                            up:"desde el suelo hacia arriba",
-                            side:"desde el lado izquierdo"
+                            up: "desde el suelo hacia arriba",
+                            side: "desde el lado izquierdo"
                         },
                         q_door: {
                             opening_door: "cómo abrir la puerta",
@@ -750,19 +782,20 @@ i18n
                             closed: "Cerrado: ",
                             open: "Abierto: ",
                             components: "Componentes: ",
-                            saved: "Espacio libre: "
+                            saved: "Espacio libre: ",
+                            intersection: "Comprobar solapamiento"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "cama plegable estacionaria",
-                            zetel:"sofá fijo",
+                            zetel: "sofá fijo",
                             bureau: "escritorio fijo",
-                            kast_met_zijschappen:"armario fijo con espacios laterales",
-                            kast:"armario fijo",    
-                            bed_bewegend:"cama móvil",
-                            kast_bewegend:"armario móvil",
-                            bureau_bewegend:"escritorio móvil",
-                            tweede_kast_bewegend:"segundo armario móvil"
+                            kast_met_zijschappen: "armario fijo con espacios laterales",
+                            kast: "armario fijo",
+                            bed_bewegend: "cama móvil",
+                            kast_bewegend: "armario móvil",
+                            bureau_bewegend: "escritorio móvil",
+                            tweede_kast_bewegend: "segundo armario móvil"
                         }
 
                     },
@@ -774,6 +807,13 @@ i18n
                         email: "Correo electrónico",
                         address: "Dirección",
                         submit: "Enviar"
+                    },
+                    alert: {
+                        no: "No se detectan solapamientos",
+                        yes: "Solapamiento detectado",
+                        adjust: "Por favor, ajuste la configuración para evitar solapamientos.",
+                        proceed: "Puede proceder a la configuración",
+                        again: "Vuelva a comprobarlo cuando realice cambios en la configuración anterior."
                     }
                 }
             },
@@ -802,16 +842,16 @@ i18n
                         sloping_Wall: "Muro inclinato",
                         light: "Luce",
                         other: "Altro",
-                        q_all:{
-                            dimensions:"Dimensioni: ",
+                        q_all: {
+                            dimensions: "Dimensioni: ",
                             position: "Posizione nella stanza: ",
                             wall: "Selezionare la parete corretta",
                             front: "anteriore",
                             back: "posteriore",
                             left: "sinistra",
                             right: "destra",
-                            up:"dal basso verso l'alto",
-                            side:"dal lato sinistro"
+                            up: "dal basso verso l'alto",
+                            side: "dal lato sinistro"
                         },
                         q_door: {
                             opening_door: "Come funziona l'impianto?",
@@ -901,19 +941,20 @@ i18n
                             closed: "Chiuso: ",
                             open: "Aperto: ",
                             components: "Componenti: ",
-                            saved: "Spazio risparmiato: "
+                            saved: "Spazio risparmiato: ",
+                            intersection: "Controllare la sovrapposizione"
 
                         },
-                        components:{
+                        components: {
                             opkladbed: "letto fisso pieghevole",
-                            zetel:"divano fisso",
+                            zetel: "divano fisso",
                             bureau: "scrivania fissa",
-                            kast_met_zijschappen:"armadio fisso con spazi laterali",
-                            kast:"armadio fisso",    
-                            bed_bewegend:"letto mobile",
-                            kast_bewegend:"armadio mobile",
-                            bureau_bewegend:"scrivania mobile",
-                            tweede_kast_bewegend:"secondo armadio mobile"
+                            kast_met_zijschappen: "armadio fisso con spazi laterali",
+                            kast: "armadio fisso",
+                            bed_bewegend: "letto mobile",
+                            kast_bewegend: "armadio mobile",
+                            bureau_bewegend: "scrivania mobile",
+                            tweede_kast_bewegend: "secondo armadio mobile"
                         }
 
                     },
@@ -925,6 +966,13 @@ i18n
                         email: "E-mail",
                         address: "Indirizzo",
                         submit: "Invia"
+                    },
+                    alert: {
+                        no: "Nessuna sovrapposizione rilevata",
+                        yes: "Sovrapposizione rilevata",
+                        adjust: "Regolare la configurazione per evitare sovrapposizioni.",
+                        proceed: "È possibile procedere con la configurazione",
+                        again: "Ricontrollare quando si apportano modifiche alla configurazione precedente."
                     }
                 }
             }
