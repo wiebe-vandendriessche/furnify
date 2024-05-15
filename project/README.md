@@ -75,6 +75,14 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 npm run dev
 ```
 
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#developer-server-opstarten)
+
+## ➤ MongoDB server opstarten
+
+**start MongoDB server:**
+```bash
+npm run serve
+```
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#tests-uitvoeren)
 
@@ -98,14 +106,6 @@ npm run dev
 npm run test
 ```
 
-[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#developer-server-opstarten)
-
-## ➤ Developer server opstarten
-
-**start MongoDB server:**
-```bash
-npm run serve
-```
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#productie-omgeving-deployen)
 
 ## ➤ Productie-omgeving deployen
