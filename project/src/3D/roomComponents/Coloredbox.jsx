@@ -7,14 +7,14 @@ export const ColoredBox = ({ width, height, depth, position, color, visible, tex
     if (textures && addColorToTexture) {
         return (
             <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible} castShadow receiveShadow >
-                <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding} color={color} />
+                <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding}  toneMapped={true} color={color} />
             </Box>
         );
 
     } else if (textures) {
         return (
             <Box args={[width, height, depth, 30, 30, 30]} position={position} visible={visible} castShadow receiveShadow >
-                <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding} />
+                <meshStandardMaterial {...textures} normalMap-encoding={LinearEncoding}  toneMapped={true}/>
             </Box>
         );
     }
