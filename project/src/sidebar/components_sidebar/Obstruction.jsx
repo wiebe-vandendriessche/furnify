@@ -50,7 +50,9 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                 {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
             </Button>
             <h5 className={"obstacle"} id={"button" + obstId}
-                >{t("obstructions." + type)}</h5>
+                data-testid={"btn-obstacle-name-" + type}
+
+            >{t("obstructions." + type)}</h5>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
                 onClick={(e) => deleteObst(e)}>

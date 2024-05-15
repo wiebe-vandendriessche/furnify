@@ -22,11 +22,13 @@ export function checkObstacles(obst){
     cy.get('[data-testid="btn-space-aspect-window"]').should('include.text', obst.obstructions.window).click();
     cy.get('[data-testid="btn-space-aspect-door"]').should('include.text', obst.obstructions.door).click();
     cy.get('[data-testid="btn-space-aspect-other"]').should('include.text', obst.obstructions.other);
-    cy.get('[data-testid="btn-obstacle-expand-window"]').should('include.text', obst.obstructions.window).click();
+    cy.get('[data-testid="btn-obstacle-name-window"]').should('include.text', obst.obstructions.window)
+    cy.get('[data-testid="btn-obstacle-expand-window"]').click();
     cy.get('[data-testid="question-obstacle-window-opening"]').should('include.text', obst.obstructions.q_window.opening_window);
     cy.get('[data-testid="btn-obstacle-delete-window"]').click();
     cy.get('[data-testid="btn-obstacle-expand-window"]').should('not.exist');
-    cy.get('[data-testid="btn-obstacle-expand-door"]').should('include.text', obst.obstructions.door).click();
+    cy.get('[data-testid="btn-obstacle-expand-door"]').click();
+    cy.get('[data-testid="btn-obstacle-name-door"]').should('include.text', obst.obstructions.door).click();
     cy.get('[data-testid="question-obstacle-door-opening"]').should('include.text', obst.obstructions.q_door.opening_door);
 
 }
