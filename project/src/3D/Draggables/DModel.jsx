@@ -210,6 +210,9 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             easing.dampC(object.material.color, active ? 'orange' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
+    console.log("AFMETINGEN");
+    console.log(chosen_module);
+    console.log(group);
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
