@@ -78,7 +78,9 @@ export class Module {
     public get components(): string[] {
         return this._components
     }
-
+    public get width_options():{ key: string; value: number }[]{
+        return this._width_options;
+    }
     /**
     * set the correct width
     * @param {string} size

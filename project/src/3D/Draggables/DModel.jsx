@@ -256,13 +256,12 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     useEffect(() => {
         addDObstruction(group.current, id);
     }, [addDObstruction, removeDObstruction, active]);
-
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
                 { nodes[chosen_module.name].children.map(function(object, i){
 
-                    return <mesh key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                    return <mesh scale={[chosen_module.width/chosen_module.width_options[0].value, 1, 1]} key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
 
