@@ -28,6 +28,7 @@ export function Questionnaire_module() {
     const { checkIntersections } = useIntersectionContext();
 
     const get2D = use2d();
+    const { wallProperties, setWallProperties }  = use2d();
     const value = useConfiguratorContext();
 
 
@@ -35,7 +36,7 @@ export function Questionnaire_module() {
     const { possible_modules, setPossileModules } = useModuleContext();
     const { chosen_module, setChosenModule } = useModuleContext();
     const module = (event) => {
-        let result = check(value, varia, get2D);
+        let result = check(value, varia, get2D, wallProperties);
         setErrors({
             softer: result.errors.softer,
             demands: result.errors.demands,
