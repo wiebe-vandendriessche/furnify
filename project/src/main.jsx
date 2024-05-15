@@ -13,7 +13,6 @@ import {BrowserRouter} from "react-router-dom";
 import Routing from "./Routing.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
       <BrowserRouter>
         <VariaProvider>
           <ContactProvider>
@@ -31,5 +30,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           </ContactProvider>
         </VariaProvider>
       </BrowserRouter>
-    </React.StrictMode>
 );
