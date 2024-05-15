@@ -274,18 +274,20 @@ export function Sidebar() {
 
         let color = specs.color;
         let message;
-        const url = process.env.MC_URI;
+        let getURI = window.location.href+contact.email;
+        console.log(getURI);
+        const url = import.meta.env.VITE_MC_URI;
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}`, {param: 'c'}, (_, data) => {
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
             console.log(result, msg);
+            console.log(getURI);
             message = msg;
             alert(msg);
         });
         console.log(superContext);
         await axios.post('http://localhost:3000/api/contact', superContext);
-
     };
 
 

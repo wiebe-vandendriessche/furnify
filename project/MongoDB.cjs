@@ -6,8 +6,7 @@ const cors = require('cors');
 const Super = require('./src/model/SuperModel.cjs');
 app.use(express.json())
 app.use(cors());
-require('dotenv').config({path: './config.env'});
-console.log(process.env);
+require('dotenv').config({path: './.env'});
 app.get('/:email', async (req, res) => {
     try {
         const {email} = req.params;

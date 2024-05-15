@@ -128,19 +128,20 @@ export class Module {
     */
     public correct_size(height: number, length: number, width: number) {
         if(this._components.length >= 2)
-            return ((this._height < height) && (this._width < width) && ((this._open + this._marge)< length)) || ((this._height < height) && (this._width < length) && ((this._open + this._marge) < width))
-        return ((this._height < height) && ((this._width + this._marge)< width) && (this._open < length)) || ((this._height < height) && ((this._width + this._marge) < length) && (this._open < width));
+            return (this._height < height && ((this._width < width && (this._open + this._marge)< length) ||(this._width < length && (this._open + this._marge) < width)))
+        return (this._height < height) && (((this._width + this._marge)< width && this._open < length) || ((this._width + this._marge) < length && this._open < width));
     }
 
     /**
     * Sees if the module would fit in the room if room is other
     * @param {number} side meters
+    * @param {number} height meters
     * @return {boolean} possible fit
     */
-    public correct_side(side: number) {
+    public correct_side(side: number,height: number) {
         if(this._components.length >= 2)
-            return (((this._open + this._marge) < side)||(this._width < side))
-        return ((this._open < side)||((this._width + this._marge) < side))
+            return ((this._height < height ) && (((this._open + this._marge) < side)||(this._width < side)))
+        return ((this._height < height )&& ((this._open < side)||((this._width + this._marge) < side)))
     }
 
 

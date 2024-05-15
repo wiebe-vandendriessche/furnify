@@ -8,6 +8,7 @@ import { ToggleButton, Collapse, ButtonGroup, Form, FloatingLabel, Button, FormG
 import { check } from "../../algorithm/module_choice.ts";
 import { use2d } from "../../contexts/2dContext.tsx"
 import { useModuleContext } from "../../contexts/ModuleContext.jsx"
+import { useIntersectionContext } from "../../contexts/IntersectionContext.jsx";
 
 
 export function Questionnaire_module() {
@@ -24,8 +25,10 @@ export function Questionnaire_module() {
 
 
     const { rotate } = useConfiguratorContext();
+    const { checkIntersections } = useIntersectionContext();
 
     const get2D = use2d();
+    const { wallProperties, setWallProperties }  = use2d();
     const value = useConfiguratorContext();
 
 
@@ -33,8 +36,7 @@ export function Questionnaire_module() {
     const { possible_modules, setPossileModules } = useModuleContext();
     const { chosen_module, setChosenModule } = useModuleContext();
     const module = (event) => {
-        let result = check(value, varia, get2D);
-        console.log(result);
+        let result = check(value, varia, get2D, wallProperties);
         setErrors({
             softer: result.errors.softer,
             demands: result.errors.demands,
@@ -129,7 +131,8 @@ export function Questionnaire_module() {
                                     <span key="saved_module_unit" > m²</span>
                                 </div>
 
-                                <ToggleButton onClick={rotate} variant={"danger"} >{t('questionnaire_module.module_info.rotate')}</ToggleButton>
+                                <Button onClick={rotate} variant={"danger"} >{t('questionnaire_module.module_info.rotate')}</Button>
+                                <Button onClick={checkIntersections} variant={"danger"} >{t('questionnaire_module.module_info.intersection')}</Button>
                             </div>
                         </div>
                     </FormGroup>

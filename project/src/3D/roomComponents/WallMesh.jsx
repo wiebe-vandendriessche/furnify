@@ -30,9 +30,12 @@ export const WallMesh = ({ width, height, depth, position, windows, doors, wallo
     const resultMesh = CSG.toMesh(resultCSG2, wallMesh.matrix);
     resultMesh.material = new THREE.MeshStandardMaterial({ ...wallTexture });
 
+    resultMesh.material.color = new THREE.Color('#b5b5b5');
+
     useFrame((state, delta) => {
-        easing.dampC(resultMesh.material.color, giveColor ? 'lightblue' : 'white', 0.1, delta);
+        easing.dampC(resultMesh.material.color, giveColor ? 'lightblue' : '#b5b5b5', 0.1, delta);
     });
+
 
     return <primitive object={resultMesh} position={position} />;
 };

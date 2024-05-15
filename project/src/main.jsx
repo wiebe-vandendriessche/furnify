@@ -7,25 +7,27 @@ import {ContactProvider} from "./contexts/ContactContext.jsx";
 import {RoomWallLightupProvider} from './contexts/RoomWallLightupContext.jsx';
 import {DrawingProvider} from "./contexts/2dContext.tsx";
 import "./i18n.ts";
+import { ModuleProvider } from "./contexts/ModuleContext.jsx";
+import { IntersectionProvider } from "./contexts/IntersectionContext.jsx";
 import {BrowserRouter} from "react-router-dom";
 import Routing from "./Routing.jsx";
-import {ModuleProvider} from "./contexts/ModuleContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-        <BrowserRouter>
-            <VariaProvider>
-                <ContactProvider>
-                    <ConfiguratorProvider>
-                        <RoomWallLightupProvider>
-                            <DrawingProvider>
-                                <ModuleProvider>
-                                    <Routing/>
-                                </ModuleProvider>
-                            </DrawingProvider>
-                        </RoomWallLightupProvider>
-                    </ConfiguratorProvider>
-                </ContactProvider>
-            </VariaProvider>
-        </BrowserRouter>
-
+      <BrowserRouter>
+        <VariaProvider>
+          <ContactProvider>
+            <ConfiguratorProvider>
+              <IntersectionProvider>
+                <RoomWallLightupProvider>
+                  <DrawingProvider>
+                    <ModuleProvider>
+                      <Routing/>
+                    </ModuleProvider>
+                  </DrawingProvider>
+                </RoomWallLightupProvider>
+              </IntersectionProvider>
+            </ConfiguratorProvider>
+          </ContactProvider>
+        </VariaProvider>
+      </BrowserRouter>
 );

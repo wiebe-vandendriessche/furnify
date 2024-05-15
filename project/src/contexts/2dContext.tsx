@@ -14,7 +14,7 @@ import {
   Vector3,
 } from "three";
 import { useThree } from "@react-three/fiber";
-import { off } from "process";
+
 
 const DrawingContext = createContext<any>(null);
 
@@ -213,6 +213,8 @@ export const DrawingProvider = ({ children }) => {
     sceneObjects,
     show3D,
     setShow3D,
+    wallProperties,
+    setWallProperties
   };
 
   return (

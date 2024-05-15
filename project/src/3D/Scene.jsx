@@ -12,6 +12,8 @@ import { DLight } from './Draggables/DLight.jsx';
 import { CubeTextureLoader } from 'three';
 import { Loader } from '@react-three/drei';
 import { Skybox } from './Skybox.jsx';
+import { useIntersectionContext } from '../contexts/IntersectionContext.jsx';
+import { ErrorBox } from './other/ErrorBox.jsx';
 import {useModuleContext} from "../contexts/ModuleContext.jsx";
 
 const Scene = () => {
@@ -23,17 +25,21 @@ const Scene = () => {
     let height = dimensions.height;
     const { getOtherObstacles } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
+    const { getErrorBoxes } = useIntersectionContext();
 
     const obstacles = getOtherObstacles();
     const lights = getLights();
+    const errorBoxes = getErrorBoxes();
 
     return (
         <>
-            <Canvas shadows className="canvas" camera={{ position: [10, 6, 8] }}>
+            <Canvas linear={false} shadows className="canvas" camera={{ position: [10, 6, 8] }}>
                 <Suspense fallback={null}>
 
                     <ambientLight intensity={1} />
-                    <directionalLight castShadow position={[30, 50, 30]} />
+                    <directionalLight castShadow position={[60, 90, 60]} shadow-mapSize={[1024, 1024]}>
+                        <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+                    </directionalLight>
 
                     <Room width={width} depth={depth} height={height} wallThickness={0.3} floorThickness={0.3} />
 
@@ -41,7 +47,7 @@ const Scene = () => {
                         {/* Render DObstruction for each obstacle */}
                         {obstacles.map((obstacle) => (
                             <DObstruction
-                                key={obstacle.id}
+                                obstructionKey={obstacle.id}
                                 position={[0, 0, 0]}
                                 dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
                                 maxX={width}
@@ -53,7 +59,7 @@ const Scene = () => {
                         ))}
                         {lights.map((light) => (
                             <DLight
-                                key={light.id}
+                                obstructionKey={light.id}
                                 position={[0, 0, 0]}
                                 dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
                                 maxX={width}
@@ -63,6 +69,12 @@ const Scene = () => {
                             // Pass any other necessary props to DObstruction
                             />
                         ))}
+                        {/* Render ErrorBox for each Box3 object */}
+                        {errorBoxes.map((box) => (
+                            <ErrorBox box={box} />
+                        ))}
+                        <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
+
                         {
                             chosen_module.name!= "" ? (
                                 <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
