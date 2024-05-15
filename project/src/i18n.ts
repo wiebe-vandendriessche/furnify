@@ -180,6 +180,15 @@ i18n
                         adjust: "Please adjust the configuration to avoid overlap.",
                         proceed: "You can proceed with the configuration",
                         again: "Please check again when you make changes to the previous configuration."
+                    },
+                    privacy: {
+                        intro:"The information you fill in is collected and processed by us through various services. See below for more information.",
+                        pol:"The information you fill in the form and the position of the module in the 3D space are stored in a MongoDB database. The rest of Furnify's privacy policy can be found  ",
+                        here: "here",
+                        mailchimp:"You can unsubscribe from our mailchimp campaign at any time by sending a mail to info@furnifyhome.eu.",
+                        disclaimer1: "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. ",
+                        learn:"Learn more",
+                        disclaimer2: " about Mailchimp's privacy practices."
                     }
                 }
             },

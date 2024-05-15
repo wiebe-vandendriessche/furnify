@@ -7,8 +7,17 @@ import Modal from 'react-bootstrap/Modal';
 import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import { get_modules } from './algorithm/module_choice'
+import { useTranslation } from 'react-i18next'
+
+
 
 function PrivacyPolicy(props) {
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        const lng = navigator.language;
+        i18n.changeLanguage(lng);
+    }, [])
     return (
         <Modal
             {...props}
@@ -22,17 +31,20 @@ function PrivacyPolicy(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <div>
+                    <p>
+                    {t('privacy.intro')}
+                    </p>
+                </div>
                 <h4>Furnify</h4>
-                <div><a href={"https://www.furnifyhome.eu/pages/privacy"}>
-                    learn more
-                </a></div>
+                <div><p>{t('privacy.pol')}
+                    <a href={"https://www.furnifyhome.eu/pages/privacy"}>
+                    {t('privacy.here')}</a></p>
+                </div>
                 <h4>Mailchimp</h4>
-                <div><p>You can unsubscribe at any time by clicking the link in the footer of our emails. For
-                    information
-                    about our privacy practices, please visit our website.</p></div>
-                <div class="content__gdprLegal"><p>We use Mailchimp as our marketing platform. By clicking below to
-                    subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a
-                        href="https://mailchimp.com/legal/terms">Learn more</a> about Mailchimp's privacy practices.</p>
+                <div><p>{t('privacy.mailchimp')}</p></div>
+                <div className="content__gdprLegal"><p>{t('privacy.disclaimer1')}<a
+                        href="https://mailchimp.com/legal/terms">{t('privacy.learn')}</a> {t('privacy.disclaimer2')}</p>
                 </div>
             </Modal.Body>
             <Modal.Footer>
