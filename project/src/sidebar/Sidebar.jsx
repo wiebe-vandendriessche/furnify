@@ -74,7 +74,7 @@ export function Sidebar() {
 
     const updateContactFromResponse = (response) => {
 
-        const { firstname, lastname, email, phone_number, address } = response.contact;
+        const { firstname, lastname, email, phone_number, address, country, city, postcode } = response.contact;
 
 
         setContact(prevContact => ({
@@ -87,7 +87,10 @@ export function Sidebar() {
                 number: phone_number.number,
                 country: phone_number.country
             },
-            address: address
+            address: address,
+            country: country,
+            city: city,
+            postcode: postcode,
         }));
     };
     const updateSelectedWallFromResponse = (response) => {
