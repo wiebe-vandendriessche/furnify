@@ -10,8 +10,8 @@ export const IntersectionProvider = ({ children }) => {
     const dObstructions = useRef({});
     const [errorBoxes, setErrorBoxes] = useState([]);
 
-    const { getOtherObstacles } = useConfiguratorContext();
-    const obstacles = getOtherObstacles();
+    const { getLightsAndOtherObstacles } = useConfiguratorContext();
+    const obstacles = getLightsAndOtherObstacles();
 
     useEffect(() => {
         removeDObstruction();

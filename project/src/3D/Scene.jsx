@@ -32,6 +32,8 @@ const Scene = () => {
     const lights = getLights();
     const errorBoxes = getErrorBoxes();
 
+    const { modelPosition } = useConfiguratorContext();
+
 
     return (
         <>
@@ -75,7 +77,7 @@ const Scene = () => {
                         {errorBoxes.map((box) => (
                             <ErrorBox box={box} />
                         ))}
-                        <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
+                        <DModel position={modelPosition} scale={0.001} maxX={width} maxZ={depth} />
 
                     </Surface>
 

@@ -18,7 +18,9 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
     const { nodes, materials } = useGLTF('/models/final_try.gltf')
 
-
+    //retrieve model position from configuratorcontext
+    const { setModelPosition } = useConfiguratorContext();
+    
     // swapping depth and width depending on rotation
     useEffect(() => {
         if (modelRotation === 0) {
@@ -232,6 +234,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         });
     });
 
+    //save position also in configuratorcontext
+    useEffect(() => {
+        setModelPosition(pos.current);
+    }, [pos.current]);
     
     const { addDObstruction, removeDObstruction } = useIntersectionContext();
 

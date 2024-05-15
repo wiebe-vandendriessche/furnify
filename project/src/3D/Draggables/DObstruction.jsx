@@ -5,6 +5,8 @@ import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useIntersectionContext } from '../../contexts/IntersectionContext'
 import { v4 as uuidv4 } from 'uuid';
+import { useConfiguratorContext } from '../../contexts/ConfiguratorContext';
+import { use } from 'i18next';
 
 
 export const DObstruction = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
@@ -15,6 +17,9 @@ export const DObstruction = ({ obstructionKey, position = [0.5, 0.5, -0.5], dime
     const id = obstructionKey;
 
     const ceilingHeight = maxY - dimensions[1] / 2;
+
+
+
 
     const onDrag = useCallback(({ x, z }) => {
         const newY = dimensions[1] / 2;
@@ -74,6 +79,14 @@ export const DObstruction = ({ obstructionKey, position = [0.5, 0.5, -0.5], dime
         easing.dampC(ref.current.material.color, active ? 'grey' : hovered ? 'lightblue' : '#cc5858', 0.1, delta);
     });
 
+    
+    const { addDObstructionPosition, removeDObstructionPosition } = useConfiguratorContext();
+
+    useEffect(()=> {   
+        
+        addDObstructionPosition(pos.current, id);
+
+    }, [addDObstructionPosition, removeDObstructionPosition, active]);
 
 
     const { addDObstruction, removeDObstruction } = useIntersectionContext();
