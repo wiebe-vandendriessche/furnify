@@ -72,11 +72,11 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
         <div className="obstruction-bg mb-2 flex">
                 <Button onClick={showButton}
                         variant={"danger"} id={"expand" + obstId}
+                        data-testid={"btn-obstacle-expand-" + type}
                 >
                     {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
                 </Button>
             <h5 className={"obstacle"} id={"button" + obstId}
-                data-testid={"btn-obstacle-expand-" + type}
             >{t("obstructions." + type)}</h5>
 
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
