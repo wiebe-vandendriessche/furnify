@@ -31,10 +31,16 @@ function PrivacyPolicy(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <div>
+                    <p>
+                    {t('privacy.intro')}
+                    </p>
+                </div>
                 <h4>Furnify</h4>
-                <div><a href={"https://www.furnifyhome.eu/pages/privacy"}>
-                    {t('privacy.more')}
-                </a></div>
+                <div><p>{t('privacy.pol')}
+                    <a href={"https://www.furnifyhome.eu/pages/privacy"}>
+                    {t('privacy.here')}</a></p>
+                </div>
                 <h4>Mailchimp</h4>
                 <div><p>{t('privacy.mailchimp')}</p></div>
                 <div className="content__gdprLegal"><p>{t('privacy.disclaimer1')}<a
