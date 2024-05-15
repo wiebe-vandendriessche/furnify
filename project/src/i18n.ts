@@ -177,6 +177,13 @@ i18n
                         adjust: "Please adjust the configuration to avoid overlap.",
                         proceed: "You can proceed with the configuration",
                         again: "Please check again when you make changes to the previous configuration."
+                    },
+                    privacy: {
+                        more: "read more",
+                        mailchimp:"You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy practices, please visit our website.",
+                        disclaimer1: "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. ",
+                        learn:"Learn more",
+                        disclaimer2: " about Mailchimp's privacy practices."
                     }
                 }
             },
