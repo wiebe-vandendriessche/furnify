@@ -36,7 +36,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             setModelWidth(chosen_module.open);
             setModelDepth(chosen_module.width);
         }
-    }, [modelRotation]);
+    }, [modelRotation, chosen_module]);
 
 
     const maxX2 = maxX / 2;
@@ -195,10 +195,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
 
-    useEffect(()=>{
-        setModelWidth(chosen_module.width);
-        setModelDepth(chosen_module.open);
-    }, [chosen_module])
 
     const [delayedActive, setDelayedActive] = useState(false);
     let timeoutId = null;
