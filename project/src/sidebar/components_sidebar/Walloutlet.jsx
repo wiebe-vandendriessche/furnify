@@ -75,12 +75,9 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                 >
                     {showButton2?<IoChevronDownSharp/>:<IoChevronUpSharp/>}
                 </Button>
-                <Button id={"button" + obstId}
-                        data-testid={"btn-obstacle-expand-" + type}
-                        variant={"danger"} value={type ?? t("obstructions." + type)}
-                        onClick={
-                            showButton
-                        }>{t("obstructions." + type)}</Button>
+            <h5 className={"obstacle"} id={"button" + obstId}
+                data-testid={"btn-obstacle-expand-" + type}
+            >{t("obstructions." + type)}</h5>
 
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}

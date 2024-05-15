@@ -1,15 +1,12 @@
 import { Suspense } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
-import { useState, useEffect } from 'react'
+import { Canvas} from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
-import { Ground } from './other/Ground.jsx'
 import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
 import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
 import { DLight } from './Draggables/DLight.jsx';
-import { CubeTextureLoader } from 'three';
 import { Loader } from '@react-three/drei';
 import { Skybox } from './Skybox.jsx';
 import { useIntersectionContext } from '../contexts/IntersectionContext.jsx';
@@ -73,7 +70,6 @@ const Scene = () => {
                         {errorBoxes.map((box) => (
                             <ErrorBox box={box} />
                         ))}
-                        <DModel position={[-1, 0, 2]} scale={0.001} maxX={width} maxZ={depth} />
 
                         {
                             chosen_module.name!= "" ? (

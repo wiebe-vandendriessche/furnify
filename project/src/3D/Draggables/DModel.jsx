@@ -10,20 +10,14 @@ import { useIntersectionContext } from '../../contexts/IntersectionContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
-    const group = useRef();
     const {chosen_module}=useModuleContext();
     const { specs,modelRotation } = useConfiguratorContext();
+    console.log("MODULE");
+    console.log(chosen_module.name);
     const { nodes, materials } = useGLTF('/models/'+chosen_module.name+'.gltf')
     const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
     const group= useRef();
     const pos = useRef(position)
-
-    const [width, setModelWidth] = useState(1.7);
-    const [depth, setModelDepth] = useState(3.150);
-    const { specs, modelRotation } = useConfiguratorContext();
-    //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
-    const { nodes, materials } = useGLTF('/models/final_try.gltf')
-
 
     const [width, setModelWidth] = useState(chosen_module.width);
     const [depth, setModelDepth] = useState(chosen_module.open);
