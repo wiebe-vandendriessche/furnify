@@ -169,6 +169,9 @@ i18n
                         phone_number: "Phone number",
                         email: "E-mail",
                         address: "Address",
+                        postcode: "Zip code",
+                        city: "City",
+                        country: "Country",
                         submit: "Submit"
                     },
                     alert: {
@@ -329,6 +332,9 @@ i18n
                         phone_number: "Telefoonnummer",
                         email: "E-mail",
                         address: "Adres",
+                        postcode: "Postcode",
+                        city: "Stad",
+                        country: "Land",
                         submit: "Verzend"
                     },
                     alert: {
@@ -488,6 +494,9 @@ i18n
                         phone_number: "Numéro de téléphone",
                         email: "E-mail",
                         address: "Adresse",
+                        postcode: "Code postal",
+                        city: "Ville",
+                        country: "Pays",
                         submit: "Soumettre"
                     },
                     alert: {
@@ -647,6 +656,9 @@ i18n
                         phone_number: "Telefonnummer",
                         email: "E-Mail",
                         address: "Adresse",
+                        postcode: "Postleitzahl",
+                        city: "Stadt",
+                        country: "Land",
                         submit: "Einreichen"
                     },
                     alert: {
@@ -806,6 +818,9 @@ i18n
                         phone_number: "Número de teléfono",
                         email: "Correo electrónico",
                         address: "Dirección",
+                        postcode: "Código postal",
+                        city: "Ciudad",
+                        country: "País",
                         submit: "Enviar"
                     },
                     alert: {
@@ -965,6 +980,9 @@ i18n
                         phone_number: "Numero di telefono",
                         email: "E-mail",
                         address: "Indirizzo",
+                        postcode: "Codice postale",
+                        city: "Città",
+                        country: "Paese",
                         submit: "Invia"
                     },
                     alert: {
