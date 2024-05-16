@@ -56,7 +56,7 @@ export const DrawingProvider = ({ children }) => {
     setSceneObjects([...walls, floor]);
     // console.log(walls, floor);
   };
-  
+
   function determineOrientation(points) {
     let sum = 0;
     for (let i = 0; i < points.length; i++) {
@@ -129,13 +129,8 @@ export const DrawingProvider = ({ children }) => {
     // Define extrusion settings
     const extrudeSettings = {
       steps: 1,
-      depth: 0.3, // Thickness of the floor
+      depth: 0.03, // Thickness of the floor
       bevelEnabled: false, // No bevel for simplicity
-      curveSegments: 1,
-      bevelThickness: 0,
-      bevelSize: 0,
-      bevelOffset: 0,
-      bevelSegments: 1
     };
 
     // Create geometry by extruding the shape along the Y-axis
@@ -144,8 +139,7 @@ export const DrawingProvider = ({ children }) => {
 
     // Material for the extruded shape
     const material = new MeshStandardMaterial({
-      color: "brown",
-      side: THREE.DoubleSide,
+      color: "#ccb7a3",  
     });
 
     // Create the mesh
@@ -158,9 +152,9 @@ export const DrawingProvider = ({ children }) => {
     const bbox = geometry.boundingBox;
     const offset = bbox
       ? new Vector3()
-          .addVectors(bbox.min, bbox.max)
-          .multiplyScalar(0.5)
-          .negate()
+        .addVectors(bbox.min, bbox.max)
+        .multiplyScalar(0.5)
+        .negate()
       : new Vector3();
 
     mesh.geometry.translate(offset.x, 0, offset.z);
@@ -171,14 +165,12 @@ export const DrawingProvider = ({ children }) => {
   // Toggle drawing state
   const toggleDrawing = () =>
     setIsDrawing((prev) => {
-      // console.log("Drawing is now: " + !prev);
       return !prev;
     });
 
   // Toggle orthogonal mode
   const toggleOrthogonalMode = () =>
     setOrthogonalMode((prev) => {
-      // console.log("Orthogonal mode is now: " + !prev);
       return !prev;
     });
 
@@ -222,7 +214,7 @@ export const DrawingProvider = ({ children }) => {
     sceneObjects,
     show3D,
     setShow3D,
-    wallProperties, 
+    wallProperties,
     setWallProperties
   };
 
