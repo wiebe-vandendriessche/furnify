@@ -18,6 +18,7 @@ export const GridComponent = ({
   centerLineColor = "white",
 }) => {
   const { scene } = useThree();
+  const yPosGrid = -0.01; // Just below the XZ plane to show lines above it
 
   const { geometry, material, centerMaterial } = useMemo(() => {
     const points: Vector3[] = [];
@@ -31,10 +32,10 @@ export const GridComponent = ({
     for (let i = -Math.floor(divisions / 2); i <= Math.floor(divisions / 2); i++) {
       const offset = i * step;
 
-      // Horizontal lines
-      points.push(new THREE.Vector3(-halfSize, offset, 0), new THREE.Vector3(halfSize, offset, -0.01));
-      // Vertical lines
-      points.push(new THREE.Vector3(offset, -halfSize, 0), new THREE.Vector3(offset, halfSize, -0.01));
+      // Horizontal lines on XZ plane
+      points.push(new THREE.Vector3(-halfSize, yPosGrid, offset), new THREE.Vector3(halfSize, yPosGrid, offset));
+      // Vertical lines on XZ plane
+      points.push(new THREE.Vector3(offset, yPosGrid, -halfSize), new THREE.Vector3(offset, yPosGrid, halfSize));
     }
 
     const geometry = new THREE.BufferGeometry().setFromPoints(points);

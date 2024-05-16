@@ -36,7 +36,7 @@ const useMousePosition = (camera) => {
 
   useEffect(() => {
     const raycaster = new Raycaster();
-    const planeZ = new Plane(new Vector3(0, 0, 1), 0);
+    const planeXZ = new Plane(new Vector3(0, 1, 0), 0); // Change the plane to XZ
     const mousePosition = new Vector2();
 
     const updatePosition = (x, y, rect) => {
@@ -44,7 +44,7 @@ const useMousePosition = (camera) => {
       mousePosition.y = -((y - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(mousePosition, camera);
       const intersection = new Vector3();
-      raycaster.ray.intersectPlane(planeZ, intersection);
+      raycaster.ray.intersectPlane(planeXZ, intersection); // Use the new plane
       if (intersection) {
         setCurrentMousePosition(intersection);
       }
@@ -57,7 +57,6 @@ const useMousePosition = (camera) => {
 
     const handleTouchMove = (event) => {
       if (event.touches.length > 0) {
-        // console.log("touch move");
         const touch = event.touches[0];
         const rect = touch.target.getBoundingClientRect();
         updatePosition(touch.clientX, touch.clientY, rect);
@@ -94,28 +93,7 @@ export const FloorplanEditor: React.FC = () => {
   const currentMousePosition = useMousePosition(camera);
   const snapThreshold: number = 0.4;
 
-  /**
-   * Check if the shape is closed
-   */
-  // useEffect(() => {
-  //   if (points.length > 2) {
-  //     const start = points[0];
-  //     const end = points[points.length - 1];
-  //     const distance = start.distanceTo(end);
-  //     setIsClosed(distance < snapThreshold);
-  //     console.log("isClosed: " + isClosed);
-  //   }
-  // }, [points]);
-
   const checkShapeClosed = (): boolean => {
-    // if (points.length > 2) {
-    //   const start = points[0];
-    //   const end = points[points.length - 1];
-    //   const distance = start.distanceTo(end);
-    //   return distance < snapThreshold;
-    // }
-    // return false;
-
     if (points.length > 2 && points[points.length - 1] == points[0]) return true;
     else return false;
   };
@@ -136,34 +114,22 @@ export const FloorplanEditor: React.FC = () => {
     if (latestPointRef.current) latestPointRef.current = null;
   };
 
-  /**
-   * function to check if cursor is close to start, so close the shape
-   * @param point
-   * @returns boolean
-   */
   const isCloseToStart = (point: DrawablePoint) => {
     if (points.length < 2) return false;
     const start = points[0];
     return (
       Math.sqrt(
-        Math.pow(point.x - start.x, 2) + Math.pow(point.y - start.y, 2)
+        Math.pow(point.x - start.x, 2) + Math.pow(point.z - start.z, 2) // Use x and z for distance calculation
       ) < snapThreshold
     );
   };
 
-  /**
-   * Clear the scene when points and lines are cleared
-   */
   useEffect(() => {
-    // Whenever points or lines are cleared, ensure we also clear them from the scene
     if (points.length === 0 && lines.length === 0) {
       clearScene();
     }
   }, [points, lines]);
 
-  /**
-   * Visual feedback for when the cursor is near the start point
-   */
   useEffect(() => {
     if (!isDrawing || points.length < 2) {
       setIsNearStart(false);
@@ -177,7 +143,6 @@ export const FloorplanEditor: React.FC = () => {
       const distance = currentMousePosition.distanceTo(start);
 
       if (distance < snapThreshold) {
-        // console.log("near start");
         setIsNearStart(true);
       } else {
         setIsNearStart(false);
@@ -188,10 +153,6 @@ export const FloorplanEditor: React.FC = () => {
     return () => window.removeEventListener("mousemove", checkProximity);
   }, [currentMousePosition, isDrawing, points]);
 
-  /**
-   * Toggle drawing with the "d" key
-   * possibly replace this with pressing a button onscreen
-   */
   useEffect(() => {
     const toggleDrawingKey = (event: KeyboardEvent) => {
       if (event.key === "d" || event.key === "D") {
@@ -203,25 +164,21 @@ export const FloorplanEditor: React.FC = () => {
     return () => window.removeEventListener("keydown", toggleDrawingKey);
   }, []);
 
-  /**
-   * Logic for adding points to the scene
-   */
   const addPoint = useCallback(
     (newPoint: DrawablePoint) => {
       const lastPoint = points.length > 0 ? points[points.length - 1] : null;
 
       if (orthogonalMode && lastPoint && !isCloseToStart(newPoint)) {
         const dx = Math.abs(newPoint.x - lastPoint.x);
-        const dy = Math.abs(newPoint.y - lastPoint.y);
+        const dz = Math.abs(newPoint.z - lastPoint.z); // Use x and z for orthogonal mode
 
-        if (dx > dy) {
-          newPoint.y = lastPoint.y;
+        if (dx > dz) {
+          newPoint.z = lastPoint.z;
         } else {
           newPoint.x = lastPoint.x;
         }
       }
 
-      // closing the shape
       if (isDrawing && points.length > 1 && isCloseToStart(newPoint)) {
         newPoint = points[0];
         toggleDrawing();
@@ -231,20 +188,17 @@ export const FloorplanEditor: React.FC = () => {
         }
       }
 
-      // snapping to grid
       if (snappingMode && gridSize > 0 && !isCloseToStart(newPoint)) {
         const snappedX = Math.round(newPoint.x / gridSize) * gridSize;
-        const snappedY = Math.round(newPoint.y / gridSize) * gridSize;
-        newPoint.set(snappedX, snappedY, newPoint.z);
+        const snappedZ = Math.round(newPoint.z / gridSize) * gridSize; // Use x and z for snapping
+        newPoint.set(snappedX, newPoint.y, snappedZ);
       }
 
-      // add the point normally
       latestPointRef.current = newPoint;
       setPoints((prevPoints) => {
         const updatedPoints = [...prevPoints, newPoint];
         if (updatedPoints.length > 1) {
           const start = updatedPoints[updatedPoints.length - 2];
-          // newPoint.z = 0.1; // just to make sure lines are a bit above the grid
           const newLine = new DrawableLine(start, newPoint);
           newLine.addToScene(scene);
           setLines((prevLines) => [...prevLines, newLine]);
@@ -258,9 +212,6 @@ export const FloorplanEditor: React.FC = () => {
     [scene, isDrawing, points, orthogonalMode, snappingMode, gridSize]
   );
 
-  /**
-   * Handle left and right clicks
-  */
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
       event.preventDefault();
@@ -295,16 +246,11 @@ export const FloorplanEditor: React.FC = () => {
     };
 
     window.addEventListener("click", handleClick);
-    // window.addEventListener("contextmenu", handleRightClick);
     return () => {
       window.removeEventListener("click", handleClick);
-      // window.removeEventListener("contextmenu", handleRightClick);
     };
   }, [addPoint, currentMousePosition, scene, isDrawing]);
 
-  /**
-   * Update the temp line when drawing
-   */
   useFrame(() => {
     if (
       isDrawing &&
@@ -323,20 +269,19 @@ export const FloorplanEditor: React.FC = () => {
       } else if (orthogonalMode) {
         const lastPoint = latestPointRef.current;
         const dx = Math.abs(endPoint.x - lastPoint.x);
-        const dy = Math.abs(endPoint.y - lastPoint.y);
+        const dz = Math.abs(endPoint.z - lastPoint.z);
 
-        if (dx > dy) {
-          endPoint.y = lastPoint.y;
+        if (dx > dz) {
+          endPoint.z = lastPoint.z;
         } else {
           endPoint.x = lastPoint.x;
         }
       }
 
       if (snappingMode) {
-        // console.log("trying to snap");
         const snappedX = Math.round(endPoint.x / gridSize) * gridSize;
-        const snappedY = Math.round(endPoint.y / gridSize) * gridSize;
-        endPoint.set(snappedX, snappedY, endPoint.z);
+        const snappedZ = Math.round(endPoint.z / gridSize) * gridSize;
+        endPoint.set(snappedX, endPoint.y, snappedZ);
       }
 
       if (!tempLineRef.current) {
@@ -352,9 +297,6 @@ export const FloorplanEditor: React.FC = () => {
     }
   });
 
-  /**
-   * Display the length of each line
-   */
   const lineLengthSprites = points
     .slice(1)
     .map((point: DrawablePoint, index: number) => {
