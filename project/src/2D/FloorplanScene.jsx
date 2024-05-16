@@ -29,7 +29,7 @@ export const FloorplanScene = () => {
   const { showGrid, setShowGrid } = use2d();
   const { isClosed, setIsClosed } = use2d();
   const { handleConvertTo3D, sceneObjects, show3D, setShow3D } = use2d();
-  
+
   const { skyboxPath, setSkyboxPath } = useConfiguratorContext();
   const { setWallProperties, wallProperties } = use2d();
 
@@ -180,7 +180,7 @@ export const FloorplanScene = () => {
               </svg>
             </button>
 
-            <SliderHeightComponent setWallProperties={setWallProperties} wallProperties={wallProperties}/>
+            <SliderHeightComponent setWallProperties={setWallProperties} wallProperties={wallProperties} />
           </>
         )}
       </div>
@@ -198,7 +198,7 @@ export const FloorplanScene = () => {
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
           <FloorplanEditor />
-          <axesHelper position={[0, 0, 1]} />
+          {/* <axesHelper position={[0, 0, 0]} /> */}
           <OrbitControls
             ref={controlsRef}
             enableZoom={true}
@@ -209,6 +209,9 @@ export const FloorplanScene = () => {
               MIDDLE: THREE.MOUSE.DOLLY,
               RIGHT: THREE.MOUSE.PAN,
             }}
+            maxZoom={10000}
+            minZoom={10}
+            zoomToCursor={true} 
           />
           {showGrid && (
             <GridComponent
@@ -237,7 +240,7 @@ export const FloorplanScene = () => {
           <OrbitControls makeDefault enablePan={true} minDistance={5} maxDistance={50} />
           <Skybox path={skyboxPath} />
 
-          <axesHelper position={[0, 0, 0]} args={[5]} />
+          {/* <axesHelper position={[0, 0, 0]} args={[5]} /> */}
         </Canvas>
       )}
     </>
