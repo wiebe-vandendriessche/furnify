@@ -72,7 +72,8 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 14/05/24,13:30,16:30,Contacturen,Fixen collisiondetection met button,190 en 156,
 14/05/24,18:00,19:30,Extern,Afwerken collisiondetection en kleine bugs fixen,190 en 156,
 14/05/24,20:00,21:00,Extern,Afwerken collisiondetection en kleine bugs fixen,190 en 156,
-
+15/05/24,13:00,16:00,versturen van positites van objecten naar configuratorcontext zodat ook deze kunn heropgehaald worden,197,
+15/05/24,21:00,22:30,bug fixen met thomas en nieuwste versie deployen,152,
 
 
 
