@@ -99,6 +99,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"
                 }`}
               onClick={handleDrawingButtonClick}
+              title="Toggle Drawing Mode"
             >
               <PencilSquare />
             </button>
@@ -106,6 +107,7 @@ export const FloorplanScene = () => {
             <button
               className={`btn-circle btn-lg unclicked`}
               onClick={handleRemoveButtonClick}
+              title="Remove All"
             >
               <Trash />
             </button>
@@ -114,6 +116,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${orthogonalMode ? "clicked" : "unclicked"
                 }`}
               onClick={handleOrthogonalButtonClick}
+              title="Toggle Orthogonal Mode"
             >
               <Rulers />
             </button>
@@ -121,6 +124,7 @@ export const FloorplanScene = () => {
             <button
               className={`btn-circle btn-lg unclicked`}
               onClick={handleHomeButtonClicked}
+              title="Reset View"
             >
               <House />
             </button>
@@ -129,6 +133,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${showGrid ? "clicked" : "unclicked"
                 }`}
               onClick={handleGridButtonCLicked}
+              title="Toggle Grid and Snapping"
             >
               <Grid3x3 />
             </button>
@@ -141,6 +146,7 @@ export const FloorplanScene = () => {
               <button
                 className={`btn-circle btn-lg unclicked`}
                 onClick={handle3DButtonClicked}
+                title="Convert to 3D"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -163,6 +169,7 @@ export const FloorplanScene = () => {
             <button
               className={`btn-circle btn-lg unclicked`}
               onClick={handle2DButtonClicked}
+              title="Back to 2D"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
