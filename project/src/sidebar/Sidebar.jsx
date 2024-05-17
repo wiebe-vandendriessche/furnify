@@ -282,7 +282,8 @@ export function Sidebar() {
             }
         });
 
-        let color = specs.color;
+        let color = specs.color.toString().replace("#",'');
+        console.log(color)
         let getURI = window.location.href+contact.email;
         const url = import.meta.env.VITE_MC_URI;
         console.log(superContext);
