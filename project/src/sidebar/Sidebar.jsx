@@ -218,6 +218,7 @@ export function Sidebar() {
 
 
     const showNextPart = () => {
+        console.log(contact.phone_number);
         switch (part) {
             case 0:
                 return <Questionnaire_space />
@@ -294,7 +295,7 @@ export function Sidebar() {
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, async (_, data) => {
             const {msg, result} = data
-            alert(data);
+            alert(msg);
             console.log(superContext);
             if (result === "success") {
                 if (msg === "You're already subscribed, your profile has been updated. Thank you!") {
