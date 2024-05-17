@@ -19,11 +19,11 @@ export const check = (val: any, varia: any, get2D: any) => {
 
     // change the size of the modules if bed is selected
     if (func.bed == true) {
-        modules.forEach(mod => { mod.width_options = varia.size })
+        modules.forEach(mod => { mod.set_width_options(varia.size)})
     }
     //if bed is not selected make sure to return the smallest value
     else {
-        modules.forEach(mod => { mod.width_options = "140" })
+        modules.forEach(mod => { mod.set_width_options("140")})
     }
 
     //check if the exact combination is possible
@@ -96,8 +96,13 @@ export const check = (val: any, varia: any, get2D: any) => {
 
     }
     console.log("ALGORITHM: the possible results:")
-    console.log(result)
-    return {possible:result, errors: errors};
+    const regularObjects = result.map(module => {
+        const regularObject = { ...module };
+        return regularObject;
+    });
+
+    console.log(regularObjects)
+    return {possible:regularObjects, errors: errors};
 
 }
 

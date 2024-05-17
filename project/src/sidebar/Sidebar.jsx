@@ -9,7 +9,6 @@ import logo_dm from "../assets/logo_dm.png";
 import Questionnaire_space from "./components_sidebar/Questionnaire_space.jsx";
 import Questionnaire_specs from "./components_sidebar/Questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
@@ -28,7 +27,6 @@ export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
-    const value = useConfiguratorContext();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -49,7 +47,8 @@ export function Sidebar() {
     const { contact,setContact } = useContactContext();
 
     const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
-        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath} = useConfiguratorContext();
+        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath,modelPosition,
+        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition} = useConfiguratorContext();
 
     const {varia,setVaria} = useVariaContext();
 
@@ -69,7 +68,10 @@ export function Sidebar() {
         selectedWall: useRoomWallLightupContext().selectedWall,
         errors: useModuleContext().errors,
         possible_modules:useModuleContext().possible_modules,
-        chosen_module: useModuleContext().chosen_module
+        chosen_module: useModuleContext().chosen_module,
+        modelPosition: useConfiguratorContext().modelPosition,
+        positions: useConfiguratorContext().obstructionPositions,
+        rotationIndex: useConfiguratorContext().rotationIndex
     };
 
     const updateContactFromResponse = (response) => {
@@ -149,6 +151,14 @@ export function Sidebar() {
 
         setRectangular(response.rectangular);
 
+        setPossileModules(response.possible_modules);
+
+        setModelPosition(response.modelPosition);
+
+        setObstructionPositions(response.positions);
+
+        setRotationIndex(response.rotationIndex);
+
     }
 
     const updateModuleFromResponse = (response) =>{
@@ -161,7 +171,7 @@ export function Sidebar() {
             points2D: points2D
         });
 
-        setPossileModules(response.possible_modules);
+
 
         const { name, height, width, depth, open, closed, saved, bed, sofa, desk, storage, width_options, components } = response.chosen_module;
         setChosenModule({
@@ -273,21 +283,27 @@ export function Sidebar() {
         });
 
         let color = specs.color;
-        let message;
         let getURI = window.location.href+contact.email;
-        console.log(getURI);
         const url = import.meta.env.VITE_MC_URI;
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, async (_, data) => {
             const {msg, result} = data
-            console.log(result, msg);
-            console.log(getURI);
-            message = msg;
             alert(msg);
+            console.log(superContext);
+            if (result === "success") {
+                if (msg === "You're already subscribed, your profile has been updated. Thank you!") {
+                    await axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext);
+                    console.log("PUT request");
+                }
+
+                if(msg === "Thank you for subscribing!"){
+                    await axios.post(`http://localhost:3000/api/contact`, superContext);
+                    console.log("POST request");
+                }
+            }
+
         });
-        console.log(superContext);
-        await axios.post('http://localhost:3000/api/contact', superContext);
     };
 
 

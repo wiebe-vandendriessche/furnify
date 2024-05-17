@@ -4,7 +4,7 @@ import Scene from './3D/Scene'
 import {useConfiguratorContext} from './contexts/ConfiguratorContext'
 import {FloorplanScene} from './2D/FloorplanScene'
 import Modal from 'react-bootstrap/Modal';
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import { get_modules } from './algorithm/module_choice'
 
@@ -30,14 +30,11 @@ function PrivacyPolicy(props) {
                 <div><p>You can unsubscribe at any time by clicking the link in the footer of our emails. For
                     information
                     about our privacy practices, please visit our website.</p></div>
-                <div class="content__gdprLegal"><p>We use Mailchimp as our marketing platform. By clicking below to
+                <div ><p>We use Mailchimp as our marketing platform. By clicking below to
                     subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a
                         href="https://mailchimp.com/legal/terms">Learn more</a> about Mailchimp's privacy practices.</p>
                 </div>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant={"danger"} onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }
@@ -45,7 +42,7 @@ function PrivacyPolicy(props) {
 
 function App() {
     const [modalShow, setModalShow] = React.useState(false);
-    const {rectangular, setRectangular} = useConfiguratorContext();
+    const {rectangular} = useConfiguratorContext();
     get_modules();
 
     return (

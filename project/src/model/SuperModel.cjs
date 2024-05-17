@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {Float} = require("@react-three/drei");
 
 const contactSchema = new mongoose.Schema({
     firstname: {
@@ -54,6 +55,10 @@ const obstacleItemSchema = new mongoose.Schema({
         default: 0
     },
     height: {
+        type: Number,
+        default: 0
+    },
+    depth: {
         type: Number,
         default: 0
     },
@@ -128,6 +133,30 @@ const variaSchema = new mongoose.Schema({
     size: String
 });
 
+const WidthOptionSchema = new mongoose.Schema({
+    key: String,
+    value: Number
+});
+
+const possible_modulesItemsSchema = new mongoose.Schema({
+    bed: Boolean,
+    sofa: Boolean,
+    desk: Boolean,
+    storage: Boolean,
+    width_options: [WidthOptionSchema],
+    components: [String],
+    marge: Number,
+    name: String,
+    height: Number,
+    width: Number,
+    depth: Number,
+    open: Number,
+    closed: Number,
+    saved: Number
+
+})
+
+
 const chosen_moduleSchema = new mongoose.Schema({
     name: String,
     height: Number,
@@ -140,7 +169,8 @@ const chosen_moduleSchema = new mongoose.Schema({
     sofa: Boolean,
     desk: Boolean,
     storage: Boolean,
-    width_options: [Number],
+    marge: Number,
+    width_options: [WidthOptionSchema],
     components: [String]
 });
 
@@ -150,9 +180,6 @@ const errorsSchema = new mongoose.Schema({
     roomSize: Boolean,
     points2D: Boolean
 });
-
-
-
 
 // Combine all schemas into one main schema
 const superSchema = new mongoose.Schema({
@@ -164,10 +191,17 @@ const superSchema = new mongoose.Schema({
     varia: variaSchema,
     rectangular: Boolean,
     skyboxPath: String,
+    possible_modules: [possible_modulesItemsSchema],
     chosen_module: chosen_moduleSchema,
     rotationIndex: Number,
     errors: errorsSchema,
-    selectedWall: String
+    selectedWall: String,
+    modelPosition: [Number],
+    positions: {
+        type: Map,
+        of: [Number]
+    },
+    rotationIndex: Number
 });
 
 const SuperModel = mongoose.model('SuperModel', superSchema);

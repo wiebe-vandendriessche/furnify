@@ -1,30 +1,26 @@
 import { Suspense } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
-import { useState, useEffect } from 'react'
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei'
 import { Room } from './roomComponents/Room.tsx'
-import { Ground } from './other/Ground.jsx'
 import { useConfiguratorContext } from '../contexts/ConfiguratorContext.jsx';
 import { Surface } from './Draggables/Surface.jsx';
 import { DModel } from './Draggables/DModel.jsx';
 import { DObstruction } from './Draggables/DObstruction.jsx';
 import { DLight } from './Draggables/DLight.jsx';
-import { CubeTextureLoader } from 'three';
 import { Loader } from '@react-three/drei';
 import { Skybox } from './Skybox.jsx';
 import { useIntersectionContext } from '../contexts/IntersectionContext.jsx';
 import { ErrorBox } from './other/ErrorBox.jsx';
-import * as THREE from 'three';
 
 const Scene = () => {
     const { dimensions } = useConfiguratorContext();
-    const { skyboxPath, setSkyboxPath } = useConfiguratorContext();
+    const { skyboxPath } = useConfiguratorContext();
 
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
 
-    const { getOtherObstacles } = useConfiguratorContext();
+    const { getOtherObstacles,obstructionPositions } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
     const { getErrorBoxes } = useIntersectionContext();
 
@@ -33,6 +29,8 @@ const Scene = () => {
     const errorBoxes = getErrorBoxes();
 
     const { modelPosition } = useConfiguratorContext();
+
+    console.log(obstructionPositions);
 
 
     return (
@@ -51,8 +49,9 @@ const Scene = () => {
                         {/* Render DObstruction for each obstacle */}
                         {obstacles.map((obstacle) => (
                             <DObstruction
+                                key = {obstacle.id}
                                 obstructionKey={obstacle.id}
-                                position={[0, 0, 0]}
+                                position={obstructionPositions[obstacle.id]}
                                 dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
                                 maxX={width}
                                 maxZ={depth}
@@ -63,8 +62,9 @@ const Scene = () => {
                         ))}
                         {lights.map((light) => (
                             <DLight
+                                key = {light.id}
                                 obstructionKey={light.id}
-                                position={[0, 0, 0]}
+                                position={obstructionPositions[light.id]}
                                 dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
                                 maxX={width}
                                 maxZ={depth}

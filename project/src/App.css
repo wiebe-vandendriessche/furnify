@@ -146,7 +146,10 @@ button:hover {
     ::-webkit-scrollbar-thumb:hover {
         background: #b02a37;
     }
+
 }
+
+
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -193,6 +196,9 @@ button:hover {
         background: #b02a37;
     }
 
+    .modal-content{
+        background-color: #121212;
+    }
 
 
 }

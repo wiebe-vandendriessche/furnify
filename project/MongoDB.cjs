@@ -35,7 +35,7 @@ app.post('/api/contact', async (req, res) => {
 app.put('/api/contact/:email', async (req, res) => {
     try {
         const {email} = req.params;
-        const contact = await Super.findOne({email});
+        const contact = await Super.findOne({ 'contact.email': email});
 
         if (!contact) {
             return res.status(404).json({message: "Contact not found"});
@@ -49,6 +49,7 @@ app.put('/api/contact/:email', async (req, res) => {
         res.status(200).json(updatedContact);
 
     } catch (error) {
+        console.error("Error processing PUT request to /api/contact:", error);
         res.status(500).json({message: error.message});
     }
 })
