@@ -80,7 +80,7 @@ export const FloorplanScene = () => {
   const handle2DButtonClicked = (event) => {
     event.stopPropagation();
     let goback = window.confirm(
-      "Goin back to 2D will remove all 3D objects. Do you want to continue?"
+      "Going back to 2D will remove all 3D objects. Do you want to continue?"
     );
     if (goback) {
       setShow3D(false);
