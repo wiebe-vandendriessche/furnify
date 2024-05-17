@@ -145,7 +145,9 @@ export const ConfiguratorProvider = ({ children }) => {
         addDObstructionPosition,
         removeDObstructionPosition,
         obstructionPositions,
-        setObstructionPositions
+        setObstructionPositions,
+        rotationIndex,
+        setRotationIndex
     }
 
 

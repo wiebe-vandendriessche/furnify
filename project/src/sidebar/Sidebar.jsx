@@ -163,15 +163,14 @@ export function Sidebar() {
 
     const updateModuleFromResponse = (response) =>{
         const { softer, demands, roomSize, points2D } = response.errors;
-
+        console.log("HIER")
+        console.log(response)
         setErrors({
             softer: softer,
             demands: demands,
             roomSize: roomSize,
             points2D: points2D
         });
-
-
 
         const { name, height, width, depth, open, closed, saved, bed, sofa, desk, storage, width_options, components } = response.chosen_module;
         setChosenModule({
@@ -191,6 +190,7 @@ export function Sidebar() {
         });
     }
 
+    console.log(chosen_module);
 
     const {email} = useParams();
 
@@ -199,9 +199,13 @@ export function Sidebar() {
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
                     console.log(response.data);
+                    console.log("DAAR")
                     updateContactFromResponse(response.data);
+                    console.log("contact")
                     updateSelectedWallFromResponse(response.data);
+                    console.log("wall")
                     updateVariaFromResponse(response.data);
+                    console.log("varia")
                     updateConfiguratorFromResponse(response.data);
                     updateModuleFromResponse(response.data);
 
@@ -283,7 +287,6 @@ export function Sidebar() {
         });
 
         let color = specs.color.toString().replace("#",'');
-        console.log(color)
         let getURI = window.location.href+contact.email;
         const url = import.meta.env.VITE_MC_URI;
         console.log(superContext);

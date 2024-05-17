@@ -15,6 +15,8 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     console.log("MODULE");
     console.log(chosen_module.name);
     const { nodes, materials } = useGLTF('/models/'+chosen_module.name+'.gltf')
+    console.log("NODES")
+    console.log(nodes)
     const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
     const group= useRef();
     const pos = useRef(position)
