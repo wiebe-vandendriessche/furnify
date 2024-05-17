@@ -31,30 +31,104 @@ function Contact() {
 
         <div className={"m-2"}>
             <div className={"mb-3"}>
-                {/**/}
                 <h5 data-testid={"question-contact"}>
                     {t('contact.q_contact')}
                 </h5>
             </div>
-                {Object.entries(contact).map(([key, value]) => (
-                    key !== 'phone_number' ? (<FloatingLabel key={key}
-                        data-testid={"label-contact-" + key}
-                        className={"mb-2"}
-                        controlid="floatingInput"
-                        label={t("contact." + key)}>
-                        <Form.Control name={key} type="text" placeholder={key} defaultValue={value}
-                            data-testid={"input-contact-" + key}
+            <FloatingLabel key={"firstname"}
+                           data-testid={"label-contact-firstname"}
+                           className={"mb-2"}
+                           controlid="floatingInput"
+                           label={t("contact.firstname")}>
+            <Form.Control name={"firstname"} type="text" placeholder={"firstname"} defaultValue={contact["firstname"]}
+                            data-testid={"input-contact-" + "firstname"}
                             onChange={changeContact} />
-                    </FloatingLabel>) : (
-                        //onlyCountries sets all countries that can be chose to show
-                        <PhoneInput key={key} className={"mb-2"} country={contact.phone_number.country} onlyCountries={["be", "nl"]}
-                            enableSearch={true}
-                            searchPlaceholder={""}
-                            disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
-                            data-testid={"input-contact-phone"}
-                            value={contact.phone_number.number} onChange={(value, country) => changePhoneNumber(value, country.countryCode)} />
-                    )))
-                }
+            </FloatingLabel>
+            <FloatingLabel key={"lastname"}
+                           data-testid={"label-contact-lastname"}
+                           className={"mb-2"}
+                           controlid="floatingInput"
+                           label={t("contact.lastname")}>
+            <Form.Control name={"lastname"} type="text" placeholder={"lastname"} defaultValue={contact["lastname"]}
+                            data-testid={"input-contact-" + "lastname"}
+                            onChange={changeContact} />
+            </FloatingLabel>
+            <PhoneInput key={"phone"} className={"mb-2"} country={contact.phone_number.country} onlyCountries={["be", "nl"]}
+                        enableSearch={true}
+                        searchPlaceholder={""}
+                        disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
+                        data-testid={"input-contact-phone"}
+                        value={contact.phone_number.number} onChange={(value, country) => changePhoneNumber(value, country.countryCode)} />
+            <FloatingLabel key={"email"}
+                           data-testid={"label-contact-email"}
+                           className={"mb-2"}
+                           controlid="floatingInput"
+                           label={t("contact.email")}>
+            <Form.Control name={"email"} type="text" placeholder={"email"} defaultValue={contact["email"]}
+                            data-testid={"input-contact-" + "email"}
+                            onChange={changeContact} />
+            </FloatingLabel>
+            <table>
+                <tr>
+                    <td>
+                        <FloatingLabel key={"address"}
+                                       data-testid={"label-contact-address"}
+                                       className={"mb-2"}
+                                       controlid="floatingInput"
+                                       label={t("contact.address")}>
+                            <Form.Control name={"address"} type="text" placeholder={"address"} defaultValue={contact["address"]}
+                                          data-testid={"input-contact-" + "address"}
+                                          onChange={changeContact} />
+                        </FloatingLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <FloatingLabel key={"postcode"}
+                                                   data-testid={"label-contact-postcode"}
+                                                   className={"mb-2"}
+                                                   controlid="floatingInput"
+                                                   label={t("contact.postcode")}>
+                                        <Form.Control name={"postcode"} type="text" placeholder={"postcode"} defaultValue={contact["postcode"]}
+                                                      data-testid={"input-contact-" + "postcode"}
+                                                      onChange={changeContact} />
+                                    </FloatingLabel>
+                                </td>
+                                <td>
+                                    <FloatingLabel key={"city"}
+                                                   data-testid={"label-contact-city"}
+                                                   className={"mb-2"}
+                                                   controlid="floatingInput"
+                                                   label={t("contact.city")}>
+                                        <Form.Control name={"city"} type="text" placeholder={"city"} defaultValue={contact["city"]}
+                                                      data-testid={"input-contact-" + "city"}
+                                                      onChange={changeContact} />
+                                    </FloatingLabel>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <FloatingLabel key={"country"}
+                                       data-testid={"label-contact-country"}
+                                       className={"mb-2"}
+                                       controlid="floatingInput"
+                                       label={t("contact.country")}>
+                            <Form.Control name={"country"} type="text" placeholder={"country"} defaultValue={contact["country"]}
+                                          data-testid={"input-contact-" + "country"}
+                                          onChange={changeContact} />
+                        </FloatingLabel>
+                    </td>
+                </tr>
+            </table>
             <Button variant={"danger"} type={"submit"}>{t('contact.submit')}</Button>
         </div>
     )

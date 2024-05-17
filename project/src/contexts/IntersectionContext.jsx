@@ -2,10 +2,17 @@ import { createContext, useContext, useState } from 'react';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { useConfiguratorContext } from './ConfiguratorContext';
+import { useTranslation } from 'react-i18next'
 
 const IntersectionContext = createContext();
 
 export const IntersectionProvider = ({ children }) => {
+    const { t, i18n } = useTranslation();
+
+    useEffect(() => {
+        const lng = navigator.language;
+        i18n.changeLanguage(lng);
+    }, [])
 
     const dObstructions = useRef({});
     const [errorBoxes, setErrorBoxes] = useState([]);
@@ -85,13 +92,13 @@ export const IntersectionProvider = ({ children }) => {
         }
 
         if (intersectionsDetected) {
-            console.log('Intersections detected');
-            window.alert('Intersections detected!\nPlease adjust the configuration to avoid intersections.');
+            console.log(t('alert.yes'));
+            window.alert(t('alert.yes') +'\n'+ t('alert.adjust'));
         }
 
         if (!intersectionsDetected) {
-            console.log('No intersections detected');
-            window.alert('No intersections detected!\nYou can proceed with the configuration.\nDon\'t forget to check again when you made changes to the previous configuration.');
+            console.log(t('alert.no'));
+            window.alert(t('alert.no')+'\n'+t('alert.proceed')+'\n'+t('alert.again'));
         }
 
         //update errorBoxes

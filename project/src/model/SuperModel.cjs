@@ -27,6 +27,18 @@ const contactSchema = new mongoose.Schema({
     address: {
         type: String,
         required: false,
+    },
+    postcode: {
+        type: String,
+        required: false,
+    },
+    country:{
+        type: String,
+        required: false,
+    },
+    city:{
+        type: String,
+        required: false,
     }
 });
 

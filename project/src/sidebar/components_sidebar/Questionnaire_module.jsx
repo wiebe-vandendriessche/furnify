@@ -28,6 +28,7 @@ export function Questionnaire_module() {
     const { checkIntersections } = useIntersectionContext();
 
     const get2D = use2d();
+    const { wallProperties, setWallProperties }  = use2d();
     const value = useConfiguratorContext();
 
 
@@ -35,7 +36,7 @@ export function Questionnaire_module() {
     const { possible_modules, setPossileModules } = useModuleContext();
     const { chosen_module, setChosenModule } = useModuleContext();
     const module = (event) => {
-        let result = check(value, varia, get2D);
+        let result = check(value, varia, get2D, wallProperties);
         setErrors({
             softer: result.errors.softer,
             demands: result.errors.demands,
@@ -131,7 +132,7 @@ export function Questionnaire_module() {
                                 </div>
 
                                 <Button onClick={rotate} variant={"danger"} >{t('questionnaire_module.module_info.rotate')}</Button>
-                                <Button onClick={checkIntersections} variant={"danger"} >Check intersections</Button>
+                                <Button onClick={checkIntersections} variant={"danger"} >{t('questionnaire_module.module_info.intersection')}</Button>
                             </div>
                         </div>
                     </FormGroup>

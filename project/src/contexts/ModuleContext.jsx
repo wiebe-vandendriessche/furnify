@@ -8,7 +8,7 @@ export const ModuleProvider = ({ children }) => {
     const [possible_modules, setPossileModules] = useState([{name: "", height: 0, width:0, depth:0, open: 0, closed:0,saved:0,bed:false,
     sofa:false,desk:false, storage:false, width_options:[],components:[]}])
     const [chosen_module, setChosenModule] = useState({name: "", height: 0, width:0, depth:0, open: 0, closed:0,saved:0,bed:false,
-    sofa:false,desk:false, storage:false, width_options:[],components:[]})
+    sofa:false,desk:false, storage:false, width_options:[],components:[], scale:{x:1, y:1, z:1}})
     return (
         <ModuleContext.Provider
             value={{

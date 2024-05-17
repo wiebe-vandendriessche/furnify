@@ -1,42 +1,46 @@
-import { MathUtils, Color } from 'three'
+import {MathUtils, Color, TextureLoader} from 'three'
 import { useCallback, useRef, useEffect, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import {useFrame, useLoader} from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useGLTF } from '@react-three/drei'
 import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
+import {useModuleContext} from "../../contexts/ModuleContext.jsx";
 import { useIntersectionContext } from '../../contexts/IntersectionContext'
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
-    const group = useRef();
+    const {chosen_module}=useModuleContext();
+    const { specs,modelRotation } = useConfiguratorContext();
+    console.log("MODULE");
+    console.log(chosen_module.name);
+    const { nodes, materials } = useGLTF('/models/'+chosen_module.name+'.gltf')
+    const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
+    const group= useRef();
     const pos = useRef(position)
 
-    const [width, setModelWidth] = useState(1.7);
-    const [depth, setModelDepth] = useState(3.150);
-    const { specs, modelRotation } = useConfiguratorContext();
-    //const { nodes, materials } = useGLTF('/models/tv_wand_'+specs.color+'_'+specs.material+'.gltf')
-    const { nodes, materials } = useGLTF('/models/final_try.gltf')
+    const [width, setModelWidth] = useState(chosen_module.width);
+    const [depth, setModelDepth] = useState(chosen_module.open);
 
     //retrieve model position from configuratorcontext
     const { setModelPosition } = useConfiguratorContext();
-    
+
     // swapping depth and width depending on rotation
     useEffect(() => {
         if (modelRotation === 0) {
-            setModelWidth(1.7);
-            setModelDepth(3.150);
+            setModelWidth(chosen_module.width);
+            setModelDepth(chosen_module.open);
         } else if (modelRotation === Math.PI / 2) {
-            setModelWidth(3.150);
-            setModelDepth(1.7);
+            setModelWidth(chosen_module.open);
+            setModelDepth(chosen_module.width);
         } else if (modelRotation === Math.PI) {
-            setModelWidth(1.7);
-            setModelDepth(3.150);
+            setModelWidth(chosen_module.width);
+            setModelDepth(chosen_module.open);
         } else if (modelRotation === -Math.PI / 2) {
-            setModelWidth(3.150);
-            setModelDepth(1.7);
+            setModelWidth(chosen_module.open);
+            setModelDepth(chosen_module.width);
         }
-    }, [modelRotation]);
+    }, [modelRotation, chosen_module]);
 
 
     const maxX2 = maxX / 2;
@@ -190,9 +194,11 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     // Sla de oorspronkelijke kleuren op wanneer het component wordt gemonteerd
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
-        const originalColors = nodes.bureaum_kastm_kast.children.map(object => object.material.color.clone());
+        const originalColors = nodes[chosen_module.name].children.map(object => object.material.color.clone());
+        console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
+
 
     const [delayedActive, setDelayedActive] = useState(false);
     let timeoutId = null;
@@ -229,16 +235,29 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
         }
 
         group.current.children.forEach((object, i) => {
-            const originalColor = originalColors[i];
+            // Gebruik de opgeslagen oorspronkelijke kleuren om de kleur terug te zetten wanneer het hover-effect eindigt
+            let originalColor = originalColors[i];
+            // Making it possible to switch colors on an object
+            if(object.material.name.includes("Color")){
+                originalColor=specs.color;
+            }
+
+            if(object.material.name.includes("Wood") & object.material.map!=null){
+                object.material.map=texture;
+            }
             easing.dampC(object.material.color, active ? 'grey' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
+    console.log("AFMETINGEN");
+    console.log(chosen_module);
+    console.log(group);
+
 
     //save position also in configuratorcontext
     useEffect(() => {
         setModelPosition(pos.current);
     }, [pos.current]);
-    
+
     const { addDObstruction, removeDObstruction } = useIntersectionContext();
 
     //sending mesh data to IntersectionContext when component mounts
@@ -246,12 +265,12 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     useEffect(() => {
         addDObstruction(group.current, id);
     }, [addDObstruction, removeDObstruction, active]);
-
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
-                {nodes.bureaum_kastm_kast.children.map(function (object, i) {
-                    return <mesh key={"texture" + i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                { nodes[chosen_module.name].children.map(function(object, i){
+
+                    return <mesh scale={[chosen_module.width/chosen_module.width_options[0].value, 1, 1]} key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
 

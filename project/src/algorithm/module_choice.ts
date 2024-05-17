@@ -3,7 +3,7 @@ import { parseCsvData } from "./read_file_csv";
 const MARGE = 1
 let modules: Module[] = []
 
-export const check = (val: any, varia: any, get2D: any) => {
+export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
     let func = val.functionalities
     let dim = val.dimensions
     
@@ -72,14 +72,14 @@ export const check = (val: any, varia: any, get2D: any) => {
     //room has other 
     else {
         let sides2D = get2D.lines;
-        console.log(sides2D)
         if (sides2D.length!= 0) {
+            let height = wallProperties.height;
             let sides: number[] = []
             let result_size: Module[] = [];
             sides2D.forEach(side => { sides.push(side.getLength()) })
             sides.sort().reverse()
             result.forEach(mod => {
-                if (mod.correct_side(sides[0])) {
+                if (mod.correct_side(sides[0],height)) {
                     result_size.push(mod)
                 }
             })
