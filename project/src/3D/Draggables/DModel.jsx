@@ -7,6 +7,7 @@ import { useGLTF } from '@react-three/drei'
 import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
 import {useModuleContext} from "../../contexts/ModuleContext.jsx";
 import { useIntersectionContext } from '../../contexts/IntersectionContext'
+import * as THREE from "three";
 
 export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
 
@@ -18,12 +19,23 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
     const group= useRef();
     const pos = useRef(position)
+    const [sizes, setSizes]=useState({x:1, y:1, z:1})
+    useEffect(()=>
+    {
+        if(group.current){
+            setSizes(new THREE.Box3().setFromObject(group.current).getSize(new THREE.Vector3()));
+        }
+    },[group.current])
 
     const [width, setModelWidth] = useState(chosen_module.width);
     const [depth, setModelDepth] = useState(chosen_module.open);
 
     //retrieve model position from configuratorcontext
     const { setModelPosition } = useConfiguratorContext();
+
+
+
+
 
     // swapping depth and width depending on rotation
     useEffect(() => {
@@ -270,7 +282,7 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
                 { nodes[chosen_module.name].children.map(function(object, i){
 
-                    return <mesh scale={[chosen_module.width/chosen_module.width_options[0].value, 1, 1]} key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                    return <mesh scale={[chosen_module.width/sizes.x, chosen_module.open/sizes.y, chosen_module.height/sizes.z]} key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
                 })}
             </group>
 
