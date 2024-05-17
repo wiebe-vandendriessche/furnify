@@ -218,7 +218,7 @@ export const FloorplanScene = () => {
             }}
             maxZoom={10000}
             minZoom={10}
-            zoomToCursor={true} 
+            zoomToCursor={true}
           />
           {showGrid && (
             <GridComponent
@@ -240,7 +240,9 @@ export const FloorplanScene = () => {
           onMouseLeave={handleMouseLeave}
         >
           <ambientLight intensity={0.7} />
-          <directionalLight castShadow position={[30, 50, 30]} />
+          <directionalLight castShadow position={[60, 90, 60]} shadow-mapSize={[1024, 1024]}>
+            <orthographicCamera attach="shadow-camera" args={[-10, 10, 10, -10]} />
+          </directionalLight>
           {sceneObjects.map((object, index) => (
             <primitive key={index} object={object} />
           ))}
