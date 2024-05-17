@@ -54,7 +54,7 @@ export const DrawingProvider = ({ children }) => {
     const { mesh: floor, offset } = createFloor(points);
     const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
-    // console.log(walls, floor);
+    alert("The 2D to 3D conversion is still in development. \nThe 3D model here doesn't yet have the same functionality as the rectangular 3D model. \n(Adding modules and obstacles)");
   };
 
   function determineOrientation(points) {
