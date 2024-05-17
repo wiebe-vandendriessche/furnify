@@ -20,7 +20,7 @@ const Scene = () => {
     let width = dimensions.width;
     let depth = dimensions.length;
     let height = dimensions.height;
-    const { getOtherObstacles } = useConfiguratorContext();
+    const { getOtherObstacles, obstructionPositions } = useConfiguratorContext();
     const { getLights } = useConfiguratorContext();
     const { getErrorBoxes } = useIntersectionContext();
 
@@ -29,7 +29,7 @@ const Scene = () => {
     const errorBoxes = getErrorBoxes();
 
     const { modelPosition } = useConfiguratorContext();
-
+    console.log(obstructionPositions)
 
     return (
         <>
@@ -47,8 +47,9 @@ const Scene = () => {
                         {/* Render DObstruction for each obstacle */}
                         {obstacles.map((obstacle) => (
                             <DObstruction
+                                key={obstacle.id}
                                 obstructionKey={obstacle.id}
-                                position={[0, 0, 0]}
+                                position={obstructionPositions[obstacle.id]}
                                 dimensions={[obstacle.width / 100, obstacle.height / 100, obstacle.obstLength / 100]}
                                 maxX={width}
                                 maxZ={depth}
@@ -59,8 +60,9 @@ const Scene = () => {
                         ))}
                         {lights.map((light) => (
                             <DLight
+                                key={light.id}
                                 obstructionKey={light.id}
-                                position={[0, 0, 0]}
+                                position={obstructionPositions[light.id]}
                                 dimensions={[light.width / 100, light.height / 100, light.obstLength / 100]}
                                 maxX={width}
                                 maxZ={depth}

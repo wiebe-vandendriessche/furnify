@@ -1,7 +1,4 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
-import React, { Suspense } from 'react';
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
-import { get, model } from 'mongoose';
 
 const ConfiguratorContext = createContext();
 
@@ -36,7 +33,7 @@ export const ConfiguratorProvider = ({ children }) => {
     //------------------------------------------------------------------------------------------------------------------------
     const dobstructionPositions = useRef({});
     //------------------------------------------------------------------------------------------------------------------------
-
+    const [obstructionPositions, setObstructionPositions]=useState(dobstructionPositions.current)
 
     // vanaf hier pruts code voor posities bij te houden maar werkt (niet gebruiken of aanpassen)
     //------------------------------------------------------------------------------------------------------------------------
@@ -47,8 +44,8 @@ export const ConfiguratorProvider = ({ children }) => {
         if (position) {
             dobstructionPositions.current[obstructionKey] = position; // Storing mesh with its ID as the key
         }
+        setObstructionPositions(dobstructionPositions.current);
         console.log("positions", dobstructionPositions.current);
-
     };
 
     useEffect(() => {
@@ -147,6 +144,8 @@ export const ConfiguratorProvider = ({ children }) => {
         getLightsAndOtherObstacles,
         addDObstructionPosition,
         removeDObstructionPosition,
+        obstructionPositions,
+        setObstructionPositions
     }
 
 
