@@ -8,57 +8,13 @@ import React, {useEffect, useState} from "react";
 import Button from "react-bootstrap/Button";
 import { get_modules } from './algorithm/module_choice'
 import { useTranslation } from 'react-i18next'
+import {PrivacyButton} from "./Privacy/PrivacyButton";
+import {PrivacyPolicy} from "./Privacy/PrivacyPolicy.jsx";
 
 
-
-
-function PrivacyPolicy(props) {
-    const { t, i18n } = useTranslation();
-
-    useEffect(() => {
-        const lng = navigator.language;
-        i18n.changeLanguage(lng);
-    }, [])
-    return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    {t('privacy.title')}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <p>
-                    {t('privacy.intro')}
-                    </p>
-                </div>
-                <h4>Furnify</h4>
-                <div><p>{t('privacy.pol')}
-                    <a href={"https://www.furnifyhome.eu/pages/privacy"}>
-                    {t('privacy.here')}</a></p>
-                </div>
-                <h4>Mailchimp</h4>
-                <div><p>{t('privacy.mailchimp')}</p></div>
-                <div className="content__gdprLegal"><p>{t('privacy.disclaimer1')}<a
-                        href="https://mailchimp.com/legal/terms">{t('privacy.learn')}</a> {t('privacy.disclaimer2')}</p>
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant={"danger"} onClick={props.onHide}>
-                    {t('privacy.close')}</Button>
-            </Modal.Footer>
-        </Modal>
-    );
-}
 
 
 function App() {
-    const { t, i18n } = useTranslation();
 
     const [modalShow, setModalShow] = React.useState(false);
     const {rectangular, setRectangular} = useConfiguratorContext();
@@ -74,9 +30,7 @@ function App() {
                     {!rectangular && <FloorplanScene/>}
                 </div>
 
-                <Button className={"privacy"} variant="danger" onClick={() => setModalShow(true)}>
-                    {t('privacy.privacy')}
-                </Button>
+                <PrivacyButton setModalShow={setModalShow}/>
 
                 <PrivacyPolicy
                     show={modalShow}
