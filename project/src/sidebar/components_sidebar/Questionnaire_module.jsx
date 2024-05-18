@@ -24,13 +24,11 @@ export function Questionnaire_module() {
     const { varia } = useVariaContext();
 
 
-    const { rotate } = useConfiguratorContext();
+    const { rotate, disable} = useConfiguratorContext();
     const { checkIntersections } = useIntersectionContext();
-
+    const value=useConfiguratorContext()
     const get2D = use2d();
     const { wallProperties, setWallProperties }  = use2d();
-    const value = useConfiguratorContext();
-
 
     const { errors, setErrors } = useModuleContext();
     const { possible_modules, setPossileModules } = useModuleContext();
@@ -70,7 +68,9 @@ export function Questionnaire_module() {
                         <div className={"mb-3"}>
                             <h5>{t('questionnaire_module.question')}</h5>
                             <p>{t('questionnaire_module.warning')}</p>
-                            <Button onClick={module} variant="danger">
+                            <Button onClick={module} variant="danger"
+                                    disabled={disable}
+                            >
                                 {t('questionnaire_module.button')}
                             </Button>
                         </div>

@@ -17,14 +17,14 @@ export function Questionnaire_spec() {
     }, [])
 
     //Uses reactcontext
-    const {specs, setSpecs} = useConfiguratorContext();
+    const {specs, setSpecs, disable} = useConfiguratorContext();
     const {varia, setVaria} = useVariaContext();
 
     const changeSpecs = (event) => {
         setSpecs({...specs, [event.target.name]: event.target.value})
     }
     const changeVaria = (event) => {
-        setVaria({[event.target.name]: event.target.value});
+        setVaria({...varia, [event.target.name]: event.target.value});
     }
     return (
         <div className="m-2">
@@ -39,19 +39,25 @@ export function Questionnaire_spec() {
                                                       name="material"
                                                       data-testid={"btn-specs-material-birch"}
                                                       onChange={changeSpecs}
-                                                      checked={specs.material === "birch"}>
+                                                      checked={specs.material === "birch"
+                                        }
+                                                      disabled={disable}>
                                             {t('questionnaire_specs.materials.birch')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="matOak" value={"oak"}
                                                       name="material"
                                                       data-testid={"btn-specs-material-oak"}
-                                                      onChange={changeSpecs} checked={specs.material === "oak"}>
+                                                      onChange={changeSpecs} checked={specs.material === "oak"}
+                                                      disabled={disable}
+                                        >
                                             {t('questionnaire_specs.materials.oak')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="matWalnut" name="material"
                                                       value={"walnut"}
                                                       data-testid={"btn-specs-material-walnut"}
-                                                      onChange={changeSpecs} checked={specs.material === "walnut"}>
+                                                      onChange={changeSpecs} checked={specs.material === "walnut"}
+                                                      disabled={disable}
+                                        >
                                             {t('questionnaire_specs.materials.walnut')}
                                         </ToggleButton>
                                     </ButtonGroup>
@@ -60,12 +66,16 @@ export function Questionnaire_spec() {
                                     <ButtonGroup>
                                         <ToggleButton variant={"danger"} type="radio" id="colWhite" name="color" value="#FFFFFF"
                                                       data-testid={"btn-specs-color-white"}
-                                                      onChange={changeSpecs} checked={specs.color == "#FFFFFF"}>
+                                                      onChange={changeSpecs} checked={specs.color == "#FFFFFF"}
+                                                      disabled={disable}
+                                        >
                                             {t('questionnaire_specs.materials.white')}
                                         </ToggleButton>
                                         <ToggleButton variant={"danger"} type="radio" id="colBlack" name="color" value="#565656"
                                                       data-testid={"btn-specs-color-black"}
-                                                      onChange={changeSpecs} checked={specs.color == "#565656"}>
+                                                      onChange={changeSpecs} checked={specs.color == "#565656"}
+                                                      disabled={disable}
+                                        >
                                             {t('questionnaire_specs.materials.black')}
                                         </ToggleButton>
                                     </ButtonGroup>
@@ -81,7 +91,9 @@ export function Questionnaire_spec() {
                         <div className={"mb-3"}><h5 data-testid={"question-specs-other"} >{t('questionnaire_specs.q_other')}</h5></div>
                     </FormGroup>
                     <Form.Control as={"textarea"} data-testid={"area-specs-requirements"} rows="3" cols="40" value={varia.requirements}
-                                  name="requirements" onChange={changeVaria}></Form.Control>
+                                  name="requirements" onChange={changeVaria}
+                                  readOnly={disable}
+                    ></Form.Control>
                 </div>
         </div>
     )
