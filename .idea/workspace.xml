@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP">
-      <change beforePath="$PROJECT_DIR$/project/src/3D/Draggables/DModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/3D/Draggables/DModel.jsx" afterDir="false" />
+    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP ON OFF">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +66,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.serve" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -85,7 +86,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715978052860</updated>
-      <workItem from="1715978057776" duration="7422000" />
+      <workItem from="1715978057776" duration="8784000" />
     </task>
     <task id="LOCAL-00001" summary="fix phone_number">
       <option name="closed" value="true" />
@@ -103,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716022937832</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP ON OFF">
+      <option name="closed" value="true" />
+      <created>1716023246744</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1716023246744</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +121,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix phone_number" />
     <MESSAGE value="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP" />
-    <option name="LAST_COMMIT_MESSAGE" value="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP" />
+    <MESSAGE value="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP ON OFF" />
+    <option name="LAST_COMMIT_MESSAGE" value="MERGE/ DOUBLE OPT IN MAILCHIMP&#10;AUTO SNAP ON OFF" />
   </component>
 </project>
