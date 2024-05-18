@@ -67,7 +67,6 @@ i18n
                             no: "no",
                         },
 
-
                     },
                     questionnaire_func: {
                         q_space: "Which living space do you want to optimize?",
@@ -192,6 +191,17 @@ i18n
                         disclaimer2: " about Mailchimp's privacy practices.",
                         close: "Close",
                         privacy: "Privacy"
+                    },
+                    floorplan: {
+                        slider: "Grid size",
+                        height: "Height",
+                        backto: "Going back to 2D will remove all 3D objects. Do you want to continue?",
+                        convertedTo3D: "The 2D to 3D conversion is still in development. \nThe 3D model here doesn't yet have the same functionality as the rectangular 3D model. \n(Adding modules and obstacles)",
+                        drawingMode: "Toggle Drawing Mode",
+                        remove: "Remove All",
+                        orthogonalMode: "Toggle Orthogonal Mode",
+                        reset: "Reset View",
+                        grid: "Toggle Grid and Snapping"
                     }
                 }
             },
@@ -367,7 +377,19 @@ i18n
                         title:"Privacybeleid",
                         close:"Sluiten",
                         privacy: "Privacy"
+                    },
+                    floorplan: {
+                        slider: "Rastergrootte",
+                        height: "Hoogte",
+                        backto: "Teruggaan naar 2D verwijdert alle 3D-objecten. Wil je doorgaan?",
+                        convertedTo3D: "De conversie van 2D naar 3D is nog in ontwikkeling. \nHet 3D-model hier heeft nog niet dezelfde functionaliteit als het rechthoekige 3D-model. \n(Modules en obstakels toevoegen)",
+                        drawingMode: "Teken Modus Wisselen",
+                        remove: "Alles Verwijderen",
+                        orthogonalMode: "Orthogonale Modus Wisselen",
+                        reset: "Weergave Resetten",
+                        grid: "Raster en Snappen Wisselen"
                     }
+
                 }
             },
             fr: {
@@ -541,6 +563,17 @@ i18n
                         disclaimer2: " sur les pratiques de Mailchimp en matière de protection de la vie privée.",
                         close: "Fermer",
                         privacy: "Confidentialité"
+                    },
+                    floorplan: {
+                        slider: "Taille de la grille",
+                        height: "Hauteur",
+                        backto: "Revenir en 2D supprimera tous les objets 3D. Voulez-vous continuer ?",
+                        convertedTo3D: "La conversion de 2D à 3D est encore en développement. \nLe modèle 3D ici n'a pas encore les mêmes fonctionnalités que le modèle 3D rectangulaire. \n(Ajout de modules et d'obstacles)",
+                        drawingMode: "Basculer en mode dessin",
+                        remove: "Tout supprimer",
+                        orthogonalMode: "Basculer en mode orthogonal",
+                        reset: "Réinitialiser la vue",
+                        grid: "Basculer la grille et l'accrochage"
                     }
                 }
             },
@@ -715,6 +748,17 @@ i18n
                         disclaimer2: " über die Datenschutzpraktiken von Mailchimp.",
                         privacy:"Datenschutz",
                         close:"Schließen"
+                    },
+                    floorplan: {
+                        slider: "Rastergröße",
+                        height: "Höhe",
+                        backto: "Das Zurückkehren zu 2D entfernt alle 3D-Objekte. Möchten Sie fortfahren?",
+                        convertedTo3D: "Die Umwandlung von 2D zu 3D befindet sich noch in der Entwicklung. \nDas 3D-Modell hier hat noch nicht die gleichen Funktionen wie das rechteckige 3D-Modell. \n(Hinzufügen von Modulen und Hindernissen)",
+                        drawingMode: "Zeichenmodus umschalten",
+                        remove: "Alles entfernen",
+                        orthogonalMode: "Orthogonalen Modus umschalten",
+                        reset: "Ansicht zurücksetzen",
+                        grid: "Raster und Einrasten umschalten"
                     }
                 }
             },
@@ -889,6 +933,17 @@ i18n
                         disclaimer2: " sobre las prácticas de privacidad de Mailchimp.",
                         privacy: "Privacidad",
                         close: "Cerrar"
+                    },
+                    floorplan: {
+                        slider: "Tamaño de la cuadrícula",
+                        height: "Altura",
+                        backto: "Volver a 2D eliminará todos los objetos 3D. ¿Quieres continuar?",
+                        convertedTo3D: "La conversión de 2D a 3D aún está en desarrollo. \nEl modelo 3D aquí no tiene todavía las mismas funcionalidades que el modelo 3D rectangular. \n(Añadir módulos y obstáculos)",
+                        drawingMode: "Alternar modo de dibujo",
+                        remove: "Eliminar todo",
+                        orthogonalMode: "Alternar modo ortogonal",
+                        reset: "Restablecer vista",
+                        grid: "Alternar cuadrícula y ajuste"
                     }
                 }
             },
@@ -1063,6 +1118,17 @@ i18n
                         disclaimer2: " sulle pratiche di privacy di Mailchimp.",
                         privacy: "Privacy",
                         close:"Chiudere"
+                    },
+                    floorplan: {
+                        slider: "Dimensione griglia",
+                        height: "Altezza",
+                        backto: "Tornare alla visualizzazione 2D rimuoverà tutti gli oggetti 3D. Vuoi continuare?",
+                        convertedTo3D: "La conversione da 2D a 3D è ancora in sviluppo. \nIl modello 3D qui non ha ancora le stesse funzionalità del modello 3D rettangolare. \n(Aggiunta di moduli e ostacoli)",
+                        drawingMode: "Attiva/Disattiva modalità disegno",
+                        remove: "Rimuovi tutto",
+                        orthogonalMode: "Attiva/Disattiva modalità ortogonale",
+                        reset: "Reimposta vista",
+                        grid: "Attiva/Disattiva griglia e snapping"
                     }
                 }
             }

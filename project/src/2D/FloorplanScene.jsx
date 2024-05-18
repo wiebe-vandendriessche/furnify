@@ -11,7 +11,7 @@ import {
   Rulers,
   Trash,
 } from "react-bootstrap-icons";
-
+import { useTranslation } from 'react-i18next';
 import * as THREE from "three";
 import { GridComponent } from "./components/GridComponent";
 import "./Floorplan.css";
@@ -32,6 +32,8 @@ export const FloorplanScene = () => {
 
   const { skyboxPath, setSkyboxPath } = useConfiguratorContext();
   const { setWallProperties, wallProperties } = use2d();
+
+  const { t, i18n } = useTranslation();
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -80,7 +82,7 @@ export const FloorplanScene = () => {
   const handle2DButtonClicked = (event) => {
     event.stopPropagation();
     let goback = window.confirm(
-      "Going back to 2D will remove all 3D objects. Do you want to continue?"
+      t('floorplan.backto')
     );
     if (goback) {
       setShow3D(false);
@@ -97,7 +99,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${isDrawing ? "clicked" : "unclicked"
                 }`}
               onClick={handleDrawingButtonClick}
-              title="Toggle Drawing Mode"
+              title={t('floorplan.drawingMode')}
             >
               <PencilSquare />
             </button>
@@ -105,7 +107,7 @@ export const FloorplanScene = () => {
             <button
               className={`btn-circle btn-lg unclicked`}
               onClick={handleRemoveButtonClick}
-              title="Remove All"
+              title={t('floorplan.remove')}
             >
               <Trash />
             </button>
@@ -114,7 +116,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${orthogonalMode ? "clicked" : "unclicked"
                 }`}
               onClick={handleOrthogonalButtonClick}
-              title="Toggle Orthogonal Mode"
+              title={t('floorplan.orthogonalMode')}
             >
               <Rulers />
             </button>
@@ -122,7 +124,7 @@ export const FloorplanScene = () => {
             <button
               className={`btn-circle btn-lg unclicked`}
               onClick={handleHomeButtonClicked}
-              title="Reset View"
+              title={t('floorplan.reset')}
             >
               <House />
             </button>
@@ -131,7 +133,7 @@ export const FloorplanScene = () => {
               className={`btn-circle btn-lg ${showGrid ? "clicked" : "unclicked"
                 }`}
               onClick={handleGridButtonCLicked}
-              title="Toggle Grid and Snapping"
+              title={t('floorplan.grid')}
             >
               <Grid3x3 />
             </button>

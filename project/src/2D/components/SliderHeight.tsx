@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { use2d } from '../../contexts/2dContext';
+import { useTranslation } from 'react-i18next';
 
 export function SliderHeightComponent({setWallProperties, wallProperties}) {
-    // const [wallProperties, setWallProperties] = use2d();
+    const { t, i18n } = useTranslation();
 
   // Handle changing the slider
   const handleSliderChange = (event) => {
@@ -21,7 +22,7 @@ export function SliderHeightComponent({setWallProperties, wallProperties}) {
         value={wallProperties.height}  // Bind the slider's value to the component's state
         onChange={handleSliderChange}  // Set the method to call on value change
       />
-      <div style={{margin: '0px 0px 0px 10px'}}>Height: {wallProperties.height}m</div>
+      <div style={{margin: '0px 0px 0px 10px'}}>{t('floorplan.height')}: {wallProperties.height}m</div>
     </div>
   );
 }

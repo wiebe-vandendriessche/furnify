@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function SliderComponent({ gridSize, setgridSize }) {
-  // Initialize state with the default value of the slider
-  // const [gridSize, setgridSize] = useState(50);
+  const { t, i18n } = useTranslation();
 
   // Handle changing the slider
   const handleSliderChange = (event) => {
@@ -21,7 +21,7 @@ export function SliderComponent({ gridSize, setgridSize }) {
         value={gridSize}  // Bind the slider's value to the component's state
         onChange={handleSliderChange}  // Set the method to call on value change
       />
-      <div style={{margin: '0px 0px 0px 10px'}}>Grid size: {gridSize}m</div>
+      <div style={{margin: '0px 0px 0px 10px'}}>{t('floorplan.slider')}: {gridSize}m</div>
     </div>
   );
 }

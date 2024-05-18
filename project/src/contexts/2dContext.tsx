@@ -14,6 +14,7 @@ import {
   Vector3,
 } from "three";
 import { useThree } from "@react-three/fiber";
+import { useTranslation } from "react-i18next";
 
 const DrawingContext = createContext<any>(null);
 
@@ -46,6 +47,8 @@ export const DrawingProvider = ({ children }) => {
     thickness: number;
   }>({ height: 2, thickness: 0.3 });
 
+  const { t, i18n } = useTranslation();
+
   type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
 
@@ -54,7 +57,7 @@ export const DrawingProvider = ({ children }) => {
     const { mesh: floor, offset } = createFloor(points);
     const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
-    alert("The 2D to 3D conversion is still in development. \nThe 3D model here doesn't yet have the same functionality as the rectangular 3D model. \n(Adding modules and obstacles)");
+    alert(t("floorplan.convertedTo3D"));
   };
 
   function determineOrientation(points) {
