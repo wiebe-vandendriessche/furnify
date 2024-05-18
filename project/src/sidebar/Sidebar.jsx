@@ -78,14 +78,11 @@ export function Sidebar() {
 
         const { firstname, lastname, email, phone_number, address } = response.contact;
 
-
-        setContact(prevContact => ({
-            ...prevContact,
+        setContact(() => ({
             firstname: firstname,
             lastname: lastname,
             email: email,
             phone_number: {
-                ...prevContact.phone_number,
                 number: phone_number.number,
                 country: phone_number.country
             },
@@ -150,7 +147,8 @@ export function Sidebar() {
         setSkyboxPath(response.skyboxPath);
 
         setRectangular(response.rectangular);
-
+        console.log("ANTWOORD")
+        console.log(response)
         setPossileModules(response.possible_modules);
 
         setModelPosition(response.modelPosition);
@@ -160,7 +158,8 @@ export function Sidebar() {
         setRotationIndex(response.rotationIndex);
 
     }
-
+    console.log(modelPosition);
+    console.log(rotationIndex);
     const updateModuleFromResponse = (response) =>{
         const { softer, demands, roomSize, points2D } = response.errors;
         console.log("HIER")
@@ -202,11 +201,8 @@ export function Sidebar() {
                     console.log(response.data);
                     console.log("DAAR")
                     updateContactFromResponse(response.data);
-                    console.log("contact")
                     updateSelectedWallFromResponse(response.data);
-                    console.log("wall")
                     updateVariaFromResponse(response.data);
-                    console.log("varia")
                     updateConfiguratorFromResponse(response.data);
                     updateModuleFromResponse(response.data);
 
