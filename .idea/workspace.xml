@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="fix put and post request" />
+    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="fix put and post request">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Contact.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/components_sidebar/Contact.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,10 +20,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2gbtLaa2k1DUDhKSSHvBlXWU25t" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,6 +41,7 @@
     "nodejs_package_manager_path": "npm",
     "npm.dev.executor": "Run",
     "npm.serve.executor": "Run",
+    "ts.external.directory.path": "D:\\Informatica\\jaar3\\VOP\\furnify2\\project\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -83,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715978052860</updated>
-      <workItem from="1715978057776" duration="9436000" />
+      <workItem from="1715978057776" duration="10924000" />
     </task>
     <task id="LOCAL-00001" summary="fix phone_number">
       <option name="closed" value="true" />
@@ -125,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716025058774</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix put and post request">
+      <option name="closed" value="true" />
+      <created>1716025303218</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716025303218</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

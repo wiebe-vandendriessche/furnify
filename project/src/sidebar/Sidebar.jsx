@@ -237,39 +237,6 @@ export function Sidebar() {
 
     const onSubmit = async e => {
         e.preventDefault();
-        let obs = "_";
-        Object.entries(obstacles).forEach(([type, items]) => {
-            items.forEach((item) => {
-                obs += item.id + ". " + item.type;
-                switch (item.type) {
-                    case 'window':
-                        if (item.inside_window === 'yes') {
-                            obs += " open on the inside";
-                        } else {
-                            obs += " open on the outside";
-                        }
-                        obs += " width:" + item.width + " height:" + item.height;
-                        break;
-                    case 'door':
-                        obs += " open " + item.opening_door;
-                        obs += " width:" + item.width + " height:" + item.height;
-                        break;
-                    default:
-                        obs += " width:" + item.width + " length:" + item.obstLength + " height:" + item.height;
-                        break;
-                }
-                if (item.obstacleWall) {
-                    obs += " obstacle wall:" + item.obstacleWall;
-                }
-                if (item.windowWall) {
-                    obs += " window wall:" + item.windowWall;
-                }
-                if (item.windowXpos && item.windowYpos) {
-                    obs += " position:" + item.windowXpos + "," + item.windowYpos;
-                }
-                obs += "\n";
-            });
-        });
 
         let dim=""
         Object.entries(dimensions).map(([key, value]) => (
@@ -284,13 +251,13 @@ export function Sidebar() {
         });
 
         let color = specs.color.toString().replace("#",'');
-        let getURI = window.location.href+contact.email;
         const url = import.meta.env.VITE_MC_URI;
 
         console.log(superContext);
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
+                    &POSTCODE=${contact.postcode}&COUNTRY=${contact.country}&CITY=${contact.city}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
+                    &COLOR=${color}&REQ=${varia.requirements}&MODULE=${chosen_module.name}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
             if (result === "success") {
                 axios.post(`http://localhost:3000/api/contact`, superContext)
