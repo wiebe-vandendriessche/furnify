@@ -92,12 +92,10 @@ export const IntersectionProvider = ({ children }) => {
         }
 
         if (intersectionsDetected) {
-            console.log(t('alert.yes'));
             window.alert(t('alert.yes') +'\n'+ t('alert.adjust'));
         }
 
         if (!intersectionsDetected) {
-            console.log(t('alert.no'));
             window.alert(t('alert.no')+'\n'+t('alert.proceed')+'\n'+t('alert.again'));
         }
 

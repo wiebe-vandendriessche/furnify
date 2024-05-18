@@ -20,11 +20,7 @@ export const DModel = ({
 
     const {chosen_module} = useModuleContext();
     const {specs, modelRotation} = useConfiguratorContext();
-    console.log("MODULE");
-    console.log(chosen_module.name);
     const {nodes, materials} = useGLTF('/models/' + chosen_module.name + '.gltf')
-    console.log("NODES")
-    console.log(nodes)
     const texture = useLoader(TextureLoader, '/models/' + specs.material + '.jpg')
     const group = useRef();
     const pos = useRef(position)
@@ -165,8 +161,6 @@ export const DModel = ({
     //remove ability for module to stick to wall if it comes from get Request
         // makes sure when enlarging the room or rotating the model sticks to the wall in x
         useEffect(() => {
-            console.log("get is");
-            console.log(get)
             if(!get){
                 const [x, y, z] = pos.current;
                 let newX = x
@@ -187,8 +181,6 @@ export const DModel = ({
 
         // makes sure when enlarging the room or rotating the model sticks to the wall in z
         useEffect(() => {
-            console.log("get is");
-            console.log(get);
             if(!get){
                 const [x, y, z] = pos.current;
                 let newZ = z
@@ -217,7 +209,6 @@ export const DModel = ({
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
         const originalColors = nodes[chosen_module.name].children.map(object => object.material.color.clone());
-        console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
 
@@ -270,9 +261,6 @@ export const DModel = ({
             easing.dampC(object.material.color, active ? 'grey' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
-    console.log("AFMETINGEN");
-    console.log(chosen_module);
-    console.log(group);
 
 
     //save position also in configuratorcontext

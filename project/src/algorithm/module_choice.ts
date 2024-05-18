@@ -26,8 +26,6 @@ export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
 
     //check if the exact combination is possible
     let result: Module[] = [];
-    console.log("ALGORITHM: ")
-    console.log(modules)
     modules.forEach(mod => {
         if (mod.type(func.bed, func.office_space, func.sofa, func.storage_space)) {
             result.push(mod)
@@ -93,12 +91,10 @@ export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
         }
 
     }
-    console.log("ALGORITHM: the possible results:")
     const regularObjects=result.map(module=>{
         const regularObject={...module};
         return regularObject;
     })
-    console.log(regularObjects)
     return {possible: regularObjects, errors:errors}
 
 }

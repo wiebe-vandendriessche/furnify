@@ -76,7 +76,7 @@ export function Sidebar() {
 
     const updateContactFromResponse = (response) => {
 
-        const { firstname, lastname, email, phone_number, address } = response.contact;
+        const { firstname, lastname, email, phone_number, address, country, postcode, city} = response.contact;
 
         setContact(() => ({
             firstname: firstname,
@@ -86,7 +86,10 @@ export function Sidebar() {
                 number: phone_number.number,
                 country: phone_number.country
             },
-            address: address
+            address: address,
+            country: country,
+            postcode: postcode,
+            city: city
         }));
     };
     const updateSelectedWallFromResponse = (response) => {
@@ -147,8 +150,6 @@ export function Sidebar() {
         setSkyboxPath(response.skyboxPath);
 
         setRectangular(response.rectangular);
-        console.log("ANTWOORD")
-        console.log(response)
         setPossileModules(response.possible_modules);
 
         setModelPosition(response.modelPosition);
@@ -158,12 +159,8 @@ export function Sidebar() {
         setRotationIndex(response.rotationIndex);
 
     }
-    console.log(modelPosition);
-    console.log(rotationIndex);
     const updateModuleFromResponse = (response) =>{
         const { softer, demands, roomSize, points2D } = response.errors;
-        console.log("HIER")
-        console.log(response)
         setErrors({
             softer: softer,
             demands: demands,
@@ -189,7 +186,6 @@ export function Sidebar() {
         });
     }
 
-    console.log(chosen_module);
 
     const {email} = useParams();
 
@@ -213,7 +209,6 @@ export function Sidebar() {
 
 
     const showNextPart = () => {
-        console.log(contact.phone_number);
         switch (part) {
             case 0:
                 return <Questionnaire_space />
@@ -253,7 +248,6 @@ export function Sidebar() {
         let color = specs.color.toString().replace("#",'');
         const url = import.meta.env.VITE_MC_URI;
 
-        console.log(superContext);
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &POSTCODE=${contact.postcode}&COUNTRY=${contact.country}&CITY=${contact.city}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}

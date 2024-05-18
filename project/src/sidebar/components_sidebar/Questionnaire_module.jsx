@@ -44,7 +44,6 @@ export function Questionnaire_module() {
             points2D: result.errors.points2D
         });
         setPossileModules(result.possible);
-        console.log(result.possible);
         if (result.possible.length == 0) {
             setChosenModule({
                 name: "", height: 0, width: 0, depth: 0, open: 0, closed: 0, saved: 0, bed: false,

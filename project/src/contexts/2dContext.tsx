@@ -54,7 +54,6 @@ export const DrawingProvider = ({ children }) => {
     const { mesh: floor, offset } = createFloor(points);
     const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
-    // console.log(walls, floor);
   };
 
   function determineOrientation(points) {

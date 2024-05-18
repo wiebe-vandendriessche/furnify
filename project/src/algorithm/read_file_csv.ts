@@ -17,7 +17,6 @@ export async function parseCsvData(): Promise<any[]> {
         header: true
     })
     if (parsedData.errors.length > 0) {
-        console.log("ALGORITHM: ")
         console.error('Error parsing CSV:', parsedData.errors);
     }
 

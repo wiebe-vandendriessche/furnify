@@ -29,7 +29,6 @@ const Scene = () => {
     const errorBoxes = getErrorBoxes();
 
     const { modelPosition } = useConfiguratorContext();
-    console.log(obstructionPositions)
 
     return (
         <>

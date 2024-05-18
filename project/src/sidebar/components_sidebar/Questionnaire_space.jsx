@@ -29,7 +29,6 @@ export function Questionnaire_space() {
     }
 
     const changeDim2D = (event) => {
-        console.log("changing height: " + event.target.value);
         setWallProperties({height: event.target.value, thickness: wallProperties.thickness});
     }
 

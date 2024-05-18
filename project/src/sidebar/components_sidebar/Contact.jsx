@@ -69,6 +69,7 @@ function Contact() {
                             onChange={changeContact} />
             </FloatingLabel>
             <table>
+                <tbody>
                 <tr>
                     <td>
                         <FloatingLabel key={"address"}
@@ -85,6 +86,7 @@ function Contact() {
                 <tr>
                     <td>
                         <table>
+                            <tbody>
                             <tr>
                                 <td>
                                     <FloatingLabel key={"postcode"}
@@ -109,6 +111,7 @@ function Contact() {
                                     </FloatingLabel>
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
 
 
@@ -128,6 +131,8 @@ function Contact() {
                         </FloatingLabel>
                     </td>
                 </tr>
+                </tbody>
+
             </table>
             <Button variant={"danger"} type={"submit"}>{t('contact.submit')}</Button>
         </div>
