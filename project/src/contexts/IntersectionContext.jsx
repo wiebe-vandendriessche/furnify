@@ -51,7 +51,6 @@ export const IntersectionProvider = ({ children }) => {
     }, []);
 
     const checkIntersections = () => {
-        console.log('Checking intersections...');
 
         // Convert dictionary of meshes to an array of meshes
         const meshes = Object.values(dObstructions.current);
@@ -106,12 +105,6 @@ export const IntersectionProvider = ({ children }) => {
     const getErrorBoxes = () => {
         return errorBoxes;
     }
-
-    useEffect(() => {
-        console.log('Error boxes updated:');
-        console.log(errorBoxes);
-    }, [errorBoxes]);
-
 
     const value = {
         addDObstruction,
