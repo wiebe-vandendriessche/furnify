@@ -207,7 +207,7 @@ i18n
                         width: "Breedte",
                         height: "Hoogte",
                         other: "Anders",
-                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte",
+                        q_aspects: "Voeg toe met welke aspecten we rekening moeten houden in uw woonruimte",
                         aspect: "Aspect",
                         add_aspect: "Voeg een aspect toe"
                     },
@@ -358,10 +358,10 @@ i18n
                     },
                     privacy: {
                         intro:"De informatie die u invult, wordt door ons verzameld en verwerkt via verschillende diensten. Zie hieronder voor meer informatie.",
-                        pol:"De informatie die je invult op het formulier en de positie van de module in de 3D ruimte worden opgeslagen in een MongoDB database. De rest van Furnify's privacy policy vind je ",
+                        pol:"De informatie die u invult op het formulier en de positie van de module in de 3D ruimte worden opgeslagen in een MongoDB database. De rest van Furnify's privacy policy vind u ",
                         here: "hier",
-                        mailchimp:"Je kunt je op elk gewenst moment afmelden voor onze mailchimp-campagne door een mail te sturen naar info@furnifyhome.eu.",
-                        disclaimer1: "We gebruiken Mailchimp als ons marketingplatform. Door je hieronder in te schrijven, ga je ermee akkoord dat je gegevens worden overgedragen aan Mailchimp voor verwerking. ",
+                        mailchimp:"U kunt u op elk gewenst moment afmelden voor onze mailchimp-campagne door een mail te sturen naar info@furnifyhome.eu.",
+                        disclaimer1: "We gebruiken Mailchimp als ons marketingplatform. Door u hieronder in te schrijven, gaat u ermee akkoord dat uw gegevens worden overgedragen aan Mailchimp voor verwerking. ",
                         learn:"Meer informatie",
                         disclaimer2: " over de privacypraktijken van Mailchimp.",
                         title:"Privacybeleid",
