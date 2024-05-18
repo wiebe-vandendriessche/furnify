@@ -20,6 +20,8 @@ import Q1 from "./components_sidebar/Q1.jsx";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import Questionnaire_module from "./components_sidebar/Questionnaire_module.jsx";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 
 
@@ -229,6 +231,26 @@ export function Sidebar() {
         }
     }
 
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const handleClose = () => setShowModal(false);
+
+    const ConfirmationModal = ({ show, handleClose, message }) => {
+        return (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{message}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    };
+
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -264,8 +286,8 @@ export function Sidebar() {
                                 console.log(error)});
                     });
             }
-
-            alert(msg);
+            setModalMessage(msg);
+            setShowModal(true);
 
         });
     };
@@ -284,6 +306,7 @@ export function Sidebar() {
                         </a>
                         <Form onSubmit={onSubmit}>
                             {showNextPart()}
+                            <ConfirmationModal show={showModal} handleClose={handleClose} message={modalMessage} />
                         </Form>
                         <div className="bottom_btn">
                             <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}>
