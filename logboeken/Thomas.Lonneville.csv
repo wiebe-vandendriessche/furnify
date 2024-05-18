@@ -62,4 +62,15 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 8/05/24, 11:30,12:00, Extern, voorbereiden presentatie,, 
 8/05/24, 13:00,16:30, Contacturen, Presentaties,, 
 9/05/24, 10:00,11:00, Extern, Combinaties van modules verder afwerken,153, gestopt omdat afstanden niet altijd lijken te kloppen en dus wachten op mail
-14/05/24, 11:00,12:15, Extern, Combinaties van modules verder afwerken,153, enkel nog open zetelmodule nodig
+14/05/24, 11:00,12:15, Extern, Combinaties van modules verder afwerken,153, enkel nog open bedmodule nodig
+14/05/24, 13:30,16:30, Contacturen, ,,
+15/05/24, 13:00,16:00, Contacturen, Toevoegen van een adres + manier uitklappen van obstakel aanpassen,,
+15/05/24, 18:45, 19:15, Extern, Adres toevoegen in models, ,
+15/05/24, 21:20, 22:20, Extern, Bug bij wisselen en roteren van modellen oplossen, ,
+15/05/24, 23:00, 23:30, Extern, Model laten schalen volgens gekozen breedte van matras, ,
+16/05/24, 10:45, 11:45, Extern, Presentatie voorbereiden, 177,
+16/05/24, 14:30, 15:30, Extern, Presentatie voor klant, 177,
+16/05/24, 17:00, 18:00, Extern, Verslag schrijven, 174,
+17/05/24, 11:00, 12:00, Extern, Mergen van main in branch 197 voor db, 197, opsturen naar database/mailchimp werkt niet meer
+17/05/24, 12:30, 14:00, Extern, Proberen herschalen van modules met verkeerde afmetingen in code, , lukt niet om accurate afmetingen van het model te verkrijgen... Dus mislukt
+17/05/24, 19:30, 23:00, Extern, Ervoor proberen te zorgen dat versturen/ophalen van data terug werkt, 197, positie van module niet altijd accuraat
