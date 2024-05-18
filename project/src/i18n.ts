@@ -182,13 +182,16 @@ i18n
                         again: "Please check again when you make changes to the previous configuration."
                     },
                     privacy: {
+                        title:"Privacy policy",
                         intro:"The information you fill in is collected and processed by us through various services. See below for more information.",
                         pol:"The information you fill in the form and the position of the module in the 3D space are stored in a MongoDB database. The rest of Furnify's privacy policy can be found  ",
                         here: "here",
                         mailchimp:"You can unsubscribe from our mailchimp campaign at any time by sending a mail to info@furnifyhome.eu.",
                         disclaimer1: "We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. ",
                         learn:"Learn more",
-                        disclaimer2: " about Mailchimp's privacy practices."
+                        disclaimer2: " about Mailchimp's privacy practices.",
+                        close: "Close",
+                        privacy: "Privacy"
                     }
                 }
             },
@@ -360,7 +363,10 @@ i18n
                         mailchimp:"Je kunt je op elk gewenst moment afmelden voor onze mailchimp-campagne door een mail te sturen naar info@furnifyhome.eu.",
                         disclaimer1: "We gebruiken Mailchimp als ons marketingplatform. Door je hieronder in te schrijven, ga je ermee akkoord dat je gegevens worden overgedragen aan Mailchimp voor verwerking. ",
                         learn:"Meer informatie",
-                        disclaimer2: " over de privacypraktijken van Mailchimp."
+                        disclaimer2: " over de privacypraktijken van Mailchimp.",
+                        title:"Privacybeleid",
+                        close:"Sluiten",
+                        privacy: "Privacy"
                     }
                 }
             },
@@ -525,13 +531,16 @@ i18n
                         again: "Veuillez vérifier à nouveau si vous apportez des modifications à la configuration précédente."
                     },
                     privacy: {
+                        title:"Politique de confidentialité",
                         intro:"Les informations que vous remplissez sont collectées et traitées par nos soins par le biais de différents services. Voir ci-dessous pour plus d'informations.",
                         pol:"Les informations que vous remplissez dans le formulaire et la position du module dans l'espace 3D sont stockées dans une base de données MongoDB. Le reste de la politique de confidentialité de Furnify est disponible ",
                         here: "ici",
                         mailchimp:"YVous pouvez vous désinscrire de notre campagne mailchimp à tout moment en envoyant un courrier à info@furnifyhome.eu.",
                         disclaimer1: "Nous utilisons Mailchimp comme plateforme de marketing. En cliquant ci-dessous pour vous inscrire, vous reconnaissez que vos informations seront transférées à Mailchimp pour traitement. ",
                         learn:"En savoir plus",
-                        disclaimer2: " sur les pratiques de Mailchimp en matière de protection de la vie privée."
+                        disclaimer2: " sur les pratiques de Mailchimp en matière de protection de la vie privée.",
+                        close: "Fermer",
+                        privacy: "Confidentialité"
                     }
                 }
             },
@@ -696,13 +705,16 @@ i18n
                         again: "Bitte überprüfen Sie dies erneut, wenn Sie Änderungen an der vorherigen Konfiguration vornehmen."
                     },
                     privacy: {
+                        title:"Datenschutzrichtlinie",
                         intro:"Die von Ihnen eingegebenen Informationen werden von uns über verschiedene Dienste gesammelt und verarbeitet. Siehe unten für weitere Informationen.",
                         pol:"Die Informationen, die Sie in das Formular eingeben, und die Position des Moduls im 3D-Raum werden in einer MongoDB-Datenbank gespeichert. Den Rest der Furnify-Datenschutzrichtlinie finden Sie ",
                         here: "hier",
                         mailchimp:"Sie können sich jederzeit von unserer Mailchimp-Kampagne abmelden, indem Sie eine E-Mail an info@furnifyhome.eu senden.",
                         disclaimer1: "Wir verwenden Mailchimp als unsere Marketingplattform. Wenn Sie unten klicken, um sich anzumelden, erklären Sie sich damit einverstanden, dass Ihre Daten zur Verarbeitung an Mailchimp übermittelt werden. ",
                         learn:"Erfahren Sie mehr",
-                        disclaimer2: " über die Datenschutzpraktiken von Mailchimp."
+                        disclaimer2: " über die Datenschutzpraktiken von Mailchimp.",
+                        privacy:"Datenschutz",
+                        close:"Schließen"
                     }
                 }
             },
@@ -867,13 +879,16 @@ i18n
                         again: "Vuelva a comprobarlo cuando realice cambios en la configuración anterior."
                     },
                     privacy: {
+                        title:" Política de privacidad",
                         intro:"La información que usted rellena es recogida y procesada por nosotros a través de varios servicios. Consulte a continuación para obtener más información.",
                         pol:"La información que rellenas en el formulario y la posición del módulo en el espacio 3D se almacenan en una base de datos MongoDB. El resto de la política de privacidad de Furnify se puede encontrar ",
                         here: "aquí",
                         mailchimp:"Puede darse de baja de nuestra campaña de mailchimp en cualquier momento enviando un correo a info@furnifyhome.eu.",
                         disclaimer1: "Utilizamos Mailchimp como plataforma de marketing. Al hacer clic a continuación para suscribirse, usted reconoce que su información será transferida a Mailchimp para su procesamiento. ",
                         learn:"Más información",
-                        disclaimer2: " sobre las prácticas de privacidad de Mailchimp."
+                        disclaimer2: " sobre las prácticas de privacidad de Mailchimp.",
+                        privacy: "Privacidad",
+                        close: "Cerrar"
                     }
                 }
             },
@@ -1038,13 +1053,16 @@ i18n
                         again: "Ricontrollare quando si apportano modifiche alla configurazione precedente."
                     },
                     privacy: {
+                        title:"Politica sulla privacy",
                         intro:"Le informazioni inserite vengono raccolte ed elaborate da noi attraverso vari servizi. Per ulteriori informazioni, vedere di seguito.",
                         pol:"Le informazioni inserite nel modulo e la posizione del modulo nello spazio 3D sono memorizzate in un database MongoDB. Il resto dell'informativa sulla privacy di Furnify è disponibile ",
                         here: "qui",
                         mailchimp:"È possibile annullare l'iscrizione alla nostra campagna mailchimp in qualsiasi momento inviando una mail a info@furnifyhome.eu.",
                         disclaimer1: "Utilizziamo Mailchimp come piattaforma di marketing. Facendo clic qui sotto per iscriversi, l'utente riconosce che le sue informazioni saranno trasferite a Mailchimp per l'elaborazione. ",
                         learn:"Per saperne di più",
-                        disclaimer2: " sulle pratiche di privacy di Mailchimp."
+                        disclaimer2: " sulle pratiche di privacy di Mailchimp.",
+                        privacy: "Privacy",
+                        close:"Chiudere"
                     }
                 }
             }
