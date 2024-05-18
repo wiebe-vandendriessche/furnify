@@ -1,26 +1,36 @@
 import {MathUtils, Color, TextureLoader} from 'three'
-import { useCallback, useRef, useEffect, useState } from 'react'
+import {useCallback, useRef, useEffect, useState} from 'react'
 import {useFrame, useLoader} from '@react-three/fiber'
-import { easing } from 'maath'
-import { useDrag } from './Surface'
-import { useGLTF } from '@react-three/drei'
-import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
+import {easing} from 'maath'
+import {useDrag} from './Surface'
+import {useGLTF} from '@react-three/drei'
+import {useConfiguratorContext} from '../../contexts/ConfiguratorContext'
 import {useModuleContext} from "../../contexts/ModuleContext.jsx";
-import { useIntersectionContext } from '../../contexts/IntersectionContext'
+import {useIntersectionContext} from '../../contexts/IntersectionContext'
 
-export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = Math.round, maxX = 4, maxZ = 4, clamp = MathUtils.clamp, ...props }) => {
+export const DModel = ({
+                           position = [0.5, 0.5, -0.5],
+                           c = new Color(),
+                           round = Math.round,
+                           maxX = 4,
+                           maxZ = 4,
+                           clamp = MathUtils.clamp,
+                           ...props
+                       }) => {
 
-    const {chosen_module}=useModuleContext();
-    const { specs,modelRotation } = useConfiguratorContext();
-    console.log("MODULE");
-    console.log(chosen_module.name);
-    const { nodes, materials } = useGLTF('/models/'+chosen_module.name+'.gltf')
-    const texture = useLoader(TextureLoader, '/models/'+specs.material+'.jpg')
-    const group= useRef();
+    const {chosen_module} = useModuleContext();
+    const {specs, modelRotation} = useConfiguratorContext();
+    const {nodes, materials} = useGLTF('/models/' + chosen_module.name + '.gltf')
+    const texture = useLoader(TextureLoader, '/models/' + specs.material + '.jpg')
+    const group = useRef();
     const pos = useRef(position)
 
     const [width, setModelWidth] = useState(chosen_module.width);
     const [depth, setModelDepth] = useState(chosen_module.open);
+
+    //retrieve model position from configuratorcontext
+    const {setModelPosition, get,setGet} = useConfiguratorContext();
+
     // swapping depth and width depending on rotation
     useEffect(() => {
         if (modelRotation === 0) {
@@ -42,8 +52,10 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     const maxX2 = maxX / 2;
     const maxZ2 = maxZ / 2;
 
-    const onDrag = useCallback(({ x, z }) => {
-
+    const onDrag = useCallback(({x, z}) => {
+        //enable module the stick to the wall again(GET REQUEST)
+        setGet(false)
+        //zorgt ervoor dat de modullen weer een de muur kleven
         let distanceToRightWall;
         let distanceToLeftWall;
         let distanceToFrontWall;
@@ -140,48 +152,54 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             newZ = clamp(newZ, -maxZ2, maxZ2 - depth);
         }
 
+
         //update position
         pos.current = [newX, position[1], newZ];
 
     }, [maxX2, maxZ2, position, clamp, width, depth, modelRotation]);
 
-    // makes sure when enlarging the room or rotating the model sticks to the wall in x
-    useEffect(() => {
-        const [x, y, z] = pos.current;
-        let newX = x
-        // different calculation for different rotations
-        if (modelRotation === 0) {
-            newX = x < 0 ? -maxX2 : maxX2 - width;
-        } else if (modelRotation === Math.PI / 2) {
-            newX = x < 0 ? -maxX2 : maxX2 - width;
-        } else if (modelRotation === Math.PI) {
-            newX = x < 0 ? -maxX2 + width : maxX2;
-        } else if (modelRotation === -Math.PI / 2) {
-            newX = x < 0 ? -maxX2 + width : maxX2;
-        }
-        pos.current = [newX, y, z];
-    }, [maxX2, width, modelRotation]);
+    //remove ability for module to stick to wall if it comes from get Request
+        // makes sure when enlarging the room or rotating the model sticks to the wall in x
+        useEffect(() => {
+            if(!get){
+                const [x, y, z] = pos.current;
+                let newX = x
+                // different calculation for different rotations
+                if (modelRotation === 0) {
+                    newX = x < 0 ? -maxX2 : maxX2 - width;
+                } else if (modelRotation === Math.PI / 2) {
+                    newX = x < 0 ? -maxX2 : maxX2 - width;
+                } else if (modelRotation === Math.PI) {
+                    newX = x < 0 ? -maxX2 + width : maxX2;
+                } else if (modelRotation === -Math.PI / 2) {
+                    newX = x < 0 ? -maxX2 + width : maxX2;
+                }
+                pos.current = [newX, y, z];
+            }
 
-    // makes sure when enlarging the room or rotating the model sticks to the wall in z
-    useEffect(() => {
-        const [x, y, z] = pos.current;
-        let newZ = z
-        // different calculation for different rotations
-        if (modelRotation === 0) {
-            newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
-        } else if (modelRotation === Math.PI / 2) {
-            newZ = z < 0 ? -maxZ2 + depth : maxZ2;
-        } else if (modelRotation === Math.PI) {
-            newZ = z < 0 ? -maxZ2 + depth : maxZ2;
-        } else if (modelRotation === -Math.PI / 2) {
-            newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
-        }
-        pos.current = [x, y, newZ];
-    }, [maxZ2, depth, modelRotation]);
+        }, [maxX2, width, modelRotation]);
+
+        // makes sure when enlarging the room or rotating the model sticks to the wall in z
+        useEffect(() => {
+            if(!get){
+                const [x, y, z] = pos.current;
+                let newZ = z
+                // different calculation for different rotations
+                if (modelRotation === 0) {
+                    newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+                } else if (modelRotation === Math.PI / 2) {
+                    newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+                } else if (modelRotation === Math.PI) {
+                    newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+                } else if (modelRotation === -Math.PI / 2) {
+                    newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+                }
+                pos.current = [x, y, newZ];
+            }
+        }, [maxZ2, depth, modelRotation]);
 
 
     const [events, active, hovered] = useDrag(onDrag);
-
 
     useEffect(() => void (document.body.style.cursor = active ? 'grabbing' : hovered ? 'grab' : 'auto'), [active, hovered]);
 
@@ -191,7 +209,6 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     useEffect(() => {
         // Sla de oorspronkelijke kleuren van de materialen op
         const originalColors = nodes[chosen_module.name].children.map(object => object.material.color.clone());
-        console.log(originalColors)
         setOriginalColors(originalColors);
     }, [specs.color, nodes]);
 
@@ -234,22 +251,24 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
             // Gebruik de opgeslagen oorspronkelijke kleuren om de kleur terug te zetten wanneer het hover-effect eindigt
             let originalColor = originalColors[i];
             // Making it possible to switch colors on an object
-            if(object.material.name.includes("Color")){
-                originalColor=specs.color;
+            if (object.material.name.includes("Color")) {
+                originalColor = specs.color;
             }
 
-            if(object.material.name.includes("Wood") & object.material.map!=null){
-                object.material.map=texture;
+            if (object.material.name.includes("Wood") & object.material.map != null) {
+                object.material.map = texture;
             }
             easing.dampC(object.material.color, active ? 'grey' : hovered ? 'lightblue' : originalColor, 0.1, delta);
         });
     });
-    console.log("AFMETINGEN");
-    console.log(chosen_module);
-    console.log(group);
 
 
-    const { addDObstruction, removeDObstruction } = useIntersectionContext();
+    //save position also in configuratorcontext
+    useEffect(() => {
+        setModelPosition(pos.current);
+    }, [pos.current]);
+
+    const {addDObstruction, removeDObstruction} = useIntersectionContext();
 
     //sending mesh data to IntersectionContext when component mounts
     const id = 'model';
@@ -259,9 +278,11 @@ export const DModel = ({ position = [0.5, 0.5, -0.5], c = new Color(), round = M
     return (
         <>
             <group ref={group} rotation={[0, modelRotation, 0]} {...events} {...props} dispose={null}>
-                { nodes[chosen_module.name].children.map(function(object, i){
+                {nodes[chosen_module.name].children.map(function (object, i) {
 
-                    return <mesh scale={[chosen_module.width/chosen_module.width_options[0].value, 1, 1]} key={"texture"+i.toString()} geometry={object.geometry} castShadow receiveShadow material={object.material} />;
+                    return <mesh scale={[chosen_module.width / chosen_module.width_options[0].value, 1, 1]}
+                                 key={"texture" + i.toString()} geometry={object.geometry} castShadow receiveShadow
+                                 material={object.material}/>;
                 })}
             </group>
 

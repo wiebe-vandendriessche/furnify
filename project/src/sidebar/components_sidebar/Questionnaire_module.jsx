@@ -3,8 +3,8 @@ import "./Questionnaire.css"
 import { useVariaContext } from "../../contexts/VariaContext.jsx";
 import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
-import { ToggleButton, Collapse, ButtonGroup, Form, FloatingLabel, Button, FormGroup } from "react-bootstrap";
+import { useEffect} from 'react'
+import { ToggleButton, Collapse, Button, FormGroup } from "react-bootstrap";
 import { check } from "../../algorithm/module_choice.ts";
 import { use2d } from "../../contexts/2dContext.tsx"
 import { useModuleContext } from "../../contexts/ModuleContext.jsx"
@@ -44,11 +44,10 @@ export function Questionnaire_module() {
             points2D: result.errors.points2D
         });
         setPossileModules(result.possible);
-        console.log(result.possible);
         if (result.possible.length == 0) {
             setChosenModule({
                 name: "", height: 0, width: 0, depth: 0, open: 0, closed: 0, saved: 0, bed: false,
-                sofa: false, desk: false, storage: false, width_options: [], components: []
+                sofa: false, desk: false, storage: false, marge:0, width_options: [], components: []
             })
         }
         else {

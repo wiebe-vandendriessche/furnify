@@ -9,7 +9,6 @@ import logo_dm from "../assets/logo_dm.png";
 import Questionnaire_space from "./components_sidebar/Questionnaire_space.jsx";
 import Questionnaire_specs from "./components_sidebar/Questionnaire_specs.jsx";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { check } from "../algorithm/module_choice.ts";
 import { useConfiguratorContext } from "../contexts/ConfiguratorContext.jsx";
 import {useContactContext} from "../contexts/ContactContext.jsx"
 import {useVariaContext} from "../contexts/VariaContext.jsx"
@@ -21,6 +20,8 @@ import Q1 from "./components_sidebar/Q1.jsx";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import Questionnaire_module from "./components_sidebar/Questionnaire_module.jsx";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 
 
@@ -28,7 +29,6 @@ export function Sidebar() {
     const [sidebar, setSidebar] = useState(true);
     const [part, showPart] = useState(0);
     const [stateId, setStateId] = useState(1);
-    const value = useConfiguratorContext();
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
@@ -49,7 +49,8 @@ export function Sidebar() {
     const { contact,setContact } = useContactContext();
 
     const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
-        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath} = useConfiguratorContext();
+        rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath,modelPosition,
+        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition,get,setGet} = useConfiguratorContext();
 
     const {varia,setVaria} = useVariaContext();
 
@@ -69,28 +70,28 @@ export function Sidebar() {
         selectedWall: useRoomWallLightupContext().selectedWall,
         errors: useModuleContext().errors,
         possible_modules:useModuleContext().possible_modules,
-        chosen_module: useModuleContext().chosen_module
+        chosen_module: useModuleContext().chosen_module,
+        modelPosition: useConfiguratorContext().modelPosition,
+        positions: useConfiguratorContext().obstructionPositions,
+        rotationIndex: useConfiguratorContext().rotationIndex
     };
 
     const updateContactFromResponse = (response) => {
 
-        const { firstname, lastname, email, phone_number, address, country, city, postcode } = response.contact;
+        const { firstname, lastname, email, phone_number, address, country, postcode, city} = response.contact;
 
-
-        setContact(prevContact => ({
-            ...prevContact,
+        setContact(() => ({
             firstname: firstname,
             lastname: lastname,
             email: email,
             phone_number: {
-                ...prevContact.phone_number,
                 number: phone_number.number,
                 country: phone_number.country
             },
             address: address,
             country: country,
-            city: city,
             postcode: postcode,
+            city: city
         }));
     };
     const updateSelectedWallFromResponse = (response) => {
@@ -151,20 +152,23 @@ export function Sidebar() {
         setSkyboxPath(response.skyboxPath);
 
         setRectangular(response.rectangular);
+        setPossileModules(response.possible_modules);
+
+        setModelPosition(response.modelPosition);
+
+        setObstructionPositions(response.positions);
+
+        setRotationIndex(response.rotationIndex);
 
     }
-
     const updateModuleFromResponse = (response) =>{
         const { softer, demands, roomSize, points2D } = response.errors;
-
         setErrors({
             softer: softer,
             demands: demands,
             roomSize: roomSize,
             points2D: points2D
         });
-
-        setPossileModules(response.possible_modules);
 
         const { name, height, width, depth, open, closed, saved, bed, sofa, desk, storage, width_options, components } = response.chosen_module;
         setChosenModule({
@@ -189,9 +193,9 @@ export function Sidebar() {
 
     if(email !== undefined){
         useEffect(() => {
+            setGet(true);
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
-                    console.log(response.data);
                     updateContactFromResponse(response.data);
                     updateSelectedWallFromResponse(response.data);
                     updateVariaFromResponse(response.data);
@@ -227,41 +231,29 @@ export function Sidebar() {
         }
     }
 
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const handleClose = () => setShowModal(false);
+
+    const ConfirmationModal = ({ show, handleClose, message }) => {
+        return (
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{message}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    };
+
+
     const onSubmit = async e => {
         e.preventDefault();
-        let obs = "_";
-        Object.entries(obstacles).forEach(([type, items]) => {
-            items.forEach((item) => {
-                obs += item.id + ". " + item.type;
-                switch (item.type) {
-                    case 'window':
-                        if (item.inside_window === 'yes') {
-                            obs += " open on the inside";
-                        } else {
-                            obs += " open on the outside";
-                        }
-                        obs += " width:" + item.width + " height:" + item.height;
-                        break;
-                    case 'door':
-                        obs += " open " + item.opening_door;
-                        obs += " width:" + item.width + " height:" + item.height;
-                        break;
-                    default:
-                        obs += " width:" + item.width + " length:" + item.obstLength + " height:" + item.height;
-                        break;
-                }
-                if (item.obstacleWall) {
-                    obs += " obstacle wall:" + item.obstacleWall;
-                }
-                if (item.windowWall) {
-                    obs += " window wall:" + item.windowWall;
-                }
-                if (item.windowXpos && item.windowYpos) {
-                    obs += " position:" + item.windowXpos + "," + item.windowYpos;
-                }
-                obs += "\n";
-            });
-        });
 
         let dim=""
         Object.entries(dimensions).map(([key, value]) => (
@@ -275,24 +267,30 @@ export function Sidebar() {
             }
         });
 
-        let color = specs.color;
-        let message;
-        let getURI = window.location.href+contact.email;
-        console.log(getURI);
+        let color = specs.color.toString().replace("#",'');
         const url = import.meta.env.VITE_MC_URI;
-        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
-                    &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
-            const {msg, result} = data
-            console.log(result, msg);
-            console.log(getURI);
-            message = msg;
-            alert(msg);
-        });
-        console.log(superContext);
-        await axios.post('http://localhost:3000/api/contact', superContext);
-    };
 
+        jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
+                    &POSTCODE=${contact.postcode}&COUNTRY=${contact.country}&CITY=${contact.city}
+                    &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
+                    &COLOR=${color}&REQ=${varia.requirements}&MODULE=${chosen_module.name}`, {param: 'c'}, (_, data) => {
+            const {msg, result} = data
+            if (result === "success") {
+                axios.post(`http://localhost:3000/api/contact`, superContext)
+                    .then(function (response) {console.log(response);})
+                    .catch(function (error) {
+                        console.log(error);
+                        axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext)
+                            .then(function (response) {console.log(response);})
+                            .catch(function (error) {
+                                console.log(error)});
+                    });
+            }
+            setModalMessage(msg);
+            setShowModal(true);
+
+        });
+    };
 
 
     return (
@@ -308,6 +306,7 @@ export function Sidebar() {
                         </a>
                         <Form onSubmit={onSubmit}>
                             {showNextPart()}
+                            <ConfirmationModal show={showModal} handleClose={handleClose} message={modalMessage} />
                         </Form>
                         <div className="bottom_btn">
                             <button data-testid="btn-nav-sidebar-previous" onClick={previousPart} hidden={showPrevious()}>

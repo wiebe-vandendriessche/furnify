@@ -9,9 +9,7 @@ export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
     
 
     let errors = {softer: false, demands: false, roomSize: false, points2D: false}
-    console.log("ALGORITHM: ")
-    console.log(val.functionalities)
-    
+
     //make sure to fill the modules
     if (modules.length == 0) {
         get_modules();
@@ -19,17 +17,15 @@ export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
 
     // change the size of the modules if bed is selected
     if (func.bed == true) {
-        modules.forEach(mod => { mod.width_options = varia.size })
+        modules.forEach(mod => { mod.set_width_options(varia.size) })
     }
     //if bed is not selected make sure to return the smallest value
     else {
-        modules.forEach(mod => { mod.width_options = "140" })
+        modules.forEach(mod => { mod.set_width_options("140") })
     }
 
     //check if the exact combination is possible
     let result: Module[] = [];
-    console.log("ALGORITHM: ")
-    console.log(modules)
     modules.forEach(mod => {
         if (mod.type(func.bed, func.office_space, func.sofa, func.storage_space)) {
             result.push(mod)
@@ -95,9 +91,11 @@ export const check = (val: any, varia: any, get2D: any,wallProperties:any) => {
         }
 
     }
-    console.log("ALGORITHM: the possible results:")
-    console.log(result)
-    return {possible:result, errors: errors};
+    const regularObjects=result.map(module=>{
+        const regularObject={...module};
+        return regularObject;
+    })
+    return {possible: regularObjects, errors:errors}
 
 }
 

@@ -192,7 +192,9 @@ button:hover {
     ::-webkit-scrollbar-thumb:hover {
         background: #b02a37;
     }
-
+    .modal-content{
+        background-color: #121212;
+    }
 
 
 }

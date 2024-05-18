@@ -4,6 +4,7 @@ import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { useDrag } from './Surface'
 import { useIntersectionContext } from '../../contexts/IntersectionContext'
+import { useConfiguratorContext } from '../../contexts/ConfiguratorContext'
 
 export const DLight = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions, otype, maxX = 4, maxZ = 4, maxY, clamp = MathUtils.clamp, ...props }) => {
     const ref = useRef();
@@ -13,6 +14,9 @@ export const DLight = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions
     const id = obstructionKey;
 
     const ceilingHeight = maxY - dimensions[1] / 2;
+
+
+
 
     const onDrag = useCallback(({ x, z }) => {
         const newY = ceilingHeight;
@@ -71,6 +75,12 @@ export const DLight = ({ obstructionKey, position = [0.5, 0.5, -0.5], dimensions
         }
         easing.dampC(ref.current.material.color, active ? 'grey' : hovered ? 'lightblue' : '#ffdc7a', 0.1, delta);
     });
+
+    const { addDObstructionPosition, removeDObstructionPosition } = useConfiguratorContext();
+
+    useEffect(()=> {    
+        addDObstructionPosition(pos.current, id);
+    }, [addDObstructionPosition, removeDObstructionPosition, active, dimensions,]);
 
     const { addDObstruction, removeDObstruction } = useIntersectionContext();
 
