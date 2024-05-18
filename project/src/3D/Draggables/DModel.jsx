@@ -33,7 +33,7 @@ export const DModel = ({
     const [depth, setModelDepth] = useState(chosen_module.open);
 
     //retrieve model position from configuratorcontext
-    const {setModelPosition, get,setGet} = useConfiguratorContext();
+    const {setModelPosition, get} = useConfiguratorContext();
 
     // swapping depth and width depending on rotation
     useEffect(() => {
@@ -58,7 +58,6 @@ export const DModel = ({
 
     const onDrag = useCallback(({x, z}) => {
         //zorgt ervoor dat de modullen weer een de muur kleven
-        setGet(false);
         let distanceToRightWall;
         let distanceToLeftWall;
         let distanceToFrontWall;
@@ -162,41 +161,45 @@ export const DModel = ({
     }, [maxX2, maxZ2, position, clamp, width, depth, modelRotation]);
 
     //remove ability for module to stick to wall if it comes from get Request
-    if (!get) {
         // makes sure when enlarging the room or rotating the model sticks to the wall in x
         useEffect(() => {
-            const [x, y, z] = pos.current;
-            let newX = x
-            // different calculation for different rotations
-            if (modelRotation === 0) {
-                newX = x < 0 ? -maxX2 : maxX2 - width;
-            } else if (modelRotation === Math.PI / 2) {
-                newX = x < 0 ? -maxX2 : maxX2 - width;
-            } else if (modelRotation === Math.PI) {
-                newX = x < 0 ? -maxX2 + width : maxX2;
-            } else if (modelRotation === -Math.PI / 2) {
-                newX = x < 0 ? -maxX2 + width : maxX2;
+            if(!get){
+                const [x, y, z] = pos.current;
+                let newX = x
+                // different calculation for different rotations
+                if (modelRotation === 0) {
+                    newX = x < 0 ? -maxX2 : maxX2 - width;
+                } else if (modelRotation === Math.PI / 2) {
+                    newX = x < 0 ? -maxX2 : maxX2 - width;
+                } else if (modelRotation === Math.PI) {
+                    newX = x < 0 ? -maxX2 + width : maxX2;
+                } else if (modelRotation === -Math.PI / 2) {
+                    newX = x < 0 ? -maxX2 + width : maxX2;
+                }
+                pos.current = [newX, y, z];
             }
-            pos.current = [newX, y, z];
+
         }, [maxX2, width, modelRotation]);
 
         // makes sure when enlarging the room or rotating the model sticks to the wall in z
         useEffect(() => {
-            const [x, y, z] = pos.current;
-            let newZ = z
-            // different calculation for different rotations
-            if (modelRotation === 0) {
-                newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
-            } else if (modelRotation === Math.PI / 2) {
-                newZ = z < 0 ? -maxZ2 + depth : maxZ2;
-            } else if (modelRotation === Math.PI) {
-                newZ = z < 0 ? -maxZ2 + depth : maxZ2;
-            } else if (modelRotation === -Math.PI / 2) {
-                newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+            if(!get){
+                const [x, y, z] = pos.current;
+                let newZ = z
+                // different calculation for different rotations
+                if (modelRotation === 0) {
+                    newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+                } else if (modelRotation === Math.PI / 2) {
+                    newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+                } else if (modelRotation === Math.PI) {
+                    newZ = z < 0 ? -maxZ2 + depth : maxZ2;
+                } else if (modelRotation === -Math.PI / 2) {
+                    newZ = z < 0 ? -maxZ2 : maxZ2 - depth;
+                }
+                pos.current = [x, y, newZ];
             }
-            pos.current = [x, y, newZ];
         }, [maxZ2, depth, modelRotation]);
-    }
+
 
     const [events, active, hovered] = useDrag(onDrag);
 
