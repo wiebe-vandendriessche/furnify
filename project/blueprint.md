@@ -1,4 +1,6 @@
-# }
+# Furnify 2
+
+<p align="left"><img src="https://www.furnifyhome.eu/cdn/shop/files/Logo_Full_Color_V1_1x_7fc06cc4-a6ac-4fbd-a607-81a4f85de9b7.jpg?v=1675388945&width=500" alt="project-image"></p>
 
 Welkom op {{ pkg.name }}. Dit is versie {{ pkg.version }}!
 
@@ -8,8 +10,9 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 
 ## Repository-indeling
 
-- **/public/textures/:** Bevat de textures gebruikt voor het 3D model.
 - **/public/models/:** Bevat de models gebruikt voor het 3D model.
+- **/public/other/skyboxes/:** Bevat de *skyboxes* gebruikt in de 3D omgeving.
+- **/public/textures/:** Bevat de textures gebruikt voor het 3D model.
 - **/src/:** Bevat de broncode van de applicatie.
   - **/src/2D/:** Bevat alle componenten voor het 2D vloerplan.
     - **/src/2D/components/:** Bevat alle basiscomponenten waaruit het vloerplan bestaat.
@@ -27,21 +30,28 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
     - **/src/algorithm/module.ts:** Klasse voor de modules met getters en bepalingfuncties.
     - **/src/algorithm/read_file_csv.ts:** Bevat code voor inlezen van csv bestand.
   - **/src/assets/:**  Bevat afbeeldingen.
-  - **/src/contexts/:** Bevat contexten (data die realtime aangepast en gebruikt kan worden in de volledige applicatie).
+  - **/src/contexts/:** Bevat contexten (data die *realtime* in *state* aangepast en gebruikt kan worden in de volledige applicatie).
+  - **/src/model/SuperModel.cjs:** Definieert schema's voor de *backend*.
+  - **/src/Privacy/:** Bevat privacy componenten.
   - **/src/sidebar/:** Bevat sidebar componenten.
     - **/src/sidebar/components_sidebar/:** Bevat componenten gebruikt in de sidebar.
     - **/src/sidebar/Sidebar.jsx:** Bevat de sidebar compositie.
   - **/src/App.jsx:** React app.
-  - **/src/i18.ts:** Internationalisatie configuratie.
-  - **/src/main.jsx:** Bevat React app met alle contextproviders.
+  - **/src/i18n.ts:** Internationalisatie configuratie met alle vertalingen.
+  - **/src/Login.jsx:** Bevat de login pagina voor admin.
+  - **/src/main.jsx:** Bevat React app met alle *contextproviders*.
+  - **/src/Routing.jsx** Definieert de routering voor gepubliceerde kamers terug op te vragen als admin.
 - **/index.html** Bevat de html index.
 - **/README.md** Bevat de README, gegenereerd door blueprint.md.
 - **/blueprint.md** Genereerd de README.
 - **/cypress.config.cjs** Configuratie van testen.
-- **/package.json** Packages.
+- **/MongoDB.cjs** Bestand voor databank.
+- **/package.json** *Packages*.
 - **/vite.config.js** Vite configuratie.
 
-## Developer server opstarten
+## Lokaal uitvoeren en testen
+
+### Vite developer server opstarten (in project folder)
 
 **start dev server:**
 
@@ -49,11 +59,19 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 npm run dev
 ```
 
-## Tests Uitvoeren
+### MongoDB server opstarten (in project folder)
+
+**start MongoDB server:**
+
+```bash
+npm run serve
+```
+
+### Tests Uitvoeren
 
 #### Zonder beeld
 
-**start dev test server (niet om te deployen):**
+**start dev test server als dit nog niet gebeurd is:**
 
 ```bash
 npm run dev
@@ -77,40 +95,81 @@ npm run dev
 npm run test
 ```
 
-## Productie-omgeving deployen
+## Applicatie bereiken
 
-### Applicatie bereiken:
+Productie is momenteel gedeployed op: http://157.193.171.41
 
-Productie is gedeployed op: http://157.193.171.41
+## Gebruikershandleiding
 
-### Applicatie deployen op de server
+Wanneer de gebruiker de site opent, krijgt hij een standaard rechthoekige kamer te zien. Dit is het vertrekpunt, maar kan natuurlijk volledig aangepast worden.
 
-#### Op de server:
+1. Selecteer de woonruimte die u wenst te optimaliseren op de sidebar.
+2. Selecteer de vorm van de ruimte.
 
-**installeer node packages**:
+   - Rechthoekig: Ga verder naar stap 3.
+   - Anders:
 
-```bash
-npm install
-```
+     1. Kies of u met het raster wilt werken of niet.
 
-**build for production**:
+        - Zo ja: selecteer de gewenste rastergrootte met de slider.
+        - Nee: zet het raster uit (meest rechtse knop).
+     2. Zet tekenmodus aan (meest linkse knop).
+     3. Teken de vorm van uw woonruimte en zorg dat je de vorm sluit.
 
-```bash
-npm run build
-```
+        - Het is mogelijk om:
 
-In de root van de server voer deze commando's uit:
+          - Loodrecht te tekenen met de middelste knop.
+          - Alles te verwijderen met de tweede knop van links.
+     4. Klik op de net verschenen 3D knop (rechts).
+     5. Bekijk je kamer in 3D (verdere functionaliteit is hier nog niet toegevoegd).
+3. Voer de afmetingen van uw woonruimte in.
+4. Kies de indeling van uw woonruimte.
+5. Klik op het pijltje vanonder om naar het volgende tabblad te gaan.
+6. Voeg aspecten toe in de ruimte, waar rekening mee moet worden gehouden bij het plaatsen van de meubel.
 
-```bash
-sudo rm -rf /var/www/html/*
+   - Klap een aspect open en vul de gevraagde gegevens in.
+   - Een licht en “andere” aspecten kunnen versleept worden in de 3D omgeving.
+   - Bij een raam, deur, stopcontact en schakelaar kiest u op welke muur deze moet worden geplaatst.
+7. Ga naar het volgende tabblad.
+8. Selecteer de functies die u graag zou hebben.
+9. Ga naar het volgende tabblad.
+10. Klik op modules zoeken.
+11. U ziet de mogelijke modules die passen bij uw opgegeven specificaties of, indien hier geen combinatie van bestaat, een zachtere combinatie.
+12. Draai en versleep de module zodat deze naar wens gepositioneerd is.
+13. Klik op de controleer overlap knop en los eventuele problemen op.
+14. Ga naar het volgende tabblad.
+15. Geef de gewenste afwerkingen en eventuele andere vereisten aan.
+16. Ga naar het volgende tabblad.
+17. Vul uw contactgegevens in.
+18. Druk op verzenden.
 
-sudo cp -r furnify2/project/dist/* /var/www/html
-```
+## Zelf ontplooien in productie-omgeving met eigen Linux server
 
-**locally preview production build**:
+Zelf de site builden en ontplooien op een Linux server aan de hand van een Apache2-webserver, is mogelijk met Vite. Volg de onderstaande stappen:
 
-```bash
-npm run preview
-```
+Op de server:
+
+1. Zorg dat MongoDB versie 7.0.9 op de server geïnstalleerd is.
+2. Indien u het project als een .zip bestand hebt, unzipt u dit en opent u de nieuwe map “project”. Sla stap 2, 3 en 4 over en ga verder bij stap 7.
+3. Installeer git (indien je dit nog niet hebt): [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+4. Indien u toegang hebt tot GitLab:
+   Zorg dat de GitLab-repository lokaal staat.
+
+   a. Open een terminal venster.
+
+   b. Voer het volgende commando uit: `git clone [repository-name]`
+5. Ga in een terminal venster naar de map van de repository.
+6. Voor de meest recente versie van de code te verkrijgen: `git pull`
+7. Verifieer of je effectief in de project map zit door het commando `ls` uit te voeren in de terminal. Als je de mappen “src”, “public” en nog wat andere configuratiebestanden ziet staan, zit je in de correcte map.
+8. Installeer Node en npm (indien je dit nog niet hebt): [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+9. Installeer de juiste packages met het volgende commando: `npm install`
+10. Voer `npm run build` uit.
+11. In de root van de server voer deze commando's uit om de site op de Apache2-server te zetten:
+
+    a. `sudo rm -rf /var/www/html/*`
+
+    b. `sudo cp -r furnify2/project/dist/* /var/www/html`
+12. Start de MongoDB server: `npm run server`
+13. Om de production build lokaal te previewen, gebruik: `npm run preview`
 
 {{ template:contributors }}
