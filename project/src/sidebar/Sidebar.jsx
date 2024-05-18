@@ -295,17 +295,16 @@ export function Sidebar() {
                     &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
             if (result === "success") {
-                if (msg === "You're already subscribed, your profile has been updated. Thank you!") {
-                    axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext);
-                    console.log("PUT request");
-                }
-
-                if (msg === "Almost finished... We need to confirm your email address. To complete the subscription process, please click the link in the email we just sent you.") {
-                    axios.post(`http://localhost:3000/api/contact`, superContext);
-                    console.log("POST request");
-                }
+                axios.post(`http://localhost:3000/api/contact`, superContext)
+                    .then(function (response) {console.log(response);})
+                    .catch(function (error) {
+                        console.log(error);
+                        axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext)
+                            .then(function (response) {console.log(response);})
+                            .catch(function (error) {
+                                console.log(error)});
+                    });
             }
-
             alert(msg);
 
         });
