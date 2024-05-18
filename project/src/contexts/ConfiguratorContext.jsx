@@ -47,7 +47,6 @@ export const ConfiguratorProvider = ({ children }) => {
             dobstructionPositions.current[obstructionKey] = position; // Storing mesh with its ID as the key
         }
         setObstructionPositions(dobstructionPositions.current);
-        console.log("positions", dobstructionPositions.current);
     };
 
     useEffect(() => {

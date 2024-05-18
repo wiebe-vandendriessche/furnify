@@ -102,16 +102,13 @@ export function Sidebar() {
     const updateVariaFromResponse = (response) => {
 
         const { requirements, mattress, room, size } = response.varia;
-        console.log("INGELADEN RESULTATEN")
-        console.log(response)
-        console.log(size)
+      
         setVaria(() => ({
             requirements: requirements,
             mattress: mattress,
             room: room,
             size: size
         }));
-        console.log(varia)
     };
     const updateConfiguratorFromResponse = (response) =>{
         const { length, width, height } = response.dimensions;
