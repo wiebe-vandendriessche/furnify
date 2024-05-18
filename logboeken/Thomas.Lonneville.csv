@@ -74,3 +74,4 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 17/05/24, 11:00, 12:00, Extern, Mergen van main in branch 197 voor db, 197, opsturen naar database/mailchimp werkt niet meer
 17/05/24, 12:30, 14:00, Extern, Proberen herschalen van modules met verkeerde afmetingen in code, , lukt niet om accurate afmetingen van het model te verkrijgen... Dus mislukt
 17/05/24, 19:30, 23:00, Extern, Ervoor proberen te zorgen dat versturen/ophalen van data terug werkt, 197, positie van module niet altijd accuraat
+18/05/24, 10:15, 12:00, Extern, Oplossen positie module + toevoegen vertaling adres + deel van logs verwijderd, 197 en 202, 
