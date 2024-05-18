@@ -140,7 +140,7 @@ const specsSchema = new mongoose.Schema({
 const variaSchema = new mongoose.Schema({
     requirements: String,
     mattress: String,
-    room: [String],
+    room: String,
     size: String
 });
 const WidthOptionSchema = new mongoose.Schema({

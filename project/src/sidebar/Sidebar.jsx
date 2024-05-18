@@ -50,7 +50,7 @@ export function Sidebar() {
 
     const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
         rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath,modelPosition,
-        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition,get,setGet} = useConfiguratorContext();
+        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition,get,setGet, setDisable} = useConfiguratorContext();
 
     const {varia,setVaria} = useVariaContext();
 
@@ -102,15 +102,16 @@ export function Sidebar() {
     const updateVariaFromResponse = (response) => {
 
         const { requirements, mattress, room, size } = response.varia;
-
-
-        setVaria(prevVaria => ({
-            ...prevVaria,
+        console.log("INGELADEN RESULTATEN")
+        console.log(response)
+        console.log(size)
+        setVaria(() => ({
             requirements: requirements,
             mattress: mattress,
             room: room,
             size: size
         }));
+        console.log(varia)
     };
     const updateConfiguratorFromResponse = (response) =>{
         const { length, width, height } = response.dimensions;
@@ -194,6 +195,7 @@ export function Sidebar() {
     if(email !== undefined){
         useEffect(() => {
             setGet(true);
+            setDisable(true);
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
                     updateContactFromResponse(response.data);
@@ -276,6 +278,8 @@ export function Sidebar() {
                     &COLOR=${color}&REQ=${varia.requirements}&MODULE=${chosen_module.name}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
             if (result === "success") {
+                console.log("SUPERCONTEXT");
+                console.log(superContext);
                 axios.post(`http://localhost:3000/api/contact`, superContext)
                     .then(function (response) {console.log(response);})
                     .catch(function (error) {

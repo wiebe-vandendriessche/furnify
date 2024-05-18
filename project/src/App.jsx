@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 
 
+
 function PrivacyPolicy(props) {
     const { t, i18n } = useTranslation();
 
@@ -27,7 +28,7 @@ function PrivacyPolicy(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    privacy policy
+                    {t('privacy.title')}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -48,7 +49,8 @@ function PrivacyPolicy(props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant={"danger"} onClick={props.onHide}>Close</Button>
+                <Button variant={"danger"} onClick={props.onHide}>
+                    {t('privacy.close')}</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -56,6 +58,8 @@ function PrivacyPolicy(props) {
 
 
 function App() {
+    const { t, i18n } = useTranslation();
+
     const [modalShow, setModalShow] = React.useState(false);
     const {rectangular, setRectangular} = useConfiguratorContext();
     get_modules();
@@ -71,7 +75,7 @@ function App() {
                 </div>
 
                 <Button className={"privacy"} variant="danger" onClick={() => setModalShow(true)}>
-                    privacy
+                    {t('privacy.privacy')}
                 </Button>
 
                 <PrivacyPolicy

@@ -21,7 +21,7 @@ export function Questionnaire_space() {
 
 
     //Uses reactcontext
-    const {dimensions, setDimensions, rectangular, setRectangular} = useConfiguratorContext();
+    const {dimensions, setDimensions, rectangular, setRectangular, disable} = useConfiguratorContext();
 
     //Changes values of dimensions in context
     const changeDim = (event) => {
@@ -35,7 +35,7 @@ export function Questionnaire_space() {
     const {varia, setVaria} = useVariaContext();
 
     const changeVaria = (event) => {
-        setVaria({...varia, [event.target.name]: [event.target.id]})
+        setVaria({...varia, [event.target.name]: event.target.id})
     }
 
     const space = [
@@ -86,8 +86,11 @@ export function Questionnaire_space() {
                                         variant="danger"
                                         value={space.name}
                                         onChange={changeVaria}
-                                        checked={varia.room == space.id}>
+                                        checked={varia.room == space.id}
+                                        disabled={disable}
+                                    >
                                         {space.name}
+
                                     </ToggleButton>
                                 ))}
                             </ButtonGroup>
@@ -111,6 +114,7 @@ export function Questionnaire_space() {
                                     value="Rectangular"
                                     variant="danger"
                                     checked={rectangular}
+                                    disabled={disable}
                                 >
                                     {t('questionnaire_space.rectangular')}
                                 </ToggleButton>
@@ -122,7 +126,9 @@ export function Questionnaire_space() {
                                     checked={!rectangular}
                                     onClick={() => {
                                         changeForm(false)
-                                    }}>
+                                    }}
+                                    disabled={disable}
+                                >
                                     {t('questionnaire_space.other')}
                                 </ToggleButton>
                             </ButtonGroup>
@@ -143,7 +149,9 @@ export function Questionnaire_space() {
                                                         type="number" min={0} step={0.1} value={value}
                                                         size="sm"
                                                         name={key} onChange={changeDim}
-                                                        onKeyPress={handleKeyPress}/>
+                                                        onKeyPress={handleKeyPress}
+                                                        readOnly={disable}
+                                                    />
                                                 </FloatingLabel>
                                             </Col>
                                         )
@@ -167,7 +175,9 @@ export function Questionnaire_space() {
                                                         type="number" min={0} step={0.1} value={value}
                                                         size="sm"
                                                         name={key} onChange={changeDim2D}
-                                                        onKeyPress={handleKeyPress}/>
+                                                        onKeyPress={handleKeyPress}
+                                                        readOnly={disable}
+                                                    />
                                                 </FloatingLabel>
                                             </Col>) : (<></>)
                                         )
@@ -188,18 +198,24 @@ export function Questionnaire_space() {
                                 <ToggleButton variant={"danger"} type="radio" id="wall" value={"wall"} name="layout"
                                               onChange={changeSpecs}
                                               data-testid={"btn-specs-preferences-wall"}
-                                              checked={"wall" === specs.layout}>
+                                              checked={"wall" === specs.layout}
+                                              disabled={disable}
+                                >
                                     {t('questionnaire_specs.preferences.wall')}
                                 </ToggleButton>
                                 <ToggleButton variant={"danger"} type="radio" id="partition" value={"partition"}
                                               name="layout"
                                               data-testid={"btn-specs-preferences-partition_wall"}
-                                              onChange={changeSpecs} checked={"partition" === specs.layout}>
+                                              onChange={changeSpecs} checked={"partition" === specs.layout}
+                                              disabled={disable}
+                                >
                                     {t('questionnaire_specs.preferences.partition_wall')}
                                 </ToggleButton>
                                 <ToggleButton variant={"danger"} type="radio" id="middle" name="layout" value={"middle"}
                                               data-testid={"btn-specs-preferences-middle_wall"}
-                                              onChange={changeSpecs} checked={"middle" === specs.layout}>
+                                              onChange={changeSpecs} checked={"middle" === specs.layout}
+                                              disabled={disable}
+                                >
                                     {t('questionnaire_specs.preferences.in_the_middle_of_space')}
                                 </ToggleButton>
                             </ButtonGroup>

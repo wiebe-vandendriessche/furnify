@@ -94,7 +94,7 @@ export function Q1({ stateId, setStateId }) {
     }
 
     //Uses reactcontext
-    const { dimensions, obstacles, setObstacles } = useConfiguratorContext();
+    const { dimensions, obstacles, setObstacles, disable } = useConfiguratorContext();
 
     //Changes values of dimensions in context
     //___________________________________________________________________________________
@@ -288,27 +288,39 @@ export function Q1({ stateId, setStateId }) {
                     </div>
                     <div className={"m-1"}>
                         <Button data-testid={"btn-space-aspect-window"} onClick={addObstacles} variant="danger"
-                            value={"window"}>
+                            value={"window"}
+                            disabled={disable}
+                        >
                             {t('obstructions.window')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-door"} onClick={addObstacles} variant="danger"
-                            value={"door"}>
+                            value={"door"}
+                                disabled={disable}
+                        >
                             {t('obstructions.door')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-walloutlet"} onClick={addObstacles} variant="danger"
-                            value={"walloutlet"}>
+                            value={"walloutlet"}
+                                disabled={disable}
+                        >
                             {t('obstructions.walloutlet')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-switch"} onClick={addObstacles} variant="danger"
-                            value={"switch"}>
+                            value={"switch"}
+                                disabled={disable}
+                        >
                             {t('obstructions.switch')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-light"} onClick={addObstacles} variant="danger"
-                            value={"light"}>
+                            value={"light"}
+                                disabled={disable}
+                        >
                             {t('obstructions.light')}
                         </Button>
                         <Button data-testid={"btn-space-aspect-other"} onClick={addObstacles} variant="danger"
-                            value={"other"}>
+                            value={"other"}
+                                disabled={disable}
+                        >
                             {t('obstructions.other')}
                         </Button>
                         <div className={"aspect"}>

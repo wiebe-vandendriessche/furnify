@@ -12,6 +12,7 @@ export const ConfiguratorProvider = ({ children }) => {
     const [obstacles, setObstacles] = useState({door: [], window: [], walloutlet: [], switch: [], light: [], other: []});
     const [get,setGet] = useState(false);
     const [rectangular, setRectangular] = useState(true);
+    const [disable, setDisable]=useState(false);
 
     const [rotationIndex, setRotationIndex] = useState(0);
     const rotations = [0, Math.PI / 2, Math.PI, -Math.PI / 2];
@@ -151,7 +152,9 @@ export const ConfiguratorProvider = ({ children }) => {
         rotationIndex,
         setRotationIndex,
         get,
-        setGet
+        setGet,
+        disable,
+        setDisable
     }
 
 
