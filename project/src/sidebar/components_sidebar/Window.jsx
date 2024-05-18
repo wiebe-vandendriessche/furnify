@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWindow, type, obstId, width, height, windowXpos, windowYpos, maxHeight }) {
@@ -17,6 +18,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
         i18n.changeLanguage(lng);
     }, [])
 
+    const {disable}=useConfiguratorContext()
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
@@ -82,7 +84,9 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
             >{t("obstructions." + type)}</h5>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                onClick={(e) => deleteObst(e)}
+                disabled={disable}
+            >
                 <IoCloseSharp />
 
             </Button>
@@ -102,6 +106,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"width" + obstId}
+                                              readOnly={disable}
                                 />
 
 
@@ -119,6 +124,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"height" + obstId}
+                                              readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -137,6 +143,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                 onClick={(event) => {
                                     changeOpening(event)
                                 }}
+                                disabled={disable}
                             >{t('obstructions.q_window.yes')} </ToggleButton>
                             <ToggleButton
                                 className="mb-4"
@@ -149,6 +156,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                 onClick={(event) => {
                                     changeOpening(event)
                                 }}
+                                disabled={disable}
                             >{t('obstructions.q_window.no')}</ToggleButton>
                         </ButtonGroup>
                     </Row>
@@ -171,6 +179,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
                                     id={"xpos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -191,6 +200,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
                                     id={"ypos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -214,7 +224,7 @@ function Window({ windowWall, deleteObst, changeOpening, insideWindow, changeWin
                                         changeSelectedWall(x);
                                         changeOpening(e);
                                     }}
-                                    disabled={isButtonDisabled} // Set button disabled state
+                                    disabled={disable || isButtonDisabled} // Set button disabled state
                                     checked={x == windowWall}
                                 >
                                     {t(`obstructions.q_all.${x}`)}

@@ -5,6 +5,7 @@ import { Col, FloatingLabel, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { IoCloseSharp, IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Light({ deleteObst, changeLight, type, obstId, width, height, obstLength, maxHeight }) {
@@ -14,7 +15,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
-
+    const {disable}=useConfiguratorContext();
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
         setShow2(!showButton2)
@@ -53,7 +54,9 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
             >{t("obstructions." + type)}</h5>
                 <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                         variant={"danger"} id={"delete" + obstId}
-                        onClick={(e) => deleteObst(e)}>
+                        onClick={(e) => deleteObst(e)}
+                disabled={disable}
+                >
                     <IoCloseSharp />
                 </Button>
 
@@ -77,6 +80,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"length" + obstId}
+                                        readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -92,6 +96,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"width" + obstId}
+                                                  readOnly={disable}
                                     />
 
 
@@ -109,6 +114,7 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"height" + obstId}
+                                                  readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>

@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutlet, type, obstId, width, height, depth, walloutletXpos, walloutletYpos, maxHeight }) {
@@ -17,6 +18,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
         i18n.changeLanguage(lng);
     }, [])
 
+    const {disable}=useConfiguratorContext();
     const [showButton1, setShow1] = useState(false);
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
@@ -83,13 +85,14 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
 
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                onClick={(e) => deleteObst(e)}
+                disabled={disable}
+            >
                 <IoCloseSharp />
 
             </Button>
             <div className="m-1" hidden={showButton2}>
                 <Form.Group>
-                    
                         <Row>
                         <Form.Label>{t('obstructions.q_all.dimensions')}</Form.Label>
                             <Col>
@@ -104,6 +107,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"width" + obstId}
+                                                  readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -119,6 +123,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"height" + obstId}
+                                                  readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -134,6 +139,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"depth" + obstId}
+                                                  readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -157,6 +163,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
                                     id={"xpos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -177,6 +184,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
                                     id={"ypos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -200,7 +208,7 @@ function Walloutlet({ walloutletWall, deleteObst, changeOpening, changeWalloutle
                                         changeSelectedWall(x);
                                         changeOpening(e);
                                     }}
-                                    disabled={isButtonDisabled} // Set button disabled state
+                                    disabled={disable || isButtonDisabled} // Set button disabled state
                                     checked={x == walloutletWall}
                                 >
                                     {t(`obstructions.q_all.${x}`)}

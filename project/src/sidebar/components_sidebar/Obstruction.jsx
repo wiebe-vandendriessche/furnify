@@ -5,6 +5,7 @@ import { Col, FloatingLabel, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obstLength, maxHeight }) {
@@ -16,6 +17,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
         i18n.changeLanguage(lng);
     }, [])
 
+    const {disable}=useConfiguratorContext()
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
         setShow2(!showButton2)
@@ -55,7 +57,9 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
             >{t("obstructions." + type)}</h5>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                onClick={(e) => deleteObst(e)}
+                disabled={disable}
+            >
                 <IoCloseSharp />
             </Button>
             <div className="m-1" hidden={showButton2}>
@@ -64,7 +68,9 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                         defaultValue={type}
                         onChange={(e) => {
                             changeObst(e)
-                        }}>
+                        }}
+                        disabled={disable}
+                    >
                         <option value={"other"}>{t('obstructions.other')}</option>
                         <option value={"radiator"}>{t('obstructions.radiator')}</option>
                         <option value={"sloping_Wall"}>{t('obstructions.sloping_Wall')}</option>
@@ -87,6 +93,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"length" + obstId}
+                                        readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -102,6 +109,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"width" + obstId}
+                                        readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -117,6 +125,7 @@ function Obstruction({ deleteObst, changeObst, type, obstId, width, height, obst
                                         }}
                                         onKeyPress={negativeValues}
                                         id={"height" + obstId}
+                                        readOnly={disable}
                                     />
                                 </FloatingLabel>
                             </Col>

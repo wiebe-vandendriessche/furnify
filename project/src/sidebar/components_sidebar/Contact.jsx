@@ -62,6 +62,7 @@ function Contact() {
                         searchPlaceholder={""}
                         disableSearchIcon={true} id="phone_number" name="phone_number" type="tel"
                         data-testid={"input-contact-phone"}
+                        disabled={disable}
                         value={contact.phone_number.number} onChange={(value, country) => changePhoneNumber(value, country.countryCode)} />
             <FloatingLabel key={"email"}
                            data-testid={"label-contact-email"}
@@ -71,7 +72,9 @@ function Contact() {
                            label={t("contact.email")}>
             <Form.Control name={"email"} type="text" placeholder={"email"} defaultValue={contact["email"]}
                             data-testid={"input-contact-" + "email"}
-                            onChange={changeContact} />
+                            onChange={changeContact}
+                            readOnly={disable}
+            />
             </FloatingLabel>
             <table>
                 <tbody>
@@ -147,7 +150,8 @@ function Contact() {
                 </tbody>
 
             </table>
-            <Button variant={"danger"} type={"submit"}>{t('contact.submit')}</Button>
+            <Button variant={"danger"} type={"submit"}
+            disabled={disable}>{t('contact.submit')}</Button>
         </div>
     )
 }

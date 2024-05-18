@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obstId, width, height, depth, switchXpos, switchYpos, maxHeight }) {
@@ -25,7 +26,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
     };
 
 
-
+    const {disable}=useConfiguratorContext()
     const { selectedWall, setSelectedWall } = useRoomWallLightupContext();
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -82,7 +83,9 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
             >{t("obstructions." + type)}</h5>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                onClick={(e) => deleteObst(e)}
+                disabled={disable}
+            >
                 <IoCloseSharp />
 
             </Button>
@@ -102,6 +105,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"width" + obstId}
+                                              readOnly={disable}
                                 />
 
 
@@ -119,6 +123,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"height" + obstId}
+                                              readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -134,6 +139,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"depth" + obstId}
+                                              readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -157,6 +163,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (cm)"
                                     id={"xpos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -177,6 +184,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                     onKeyPress={negativeValues}
                                     placeholder="Enter Y Position (cm)"
                                     id={"ypos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -200,7 +208,7 @@ function Switch({ switchWall, deleteObst, changeOpening, changeSwitch, type, obs
                                         changeSelectedWall(x);
                                         changeOpening(e);
                                     }}
-                                    disabled={isButtonDisabled} // Set button disabled state
+                                    disabled={disable || isButtonDisabled} // Set button disabled state
                                     checked={x == switchWall}
                                 >
                                     {t(`obstructions.q_all.${x}`)}

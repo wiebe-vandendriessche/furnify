@@ -35,7 +35,7 @@ export function Questionnaire_space() {
     const {varia, setVaria} = useVariaContext();
 
     const changeVaria = (event) => {
-        setVaria({...varia, [event.target.name]: [event.target.id]})
+        setVaria({...varia, [event.target.name]: event.target.id})
     }
 
     const space = [

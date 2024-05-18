@@ -88,7 +88,9 @@ export function Questionnaire_module() {
                                         variant={"outline-danger"}
                                         id={key}
                                         onChange={changeMod}
-                                        checked={value.name == chosen_module.name}>{t('questionnaire_module.module_type.' + value.name)}</ToggleButton>
+                                        checked={value.name == chosen_module.name}
+                                        disabled={disable}
+                                    >{t('questionnaire_module.module_type.' + value.name)}</ToggleButton>
                                 ))}
                             </div>
                             <div className={"aspect"}>

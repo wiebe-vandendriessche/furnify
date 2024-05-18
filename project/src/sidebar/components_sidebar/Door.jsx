@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import { useRoomWallLightupContext } from "../../contexts/RoomWallLightupContext.jsx";
 import {IoChevronDownSharp, IoChevronUpSharp, IoCloseSharp} from "react-icons/io5";
+import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, height, openingDoor, doorXpos, doorWall, maxHeight }) {
@@ -16,7 +17,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
         const lng = navigator.language;
         i18n.changeLanguage(lng);
     }, [])
-
+    const {disable}=useConfiguratorContext();
     const [showButton2, setShow2] = useState(true);
     const showButton = () => {
         setShow2(!showButton2)
@@ -71,7 +72,9 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
             >{t("obstructions." + type)}</h5>
             <Button className={"fa-rectangle-xmark"} data-testid={"btn-obstacle-delete-" + type}
                 variant={"danger"} id={"delete" + obstId}
-                onClick={(e) => deleteObst(e)}>
+                onClick={(e) => deleteObst(e)}
+                    disabled={disable}
+            >
                 <IoCloseSharp />
             </Button>
             <div className="m-1" hidden={showButton2}>
@@ -90,6 +93,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"width" + obstId}
+                                              readOnly={disable}
                                 />
 
 
@@ -107,6 +111,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     }}
                                     onKeyPress={negativeValues}
                                     id={"height" + obstId}
+                                              readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -125,6 +130,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 type="radio"
                                 variant="danger"
                                 checked={"left" == openingDoor}
+                                disabled={disable}
                             >
                                 {t('obstructions.q_door.inside_left')}
                             </ToggleButton>
@@ -139,6 +145,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 type="radio"
                                 variant="danger"
                                 checked={"right" == openingDoor}
+                                disabled={disable}
                             >
                                 {t('obstructions.q_door.inside_right')}
                             </ToggleButton>
@@ -152,7 +159,8 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                 type="radio"
                                 data-testid={"btn-obstacle-door-outside"}
                                 variant="danger"
-                                checked={"out" == openingDoor}>
+                                checked={"out" == openingDoor}
+                            disabled={disable}>
                                 {t('obstructions.q_door.outside')}
                             </ToggleButton>
                         </ButtonGroup>
@@ -176,6 +184,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                     onKeyPress={negativeValues}
                                     placeholder="Enter X Position (m)"
                                     id={"xpos" + obstId}
+                                    readOnly={disable}
                                 />
                             </FloatingLabel>
                         </Col>
@@ -197,7 +206,7 @@ function Door({ deleteObst, changeOpening, changeDoor, type, obstId, width, heig
                                         changeSelectedWall(x);
                                         changeOpening(e);
                                     }}
-                                    disabled={isButtonDisabled} // Set button disabled state
+                                    disabled={disable || isButtonDisabled} // Set button disabled state
                                     checked={x == doorWall}
                                 >
                                     {t(`obstructions.q_all.${x}`)}
