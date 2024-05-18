@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="">
+    <list default="true" id="265e16ba-305b-4a40-902b-7ba566024098" name="Changes" comment="fix phone_number">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/SuperModel.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/model/SuperModel.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/3D/Draggables/DModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/3D/Draggables/DModel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/contexts/ConfiguratorContext.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/contexts/ConfiguratorContext.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project/src/sidebar/Sidebar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +68,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.serve" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.serve" />
       </list>
     </recent_temporary>
   </component>
@@ -84,11 +88,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715978052860</updated>
-      <workItem from="1715978057776" duration="357000" />
+      <workItem from="1715978057776" duration="7031000" />
     </task>
+    <task id="LOCAL-00001" summary="fix phone_number">
+      <option name="closed" value="true" />
+      <created>1715978590771</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715978590771</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix phone_number" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix phone_number" />
   </component>
 </project>

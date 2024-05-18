@@ -48,7 +48,7 @@ export function Sidebar() {
 
     const { dimensions,functionalities,specs,obstacles,setDimensions,setFunctionalities,setSpecs,setObstacles,
         rectangular,setRectangular,rotationIndex,setRotationIndex,skyboxPath,setSkyboxPath,modelPosition,
-        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition} = useConfiguratorContext();
+        setModelPosition,obstructionPositions,setObstructionPositions, dobstructionPositions,addDObstructionPosition,get,setGet} = useConfiguratorContext();
 
     const {varia,setVaria} = useVariaContext();
 
@@ -195,6 +195,7 @@ export function Sidebar() {
     const {email} = useParams();
 
     if(email !== undefined){
+        setGet(true);
         useEffect(() => {
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
@@ -238,6 +239,7 @@ export function Sidebar() {
                 return <p>This is some default text</p>
         }
     }
+
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -290,28 +292,28 @@ export function Sidebar() {
         let color = specs.color.toString().replace("#",'');
         let getURI = window.location.href+contact.email;
         const url = import.meta.env.VITE_MC_URI;
+
         console.log(superContext);
         jsonp(`${url}&EMAIL=${contact.email}&FIRSTNAME=${contact.firstname}&LASTNAME=${contact.lastname}&ADDRESS=${contact.address}
                     &DIMENSIONS=${dim}&ROOM=${varia.room}&FUNCTIONAL=${func}&LAYOUT=${specs.layout}&MATERIAL=${specs.material}
-                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, async (_, data) => {
+                    &COLOR=${color}&OBSTACLES=${obs}&REQ=${varia.requirements}&MODULE=${chosen_module.name}&LINK=${getURI}`, {param: 'c'}, (_, data) => {
             const {msg, result} = data
-            alert(msg);
-            console.log(superContext);
             if (result === "success") {
                 if (msg === "You're already subscribed, your profile has been updated. Thank you!") {
-                    await axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext);
+                    axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext);
                     console.log("PUT request");
                 }
 
-                if(msg === "Thank you for subscribing!"){
-                    await axios.post(`http://localhost:3000/api/contact`, superContext);
+                if (msg === "Almost finished... We need to confirm your email address. To complete the subscription process, please click the link in the email we just sent you.") {
+                    axios.post(`http://localhost:3000/api/contact`, superContext);
                     console.log("POST request");
                 }
             }
 
+            alert(msg);
+
         });
     };
-
 
 
     return (
