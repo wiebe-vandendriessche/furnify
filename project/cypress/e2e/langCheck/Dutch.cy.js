@@ -37,7 +37,7 @@ describe("Checking text in Dutch is correctly rendered", ()=>{
 
     it("Sidebar Q1 (obstacles)",()=>{
         let obst={
-            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in jouw woonruimte",
+            q_aspects:"Voeg toe met welke aspecten we rekening moeten houden in uw woonruimte",
             obstructions: { window:"Raam", door:"Deur", radiator:"Radiator", walloutlet:"Stopcontact",
                 switch:"Schakelaar", sloping_Wall:"Schuine wand", other:"Andere",
                 q_door:{
