@@ -163,6 +163,8 @@ export const DModel = ({
     //remove ability for module to stick to wall if it comes from get Request
         // makes sure when enlarging the room or rotating the model sticks to the wall in x
         useEffect(() => {
+            console.log("get is");
+            console.log(get)
             if(!get){
                 const [x, y, z] = pos.current;
                 let newX = x
@@ -183,6 +185,8 @@ export const DModel = ({
 
         // makes sure when enlarging the room or rotating the model sticks to the wall in z
         useEffect(() => {
+            console.log("get is");
+            console.log(get);
             if(!get){
                 const [x, y, z] = pos.current;
                 let newZ = z

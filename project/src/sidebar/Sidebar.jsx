@@ -194,12 +194,10 @@ export function Sidebar() {
     const {email} = useParams();
 
     if(email !== undefined){
-        setGet(true);
         useEffect(() => {
+            setGet(true);
             axios.get(`http://localhost:3000/${email}`)
                 .then(response => {
-                    console.log(response.data);
-                    console.log("DAAR")
                     updateContactFromResponse(response.data);
                     updateSelectedWallFromResponse(response.data);
                     updateVariaFromResponse(response.data);
@@ -296,7 +294,7 @@ export function Sidebar() {
             const {msg, result} = data
             if (result === "success") {
                 if (msg === "You're already subscribed, your profile has been updated. Thank you!") {
-                    axios.put(`http://localhost:3000/api/contact/${contact.email}`, superContext);
+                    axios.post(`http://localhost:3000/api/contact/${contact.email}`, superContext);
                     console.log("PUT request");
                 }
 
@@ -304,6 +302,7 @@ export function Sidebar() {
                     axios.post(`http://localhost:3000/api/contact`, superContext);
                     console.log("POST request");
                 }
+
             }
 
             alert(msg);

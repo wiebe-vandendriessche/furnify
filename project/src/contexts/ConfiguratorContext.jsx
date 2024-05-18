@@ -92,6 +92,7 @@ export const ConfiguratorProvider = ({ children }) => {
 
     const rotate = () => {
         setRotationIndex((prevIndex) => (prevIndex + 1) % rotations.length);
+        setGet(false);
     };
 
     // Function to return doors
