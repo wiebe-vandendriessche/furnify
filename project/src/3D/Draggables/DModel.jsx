@@ -33,7 +33,7 @@ export const DModel = ({
     const [depth, setModelDepth] = useState(chosen_module.open);
 
     //retrieve model position from configuratorcontext
-    const {setModelPosition, get} = useConfiguratorContext();
+    const {setModelPosition, get,setGet} = useConfiguratorContext();
 
     // swapping depth and width depending on rotation
     useEffect(() => {
@@ -57,6 +57,8 @@ export const DModel = ({
     const maxZ2 = maxZ / 2;
 
     const onDrag = useCallback(({x, z}) => {
+        //enable module the stick to the wall again(GET REQUEST)
+        setGet(false)
         //zorgt ervoor dat de modullen weer een de muur kleven
         let distanceToRightWall;
         let distanceToLeftWall;
