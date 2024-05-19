@@ -75,3 +75,7 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 17/05/24, 12:30, 14:00, Extern, Proberen herschalen van modules met verkeerde afmetingen in code, , lukt niet om accurate afmetingen van het model te verkrijgen... Dus mislukt
 17/05/24, 19:30, 23:00, Extern, Ervoor proberen te zorgen dat versturen/ophalen van data terug werkt, 197, positie van module niet altijd accuraat
 18/05/24, 10:15, 12:00, Extern, Oplossen positie module + toevoegen vertaling adres + deel van logs verwijderd, 197 en 202, 
+18/05/24, 13:30, 15:30, Extern, Knoppen disablen voor admin + bug oplossen dat niet alles uit varia werd opgeslagen + i18n privacy policy,,
+18/05/24, 16:00, 17:30, Extern, Verslag,174,
+19/05/24, 11:30, 13:00, Extern, Modals maken van alerts, ,
+19/05/24, 22:00, 23:30, Extern, Verslag + database inschakelen op server,,
