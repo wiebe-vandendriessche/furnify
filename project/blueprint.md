@@ -119,14 +119,14 @@ Wanneer de gebruiker de site opent, krijgt hij een standaard rechthoekige kamer 
         - Zo ja: selecteer de gewenste rastergrootte met de slider.
         - Nee: zet het raster uit (meest rechtse knop).
      2. Zet tekenmodus aan (meest linkse knop).
-     3. Teken de vorm van uw woonruimte en zorg dat je de vorm sluit.
+     3. Teken de vorm van uw woonruimte en zorg dat u de vorm sluit.
 
         - Het is mogelijk om:
 
           - Loodrecht te tekenen met de middelste knop.
           - Alles te verwijderen met de tweede knop van links.
      4. Klik op de net verschenen 3D knop (rechts).
-     5. Bekijk je kamer in 3D (verdere functionaliteit is hier nog niet toegevoegd).
+     5. Bekijk u kamer in 3D (verdere functionaliteit is hier nog niet toegevoegd).
 3. Voer de afmetingen van uw woonruimte in.
 4. Kies de indeling van uw woonruimte.
 5. Klik op het pijltje vanonder om naar het volgende tabblad te gaan.
@@ -156,7 +156,7 @@ Op de server:
 
 1. Zorg dat MongoDB versie 7.0.9 op de server geïnstalleerd is.
 2. Indien u het project als een .zip bestand hebt, unzipt u dit en opent u de nieuwe map “project”. Sla stap 2, 3 en 4 over en ga verder bij stap 7.
-3. Installeer git (indien je dit nog niet hebt): [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+3. Installeer git (indien u dit nog niet hebt): [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 4. Indien u toegang hebt tot GitLab:
    Zorg dat de GitLab-repository lokaal staat.
 
@@ -165,8 +165,8 @@ Op de server:
    b. Voer het volgende commando uit: `git clone [repository-name]`
 5. Ga in een terminal venster naar de map van de repository.
 6. Voor de meest recente versie van de code te verkrijgen: `git pull`
-7. Verifieer of je effectief in de project map zit door het commando `ls` uit te voeren in de terminal. Als je de mappen “src”, “public” en nog wat andere configuratiebestanden ziet staan, zit je in de correcte map.
-8. Installeer Node en npm (indien je dit nog niet hebt): [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+7. Verifieer of u effectief in de project map zit door het commando `ls` uit te voeren in de terminal. Als u de mappen “src”, “public” en nog wat andere configuratiebestanden ziet staan, zit u in de correcte map.
+8. Installeer Node en npm (indien u dit nog niet hebt): [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 9. Installeer de juiste packages met het volgende commando: `npm install`
 10. Voer `npm run build` uit.
 11. In de root van de server voer deze commando's uit om de site op de Apache2-server te zetten:
