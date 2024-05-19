@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import {useRef, useState} from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { FloorplanEditor } from "./FloorplanEditor";
@@ -18,6 +18,7 @@ import "./Floorplan.css";
 import { SliderComponent } from "./components/Slider";
 import { Skybox } from "../3D/Skybox";
 import { SliderHeightComponent } from "./components/SliderHeight";
+import {Modals} from "../Modal/Modals.jsx";
 
 export const FloorplanScene = () => {
   const { isDrawing, toggleDrawing, drawingCanvasRef } = use2d();
@@ -34,6 +35,9 @@ export const FloorplanScene = () => {
   const { setWallProperties, wallProperties } = use2d();
 
   const { t, i18n } = useTranslation();
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleDrawingButtonClick = (event) => {
     event.stopPropagation();
@@ -79,14 +83,15 @@ export const FloorplanScene = () => {
     setShow3D(true);
   };
 
+  const goBack=()=>{
+    handleClose();
+    setShow3D(false);
+  }
+
   const handle2DButtonClicked = (event) => {
     event.stopPropagation();
-    let goback = window.confirm(
-      t('floorplan.backto')
-    );
-    if (goback) {
-      setShow3D(false);
-    }
+    setShowModal(true);
+    setModalMessage(t('floorplan.backto').toString());
   };
 
 
@@ -252,6 +257,7 @@ export const FloorplanScene = () => {
           {/* <axesHelper position={[0, 0, 0]} args={[5]} /> */}
         </Canvas>
       )}
+      <Modals show={showModal} message={modalMessage} handleClose={handleClose} confirmation={true} onClick={goBack}/>
     </>
   );
 };

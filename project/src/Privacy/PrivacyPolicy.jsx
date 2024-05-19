@@ -2,7 +2,7 @@ import {useTranslation} from "react-i18next";
 import React, {useEffect} from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-
+import "../App.css"
 
 export function PrivacyPolicy(props) {
     const { t, i18n } = useTranslation();
@@ -18,10 +18,12 @@ export function PrivacyPolicy(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {t('privacy.title')}
                 </Modal.Title>
+                <Button variant={"danger"} onClick={props.onHide}>
+                    {t('privacy.close')}</Button>
             </Modal.Header>
             <Modal.Body>
                 <div>
@@ -40,10 +42,6 @@ export function PrivacyPolicy(props) {
                     href="https://mailchimp.com/legal/terms">{t('privacy.learn')}</a> {t('privacy.disclaimer2')}</p>
                 </div>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant={"danger"} onClick={props.onHide}>
-                    {t('privacy.close')}</Button>
-            </Modal.Footer>
         </Modal>
     );
 }
