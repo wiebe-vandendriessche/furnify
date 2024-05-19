@@ -52,6 +52,12 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 
 ### Vite developer server opstarten (in project folder)
 
+**Installeer node packages:**
+
+```bash
+npm install
+```
+
 **start dev server:**
 
 ```bash
