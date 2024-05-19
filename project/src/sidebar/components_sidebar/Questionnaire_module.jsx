@@ -3,12 +3,13 @@ import "./Questionnaire.css"
 import { useVariaContext } from "../../contexts/VariaContext.jsx";
 import { useConfiguratorContext } from "../../contexts/ConfiguratorContext.jsx";
 import { useTranslation } from 'react-i18next'
-import { useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import { ToggleButton, Collapse, Button, FormGroup } from "react-bootstrap";
 import { check } from "../../algorithm/module_choice.ts";
 import { use2d } from "../../contexts/2dContext.tsx"
 import { useModuleContext } from "../../contexts/ModuleContext.jsx"
 import { useIntersectionContext } from "../../contexts/IntersectionContext.jsx";
+import {Modals} from "../../Modal/Modals.jsx";
 
 
 export function Questionnaire_module() {
@@ -25,7 +26,7 @@ export function Questionnaire_module() {
 
 
     const { rotate, disable} = useConfiguratorContext();
-    const { checkIntersections } = useIntersectionContext();
+    const { checkIntersections, modalMessage, modalTitle} = useIntersectionContext();
     const value=useConfiguratorContext()
     const get2D = use2d();
     const { wallProperties, setWallProperties }  = use2d();
@@ -58,6 +59,8 @@ export function Questionnaire_module() {
 
     }
 
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
 
 
     return (
@@ -133,11 +136,15 @@ export function Questionnaire_module() {
                                 </div>
 
                                 <Button onClick={rotate} variant={"danger"} >{t('questionnaire_module.module_info.rotate')}</Button>
-                                <Button onClick={checkIntersections} variant={"danger"} >{t('questionnaire_module.module_info.intersection')}</Button>
+                                <Button onClick={()=>{
+                                    checkIntersections()
+                                    setShowModal(true);
+                                }} variant={"danger"} >{t('questionnaire_module.module_info.intersection')}</Button>
                             </div>
                         </div>
                     </FormGroup>
                 </div>
+            <Modals message={modalMessage} title={modalTitle} handleClose={handleClose} show={showModal}/>
         </div >
 
 

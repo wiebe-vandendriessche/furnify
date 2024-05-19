@@ -68,6 +68,9 @@ button {
     margin: 5px;
 }
 
+.modal-header{
+    justify-content: space-between;
+}
 
 button:hover {
     -webkit-transform: scale(1.1);

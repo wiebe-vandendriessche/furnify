@@ -2,6 +2,7 @@ import React, { createContext, useState, useRef, useContext, useEffect } from "r
 import { DrawablePoint } from "../2D/components/Point";
 import { DrawableLine } from "../2D/components/Line";
 import * as THREE from "three";
+import {Modals} from "../Modal/Modals.jsx"
 import {
   BoxGeometry,
   ExtrudeGeometry,
@@ -51,13 +52,17 @@ export const DrawingProvider = ({ children }) => {
 
   type SceneObject = Mesh<any, any>;
   const [sceneObjects, setSceneObjects] = useState<SceneObject[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   // convert to 3D
   const handleConvertTo3D = () => {
     const { mesh: floor, offset } = createFloor(points);
     const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
-    alert(t("floorplan.convertedTo3D"));
+    setModalMessage(""+t('floorplan.convertedTo3D'))
+    setShowModal(true);
   };
 
   function determineOrientation(points) {
@@ -222,6 +227,10 @@ export const DrawingProvider = ({ children }) => {
   };
 
   return (
-    <DrawingContext.Provider value={value}>{children}</DrawingContext.Provider>
+      <>
+        <DrawingContext.Provider value={value}>{children}</DrawingContext.Provider>
+        <Modals message={modalMessage} handleClose={handleClose} show={showModal}/>
+      </>
+
   );
 };

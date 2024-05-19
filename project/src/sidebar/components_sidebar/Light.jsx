@@ -25,7 +25,6 @@ function Light({ deleteObst, changeLight, type, obstId, width, height, obstLengt
         //Only check on height
         if (!Number.isNaN(event.nativeEvent.data) && event.target.name == "height") {
             if (event.target.value > maxHeight * 100.0) {
-                alert("prevented")
                 event.preventDefault();
                 return;
             }

@@ -202,6 +202,11 @@ i18n
                         orthogonalMode: "Toggle Orthogonal Mode",
                         reset: "Reset View",
                         grid: "Toggle Grid and Snapping"
+                    },
+                    modal:{
+                        close: "Close",
+                        confirm: "Confirm",
+                        cancel: "Cancel"
                     }
                 }
             },
@@ -388,7 +393,12 @@ i18n
                         orthogonalMode: "Orthogonale Modus Wisselen",
                         reset: "Weergave Resetten",
                         grid: "Raster en Snappen Wisselen"
-                    }
+                    },
+                modal:{
+                    close: "Sluiten",
+                    confirm: "Bevestigen",
+                    cancel: "Annuleren"
+                }
 
                 }
             },
@@ -574,6 +584,11 @@ i18n
                         orthogonalMode: "Basculer en mode orthogonal",
                         reset: "Réinitialiser la vue",
                         grid: "Basculer la grille et l'accrochage"
+                    },
+                    modal:{
+                        close: "Fermer",
+                        confirm: "Confirmer",
+                        cancel: "Annuler"
                     }
                 }
             },
@@ -759,6 +774,11 @@ i18n
                         orthogonalMode: "Orthogonalen Modus umschalten",
                         reset: "Ansicht zurücksetzen",
                         grid: "Raster und Einrasten umschalten"
+                    },
+                    modal:{
+                        close: "Schließen",
+                        confirm: "Bestätigen",
+                        cancel: "Abbrechen"
                     }
                 }
             },
@@ -944,6 +964,11 @@ i18n
                         orthogonalMode: "Alternar modo ortogonal",
                         reset: "Restablecer vista",
                         grid: "Alternar cuadrícula y ajuste"
+                    },
+                    modal:{
+                        close: "Cerrar",
+                        confirm: "Confirmar",
+                        cancel: "Cancelar"
                     }
                 }
             },
@@ -1129,6 +1154,11 @@ i18n
                         orthogonalMode: "Attiva/Disattiva modalità ortogonale",
                         reset: "Reimposta vista",
                         grid: "Attiva/Disattiva griglia e snapping"
+                    },
+                    modal:{
+                        close: "Chiudi",
+                        confirm: "Conferma",
+                        cancel: "Annulla"
                     }
                 }
             }

@@ -16,7 +16,8 @@ export const IntersectionProvider = ({ children }) => {
 
     const dObstructions = useRef({});
     const [errorBoxes, setErrorBoxes] = useState([]);
-
+    const [modalMessage, setModalMessage] = useState('');
+    const [modalTitle, setModalTitle] = useState('');
     const { getLightsAndOtherObstacles } = useConfiguratorContext();
     const obstacles = getLightsAndOtherObstacles();
 
@@ -91,13 +92,14 @@ export const IntersectionProvider = ({ children }) => {
         }
 
         if (intersectionsDetected) {
-            window.alert(t('alert.yes') +'\n'+ t('alert.adjust'));
+            setModalTitle(t('alert.yes').toString())
+            setModalMessage( t('alert.adjust').toString())
         }
 
         if (!intersectionsDetected) {
-            window.alert(t('alert.no')+'\n'+t('alert.proceed')+'\n'+t('alert.again'));
+            setModalTitle(t('alert.no').toString())
+            setModalMessage(t('alert.proceed').toString()+". "+t('alert.again').toString());
         }
-
         //update errorBoxes
         setErrorBoxes(tempErrorBoxes);
     };
@@ -106,11 +108,15 @@ export const IntersectionProvider = ({ children }) => {
         return errorBoxes;
     }
 
+
     const value = {
         addDObstruction,
         removeDObstruction,
         checkIntersections,
         getErrorBoxes,
+        modalMessage,
+        modalTitle
+
     };
 
     return (
