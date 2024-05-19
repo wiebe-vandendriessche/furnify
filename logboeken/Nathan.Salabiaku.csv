@@ -42,18 +42,18 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 13/04/24,10:00,11:00,extern,verzenden van data testen,79,goede oplossing implementeren
 14/04/24,14:00,21:00,extern,verzenden van data testen,79,goede oplossing implementeren
 14/04/24,11:30,15:00,extern,issues fixen 
-16/04/24,13:30,16:30,contacturen,verzenden van data testen,79
-17/04/24,13:00,16:00,contacturen,verzenden van data testen,79
-23/04/24,13:30,16:30,contacturen,verzenden van data testen,79
-24/04/24,13:00,16:00,contacturen,verzenden van data testen,79
-30/04/24,13:30,16:30,contacturen,verzenden van data testen,79
-01/05/24,13:00,16:00,contacturen,verzenden van data testen,79
+16/04/24,13:30,16:30,contacturen
+17/04/24,13:00,16:00,contacturen
+23/04/24,13:30,16:30,contacturen,verzenden van data testen,79,GDPR
+24/04/24,13:00,16:00,contacturen,verzenden van data testen,79,GDPR
+30/04/24,13:30,16:30,contacturen
+01/05/24,13:00,16:00,contacturen
 03/05/24,14:00,16:00,extern,verzenden van data testen,79
 04/05/24,18:00,19:00,extern,verzenden van data testen,79
 06/05/24,19:00,23:59,extern,verzenden van data testen,79,implement mongodb
 07/05/24,00:00,01:30,extern,verzenden van data testen,79,implement mongodb
 07/05/24,12:00,13:30,extern,voorbereiden presentatie,175
-07/04/24,13:30,16:30,contacturen,verzenden van data testen,79
+07/04/24,13:30,16:30,contacturen,verzenden van data testen,79,
 07/05/24,21:00,23:00,extern,voorbereiden presentatie,175
 08/05/24,13:00,16:30,contacturen,presentatie,175
 10/05/24,19:00,20:00,extern,verzenden van data testen,79,implement mongodb
