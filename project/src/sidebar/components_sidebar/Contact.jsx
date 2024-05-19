@@ -9,6 +9,8 @@ import {FloatingLabel} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {useConfiguratorContext} from "../../contexts/ConfiguratorContext.jsx";
+import {useNavigate, useNavigation, useParams} from "react-router-dom";
+import axios from "axios";
 
 function Contact() {
     const {t, i18n} = useTranslation();
@@ -27,6 +29,21 @@ function Contact() {
 
     const changePhoneNumber = (num, country) => {
         setContact({...contact, phone_number: {number: num, country: country}});
+    }
+
+    const {email} = useParams();
+    const navigate = useNavigate()
+
+    const deleteUser = e =>{
+        e.preventDefault();
+        axios.delete(`http://${import.meta.env.VITE_IP_ADRESS}:3000/${email}`)
+            .then(response => {
+                console.log(`Deleted post with ID ${email}`);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        navigate("/");
     }
 
     return (
@@ -152,6 +169,8 @@ function Contact() {
             </table>
             <Button variant={"danger"} type={"submit"}
             disabled={disable}>{t('contact.submit')}</Button>
+            <Button variant={"danger"} type={"submit"} onClick={deleteUser}
+                    hidden={!disable}>Delete</Button>
         </div>
     )
 }

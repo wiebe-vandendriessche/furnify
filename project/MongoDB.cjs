@@ -54,6 +54,24 @@ app.put('/api/contact/:email', async (req, res) => {
     }
 })
 
+app.delete('/:email', async (req, res) => {
+    try {
+        const { email } = req.params;
+        const contact = await Super.findOne({ 'contact.email': email });
+
+        if (!contact) {
+            return res.status(404).json({ message: "Contact not found" });
+        }
+
+        await Super.findByIdAndDelete(contact._id);
+
+        res.status(200).json({ message: "Contact deleted successfully" });
+    } catch (error) {
+        console.error("Error processing DELETE request to /api/contact:", error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
 mongoose.connect(process.env.ATLAS_URI)
     .then(() => {
         console.log("Connected to database!");
@@ -63,3 +81,4 @@ mongoose.connect(process.env.ATLAS_URI)
     }).catch(() => {
     console.log("Connection failed");
 })
+
