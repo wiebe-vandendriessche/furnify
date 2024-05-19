@@ -55,13 +55,14 @@ export const DrawingProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const [modalMessage, setModalMessage] = useState('');
-
+  const [modalTitle, setModalTitle]=useState("")
   // convert to 3D
   const handleConvertTo3D = () => {
     const { mesh: floor, offset } = createFloor(points);
     const walls: Mesh[] = createWalls(points, offset);
     setSceneObjects([...walls, floor]);
-    setModalMessage(""+t('floorplan.convertedTo3D'))
+    setModalTitle(t('floorplan.titleConverted3D').toString())
+    setModalMessage(t('floorplan.convertedTo3D').toString())
     setShowModal(true);
   };
 
@@ -229,7 +230,7 @@ export const DrawingProvider = ({ children }) => {
   return (
       <>
         <DrawingContext.Provider value={value}>{children}</DrawingContext.Provider>
-        <Modals message={modalMessage} handleClose={handleClose} show={showModal}/>
+        <Modals message={modalMessage} handleClose={handleClose} title={modalTitle} show={showModal}/>
       </>
 
   );

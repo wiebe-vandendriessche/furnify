@@ -36,7 +36,7 @@ function Login() {
                 </Routes>
             ) : (
                 <>
-                    <Modals handleClose={handleClose} message={modalMessage} show={showModal}/>
+                    <Modals title={"Error"} handleClose={handleClose} message={modalMessage} show={showModal}/>
                     <Form onSubmit={handleSubmit} style={{
                         display: 'flex',
                         justifyContent: 'center',
