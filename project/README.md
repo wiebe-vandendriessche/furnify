@@ -38,7 +38,6 @@ Dit project is een 3D-kamerervaring ontwikkeld met React Three Fiber (R3F) en Vi
 - **/src/:** Bevat de broncode van de applicatie.
   - **/src/2D/:** Bevat alle componenten voor het 2D vloerplan.
     - **/src/2D/components/:** Bevat alle basiscomponenten waaruit het vloerplan bestaat.
-    - **/src/2D/hooks/:** Bevat hulpfuncties voor de logica van het vloerplan.
     - **/src/2D/FloorplanEditor.tsx:** Bevat de logica voor de werking van het vloerplan.
     - **/src/2D/FloorplanScene.jsx:** Bevat de compositie van de 3D scene die wordt getoond
   - **/src/3D/:** Bevat alle 3D componenten.
