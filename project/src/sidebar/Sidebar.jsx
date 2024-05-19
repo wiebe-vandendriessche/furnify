@@ -193,7 +193,7 @@ export function Sidebar() {
         useEffect(() => {
             setGet(true);
             setDisable(true);
-            axios.get(`http://157.193.171.41:3000/${email}`)
+            axios.get(`http://${import.meta.env.VITE_IP_ADRESS}:3000/${email}`)
                 .then(response => {
                     updateContactFromResponse(response.data);
                     updateSelectedWallFromResponse(response.data);
@@ -260,11 +260,11 @@ export function Sidebar() {
             if (result === "success") {
                 console.log("SUPERCONTEXT");
                 console.log(superContext);
-                axios.post(`http://157.193.171.41:3000/api/contact`, superContext)
+                axios.post(`http://${import.meta.env.VITE_IP_ADRESS}:3000/api/contact`, superContext)
                     .then(function (response) {console.log(response);})
                     .catch(function (error) {
                         console.log(error);
-                        axios.put(`http://157.193.171.41:3000/api/contact/${contact.email}`, superContext)
+                        axios.put(`http://${import.meta.env.VITE_IP_ADRESS}:3000/api/contact/${contact.email}`, superContext)
                             .then(function (response) {console.log(response);})
                             .catch(function (error) {
                                 console.log(error)});
