@@ -74,7 +74,12 @@ Datum,Start,Einde,Plaats,Omschrijving,Issue #,Opmerkingen
 14/05/24,20:00,21:00,Extern,Afwerken collisiondetection en kleine bugs fixen,190 en 156,
 15/05/24,13:00,16:00,Contacturen,versturen van positites van objecten naar configuratorcontext zodat ook deze kunn heropgehaald worden,197,
 15/05/24,21:00,22:30,Extern,bug fixen met thomas en nieuwste versie deployen,152,
-
+18/05/24,9:00,12:30,Extern,Kleine aanpassingen + schrijven verslag,174 en 210,
+18/05/24,13:30,16:30,Extern,Kleine aanpassingen + schrijven verslag,174 en 210,
+18/05/24,18:30,21:30,Extern,overbodige files,elogs en textures verwijderen + herschrijven readme,174+208+209+193+201,
+19/05/24,9:30,12:30,Extern,verslag + deploy,174 en 207,
+19/05/24,13:30,15:30,Extern,verslag en nog wat updates,174,
+19/05/24,16:30,19:30,Extern,verslag en nog wat updates,174,
 
 
 
