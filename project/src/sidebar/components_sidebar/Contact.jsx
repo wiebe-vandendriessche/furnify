@@ -21,7 +21,7 @@ function Contact() {
     }, [])
 
     const {contact, setContact} = useContactContext();
-    const {disable}=useConfiguratorContext()
+    const {disable, setDisable}=useConfiguratorContext()
     //saving changes
     const changeContact = (event) => {
         setContact({...contact, [event.target.name]: event.target.value});
@@ -43,6 +43,7 @@ function Contact() {
             .catch(error => {
                 console.error(error);
             });
+        setDisable(false)
         navigate("/");
     }
 
